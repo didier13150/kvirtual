@@ -99,17 +99,17 @@
     </spacer>
    </item>
    <item row="0" column="1">
-    <widget class="KUrlRequester" name="kcfg_exe_kvm">
+    <widget class="KUrlRequester" name="kurlrequester_exeKvm">
      <property name="text">
       <string notr="true"/>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="KUrlRequester" name="kcfg_exe_vde_switch"/>
+    <widget class="KUrlRequester" name="kurlrequester_exeVdeSwitch"/>
    </item>
    <item row="4" column="1">
-    <widget class="KUrlRequester" name="kcfg_exe_qemu_img">
+    <widget class="KUrlRequester" name="kurlrequester_exeQemuImgCreator">
      <property name="text">
       <string notr="true"/>
      </property>

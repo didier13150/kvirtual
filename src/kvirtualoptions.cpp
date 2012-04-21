@@ -99,26 +99,6 @@ void KVirtualOptions::clear()
 
 }
 
-const QString & KVirtualOptions::getKvmExec() const
-{
-	return m_kvmExec;
-}
-
-const QString & KVirtualOptions::getVdeSwitchExec() const
-{
-	return m_vdeExec;
-}
-
-void KVirtualOptions::setKvmExec( const QString & exec )
-{
-	m_kvmExec = exec;
-}
-
-void KVirtualOptions::setVdeSwitchExec( const QString & exec )
-{
-	m_vdeExec = exec;
-}
-
 QStringList KVirtualOptions::getNeededVirtualSwitch()
 {
 	QStringList needed;
@@ -360,6 +340,7 @@ void KVirtualOptions::load( const QString & filename )
 		qDebug() << "Wrong root node" << root.tagName();
 		return;
 	}
+	setDistrib( root.attribute( "distribution" ) );
 
 	node = root.firstChild();
 
@@ -372,7 +353,6 @@ void KVirtualOptions::load( const QString & filename )
 			if ( element.tagName() == "name" )
 			{
 				setName( element.text() );
-				setDistrib( element.attribute( "distribution" ) );
 			}
 
 			if ( element.tagName() == "description" )

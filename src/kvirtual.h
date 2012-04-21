@@ -71,10 +71,14 @@ private slots:
 	void startVirtual();
 	void terminateVirtual();
 	void killVirtual();
+	void readStarted( uint );
 	void readData( uint );
 	void readError( uint );
 	void closeProcess( uint, int, QProcess::ExitStatus );
 	void startVde( const QString & );
+	void setKvmExe( const QString & );
+	void setVdeSwitchExe( const QString & );
+	void setQemuImgCreator( const QString & );
 
 private:
 	void setupActions();

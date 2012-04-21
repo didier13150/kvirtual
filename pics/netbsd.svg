@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" height="256" id="svg2" inkscape:output_extension="org.inkscape.output.svg.inkscape" inkscape:version="0.47 r22583" sodipodi:docname="distributions-netbsd.svg" sodipodi:version="0.32" version="1.0" width="256">
+  <metadata id="metadata3">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:title/>
+        <dc:description/>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>unsorted</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://www.openclipart.org/">
+            <dc:title>Open Clip Art Library, Source: Open Icon Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title/>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title/>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date/>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs id="defs4">
+    <inkscape:perspective id="perspective2835" inkscape:persp3d-origin="0.5 : 0.33333333 : 1" inkscape:vp_z="1 : 0.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 0.5 : 1" sodipodi:type="inkscape:persp3d"/>
+  </defs>
+  <sodipodi:namedview bordercolor="#666666" borderopacity="1.0" gridtolerance="10000" guidetolerance="10" id="base" inkscape:current-layer="layer1" inkscape:cx="136.83547" inkscape:cy="126.096" inkscape:document-units="px" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="690" inkscape:window-width="942" inkscape:window-x="152" inkscape:window-y="0" inkscape:zoom="0.98994949" objecttolerance="10" pagecolor="#ffffff" showgrid="false" inkscape:window-maximized="0"/>
+  <g id="layer1" inkscape:groupmode="layer" inkscape:label="Layer 1">
+    <text y="148.22774" x="1.7630903" transform="scale(0.83120269,1.203076)" style="font-size:79.46884918px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#6a6a6a;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial" space="preserve" id="text2507">
+      <tspan y="148.22774" x="1.7630903" style="font-size:89.40245819px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#6a6a6a;fill-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman, Bold'" sodipodi:role="line" id="tspan2509">
+        <tspan style="fill:#ff6300;fill-opacity:1" id="tspan3281">Net</tspan>
+      </tspan>
+    </text>
+    <path style="fill:#6a6a6a;fill-opacity:1;fill-rule:evenodd;stroke:none" sodipodi:nodetypes="ccccc" id="path3387" d="m 44.945734,23.585699 4.123483,-0.548406 39.210741,90.799337 -9.493889,0.28704 -33.840335,-90.537971 z"/>
+    <path style="fill:#6a6a6a;fill-opacity:1;fill-rule:evenodd;stroke:none" sodipodi:nodetypes="ccccc" id="path3389" d="m 105.85525,185.40112 12.19818,-0.26923 27.46248,65.15609 -15.95647,0.26923 -23.70419,-65.15609 z"/>
+    <path style="fill:#ff6300;fill-opacity:1;fill-rule:evenodd;stroke:none" sodipodi:nodetypes="cccccccc" id="path3391" d="m 56.780048,21.818635 c 32.983368,16.760189 63.932592,12.609636 93.862102,-2.023356 54.06932,-29.3974548 88.32794,-9.352301 93.28803,-5.732847 -45.46801,-4.4019155 -54.41424,8.724104 -80.37122,24.617512 40.15468,-10.652876 62.93211,-6.723255 76.35265,5.058392 -34.8411,-7.695 -58.13357,9.032067 -81.80642,24.954737 -26.95567,20.285609 -44.5928,29.476857 -69.297008,26.386 L 56.780048,21.818635 z"/>
+    <text y="149.16296" x="136.40804" transform="scale(0.83120269,1.203076)" style="font-size:79.46884918px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#6a6a6a;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial" space="preserve" id="text2507-7">
+      <tspan y="149.16296" x="136.40804" style="font-size:89.40245819px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#6a6a6a;fill-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman, Bold'" sodipodi:role="line" id="tspan2509-5">BSD</tspan>
+    </text>
+  </g>
+</svg>

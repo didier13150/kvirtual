@@ -97,6 +97,7 @@ public slots:
 
 private slots:
 	void settingsChanged();
+	void setPixmap( const QString & );
 };
 
 #endif // KVirtualVIEW_H

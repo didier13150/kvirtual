@@ -7,8 +7,7 @@ install_manifest.txt
 KVirtual.kdev4
 src/kvirtualview_base.new.ui
 virtual-manager.sh
-vm1.xml
-
+*.xml
 *~
 build
 release

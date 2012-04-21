@@ -88,8 +88,6 @@ public:
 	const QString & getVideoCard() const;
 	bool isUsbSupported() const;
 	bool isSnapshotEnabled() const;
-	const QString & getKvmExec() const;
-	const QString & getVdeSwitchExec() const;
 
 public slots:
 	void setName( const QString & );
@@ -110,8 +108,6 @@ public slots:
 	void save( const QString & file );
 	void setUsedSwitch( const QString & );
 	void clear();
-	void setKvmExec( const QString & );
-	void setVdeSwitchExec( const QString & );
 
 protected:
 	QStringList m_opts;
@@ -131,9 +127,6 @@ protected:
 	uint m_cpus;
 	bool m_usb;
 	bool m_snapshot;
-
-	QString m_kvmExec;
-	QString m_vdeExec;
 
 signals:
 	void errorEncoured( const QString & );

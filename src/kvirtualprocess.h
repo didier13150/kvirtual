@@ -55,11 +55,13 @@ protected slots:
     void sendReadyReadStandardOutput();
     void sendReadyReadStandardError();
     void sendFinished( int, QProcess::ExitStatus );
+	void sendStarted();
 
 signals:
     void readyReadStandardOutput( uint );
     void readyReadStandardError( uint );
     void finished( uint, int, QProcess::ExitStatus );
+	void started( uint );
 };
 
 

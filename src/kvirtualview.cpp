@@ -24,15 +24,24 @@
 #include <KLocale>
 #include <KLineEdit>
 #include <KLed>
+#include <KStandardDirs>
+
+#include <QPixmap>
 
 #include <sys/sysinfo.h>
 
 KVirtualView::KVirtualView( QWidget * )
 {
-    m_options = 0;
+
+	m_options = 0;
     _ui_kvirtualview_base.setupUi( this );
     settingsChanged();
     setAutoFillBackground( true );
+	setPixmap( "tux" );
+    connect( _ui_kvirtualview_base.comboBox_distrib,
+             SIGNAL( currentIndexChanged ( const QString & ) ),
+             SLOT( setPixmap( const QString & ) )
+           );
 }
 
 KVirtualView::~KVirtualView()
@@ -48,6 +57,16 @@ void KVirtualView::settingsChanged()
 
     ui_kvirtualview_base.kcfg_sillyLabel->setText( i18n("This project is %1 days old",Settings::val_time()) );*/
     emit signalChangeStatusbar( i18n( "Settings changed" ) );
+}
+
+void KVirtualView::setPixmap( const QString & distrib )
+{
+	QPixmap pixmap;
+	QString buffer = KStandardDirs::locate( "appdata", distrib + ".png" );
+
+	if ( buffer.isNull() ) buffer = "tux";
+	pixmap.load( buffer );
+	_ui_kvirtualview_base.label_logo->setPixmap( pixmap );
 }
 
 void KVirtualView::setState( uint, bool state )

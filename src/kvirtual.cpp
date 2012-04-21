@@ -32,10 +32,10 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>
-#include <KStandardDirs>
 #include <KIconLoader>
 #include <KSystemTrayIcon>
 #include <KFileDialog>
+#include <KLineEdit>
 
 #include <KLocale>
 
@@ -45,8 +45,6 @@ KVirtual::KVirtual()
         m_view( new KVirtualView( this ) ),
         m_printer( 0 )
 {
-	//KStandardDirs stdDir;
-	
     m_id = 0;
 	m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
 	m_systray->show();
@@ -195,17 +193,43 @@ void KVirtual::optionsPreferences()
 
     QWidget *generalSettingsDlg = new QWidget;
     ui_prefs_base.setupUi( generalSettingsDlg );
-    dialog->addPage( generalSettingsDlg, i18n( "General" ), "package_setting" );
+	ui_prefs_base.kurlrequester_exeKvm->lineEdit()->setText( Settings::exeKvm() );
+	ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit()->setText( Settings::exeVdeSwitch() );
+	ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit()->setText( Settings::exeQemuImgCreator() );
+    dialog->addPage( generalSettingsDlg, i18n( "Executable" ), "run-build" );
     connect( dialog, SIGNAL( settingsChanged( QString ) ), m_view, SLOT( settingsChanged() ) );
     connect( dialog, SIGNAL( settingsChanged( QString ) ), this, SLOT( setConfig() ) );
+	connect( ui_prefs_base.kurlrequester_exeKvm->lineEdit(),
+			 SIGNAL( textEdited( const QString & ) ),
+			 SLOT( setKvmExe( const QString & ) )
+	);
     dialog->setAttribute( Qt::WA_DeleteOnClose );
     dialog->show();
 }
 
 void KVirtual::setConfig()
 {
-	m_options->setKvmExec( "kvm" );
-	m_options->setVdeSwitchExec( "vde_switch" );
+	qDebug() << "kvm" << Settings::exeKvm();
+	qDebug() << "vde_switch" << Settings::exeVdeSwitch();
+	qDebug() << "qemu-img" << Settings::exeQemuImgCreator();
+}
+
+void KVirtual::setKvmExe( const QString & exe )
+{
+	qDebug() << "kvm" << exe;
+	Settings::setExeKvm( exe );
+}
+
+void KVirtual::setVdeSwitchExe( const QString & exe )
+{
+	qDebug() << "vde_switch" << exe;
+	Settings::setExeVdeSwitch( exe );
+}
+
+void KVirtual::setQemuImgCreator( const QString & exe )
+{
+	qDebug() << "qemu-img" << exe;
+	Settings::setExeQemuImgCreator( exe );
 }
 
 void KVirtual::startVde( const QString & vswitch )
@@ -223,7 +247,7 @@ void KVirtual::startVde( const QString & vswitch )
 	}
 
     args << "-F" << "-sock" << vswitch;
-    process->setProgram( m_options->getVdeSwitchExec(), args );
+    process->setProgram( Settings::exeVdeSwitch(), args );
     process->setOutputChannelMode( KProcess::SeparateChannels );
     connect( process,
              SIGNAL( readyReadStandardOutput( uint ) ),
@@ -237,23 +261,19 @@ void KVirtual::startVde( const QString & vswitch )
              SIGNAL( finished( uint, int, QProcess::ExitStatus ) ),
              SLOT( closeProcess( uint, int, QProcess::ExitStatus ) )
            );
+    connect( process,
+             SIGNAL( started( uint ) ),
+             SLOT( readStarted(uint) )
+           );
 
 	m_view->addOutput( process->program().join( " " ) );
     process->start();
+	m_switchProcesses[id] = process;
 
-	buffer.setNum( id );
-	buffer.prepend( "Process" );
-    if ( process->error() != QProcess::FailedToStart )
-    {
-        m_switchProcesses[id] = process;
-		m_options->setUsedSwitch( vswitch );
-		QString buf2;
-		buf2.setNum( process->pid() );
-		buffer.append( " process PID is " + buf2 );
-		m_view->addOutput( buffer );
-    }
-    else
+    if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
 	{
+		buffer.setNum( id );
+		buffer.prepend( "Process" );
 		buffer.append( " failed to start" );
 		m_view->addError( buffer );
 	}
@@ -297,7 +317,7 @@ void KVirtual::startVirtual()
 	QString buffer;
 
     m_view->setOptions();
-    process->setProgram( m_options->getKvmExec(), m_options->getArgs() );
+    process->setProgram( Settings::exeKvm(), m_options->getArgs() );
     process->setOutputChannelMode( KProcess::SeparateChannels );
     connect( process,
              SIGNAL( readyReadStandardOutput( uint ) ),
@@ -311,6 +331,10 @@ void KVirtual::startVirtual()
              SIGNAL( finished( uint, int, QProcess::ExitStatus ) ),
              SLOT( closeProcess( uint, int, QProcess::ExitStatus ) )
            );
+    connect( process,
+             SIGNAL( started( uint ) ),
+             SLOT( readStarted(uint) )
+           );
 
     vswitch = m_options->getNeededVirtualSwitch();
     for ( QStringList::Iterator it = vswitch.begin() ; it != vswitch.end() ; ++it )
@@ -321,23 +345,47 @@ void KVirtual::startVirtual()
 
 	m_view->addOutput( process->program().join( " " ) );
     process->start();
+	m_hostProcesses[id] = process;
 
-	buffer.setNum( id );
-	buffer.prepend( "Process" );
-    if ( process->error() != QProcess::FailedToStart )
-    {
-        m_hostProcesses[id] = process;
-		emit( vmStateChanged( id, true ) );
-		QString buf2;
-		buf2.setNum( process->pid() );
-		buffer.append( " process PID is " + buf2 );
-		m_view->addOutput( buffer );
-    }
-    else
+    if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
 	{
+		buffer.setNum( id );
+		buffer.prepend( "Process" );
 		buffer.append( " failed to start" );
 		m_view->addError( buffer );
 	}
+}
+void KVirtual::readStarted( uint id )
+{
+	KVirtualProcess* process = 0;
+	QString buffer, message;
+	bool isSwitch = true;
+
+    buffer.setNum( id );
+	buffer.prepend( "Process" );
+	if ( m_hostProcesses.contains( id ) )
+	{
+		process = m_hostProcesses[id];
+		isSwitch = false;
+	}
+	else
+	{
+		if ( m_switchProcesses.contains( id ) )
+		{
+			process = m_switchProcesses[id];
+		}
+	}
+	if ( not process )
+	{
+		return;
+	}
+
+	if ( ! isSwitch ) emit( vmStateChanged( id, true ) );
+	QString buf2;
+	buf2.setNum( process->pid() );
+	buffer.append( " process started, PID is " + buf2 );
+	m_view->addOutput( buffer );
+	
 }
 
 void KVirtual::readData( uint id )
