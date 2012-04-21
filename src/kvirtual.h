@@ -29,10 +29,10 @@
 class QPrinter;
 class KToggleAction;
 class KUrl;
-class KProcess;
 
 class KVirtualView;
 class KVirtualOptions;
+class KVirtualProcess;
 class KSystemTrayIcon;
 
 /**
@@ -69,6 +69,8 @@ private slots:
 	void optionsPreferences();
 	void setConfig();
 	void startVirtual();
+	void terminateVirtual();
+	void killVirtual();
 	void readData( uint );
 	void readError( uint );
 	void closeProcess( uint, int, QProcess::ExitStatus );
@@ -81,8 +83,9 @@ private:
 	Ui::prefs_base ui_prefs_base ;
 	KVirtualView *m_view;
 	KSystemTrayIcon *m_systray;
-	QMap<uint, KProcess*> m_hostProcesses;
-	QMap<uint, KProcess*> m_switchProcesses;
+	QMap<uint, KVirtualProcess*> m_hostProcesses;
+	QMap<uint, KVirtualProcess*> m_switchProcesses;
+    KVirtualProcess* m_diskcreate;
 	uint m_id;
 	KVirtualOptions* m_options;
 

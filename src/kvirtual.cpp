@@ -121,6 +121,14 @@ void KVirtual::setupActions()
     actionCollection()->addAction( QLatin1String( "start_vm" ), runvm );
     connect( runvm, SIGNAL( triggered( bool ) ), this, SLOT( startVirtual() ) );
 
+    KAction *terminatevm = new KAction( KIcon( "dialog-close" ), i18n( "Terminate VM" ), this );
+    actionCollection()->addAction( QLatin1String( "terminate_vm" ), terminatevm );
+    connect( terminatevm, SIGNAL( triggered( bool ) ), this, SLOT( terminateVirtual() ) );
+	
+    KAction *killvm = new KAction( KIcon( "application-exit" ), i18n( "Kill VM" ), this );
+    actionCollection()->addAction( QLatin1String( "kill_vm" ), killvm );
+    connect( killvm, SIGNAL( triggered( bool ) ), this, SLOT( killVirtual() ) );
+
     // custom menu and menu item - the slot is in the class KVirtualView
     KAction *output = new KAction( KIcon( "view-process-system" ), i18n( "Show/Hide Output" ), this );
     actionCollection()->addAction( QLatin1String( "toggle_output" ), output );
@@ -203,7 +211,7 @@ void KVirtual::setConfig()
 void KVirtual::startVde( const QString & vswitch )
 {
     uint id = m_id++;
-    KProcess * process = new KVirtualProcess( id, KVirtualProcess::SWITCH );
+    KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::SWITCH );
     QStringList args;
 	QDir dir( vswitch );
 	QString buffer;
@@ -251,10 +259,40 @@ void KVirtual::startVde( const QString & vswitch )
 	}
 }
 
+void KVirtual::terminateVirtual()
+{
+    QList<uint>::ConstIterator it;
+    QList<uint> keys;
+
+	keys = m_hostProcesses.keys();
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        if ( m_hostProcesses[*it] &&  m_hostProcesses[*it]->state() != QProcess::NotRunning )
+        {
+            m_hostProcesses[*it]->terminate();
+        }
+    }
+}
+
+void KVirtual::killVirtual()
+{
+    QList<uint>::ConstIterator it;
+    QList<uint> keys;
+
+	keys = m_hostProcesses.keys();
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        if ( m_hostProcesses[*it] &&  m_hostProcesses[*it]->state() != QProcess::NotRunning )
+        {
+            m_hostProcesses[*it]->kill();
+        }
+    }
+}
+
 void KVirtual::startVirtual()
 {
     uint id = m_id++;
-    KProcess * process = new KVirtualProcess( id, KVirtualProcess::HOST );
+    KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::HOST );
     QStringList vswitch;
 	QString buffer;
 
@@ -304,7 +342,7 @@ void KVirtual::startVirtual()
 
 void KVirtual::readData( uint id )
 {
-	KProcess* process = 0;
+	KVirtualProcess* process = 0;
 	QString buffer, message;
 
     buffer.setNum( id );
@@ -324,7 +362,7 @@ void KVirtual::readData( uint id )
 
 void KVirtual::readError( uint id )
 {
-    KProcess* process = 0;
+    KVirtualProcess* process = 0;
 	QString buffer, message;
 
     buffer.setNum( id );
@@ -344,7 +382,7 @@ void KVirtual::readError( uint id )
 
 void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 {
-	KProcess* process = 0;
+	KVirtualProcess* process = 0;
 	bool announce = false;
 	if ( m_hostProcesses.contains( id ) )
 	{

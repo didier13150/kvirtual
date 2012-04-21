@@ -220,7 +220,7 @@
         <item>
          <widget class="QSlider" name="horizontalSlider_nb_of_cpu">
           <property name="maximum">
-           <number>16</number>
+           <number>255</number>
           </property>
           <property name="singleStep">
            <number>1</number>
@@ -235,7 +235,7 @@
            <enum>QSlider::TicksBelow</enum>
           </property>
           <property name="tickInterval">
-           <number>128</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -246,6 +246,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>255</number>
           </property>
          </widget>
         </item>
@@ -787,22 +790,96 @@
       <item row="1" column="0">
        <widget class="QGroupBox" name="groupBox_create_img">
         <property name="title">
-         <string>Create a qcow2 virtual disk image</string>
+         <string>Create a virtual disk image</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_6">
-         <item row="0" column="0">
+         <item row="0" column="1">
           <widget class="KUrlRequester" name="kurlrequester_create_img">
            <property name="mode">
             <set>KFile::File|KFile::LocalOnly</set>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item row="0" column="7">
           <widget class="QPushButton" name="pushButton_create_img">
            <property name="text">
             <string>Create</string>
            </property>
           </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_create_img_file">
+           <property name="text">
+            <string>File</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLabel" name="label_create_img_size">
+           <property name="text">
+            <string>Size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QSpinBox" name="spinBox_create_img_size">
+           <property name="maximum">
+            <number>999</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QComboBox" name="comboBox_create_img_size">
+           <item>
+            <property name="text">
+             <string>bytes</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>k</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>M</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>G</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="6">
+          <spacer name="horizontalSpacer_11">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>
