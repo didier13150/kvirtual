@@ -1,0 +1,1141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>kvirtualview_base</class>
+ <widget class="QWidget" name="kvirtualview_base">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>502</width>
+    <height>816</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_11">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="gbCommon">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Common</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1" rowspan="2">
+       <widget class="QLabel" name="label_name">
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="lineEdit_name"/>
+      </item>
+      <item row="3" column="0" colspan="7">
+       <widget class="QTextEdit" name="textEdit_description">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QComboBox" name="comboBox_distrib">
+        <item>
+         <property name="text">
+          <string>centos</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fedora</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>red-hat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>debian</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="KLed" name="kled_state">
+        <property name="minimumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="state">
+         <enum>KLed::Off</enum>
+        </property>
+        <property name="shape">
+         <enum>KLed::Circular</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="label_logo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="5">
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>10</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_description">
+        <property name="text">
+         <string>Description</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="gbSystem">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>System</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0" colspan="4">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_memory">
+          <property name="text">
+           <string>Base Memory</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="horizontalSlider_memory">
+          <property name="maximum">
+           <number>1024</number>
+          </property>
+          <property name="singleStep">
+           <number>128</number>
+          </property>
+          <property name="pageStep">
+           <number>512</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>128</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KIntSpinBox" name="kintspinbox_memory">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="1" colspan="3">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_nb_of_cpu">
+          <property name="text">
+           <string>Number of CPU</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="horizontalSlider_nb_of_cpu">
+          <property name="maximum">
+           <number>16</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+          <property name="pageStep">
+           <number>2</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBelow</enum>
+          </property>
+          <property name="tickInterval">
+           <number>128</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KIntSpinBox" name="kintspinbox_nb_of_cpu">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBox_usb">
+        <property name="text">
+         <string>USB Support</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="3">
+       <spacer name="horizontalSpacer_12">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="0">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="checkBox_snapshot">
+        <property name="text">
+         <string>Snapshot</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QComboBox" name="comboBox_boot">
+        <item>
+         <property name="text">
+          <string>disk</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>cdrom</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>network</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>floppy</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLabel" name="label_bootorder">
+        <property name="text">
+         <string>Boot on</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="gbDisplay">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Display</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0" colspan="5">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_display_type">
+          <property name="text">
+           <string>Display</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_16">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButton_none">
+          <property name="text">
+           <string>None</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_17">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButton_direct">
+          <property name="text">
+           <string>Direct</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_18">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButton_vnc">
+          <property name="text">
+           <string>VNC</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_vncport">
+          <property name="text">
+           <string>VNC Port</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBox_vncport">
+          <property name="maximum">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_vga_type">
+        <property name="text">
+         <string>Video Card Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBox_video_card">
+        <item>
+         <property name="text">
+          <string>std</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>cirrus</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>vmware</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>qlx</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>xenfb</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>none</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <spacer name="horizontalSpacer_15">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="label_display_keyboard">
+        <property name="text">
+         <string>Keyboard type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QComboBox" name="comboBox_display_keyboard">
+        <property name="currentIndex">
+         <number>14</number>
+        </property>
+        <property name="maxVisibleItems">
+         <number>11</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>ar</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>de-ch</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>es</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fo</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fr-ca</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>hu</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ja</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>mk</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>no</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>pt-br</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>sv</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>da</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>en-gb</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>et</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fr</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fr-ch</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>is</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>lt</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>nl</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>pl</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ru</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>th</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>de</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>en-us</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fi</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fr-be</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>hr</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>it</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>lv</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>nl-be</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>pt</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>sl</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>tr</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QGroupBox" name="gbStorage">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Storage</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QTabWidget" name="tabWidget_storage">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab_1">
+         <attribute name="title">
+          <string>Storage 1</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
+           <widget class="KUrlRequester" name="kurlrequester_storage_1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="acceptDrops">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_storage_1">
+            <item>
+             <property name="text">
+              <string>disk</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>cdrom</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>floppy</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Storage 2</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="0" column="0">
+           <widget class="KUrlRequester" name="kurlrequester_storage_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="acceptDrops">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_storage_2">
+            <item>
+             <property name="text">
+              <string>disk</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>cdrom</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>floppy</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QGroupBox" name="groupBox_create_img">
+        <property name="title">
+         <string>Create a qcow2 virtual disk image</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="0">
+          <widget class="KUrlRequester" name="kurlrequester_create_img">
+           <property name="mode">
+            <set>KFile::File|KFile::LocalOnly</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_create_img">
+           <property name="text">
+            <string>Create</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QGroupBox" name="gbNetwork">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Network</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QTabWidget" name="tabWidget_ifaces">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab_3">
+         <attribute name="title">
+          <string>Iface 1</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_iface_model_1">
+            <property name="text">
+             <string>Model</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_iface_model_1">
+            <item>
+             <property name="text">
+              <string>virtio</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>ne2k_pci</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>i82551</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>i82557b</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>i82559er</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>rtl8139</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>e1000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>pcnet</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>none</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="3">
+           <widget class="QComboBox" name="comboBox_iface_type_1">
+            <item>
+             <property name="text">
+              <string>tap</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>vde</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLineEdit" name="lineEdit_iface_detail_1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>tap10</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_iface_mac_1">
+            <property name="text">
+             <string>MAC Adress</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEdit_iface_mac_1">
+            <property name="inputMask">
+             <string>HH:HH:HH:HH:HH:HH; </string>
+            </property>
+            <property name="text">
+             <string>52:54:00:12:34:56</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3" colspan="2">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_4">
+         <attribute name="title">
+          <string>Iface 2</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_iface_model_2">
+            <property name="text">
+             <string>Model</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_iface_model_2">
+            <item>
+             <property name="text">
+              <string>virtio</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>ne2k_pci</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>i82551</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>i82557b</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>i82559er</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>rtl8139</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>e1000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>pcnet</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>none</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>132</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="3">
+           <widget class="QComboBox" name="comboBox_iface_type_2">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>tap</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>vde</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLineEdit" name="lineEdit_iface_detail_2">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>/tmp/switch1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_iface_mac_2">
+            <property name="text">
+             <string>MAC Adress</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEdit_iface_mac_2">
+            <property name="inputMask">
+             <string>HH:HH:HH:HH:HH:HH; </string>
+            </property>
+            <property name="text">
+             <string>52:54:00:12:36:56</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3" colspan="2">
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>132</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QTextBrowser" name="textBrowser_output">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>10</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

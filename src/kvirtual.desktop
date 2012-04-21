@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=KVirtual
+Exec=kvirtual %i -caption "%c"
+Icon=kvirtual
+Type=Application
+X-DocPath=kvirtual/index.html
+GenericName=A KDE4 GUI Frontend for kvm
+GenericName[fr]=Une interface utilisateur KDE4 pour kvm
+Terminal=false

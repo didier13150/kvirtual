@@ -1,0 +1,399 @@
+/***************************************************************************
+ *   Copyright (C) %{CURRENT_YEAR} by %{AUTHOR} <%{EMAIL}>                            *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ ***************************************************************************/
+
+#include "kvirtual.h"
+#include "kvirtualview.h"
+#include "kvirtualprocess.h"
+#include "settings.h"
+
+#include <QtGui/QDropEvent>
+#include <QtGui/QPainter>
+#include <QtGui/QPrinter>
+
+#include <KConfigDialog>
+#include <KStatusBar>
+
+#include <KAction>
+#include <KActionCollection>
+#include <KStandardAction>
+#include <KStandardDirs>
+#include <KIconLoader>
+#include <KSystemTrayIcon>
+#include <KFileDialog>
+
+#include <KLocale>
+
+
+KVirtual::KVirtual()
+        : KXmlGuiWindow(),
+        m_view( new KVirtualView( this ) ),
+        m_printer( 0 )
+{
+	//KStandardDirs stdDir;
+	
+    m_id = 0;
+	m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
+	m_systray->show();
+	
+    m_options = new KVirtualOptions();
+    m_view->initOptions( m_options );
+	connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );
+
+	   // accept dnd
+    setAcceptDrops( true );
+
+    // tell the KXmlGuiWindow that this is indeed the main widget
+    setCentralWidget( m_view );
+
+    // then, setup our actions
+    setupActions();
+
+    // add a status bar
+    statusBar()->show();
+
+    // a call to KXmlGuiWindow::setupGUI() populates the GUI
+    // with actions, using KXMLGUI.
+    // It also applies the saved mainwindow settings, if any, and ask the
+    // mainwindow to automatically save settings if changed: window size,
+    // toolbar position, icon size, etc.
+    setupGUI();
+
+	// Load kvm and vde_switch executable and send result on config
+	setConfig();
+}
+
+KVirtual::~KVirtual()
+{
+    QList<uint>::ConstIterator it;
+    QList<uint> keys;
+
+	keys = m_hostProcesses.keys();
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        if ( m_hostProcesses[*it] &&  m_hostProcesses[*it]->state() != QProcess::NotRunning )
+        {
+            m_hostProcesses[*it]->kill();
+        }
+        delete m_hostProcesses[*it];
+    }
+
+    keys = m_switchProcesses.keys();
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        if ( m_switchProcesses[*it] &&  m_switchProcesses[*it]->state() != QProcess::NotRunning )
+        {
+            m_switchProcesses[*it]->kill();
+        }
+        delete m_switchProcesses[*it];
+    }
+    delete m_systray;
+}
+
+void KVirtual::setupActions()
+{
+	KStandardAction::openRecent( this, SLOT( fileNew() ), actionCollection() );
+    KStandardAction::openNew( this, SLOT( fileNew() ), actionCollection() );
+    KStandardAction::open( this, SLOT( fileOpen() ), actionCollection() );
+    KStandardAction::save( this, SLOT( fileSave() ), actionCollection() );
+    KStandardAction::saveAs( this, SLOT( fileSaveAs() ), actionCollection() );
+    KStandardAction::quit( qApp, SLOT( closeAllWindows() ), actionCollection() );
+
+    KStandardAction::preferences( this, SLOT( optionsPreferences() ), actionCollection() );
+
+    // custom menu and menu item - the slot is in the class KVirtualView
+    KAction *runvm = new KAction( KIcon( "run-build" ), i18n( "Start VM" ), this );
+    actionCollection()->addAction( QLatin1String( "start_vm" ), runvm );
+    connect( runvm, SIGNAL( triggered( bool ) ), this, SLOT( startVirtual() ) );
+
+    // custom menu and menu item - the slot is in the class KVirtualView
+    KAction *output = new KAction( KIcon( "view-process-system" ), i18n( "Show/Hide Output" ), this );
+    actionCollection()->addAction( QLatin1String( "toggle_output" ), output );
+    connect( output, SIGNAL( triggered( bool ) ), m_view, SLOT( toggleOutput() ) );
+}
+
+void KVirtual::load( const QString & filename )
+{
+	m_confFilename = filename;
+	m_options->load( m_confFilename );
+	m_view->loadOptions();
+}
+
+void KVirtual::fileNew()
+{
+    // this slot is called whenever the File->New menu is selected,
+    // the New shortcut is pressed (usually CTRL+N) or the New toolbar
+    // button is clicked
+
+    // create a new window
+    (new KVirtual)->show();
+}
+
+void KVirtual::fileOpen()
+{
+	KUrl url = KUrl::fromPath ( QDir::homePath() );
+
+	load( KFileDialog::getOpenFileName( url, "*.xml", this ) );
+}
+
+void KVirtual::fileSave()
+{
+	if( m_confFilename.isNull() )
+	{
+		fileSaveAs();
+		return;
+	}
+	m_view->setOptions();
+	m_options->save( m_confFilename );
+}
+
+void KVirtual::fileSaveAs()
+{
+	KUrl url = KUrl::fromPath ( QDir::homePath() );
+
+	m_confFilename = KFileDialog::getSaveFileName( url, "*.xml", this );
+	m_view->setOptions();
+	m_options->save( m_confFilename );
+}
+
+void KVirtual::optionsPreferences()
+{
+    // The preference dialog is derived from prefs_base.ui
+    //
+    // compare the names of the widgets in the .ui file
+    // to the names of the variables in the .kcfg file
+    //avoid to have 2 dialogs shown
+    if ( KConfigDialog::showDialog( "settings" ) )
+    {
+        return;
+    }
+
+    KConfigDialog *dialog = new KConfigDialog( this, "settings", Settings::self() );
+
+    QWidget *generalSettingsDlg = new QWidget;
+    ui_prefs_base.setupUi( generalSettingsDlg );
+    dialog->addPage( generalSettingsDlg, i18n( "General" ), "package_setting" );
+    connect( dialog, SIGNAL( settingsChanged( QString ) ), m_view, SLOT( settingsChanged() ) );
+    connect( dialog, SIGNAL( settingsChanged( QString ) ), this, SLOT( setConfig() ) );
+    dialog->setAttribute( Qt::WA_DeleteOnClose );
+    dialog->show();
+}
+
+void KVirtual::setConfig()
+{
+	m_options->setKvmExec( "kvm" );
+	m_options->setVdeSwitchExec( "vde_switch" );
+}
+
+void KVirtual::startVde( const QString & vswitch )
+{
+    uint id = m_id++;
+    KProcess * process = new KVirtualProcess( id, KVirtualProcess::SWITCH );
+    QStringList args;
+	QDir dir( vswitch );
+	QString buffer;
+
+	if( dir.exists() )
+	{
+		m_view->addError( "Virtual switch is already exists but is not handled by me" );
+		return;
+	}
+
+    args << "-F" << "-sock" << vswitch;
+    process->setProgram( m_options->getVdeSwitchExec(), args );
+    process->setOutputChannelMode( KProcess::SeparateChannels );
+    connect( process,
+             SIGNAL( readyReadStandardOutput( uint ) ),
+             SLOT( readData( uint ) )
+           );
+    connect( process,
+             SIGNAL( readyReadStandardError( uint ) ),
+             SLOT( readError( uint ) )
+           );
+    connect( process,
+             SIGNAL( finished( uint, int, QProcess::ExitStatus ) ),
+             SLOT( closeProcess( uint, int, QProcess::ExitStatus ) )
+           );
+
+	m_view->addOutput( process->program().join( " " ) );
+    process->start();
+
+	buffer.setNum( id );
+	buffer.prepend( "Process" );
+    if ( process->error() != QProcess::FailedToStart )
+    {
+        m_switchProcesses[id] = process;
+		m_options->setUsedSwitch( vswitch );
+		QString buf2;
+		buf2.setNum( process->pid() );
+		buffer.append( " process PID is " + buf2 );
+		m_view->addOutput( buffer );
+    }
+    else
+	{
+		buffer.append( " failed to start" );
+		m_view->addError( buffer );
+	}
+}
+
+void KVirtual::startVirtual()
+{
+    uint id = m_id++;
+    KProcess * process = new KVirtualProcess( id, KVirtualProcess::HOST );
+    QStringList vswitch;
+	QString buffer;
+
+    m_view->setOptions();
+    process->setProgram( m_options->getKvmExec(), m_options->getArgs() );
+    process->setOutputChannelMode( KProcess::SeparateChannels );
+    connect( process,
+             SIGNAL( readyReadStandardOutput( uint ) ),
+             SLOT( readData( uint ) )
+           );
+    connect( process,
+             SIGNAL( readyReadStandardError( uint ) ),
+             SLOT( readError( uint ) )
+           );
+    connect( process,
+             SIGNAL( finished( uint, int, QProcess::ExitStatus ) ),
+             SLOT( closeProcess( uint, int, QProcess::ExitStatus ) )
+           );
+
+    vswitch = m_options->getNeededVirtualSwitch();
+    for ( QStringList::Iterator it = vswitch.begin() ; it != vswitch.end() ; ++it )
+    {
+        m_view->addOutput( "Need a virtual switch: " + *it );
+		startVde( *it );
+    }
+
+	m_view->addOutput( process->program().join( " " ) );
+    process->start();
+
+	buffer.setNum( id );
+	buffer.prepend( "Process" );
+    if ( process->error() != QProcess::FailedToStart )
+    {
+        m_hostProcesses[id] = process;
+		emit( vmStateChanged( id, true ) );
+		QString buf2;
+		buf2.setNum( process->pid() );
+		buffer.append( " process PID is " + buf2 );
+		m_view->addOutput( buffer );
+    }
+    else
+	{
+		buffer.append( " failed to start" );
+		m_view->addError( buffer );
+	}
+}
+
+void KVirtual::readData( uint id )
+{
+	KProcess* process = 0;
+	QString buffer, message;
+
+    buffer.setNum( id );
+	buffer.prepend( "Process" );
+	if ( m_hostProcesses.contains( id ) )
+	{
+		process = m_hostProcesses[id];
+	}
+	else if ( m_switchProcesses.contains( id ) )
+	{
+		process = m_switchProcesses[id];
+	}
+	if ( not process ) return;
+    buffer += " " + QString( process->readAllStandardOutput() );
+    m_view->addOutput( buffer );
+}
+
+void KVirtual::readError( uint id )
+{
+    KProcess* process = 0;
+	QString buffer, message;
+
+    buffer.setNum( id );
+	buffer.prepend( "Process" );
+	if ( m_hostProcesses.contains( id ) )
+	{
+		process = m_hostProcesses[id];
+	}
+	else if ( m_switchProcesses.contains( id ) )
+	{
+		process = m_switchProcesses[id];
+	}
+	if ( not process ) return;
+    buffer += " " + QString( process->readAllStandardError() );
+    m_view->addError( buffer );
+}
+
+void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
+{
+	KProcess* process = 0;
+	bool announce = false;
+	if ( m_hostProcesses.contains( id ) )
+	{
+		process = m_hostProcesses.take( id );
+		announce = true;
+	}
+	else if ( m_switchProcesses.contains( id ) )
+	{
+		process = m_switchProcesses.take( id );
+	}
+
+	if ( not process ) return;
+	
+    QString message = "Process", description;
+    QString buffer;
+
+    buffer.setNum( id );
+
+    switch ( status )
+    {
+
+    case QProcess::NormalExit:
+    {
+        description = "Exit normally";
+        break;
+    }
+
+    case QProcess::CrashExit:
+    {
+        description = "Crash";
+        break;
+    }
+    }
+
+    message += buffer + " terminated with retval ";
+
+    buffer.setNum( retval );
+    message += buffer + " ( " + description + " )";
+    m_view->addOutput( message );
+    disconnect(process,
+               SIGNAL( readyReadStandardOutput( uint ) ) );
+    disconnect(process,
+               SIGNAL( readyReadStandardError( uint ) ) );
+    disconnect(process,
+               SIGNAL( finished( uint, int, QProcess::ExitStatus ) ) );
+    delete process;
+	if ( announce )
+		emit( vmStateChanged( id, false ) );
+}
+
+#include "kvirtual.moc"
+// kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;

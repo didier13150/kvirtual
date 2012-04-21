@@ -3,3 +3,13 @@ CMakeFiles
 Makefile
 cmake_install.cmake
 install_manifest.txt
+.kdev4
+KVirtual.kdev4
+src/kvirtualview_base.new.ui
+virtual-manager.sh
+vm1.xml
+
+*~
+build
+release
+debug

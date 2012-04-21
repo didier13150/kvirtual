@@ -1,0 +1,29 @@
+<!DOCTYPE kpartgui SYSTEM 'kpartgui.dtd'>
+<kpartgui version="1" name="kvirtual">
+ <MenuBar>
+  <Menu name="file">
+   <text>&amp;File</text>
+   <Action name="file_new"/>
+   <Action name="file_open"/>
+   <Action name="file_open_recent"/>
+   <Separator weakSeparator="1"/>
+   <Action name="file_save"/>
+   <Action name="file_save_as"/>
+   <Separator weakSeparator="1"/>
+   <Separator weakSeparator="1"/>
+   <Action name="file_quit"/>
+  </Menu>
+  <Separator weakSeparator="1"/>
+ </MenuBar>
+ <ToolBar noMerge="1" name="mainToolBar">
+  <text>Main Toolbar</text>
+  <Action name="file_new"/>
+  <Action name="file_open"/>
+  <Action name="file_save"/>
+  <Action name="file_save_as"/>
+  <Separator name="separator_0"/>
+  <Action name="start_vm"/>
+  <Separator name="separator_1"/>
+  <Action name="toggle_output"/>
+ </ToolBar>
+</kpartgui>

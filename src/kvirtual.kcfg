@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="kvirtualrc"/>
+  <group name="Preferences">
+    <entry name="exe_kvm" type="String">
+	    <label>Executable file for kvm</label>
+		<default>/usr/bin/kvm</default>
+    </entry>
+    <entry name="exe_vde_switch" type="String">
+	    <label>Executable file for vde_switch</label>
+		<default>/usr/bin/vde_switch</default>
+    </entry>
+    <entry name="exe_qemu_img" type="String">
+	    <label>Executable file for qemu-img</label>
+		<default>/usr/bin/qemu-img</default>
+    </entry>
+  </group>
+</kcfg>
