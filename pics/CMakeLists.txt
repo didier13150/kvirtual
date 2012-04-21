@@ -1,11 +1,12 @@
 set(KVIRTUAL_DATA_FILES
-    tux.png
+    linux.png
     centos.png
     debian.png
     fedora.png
     freebsd.png
     netbsd.png
     redhat.png
+    mandriva.png
 )
 
 message(STATUS ${KDE4_DATA_DIR})

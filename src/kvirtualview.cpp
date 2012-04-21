@@ -62,6 +62,7 @@ void KVirtualView::settingsChanged()
 void KVirtualView::setPixmap( const QString & distrib )
 {
 	QPixmap pixmap;
+	
 	QString buffer = KStandardDirs::locate( "appdata", distrib + ".png" );
 
 	if ( buffer.isNull() ) buffer = "tux";

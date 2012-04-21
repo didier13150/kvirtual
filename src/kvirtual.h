@@ -82,13 +82,13 @@ private slots:
 
 private:
 	void setupActions();
+	uint getID();
 
 private:
 	Ui::prefs_base ui_prefs_base ;
 	KVirtualView *m_view;
 	KSystemTrayIcon *m_systray;
-	QMap<uint, KVirtualProcess*> m_hostProcesses;
-	QMap<uint, KVirtualProcess*> m_switchProcesses;
+	QMap<uint, KVirtualProcess*> m_processes;
     KVirtualProcess* m_diskcreate;
 	uint m_id;
 	KVirtualOptions* m_options;

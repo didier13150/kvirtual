@@ -77,29 +77,20 @@ KVirtual::KVirtual()
 }
 
 KVirtual::~KVirtual()
-{
-    QList<uint>::ConstIterator it;
-    QList<uint> keys;
-
-	keys = m_hostProcesses.keys();
-    for ( it = keys.begin() ; it != keys.end() ; ++it )
-    {
-        if ( m_hostProcesses[*it] &&  m_hostProcesses[*it]->state() != QProcess::NotRunning )
-        {
-            m_hostProcesses[*it]->kill();
-        }
-        delete m_hostProcesses[*it];
-    }
-
-    keys = m_switchProcesses.keys();
-    for ( it = keys.begin() ; it != keys.end() ; ++it )
-    {
-        if ( m_switchProcesses[*it] &&  m_switchProcesses[*it]->state() != QProcess::NotRunning )
-        {
-            m_switchProcesses[*it]->kill();
-        }
-        delete m_switchProcesses[*it];
-    }
+{	
+	QMapIterator<uint, KVirtualProcess*> it(m_processes);
+	while ( it.hasNext() )
+	{
+		it.next();
+        if ( it.value() )
+		{
+			if ( it.value()->state() != QProcess::NotRunning )
+			{
+				it.value()->kill();
+			}
+			delete it.value();
+		}
+	}
     delete m_systray;
 }
 
@@ -232,9 +223,14 @@ void KVirtual::setQemuImgCreator( const QString & exe )
 	Settings::setExeQemuImgCreator( exe );
 }
 
+uint KVirtual::getID()
+{
+	return m_id++;
+}
+
 void KVirtual::startVde( const QString & vswitch )
 {
-    uint id = m_id++;
+    uint id = getID();
     KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::SWITCH );
     QStringList args;
 	QDir dir( vswitch );
@@ -268,7 +264,7 @@ void KVirtual::startVde( const QString & vswitch )
 
 	m_view->addOutput( process->program().join( " " ) );
     process->start();
-	m_switchProcesses[id] = process;
+	m_processes[id] = process;
 
     if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
 	{
@@ -284,12 +280,13 @@ void KVirtual::terminateVirtual()
     QList<uint>::ConstIterator it;
     QList<uint> keys;
 
-	keys = m_hostProcesses.keys();
+	keys = m_processes.keys();
     for ( it = keys.begin() ; it != keys.end() ; ++it )
     {
-        if ( m_hostProcesses[*it] &&  m_hostProcesses[*it]->state() != QProcess::NotRunning )
+		//if( m_processes[*it]->getVirtualType() != KVirtualProcess::HOST ) continue;
+        if ( m_processes[*it] &&  m_processes[*it]->state() != QProcess::NotRunning )
         {
-            m_hostProcesses[*it]->terminate();
+            m_processes[*it]->terminate();
         }
     }
 }
@@ -299,19 +296,20 @@ void KVirtual::killVirtual()
     QList<uint>::ConstIterator it;
     QList<uint> keys;
 
-	keys = m_hostProcesses.keys();
+	keys = m_processes.keys();
     for ( it = keys.begin() ; it != keys.end() ; ++it )
     {
-        if ( m_hostProcesses[*it] &&  m_hostProcesses[*it]->state() != QProcess::NotRunning )
+		//if( m_processes[*it]->getVirtualType() != KVirtualProcess::HOST ) continue;
+        if ( m_processes[*it] &&  m_processes[*it]->state() != QProcess::NotRunning )
         {
-            m_hostProcesses[*it]->kill();
+            m_processes[*it]->terminate();
         }
     }
 }
 
 void KVirtual::startVirtual()
 {
-    uint id = m_id++;
+    uint id = getID();
     KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::HOST );
     QStringList vswitch;
 	QString buffer;
@@ -345,7 +343,7 @@ void KVirtual::startVirtual()
 
 	m_view->addOutput( process->program().join( " " ) );
     process->start();
-	m_hostProcesses[id] = process;
+	m_processes[id] = process;
 
     if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
 	{
@@ -359,28 +357,19 @@ void KVirtual::readStarted( uint id )
 {
 	KVirtualProcess* process = 0;
 	QString buffer, message;
-	bool isSwitch = true;
 
-    buffer.setNum( id );
-	buffer.prepend( "Process" );
-	if ( m_hostProcesses.contains( id ) )
-	{
-		process = m_hostProcesses[id];
-		isSwitch = false;
-	}
-	else
-	{
-		if ( m_switchProcesses.contains( id ) )
-		{
-			process = m_switchProcesses[id];
-		}
-	}
-	if ( not process )
+	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
 	{
 		return;
 	}
+	process = m_processes[id];
 
-	if ( ! isSwitch ) emit( vmStateChanged( id, true ) );
+	if ( process->getVirtualType() == KVirtualProcess::HOST )
+	{
+		emit( vmStateChanged( id, true ) );
+	}
+    buffer.setNum( id );
+	buffer.prepend( "Process" );
 	QString buf2;
 	buf2.setNum( process->pid() );
 	buffer.append( " process started, PID is " + buf2 );
@@ -393,37 +382,31 @@ void KVirtual::readData( uint id )
 	KVirtualProcess* process = 0;
 	QString buffer, message;
 
+	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
+	{
+		return;
+	}
+	process = m_processes[id];
+	
     buffer.setNum( id );
 	buffer.prepend( "Process" );
-	if ( m_hostProcesses.contains( id ) )
-	{
-		process = m_hostProcesses[id];
-	}
-	else if ( m_switchProcesses.contains( id ) )
-	{
-		process = m_switchProcesses[id];
-	}
-	if ( not process ) return;
     buffer += " " + QString( process->readAllStandardOutput() );
     m_view->addOutput( buffer );
 }
 
 void KVirtual::readError( uint id )
 {
-    KVirtualProcess* process = 0;
+	KVirtualProcess* process = 0;
 	QString buffer, message;
+
+	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
+	{
+		return;
+	}
+	process = m_processes[id];
 
     buffer.setNum( id );
 	buffer.prepend( "Process" );
-	if ( m_hostProcesses.contains( id ) )
-	{
-		process = m_hostProcesses[id];
-	}
-	else if ( m_switchProcesses.contains( id ) )
-	{
-		process = m_switchProcesses[id];
-	}
-	if ( not process ) return;
     buffer += " " + QString( process->readAllStandardError() );
     m_view->addError( buffer );
 }
@@ -431,24 +414,17 @@ void KVirtual::readError( uint id )
 void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 {
 	KVirtualProcess* process = 0;
-	bool announce = false;
-	if ( m_hostProcesses.contains( id ) )
-	{
-		process = m_hostProcesses.take( id );
-		announce = true;
-	}
-	else if ( m_switchProcesses.contains( id ) )
-	{
-		process = m_switchProcesses.take( id );
-	}
+	QString buffer, message, description;
 
-	if ( not process ) return;
-	
-    QString message = "Process", description;
-    QString buffer;
+	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
+	{
+		return;
+	}
+	process = m_processes.take( id );
 
     buffer.setNum( id );
-
+	buffer.prepend( "Process" );
+	
     switch ( status )
     {
 
@@ -476,9 +452,10 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
                SIGNAL( readyReadStandardError( uint ) ) );
     disconnect(process,
                SIGNAL( finished( uint, int, QProcess::ExitStatus ) ) );
-    delete process;
-	if ( announce )
+
+	if ( process->getVirtualType() == KVirtualProcess::HOST )
 		emit( vmStateChanged( id, false ) );
+    delete process;
 }
 
 #include "kvirtual.moc"
