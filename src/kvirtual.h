@@ -25,6 +25,7 @@
 #include <KXmlGuiWindow>
 
 #include "ui_prefs_base.h"
+#include "ui_kvirtual_create_img.h"
 
 class QPrinter;
 class KToggleAction;
@@ -79,6 +80,8 @@ private slots:
 	void setKvmExe( const QString & );
 	void setVdeSwitchExe( const QString & );
 	void setQemuImgCreator( const QString & );
+	void showCreateVDiskDlg();
+	void createVDisk();
 
 private:
 	void setupActions();
@@ -86,10 +89,10 @@ private:
 
 private:
 	Ui::prefs_base ui_prefs_base ;
+	Ui::Dialog_create ui_create_img;
 	KVirtualView *m_view;
 	KSystemTrayIcon *m_systray;
 	QMap<uint, KVirtualProcess*> m_processes;
-    KVirtualProcess* m_diskcreate;
 	uint m_id;
 	KVirtualOptions* m_options;
 

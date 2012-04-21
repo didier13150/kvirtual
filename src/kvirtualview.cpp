@@ -37,7 +37,7 @@ KVirtualView::KVirtualView( QWidget * )
     _ui_kvirtualview_base.setupUi( this );
     settingsChanged();
     setAutoFillBackground( true );
-	setPixmap( "tux" );
+	setPixmap( "linux" );
     connect( _ui_kvirtualview_base.comboBox_distrib,
              SIGNAL( currentIndexChanged ( const QString & ) ),
              SLOT( setPixmap( const QString & ) )
@@ -50,12 +50,6 @@ KVirtualView::~KVirtualView()
 
 void KVirtualView::settingsChanged()
 {
-    /*QPalette pal;
-    pal.setColor( QPalette::Window, Settings::col_background());
-    pal.setColor( QPalette::WindowText, Settings::col_foreground());
-    ui_kvirtualview_base.kcfg_sillyLabel->setPalette( pal );
-
-    ui_kvirtualview_base.kcfg_sillyLabel->setText( i18n("This project is %1 days old",Settings::val_time()) );*/
     emit signalChangeStatusbar( i18n( "Settings changed" ) );
 }
 
@@ -65,7 +59,7 @@ void KVirtualView::setPixmap( const QString & distrib )
 	
 	QString buffer = KStandardDirs::locate( "appdata", distrib + ".png" );
 
-	if ( buffer.isNull() ) buffer = "tux";
+	if ( buffer.isNull() ) buffer = "linux";
 	pixmap.load( buffer );
 	_ui_kvirtualview_base.label_logo->setPixmap( pixmap );
 }

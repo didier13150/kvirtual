@@ -122,6 +122,66 @@ void KVirtual::setupActions()
     KAction *output = new KAction( KIcon( "view-process-system" ), i18n( "Show/Hide Output" ), this );
     actionCollection()->addAction( QLatin1String( "toggle_output" ), output );
     connect( output, SIGNAL( triggered( bool ) ), m_view, SLOT( toggleOutput() ) );
+
+    // custom menu and menu item - the slot is in the class KVirtualView
+    KAction *vdisk = new KAction( KIcon( "document-export-table" ), i18n( "Create a new virtual disk image" ), this );
+    actionCollection()->addAction( QLatin1String( "new_vdisk" ), vdisk );
+    connect( vdisk, SIGNAL( triggered( bool ) ), SLOT( showCreateVDiskDlg() ) );
+}
+
+void KVirtual::showCreateVDiskDlg()
+{
+    QDialog *dialog = new QDialog();
+    ui_create_img.setupUi( dialog );
+	dialog->setModal( true );
+	connect( dialog, SIGNAL( accepted () ), SLOT( createVDisk() ) );
+    dialog->setAttribute( Qt::WA_DeleteOnClose );
+    dialog->show();
+}
+
+void KVirtual::createVDisk()
+{
+    uint id = getID();
+    KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::HOST );
+    QStringList opts;
+	QString buffer;
+
+	opts << "create";
+	opts << "-f" << ui_create_img.comboBox_type->currentText();
+	opts << ui_create_img.kurlrequester_file->lineEdit()->text();
+	opts << ui_create_img.spinBox_size->text() + ui_create_img.comboBox_size_unit->currentText();
+
+    m_view->setOptions();
+    process->setProgram( Settings::exeQemuImgCreator(), opts );
+    process->setOutputChannelMode( KProcess::SeparateChannels );
+    connect( process,
+             SIGNAL( readyReadStandardOutput( uint ) ),
+             SLOT( readData( uint ) )
+           );
+    connect( process,
+             SIGNAL( readyReadStandardError( uint ) ),
+             SLOT( readError( uint ) )
+           );
+    connect( process,
+             SIGNAL( finished( uint, int, QProcess::ExitStatus ) ),
+             SLOT( closeProcess( uint, int, QProcess::ExitStatus ) )
+           );
+    connect( process,
+             SIGNAL( started( uint ) ),
+             SLOT( readStarted(uint) )
+           );
+
+	m_view->addOutput( process->program().join( " " ) );
+    process->start();
+	m_processes[id] = process;
+
+    if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
+	{
+		buffer.setNum( id );
+		buffer.prepend( "Process" );
+		buffer.append( " failed to start" );
+		m_view->addError( buffer );
+	}
 }
 
 void KVirtual::load( const QString & filename )

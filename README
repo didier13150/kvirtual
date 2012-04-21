@@ -1,5 +1,9 @@
-How To Build This Template
--=-=-=-=-=-=-=-=-=-=-=-=-=
+kvirtual
+========
+
+KVirtual is a KDE4 GUI-frontend for kvm/qemu
+
+How to build kvirtual
 
 --- On Unix:
 
@@ -35,10 +39,3 @@ to uninstall the project:
 
 Note: use nmake if you're building with the Visual Studio compiler, or make
 if you're using the minGW compiler
-
-----------------------------
-Please send all comments to:
-Anne-Marie Mahfouf
-annma@kde.org
-
-Last update: July 2009

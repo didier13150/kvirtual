@@ -4,9 +4,13 @@ set(kvirtual_SRCS
    kvirtual.cpp
    main.cpp
    kvirtualview.cpp
- )
+)
 
-kde4_add_ui_files(kvirtual_SRCS kvirtualview_base.ui prefs_base.ui)
+kde4_add_ui_files(kvirtual_SRCS
+   kvirtualview_base.ui
+   prefs_base.ui
+   kvirtual_create_img.ui
+)
 
 kde4_add_kcfg_files(kvirtual_SRCS settings.kcfgc )
 
