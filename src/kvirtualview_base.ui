@@ -60,17 +60,12 @@
         </item>
         <item>
          <property name="text">
-          <string>fedora</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>redhat</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>debian</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fedora</string>
          </property>
         </item>
         <item>
@@ -80,12 +75,27 @@
         </item>
         <item>
          <property name="text">
+          <string>mandriva</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>openbsd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>redhat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>netbsd</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>mandriva</string>
+          <string>windows</string>
          </property>
         </item>
        </widget>
