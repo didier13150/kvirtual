@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300" height="300" id="svg2" version="1.1" inkscape:version="0.47 r22583" sodipodi:docname="mepis.svg">
+  <title id="title4164">MEPIS Logo svg</title>
+  <defs id="defs4">
+    <linearGradient id="linearGradient4156">
+      <stop style="stop-color:#3b66a8;stop-opacity:1;" offset="0" id="stop4158"/>
+      <stop style="stop-color:#192c48;stop-opacity:1;" offset="1" id="stop4160"/>
+    </linearGradient>
+    <inkscape:perspective sodipodi:type="inkscape:persp3d" inkscape:vp_x="0 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:persp3d-origin="372.04724 : 350.78739 : 1" id="perspective10"/>
+    <inkscape:perspective id="perspective2824" inkscape:persp3d-origin="0.5 : 0.33333333 : 1" inkscape:vp_z="1 : 0.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 0.5 : 1" sodipodi:type="inkscape:persp3d"/>
+    <inkscape:perspective id="perspective3823" inkscape:persp3d-origin="0.5 : 0.33333333 : 1" inkscape:vp_z="1 : 0.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 0.5 : 1" sodipodi:type="inkscape:persp3d"/>
+    <inkscape:perspective id="perspective4142" inkscape:persp3d-origin="0.5 : 0.33333333 : 1" inkscape:vp_z="1 : 0.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 0.5 : 1" sodipodi:type="inkscape:persp3d"/>
+    <linearGradient inkscape:collect="always" xlink:href="#linearGradient4156" id="linearGradient4162" x1="171.21425" y1="3.576458" x2="171.21425" y2="153.57646" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.95206136,0,0,0.95206136,3.9220639,5.933675)"/>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.7" inkscape:cx="454.95994" inkscape:cy="139.51221" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1152" inkscape:window-height="788" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="1"/>
+  <metadata id="metadata7">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title>MEPIS Logo svg</dc:title>
+        <cc:license rdf:resource=""/>
+        <dc:description>Redrawn in svg using these sources:
+http://mepis.gabston-howell.org/art/details.php?image_id=399
+http://mepis.gabston-howell.org/art/details.php?image_id=400</dc:description>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-15.071387,-1.1479045)">
+    <rect style="fill:url(#linearGradient4162);fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" id="rect4132" width="283.71429" height="283.71429" x="25.071392" y="10.290744" rx="29.285715" ry="37.85714"/>
+    <rect style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" id="rect4132-5" width="244.27173" height="244.27173" x="47.784847" y="29.740013" rx="29.285715" ry="37.85714"/>
+    <path id="path2832" d="m 74.510587,240.2863 c 0,-0.5783 1.900733,-3.0218 9.978774,-12.82846 5.488329,-6.66278 10.135663,-12.29447 10.327423,-12.51491 0.30889,-0.35506 0.11381,-0.74698 -1.710773,-3.43728 -3.012217,-4.44135 -4.376645,-6.81171 -6.80165,-11.81618 -4.457599,-9.19911 -7.226755,-18.37964 -8.645469,-28.66228 -0.707839,-5.1302 -0.893186,-17.30646 -0.343856,-22.58793 0.557565,-5.3605 1.246238,-9.29257 2.47257,-14.11743 3.415444,-13.43763 9.03768,-24.69154 18.055688,-36.14162 2.687476,-3.412253 10.401266,-11.145136 13.876816,-13.911155 14.20541,-11.305386 30.14844,-18.146701 47.52503,-20.393432 10.07843,-1.303121 21.85312,-0.899841 31.68335,1.085114 19.24509,3.886046 36.24812,13.215244 49.70797,27.273677 14.4098,15.050666 23.08632,33.581146 25.74196,54.977256 0.51268,4.1307 0.43211,18.40636 -0.12819,22.71068 -2.67482,20.5484 -10.96142,38.2932 -24.86282,53.24095 -1.61363,1.7351 -3.03138,3.28977 -3.15059,3.45485 -0.14846,0.20565 1.45606,2.33222 5.09637,6.75452 3.63722,4.41856 5.31305,6.63947 5.31305,7.04118 l 0,0.58678 -87.06783,0 -87.067823,0 0,-0.71433 z M 201.12935,213.793 c 10.76717,-13.05466 12.37872,-14.9076 13.0172,-14.96714 0.68276,-0.0635 1.16925,0.46836 7.72313,8.44576 l 6.99444,8.51366 1.68893,-1.81666 c 4.39218,-4.72449 8.03563,-9.51322 10.90909,-14.33826 17.56429,-29.49354 15.04355,-65.42106 -6.47704,-92.31583 -2.95667,-3.69502 -8.903,-9.603908 -12.67566,-12.595838 -21.75727,-17.254764 -49.81141,-22.312703 -75.7348,-13.654357 -27.38528,9.14661 -48.066936,32.214555 -54.131816,60.377585 -1.522822,7.07147 -2.13714,16.75037 -1.49586,23.56845 1.202121,12.78123 5.26197,24.77408 12.160606,35.92264 l 1.39537,2.25499 5.82369,-7.05752 c 3.20301,-3.88163 10.17414,-12.33314 15.49139,-18.78114 7.39647,-8.96934 9.79432,-11.72361 10.20663,-11.72361 0.41741,0 6.40433,7.13236 26.55474,31.63527 14.30871,17.39939 26.07109,31.58934 26.13864,31.53323 0.0676,-0.0562 5.65262,-6.80666 12.41132,-15.00123 z" style="fill:#ffffff;fill-opacity:1;stroke:none"/>
+  </g>
+</svg>
