@@ -1,0 +1,292 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Didier Fabert <didier.fabert@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-22 17:09+0200\n"
+"PO-Revision-Date: 2012-04-22 17:19+0200\n"
+"Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: kvirtualview.cpp:68
+msgid "Settings changed"
+msgstr ""
+
+#: kvirtualview.cpp:188 kvirtualview.cpp:278 rc.cpp:72 rc.cpp:120 rc.cpp:132
+#: kvirtualoptions.cpp:764
+msgid "disk"
+msgstr "disque"
+
+#: kvirtualview.cpp:193 kvirtualview.cpp:280 rc.cpp:81 kvirtualoptions.cpp:465
+#: kvirtualoptions.cpp:619 kvirtualoptions.cpp:770 kvirtualoptions.cpp:806
+msgid "network"
+msgstr "réseau"
+
+#: kvirtualview.cpp:198 kvirtualview.cpp:282 rc.cpp:75 rc.cpp:123 rc.cpp:135
+#: kvirtualoptions.cpp:776 kvirtualoptions.cpp:807
+msgid "cdrom"
+msgstr "cdrom"
+
+#: kvirtualview.cpp:203 rc.cpp:78 rc.cpp:126 rc.cpp:138
+#: kvirtualoptions.cpp:782 kvirtualoptions.cpp:805
+msgid "floppy"
+msgstr "disquette"
+
+#: main.cpp:42
+msgid "A KDE 4 GUI Frontend for KVM"
+msgstr "Une interface utilisateur KDE 4 pour KVM"
+
+#: main.cpp:48 kvirtual.cpp:90
+msgid "kvirtual"
+msgstr "kvirtual"
+
+#: main.cpp:50
+msgid "KVirtual"
+msgstr "KVirtual"
+
+#: main.cpp:60
+msgid "Project manager and main developer"
+msgstr "Chef de projet et principal développeur"
+
+#: main.cpp:65
+msgid "Document to open"
+msgstr "Document à ouvrir"
+
+#: kvirtual.cpp:127
+msgid "Start VM"
+msgstr "Démarrer la VM"
+
+#: kvirtual.cpp:131
+msgid "Terminate VM"
+msgstr "Arrêter la VM"
+
+#: kvirtual.cpp:135
+msgid "Kill VM"
+msgstr "Tuer la VM"
+
+#: kvirtual.cpp:140
+msgid "Show/Hide Output"
+msgstr "Montrer/Cacher la sortie"
+
+#: kvirtual.cpp:145
+msgid "Create a new virtual disk image"
+msgstr "Créer une nouvelle image de disque virtuel"
+
+#: kvirtual.cpp:198 kvirtual.cpp:346 kvirtual.cpp:425 kvirtual.cpp:446
+#: kvirtual.cpp:466 kvirtual.cpp:483 kvirtual.cpp:500
+msgid "Process"
+msgstr "Processus"
+
+#: kvirtual.cpp:199 kvirtual.cpp:347 kvirtual.cpp:426
+msgid " failed to start"
+msgstr " a échoué au démarrage"
+
+#: kvirtual.cpp:267
+msgid "Executable"
+msgstr "Executable"
+
+#: kvirtual.cpp:315
+msgid "Virtual switch is already exists but is not handled by me"
+msgstr "Le switch virtuel existe déjà mais n'est pas géré par moi"
+
+#: kvirtual.cpp:414
+msgid "Need a virtual switch: "
+msgstr "Besoin d'un switch virtuel"
+
+#: kvirtual.cpp:449
+msgid " process started, PID is "
+msgstr ""
+
+#: kvirtual.cpp:507
+msgid "Exit normally"
+msgstr ""
+
+#: kvirtual.cpp:513
+msgid "Crash"
+msgstr ""
+
+#: kvirtual.cpp:518
+msgid " terminated with retval "
+msgstr ""
+
+#: rc.cpp:3
+msgid "&File"
+msgstr ""
+
+#: rc.cpp:6
+msgid "&Virtual"
+msgstr ""
+
+#: rc.cpp:9
+msgid "Main Toolbar"
+msgstr ""
+
+#: rc.cpp:12
+msgid "qemu-img is the QEMU disk image utility"
+msgstr ""
+
+#: rc.cpp:15
+msgid "KVM / QEMU Emulator"
+msgstr ""
+
+#: rc.cpp:18
+msgid "Virtual Distributed Ethernet switch"
+msgstr ""
+
+#: rc.cpp:21
+msgid "QEMU disk image utility"
+msgstr ""
+
+#: rc.cpp:24
+msgid "Executable file for kvm"
+msgstr ""
+
+#: rc.cpp:27
+msgid "Executable file for vde_switch"
+msgstr ""
+
+#: rc.cpp:30
+msgid "Executable file for qemu-img"
+msgstr ""
+
+#: rc.cpp:33
+msgid "Create a new disk image"
+msgstr ""
+
+#: rc.cpp:36
+msgid "File"
+msgstr ""
+
+#: rc.cpp:39
+msgid "Size"
+msgstr ""
+
+#: rc.cpp:42
+msgid "Type"
+msgstr ""
+
+#: rc.cpp:45
+msgid "Form"
+msgstr ""
+
+#: rc.cpp:48
+msgid "Common"
+msgstr ""
+
+#: rc.cpp:51
+msgid "Name"
+msgstr ""
+
+#: rc.cpp:54
+msgid "Description"
+msgstr ""
+
+#: rc.cpp:57
+msgid "System"
+msgstr ""
+
+#: rc.cpp:60
+msgid "Base Memory"
+msgstr ""
+
+#: rc.cpp:63
+msgid "Number of CPU"
+msgstr ""
+
+#: rc.cpp:66
+msgid "USB Support"
+msgstr ""
+
+#: rc.cpp:69
+msgid "Snapshot"
+msgstr ""
+
+#: rc.cpp:84
+msgid "Boot on"
+msgstr ""
+
+#: rc.cpp:87 rc.cpp:90
+msgid "Display"
+msgstr ""
+
+#: rc.cpp:93 rc.cpp:108 rc.cpp:150 rc.cpp:162
+msgid "None"
+msgstr ""
+
+#: rc.cpp:96
+msgid "Direct"
+msgstr ""
+
+#: rc.cpp:99
+msgid "VNC"
+msgstr ""
+
+#: rc.cpp:102
+msgid "VNC Port"
+msgstr ""
+
+#: rc.cpp:105
+msgid "Video Card Type"
+msgstr ""
+
+#: rc.cpp:111
+msgid "Keyboard type"
+msgstr ""
+
+#: rc.cpp:114
+msgid "Storage"
+msgstr ""
+
+#: rc.cpp:117
+msgid "Storage 1"
+msgstr ""
+
+#: rc.cpp:129
+msgid "Storage 2"
+msgstr ""
+
+#: rc.cpp:141
+msgid "Network"
+msgstr ""
+
+#: rc.cpp:144
+msgid "Iface 1"
+msgstr ""
+
+#: rc.cpp:147 rc.cpp:159
+msgid "Model"
+msgstr ""
+
+#: rc.cpp:153 rc.cpp:165
+msgid "MAC Adress"
+msgstr ""
+
+#: rc.cpp:156
+msgid "Iface 2"
+msgstr ""
+
+#: kvirtualoptions.cpp:324
+msgid "filename is null"
+msgstr ""
+
+#: kvirtualoptions.cpp:338
+msgid "Can't open filename in read mode"
+msgstr ""
+
+#: kvirtualoptions.cpp:345
+msgid "Can't parse XML file"
+msgstr ""
+
+#: kvirtualoptions.cpp:355
+msgid "Wrong root node"
+msgstr ""
+
