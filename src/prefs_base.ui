@@ -20,7 +20,7 @@
       <string>KVM / QEMU Emulator</string>
      </property>
      <property name="text">
-      <string>kvm / quemu</string>
+      <string notr="true">kvm / quemu</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>
@@ -33,7 +33,7 @@
       <string>Virtual Distributed Ethernet switch</string>
      </property>
      <property name="text">
-      <string>vde_switch</string>
+      <string notr="true">vde_switch</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>
@@ -46,7 +46,7 @@
       <string>QEMU disk image utility</string>
      </property>
      <property name="text">
-      <string>qemu-img</string>
+      <string notr="true">qemu-img</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>

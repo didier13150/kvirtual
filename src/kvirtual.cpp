@@ -66,9 +66,9 @@ KVirtual::KVirtual()
 
     m_options = new KVirtualOptions();
     m_view->initOptions( m_options );
-	connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );
+    connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );
 
-	   // accept dnd
+    // accept dnd
     setAcceptDrops( true );
 
     // tell the KXmlGuiWindow that this is indeed the main widget
@@ -87,34 +87,34 @@ KVirtual::KVirtual()
     // toolbar position, icon size, etc.
     setupGUI();
 
-	m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
-	m_systray->show();
+    m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
+    m_systray->show();
 
-	m_create = new KVirtualCreateImg( this );
+    m_create = new KVirtualCreateImg( this );
 }
 
 KVirtual::~KVirtual()
 {
-	QMapIterator<uint, KVirtualProcess*> it(m_processes);
-	while ( it.hasNext() )
-	{
-		it.next();
+    QMapIterator<uint, KVirtualProcess*> it(m_processes);
+    while ( it.hasNext() )
+    {
+        it.next();
         if ( it.value() )
-		{
-			if ( it.value()->state() != QProcess::NotRunning )
-			{
-				it.value()->kill();
-			}
-			delete it.value();
-		}
-	}
+        {
+            if ( it.value()->state() != QProcess::NotRunning )
+            {
+                it.value()->kill();
+            }
+            delete it.value();
+        }
+    }
     delete m_systray;
-	delete m_create;
+    delete m_create;
 }
 
 void KVirtual::setupActions()
 {
-	KStandardAction::openRecent( this, SLOT( fileNew() ), actionCollection() );
+    KStandardAction::openRecent( this, SLOT( fileNew() ), actionCollection() );
     KStandardAction::openNew( this, SLOT( fileNew() ), actionCollection() );
     KStandardAction::open( this, SLOT( fileOpen() ), actionCollection() );
     KStandardAction::save( this, SLOT( fileSave() ), actionCollection() );
@@ -149,10 +149,10 @@ void KVirtual::setupActions()
 
 void KVirtual::showCreateVDiskDlg()
 {
-	connect( m_create,
-			 SIGNAL( accepted ( const QString &, const QString &, const QString & ) ),
-			 SLOT( createVDisk( const QString &, const QString &, const QString & ) )
-		   );
+    connect( m_create,
+             SIGNAL( accepted ( const QString &, const QString &, const QString & ) ),
+             SLOT( createVDisk( const QString &, const QString &, const QString & ) )
+           );
     m_create->show();
 }
 
@@ -161,12 +161,12 @@ void KVirtual::createVDisk( const QString & file, const QString & type, const QS
     uint id = getID();
     KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::CREATE_IMG );
     QStringList opts;
-	QString buffer;
+    QString buffer;
 
-	opts << "create";
-	opts << "-f" << type;
-	opts << file;
-	opts << size;
+    opts << "create";
+    opts << "-f" << type;
+    opts << file;
+    opts << size;
 
     m_view->setOptions();
     process->setProgram( Settings::exeQemuImgCreator(), opts );
@@ -188,24 +188,24 @@ void KVirtual::createVDisk( const QString & file, const QString & type, const QS
              SLOT( readStarted(uint) )
            );
 
-	m_view->addOutput( process->program().join( " " ) );
+    m_view->addOutput( process->program().join( " " ) );
     process->start();
-	m_processes[id] = process;
+    m_processes[id] = process;
 
     if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
-	{
-		buffer.setNum( id );
-		buffer.prepend( "Process" );
-		buffer.append( " failed to start" );
-		m_view->addError( buffer );
-	}
+    {
+        buffer.setNum( id );
+        buffer.prepend( "Process" );
+        buffer.append( " failed to start" );
+        m_view->addError( buffer );
+    }
 }
 
 void KVirtual::load( const QString & filename )
 {
-	m_confFilename = filename;
-	m_options->load( m_confFilename );
-	m_view->loadOptions();
+    m_confFilename = filename;
+    m_options->load( m_confFilename );
+    m_view->loadOptions();
 }
 
 void KVirtual::fileNew()
@@ -220,29 +220,29 @@ void KVirtual::fileNew()
 
 void KVirtual::fileOpen()
 {
-	KUrl url = KUrl::fromPath ( QDir::homePath() );
+    KUrl url = KUrl::fromPath ( QDir::homePath() );
 
-	load( KFileDialog::getOpenFileName( url, "*.xml", this ) );
+    load( KFileDialog::getOpenFileName( url, "*.xml", this ) );
 }
 
 void KVirtual::fileSave()
 {
-	if( m_confFilename.isNull() )
-	{
-		fileSaveAs();
-		return;
-	}
-	m_view->setOptions();
-	m_options->save( m_confFilename );
+    if ( m_confFilename.isNull() )
+    {
+        fileSaveAs();
+        return;
+    }
+    m_view->setOptions();
+    m_options->save( m_confFilename );
 }
 
 void KVirtual::fileSaveAs()
 {
-	KUrl url = KUrl::fromPath ( QDir::homePath() );
+    KUrl url = KUrl::fromPath ( QDir::homePath() );
 
-	m_confFilename = KFileDialog::getSaveFileName( url, "*.xml", this );
-	m_view->setOptions();
-	m_options->save( m_confFilename );
+    m_confFilename = KFileDialog::getSaveFileName( url, "*.xml", this );
+    m_view->setOptions();
+    m_options->save( m_confFilename );
 }
 
 void KVirtual::optionsPreferences()
@@ -261,45 +261,45 @@ void KVirtual::optionsPreferences()
 
     QWidget *generalSettingsDlg = new QWidget;
     ui_prefs_base.setupUi( generalSettingsDlg );
-	ui_prefs_base.kurlrequester_exeKvm->lineEdit()->setText( Settings::exeKvm() );
-	ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit()->setText( Settings::exeVdeSwitch() );
-	ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit()->setText( Settings::exeQemuImgCreator() );
+    ui_prefs_base.kurlrequester_exeKvm->lineEdit()->setText( Settings::exeKvm() );
+    ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit()->setText( Settings::exeVdeSwitch() );
+    ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit()->setText( Settings::exeQemuImgCreator() );
     dialog->addPage( generalSettingsDlg, i18n( "Executable" ), "run-build" );
     connect( dialog, SIGNAL( settingsChanged( QString ) ), m_view, SLOT( settingsChanged() ) );
-	connect( ui_prefs_base.kurlrequester_exeKvm->lineEdit(),
-			 SIGNAL( textEdited( const QString & ) ),
-			 SLOT( setKvmExe( const QString & ) )
-	);
-	connect( ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit(),
-			 SIGNAL( textEdited(  const QString &  ) ),
-			 SLOT( setVdeSwitchExe(  const QString &  ) )
-	);
-	connect( ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit(),
-			 SIGNAL( textEdited(  const QString &  ) ),
-			 SLOT( setQemuImgCreator( const QString & ) )
-	);
+    connect( ui_prefs_base.kurlrequester_exeKvm->lineEdit(),
+             SIGNAL( textEdited( const QString & ) ),
+             SLOT( setKvmExe( const QString & ) )
+           );
+    connect( ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit(),
+             SIGNAL( textEdited(  const QString &  ) ),
+             SLOT( setVdeSwitchExe(  const QString &  ) )
+           );
+    connect( ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit(),
+             SIGNAL( textEdited(  const QString &  ) ),
+             SLOT( setQemuImgCreator( const QString & ) )
+           );
     dialog->setAttribute( Qt::WA_DeleteOnClose );
     dialog->show();
 }
 
 void KVirtual::setKvmExe( const QString & exe )
 {
-	Settings::setExeKvm( exe );
+    Settings::setExeKvm( exe );
 }
 
 void KVirtual::setVdeSwitchExe( const QString & exe )
 {
-	Settings::setExeVdeSwitch( exe );
+    Settings::setExeVdeSwitch( exe );
 }
 
 void KVirtual::setQemuImgCreator( const QString & exe )
 {
-	Settings::setExeQemuImgCreator( exe );
+    Settings::setExeQemuImgCreator( exe );
 }
 
 uint KVirtual::getID()
 {
-	return m_id++;
+    return m_id++;
 }
 
 void KVirtual::startVde( const QString & vswitch )
@@ -307,14 +307,14 @@ void KVirtual::startVde( const QString & vswitch )
     uint id = getID();
     KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::SWITCH );
     QStringList args;
-	QDir dir( vswitch );
-	QString buffer;
+    QDir dir( vswitch );
+    QString buffer;
 
-	if( dir.exists() )
-	{
-		m_view->addError( "Virtual switch is already exists but is not handled by me" );
-		return;
-	}
+    if ( dir.exists() )
+    {
+        m_view->addError( "Virtual switch is already exists but is not handled by me" );
+        return;
+    }
 
     args << "-F" << "-sock" << vswitch;
     process->setProgram( Settings::exeVdeSwitch(), args );
@@ -336,17 +336,17 @@ void KVirtual::startVde( const QString & vswitch )
              SLOT( readStarted(uint) )
            );
 
-	m_view->addOutput( process->program().join( " " ) );
+    m_view->addOutput( process->program().join( " " ) );
     process->start();
-	m_processes[id] = process;
+    m_processes[id] = process;
 
     if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
-	{
-		buffer.setNum( id );
-		buffer.prepend( "Process" );
-		buffer.append( " failed to start" );
-		m_view->addError( buffer );
-	}
+    {
+        buffer.setNum( id );
+        buffer.prepend( "Process" );
+        buffer.append( " failed to start" );
+        m_view->addError( buffer );
+    }
 }
 
 void KVirtual::terminateVirtual()
@@ -354,10 +354,10 @@ void KVirtual::terminateVirtual()
     QList<uint>::ConstIterator it;
     QList<uint> keys;
 
-	keys = m_processes.keys();
+    keys = m_processes.keys();
     for ( it = keys.begin() ; it != keys.end() ; ++it )
     {
-		//if( m_processes[*it]->getVirtualType() != KVirtualProcess::HOST ) continue;
+        //if( m_processes[*it]->getVirtualType() != KVirtualProcess::HOST ) continue;
         if ( m_processes[*it] &&  m_processes[*it]->state() != QProcess::NotRunning )
         {
             m_processes[*it]->terminate();
@@ -370,10 +370,10 @@ void KVirtual::killVirtual()
     QList<uint>::ConstIterator it;
     QList<uint> keys;
 
-	keys = m_processes.keys();
+    keys = m_processes.keys();
     for ( it = keys.begin() ; it != keys.end() ; ++it )
     {
-		//if( m_processes[*it]->getVirtualType() != KVirtualProcess::HOST ) continue;
+        //if( m_processes[*it]->getVirtualType() != KVirtualProcess::HOST ) continue;
         if ( m_processes[*it] &&  m_processes[*it]->state() != QProcess::NotRunning )
         {
             m_processes[*it]->terminate();
@@ -386,7 +386,7 @@ void KVirtual::startVirtual()
     uint id = getID();
     KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::HOST );
     QStringList vswitch;
-	QString buffer;
+    QString buffer;
 
     m_view->setOptions();
     process->setProgram( Settings::exeKvm(), m_options->getArgs() );
@@ -412,92 +412,92 @@ void KVirtual::startVirtual()
     for ( QStringList::Iterator it = vswitch.begin() ; it != vswitch.end() ; ++it )
     {
         m_view->addOutput( "Need a virtual switch: " + *it );
-		startVde( *it );
+        startVde( *it );
     }
 
-	m_view->addOutput( process->program().join( " " ) );
+    m_view->addOutput( process->program().join( " " ) );
     process->start();
-	m_processes[id] = process;
+    m_processes[id] = process;
 
     if ( process->error() == QProcess::FailedToStart || process->state() == QProcess::NotRunning )
-	{
-		buffer.setNum( id );
-		buffer.prepend( "Process" );
-		buffer.append( " failed to start" );
-		m_view->addError( buffer );
-	}
+    {
+        buffer.setNum( id );
+        buffer.prepend( "Process" );
+        buffer.append( " failed to start" );
+        m_view->addError( buffer );
+    }
 }
 void KVirtual::readStarted( uint id )
 {
-	KVirtualProcess* process = 0;
-	QString buffer, message;
+    KVirtualProcess* process = 0;
+    QString buffer, message;
 
-	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
-	{
-		return;
-	}
-	process = m_processes[id];
+    if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
+    {
+        return;
+    }
+    process = m_processes[id];
 
-	if ( process->getVirtualType() == KVirtualProcess::HOST )
-	{
-		emit( vmStateChanged( id, true ) );
-	}
+    if ( process->getVirtualType() == KVirtualProcess::HOST )
+    {
+        emit( vmStateChanged( id, true ) );
+    }
     buffer.setNum( id );
-	buffer.prepend( "Process" );
-	QString buf2;
-	buf2.setNum( process->pid() );
-	buffer.append( " process started, PID is " + buf2 );
-	m_view->addOutput( buffer );
+    buffer.prepend( "Process" );
+    QString buf2;
+    buf2.setNum( process->pid() );
+    buffer.append( " process started, PID is " + buf2 );
+    m_view->addOutput( buffer );
 
 }
 
 void KVirtual::readData( uint id )
 {
-	KVirtualProcess* process = 0;
-	QString buffer, message;
+    KVirtualProcess* process = 0;
+    QString buffer, message;
 
-	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
-	{
-		return;
-	}
-	process = m_processes[id];
+    if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
+    {
+        return;
+    }
+    process = m_processes[id];
 
     buffer.setNum( id );
-	buffer.prepend( "Process" );
+    buffer.prepend( "Process" );
     buffer += " " + QString( process->readAllStandardOutput() );
     m_view->addOutput( buffer );
 }
 
 void KVirtual::readError( uint id )
 {
-	KVirtualProcess* process = 0;
-	QString buffer, message;
+    KVirtualProcess* process = 0;
+    QString buffer, message;
 
-	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
-	{
-		return;
-	}
-	process = m_processes[id];
+    if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
+    {
+        return;
+    }
+    process = m_processes[id];
 
     buffer.setNum( id );
-	buffer.prepend( "Process" );
+    buffer.prepend( "Process" );
     buffer += " " + QString( process->readAllStandardError() );
     m_view->addError( buffer );
 }
 
 void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 {
-	KVirtualProcess* process = 0;
-	QString buffer, message, description;
+    KVirtualProcess* process = 0;
+    QString buffer, message, description;
 
-	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
-	{
-		return;
-	}
-	process = m_processes.take( id );
+    if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
+    {
+        return;
+    }
+    process = m_processes.take( id );
 
     buffer.setNum( id );
-	buffer.prepend( "Process" );
+    buffer.prepend( "Process" );
 
     switch ( status )
     {
@@ -527,10 +527,10 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
     disconnect(process,
                SIGNAL( finished( uint, int, QProcess::ExitStatus ) ) );
 
-	if ( process->getVirtualType() == KVirtualProcess::HOST )
-		emit( vmStateChanged( id, false ) );
+    if ( process->getVirtualType() == KVirtualProcess::HOST )
+        emit( vmStateChanged( id, false ) );
     delete process;
 }
 
 #include "kvirtual.moc"
-// kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;
+// kate: indent-mode cstyle; space-indent on; indent-width 0;   replace-tabs off;

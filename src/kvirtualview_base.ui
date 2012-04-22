@@ -50,52 +50,82 @@
        <widget class="QComboBox" name="comboBox_distrib">
         <item>
          <property name="text">
-          <string>linux</string>
+          <string notr="true">linux</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>centos</string>
+          <string notr="true">archlinux</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>debian</string>
+          <string notr="true">centos</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>fedora</string>
+          <string notr="true">debian</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>freebsd</string>
+          <string notr="true">fedora</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>mandriva</string>
+          <string notr="true">freebsd</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>openbsd</string>
+          <string notr="true">knoppix</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>redhat</string>
+          <string notr="true">linuxmint</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>netbsd</string>
+          <string notr="true">mandriva</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>windows</string>
+          <string notr="true">mepis</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">openbsd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">redhat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">netbsd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">slackware</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ubuntu</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">windows</string>
          </property>
         </item>
        </widget>
@@ -338,12 +368,12 @@
         </item>
         <item>
          <property name="text">
-          <string>network</string>
+          <string>floppy</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>floppy</string>
+          <string>network</string>
          </property>
         </item>
        </widget>
@@ -490,34 +520,37 @@
       </item>
       <item row="1" column="1">
        <widget class="QComboBox" name="comboBox_video_card">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <item>
          <property name="text">
-          <string>std</string>
+          <string>None</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>cirrus</string>
+          <string notr="true">std</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>vmware</string>
+          <string notr="true">cirrus</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>qlx</string>
+          <string notr="true">vmware</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>xenfb</string>
+          <string notr="true">qlx</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>none</string>
+          <string notr="true">xenfb</string>
          </property>
         </item>
        </widget>
@@ -552,167 +585,167 @@
         </property>
         <item>
          <property name="text">
-          <string>ar</string>
+          <string notr="true">ar</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>de-ch</string>
+          <string notr="true">de-ch</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>es</string>
+          <string notr="true">es</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>fo</string>
+          <string notr="true">fo</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>fr-ca</string>
+          <string notr="true">fr-ca</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>hu</string>
+          <string notr="true">hu</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>ja</string>
+          <string notr="true">ja</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>mk</string>
+          <string notr="true">mk</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>no</string>
+          <string notr="true">no</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>pt-br</string>
+          <string notr="true">pt-br</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>sv</string>
+          <string notr="true">sv</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>da</string>
+          <string notr="true">da</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>en-gb</string>
+          <string notr="true">en-gb</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>et</string>
+          <string notr="true">et</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>fr</string>
+          <string notr="true">fr</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>fr-ch</string>
+          <string notr="true">fr-ch</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>is</string>
+          <string notr="true">is</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>lt</string>
+          <string notr="true">lt</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>nl</string>
+          <string notr="true">nl</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>pl</string>
+          <string notr="true">pl</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>ru</string>
+          <string notr="true">ru</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>th</string>
+          <string notr="true">th</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>de</string>
+          <string notr="true">de</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>en-us</string>
+          <string notr="true">en-us</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>fi</string>
+          <string notr="true">fi</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>fr-be</string>
+          <string notr="true">fr-be</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>hr</string>
+          <string notr="true">hr</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>it</string>
+          <string notr="true">it</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>lv</string>
+          <string notr="true">lv</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>nl-be</string>
+          <string notr="true">nl-be</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>pt</string>
+          <string notr="true">pt</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>sl</string>
+          <string notr="true">sl</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>tr</string>
+          <string notr="true">tr</string>
          </property>
         </item>
        </widget>
@@ -853,47 +886,47 @@
            <widget class="QComboBox" name="comboBox_iface_model_1">
             <item>
              <property name="text">
-              <string>virtio</string>
+              <string notr="true">virtio</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>ne2k_pci</string>
+              <string notr="true">ne2k_pci</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>i82551</string>
+              <string notr="true">i82551</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>i82557b</string>
+              <string notr="true">i82557b</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>i82559er</string>
+              <string notr="true">i82559er</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>rtl8139</string>
+              <string notr="true">rtl8139</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>e1000</string>
+              <string notr="true">e1000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>pcnet</string>
+              <string notr="true">pcnet</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>none</string>
+              <string>None</string>
              </property>
             </item>
            </widget>
@@ -915,12 +948,12 @@
            <widget class="QComboBox" name="comboBox_iface_type_1">
             <item>
              <property name="text">
-              <string>tap</string>
+              <string notr="true">tap</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>vde</string>
+              <string notr="true">vde</string>
              </property>
             </item>
            </widget>
@@ -939,8 +972,11 @@
               <height>0</height>
              </size>
             </property>
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
             <property name="text">
-             <string>tap10</string>
+             <string notr="true">tap10</string>
             </property>
            </widget>
           </item>
@@ -954,10 +990,10 @@
           <item row="1" column="1" colspan="2">
            <widget class="QLineEdit" name="lineEdit_iface_mac_1">
             <property name="inputMask">
-             <string>HH:HH:HH:HH:HH:HH; </string>
+             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
             </property>
             <property name="text">
-             <string>52:54:00:12:34:56</string>
+             <string notr="true">52:54:00:12:34:56</string>
             </property>
            </widget>
           </item>
@@ -992,47 +1028,47 @@
            <widget class="QComboBox" name="comboBox_iface_model_2">
             <item>
              <property name="text">
-              <string>virtio</string>
+              <string notr="true">virtio</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>ne2k_pci</string>
+              <string notr="true">ne2k_pci</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>i82551</string>
+              <string notr="true">i82551</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>i82557b</string>
+              <string notr="true">i82557b</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>i82559er</string>
+              <string notr="true">i82559er</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>rtl8139</string>
+              <string notr="true">rtl8139</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>e1000</string>
+              <string notr="true">e1000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>pcnet</string>
+              <string notr="true">pcnet</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>none</string>
+              <string>None</string>
              </property>
             </item>
            </widget>
@@ -1057,12 +1093,12 @@
             </property>
             <item>
              <property name="text">
-              <string>tap</string>
+              <string notr="true">tap</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>vde</string>
+              <string notr="true">vde</string>
              </property>
             </item>
            </widget>
@@ -1075,8 +1111,11 @@
               <height>0</height>
              </size>
             </property>
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
             <property name="text">
-             <string>/tmp/switch1</string>
+             <string notr="true">/tmp/switch1</string>
             </property>
            </widget>
           </item>
@@ -1090,10 +1129,10 @@
           <item row="1" column="1" colspan="2">
            <widget class="QLineEdit" name="lineEdit_iface_mac_2">
             <property name="inputMask">
-             <string>HH:HH:HH:HH:HH:HH; </string>
+             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
             </property>
             <property name="text">
-             <string>52:54:00:12:36:56</string>
+             <string notr="true">52:54:00:12:36:56</string>
             </property>
            </widget>
           </item>

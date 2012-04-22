@@ -71,22 +71,22 @@
      </property>
      <item>
       <property name="text">
-       <string>bytes</string>
+       <string notr="true">bytes</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>k</string>
+       <string notr="true">k</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>M</string>
+       <string notr="true">M</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>G</string>
+       <string notr="true">G</string>
       </property>
      </item>
     </widget>
@@ -128,7 +128,7 @@
     <widget class="QComboBox" name="comboBox_type">
      <item>
       <property name="text">
-       <string>qcow2</string>
+       <string notr="true">qcow2</string>
       </property>
      </item>
     </widget>
