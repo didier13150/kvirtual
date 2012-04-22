@@ -86,9 +86,6 @@ KVirtual::KVirtual()
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
     setupGUI();
-
-	// Load kvm and vde_switch executable and send result on config
-	setConfig();
 	
 	m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
 	m_systray->show();
@@ -269,37 +266,34 @@ void KVirtual::optionsPreferences()
 	ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit()->setText( Settings::exeQemuImgCreator() );
     dialog->addPage( generalSettingsDlg, i18n( "Executable" ), "run-build" );
     connect( dialog, SIGNAL( settingsChanged( QString ) ), m_view, SLOT( settingsChanged() ) );
-    connect( dialog, SIGNAL( settingsChanged( QString ) ), this, SLOT( setConfig() ) );
 	connect( ui_prefs_base.kurlrequester_exeKvm->lineEdit(),
 			 SIGNAL( textEdited( const QString & ) ),
 			 SLOT( setKvmExe( const QString & ) )
+	);
+	connect( ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit(),
+			 SIGNAL( textEdited(  const QString &  ) ),
+			 SLOT( setVdeSwitchExe(  const QString &  ) )
+	);
+	connect( ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit(),
+			 SIGNAL( textEdited(  const QString &  ) ),
+			 SLOT( setQemuImgCreator( const QString & ) )
 	);
     dialog->setAttribute( Qt::WA_DeleteOnClose );
     dialog->show();
 }
 
-void KVirtual::setConfig()
-{
-	qDebug() << "kvm" << Settings::exeKvm();
-	qDebug() << "vde_switch" << Settings::exeVdeSwitch();
-	qDebug() << "qemu-img" << Settings::exeQemuImgCreator();
-}
-
 void KVirtual::setKvmExe( const QString & exe )
 {
-	qDebug() << "kvm" << exe;
 	Settings::setExeKvm( exe );
 }
 
 void KVirtual::setVdeSwitchExe( const QString & exe )
 {
-	qDebug() << "vde_switch" << exe;
 	Settings::setExeVdeSwitch( exe );
 }
 
 void KVirtual::setQemuImgCreator( const QString & exe )
 {
-	qDebug() << "qemu-img" << exe;
 	Settings::setExeQemuImgCreator( exe );
 }
 

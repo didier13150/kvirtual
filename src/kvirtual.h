@@ -86,7 +86,6 @@ private slots:
 	void fileSave();
 	void fileSaveAs();
 	void optionsPreferences();
-	void setConfig();
 	void startVirtual();
 	void terminateVirtual();
 	void killVirtual();
