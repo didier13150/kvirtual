@@ -14,6 +14,15 @@
    <Action name="file_quit"/>
   </Menu>
   <Separator weakSeparator="1"/>
+  <Menu name="virtual"><text>&amp;Virtual</text>
+  <Action name="start_vm"/>
+  <Action name="terminate_vm"/>
+  <Action name="kill_vm"/>
+  <Separator weakSeparator="1"/>
+  <Action name="toggle_output"/>
+  <Separator weakSeparator="1"/>
+  <Action name="new_vdisk"/>
+  </Menu>
  </MenuBar>
  <ToolBar noMerge="1" name="mainToolBar">
   <text>Main Toolbar</text>
@@ -23,7 +32,10 @@
   <Action name="file_save_as"/>
   <Separator name="separator_0"/>
   <Action name="start_vm"/>
+  <Action name="terminate_vm"/>
+  <Action name="kill_vm"/>
   <Separator name="separator_1"/>
   <Action name="toggle_output"/>
+  <Action name="new_vdisk"/>
  </ToolBar>
 </kpartgui>

@@ -13,7 +13,7 @@
  *   \_|  o|                                             ,__,                *
  *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
- *     (___)_)   File :                                     ||--|| *         *
+ *     (___)_)   File : kvirtual.h                          ||--|| *         *
  *                                                                           *
  *                                                                           *
  *   This program is free software; you can redistribute it and/or modify    *

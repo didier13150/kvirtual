@@ -13,7 +13,7 @@
  *   \_|  o|                                             ,__,                *
  *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
- *     (___)_)   File :                                     ||--|| *         *
+ *     (___)_)   File : kvirtualcreateimg.h                 ||--|| *         *
  *                                                                           *
  *                                                                           *
  *   This program is free software; you can redistribute it and/or modify    *
@@ -72,7 +72,7 @@ private:
 
 private slots:
 	void sendAccepted();
-	
+
 signals:
 	void accepted( const QString &, const QString &, const QString & );
 };

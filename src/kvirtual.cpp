@@ -13,7 +13,7 @@
  *   \_|  o|                                             ,__,                *
  *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
- *     (___)_)   File :                                     ||--|| *         *
+ *     (___)_)   File : kvirtual.cpp                        ||--|| *         *
  *                                                                           *
  *                                                                           *
  *   This program is free software; you can redistribute it and/or modify    *
@@ -63,7 +63,7 @@ KVirtual::KVirtual()
         m_printer( 0 )
 {
     m_id = 0;
-	
+
     m_options = new KVirtualOptions();
     m_view->initOptions( m_options );
 	connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );
@@ -86,15 +86,15 @@ KVirtual::KVirtual()
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
     setupGUI();
-	
+
 	m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
 	m_systray->show();
-	
+
 	m_create = new KVirtualCreateImg( this );
 }
 
 KVirtual::~KVirtual()
-{	
+{
 	QMapIterator<uint, KVirtualProcess*> it(m_processes);
 	while ( it.hasNext() )
 	{
@@ -131,7 +131,7 @@ void KVirtual::setupActions()
     KAction *terminatevm = new KAction( KIcon( "dialog-close" ), i18n( "Terminate VM" ), this );
     actionCollection()->addAction( QLatin1String( "terminate_vm" ), terminatevm );
     connect( terminatevm, SIGNAL( triggered( bool ) ), this, SLOT( terminateVirtual() ) );
-	
+
     KAction *killvm = new KAction( KIcon( "application-exit" ), i18n( "Kill VM" ), this );
     actionCollection()->addAction( QLatin1String( "kill_vm" ), killvm );
     connect( killvm, SIGNAL( triggered( bool ) ), this, SLOT( killVirtual() ) );
@@ -448,7 +448,7 @@ void KVirtual::readStarted( uint id )
 	buf2.setNum( process->pid() );
 	buffer.append( " process started, PID is " + buf2 );
 	m_view->addOutput( buffer );
-	
+
 }
 
 void KVirtual::readData( uint id )
@@ -461,7 +461,7 @@ void KVirtual::readData( uint id )
 		return;
 	}
 	process = m_processes[id];
-	
+
     buffer.setNum( id );
 	buffer.prepend( "Process" );
     buffer += " " + QString( process->readAllStandardOutput() );
@@ -498,7 +498,7 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 
     buffer.setNum( id );
 	buffer.prepend( "Process" );
-	
+
     switch ( status )
     {
 
