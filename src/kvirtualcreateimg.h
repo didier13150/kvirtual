@@ -32,24 +32,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
  *****************************************************************************/
 
-#ifndef KVIRTUAL_H
-#define KVIRTUAL_H
+#ifndef KVIRTUALCREATEIMG_H
+#define KVIRTUALCREATEIMG_H
 
-#include <QProcess>
+#include <QString>
+#include <QDialog>
 
-#include <KXmlGuiWindow>
-
-#include "ui_prefs_base.h"
-
-class QPrinter;
-class KToggleAction;
-class KUrl;
-
-class KVirtualView;
-class KVirtualOptions;
-class KVirtualProcess;
-class KSystemTrayIcon;
-class KVirtualCreateImg;
+#include "ui_kvirtual_create_img.h"
 
 /**
  * This class serves as the main window for KVirtual.  It handles the
@@ -60,7 +49,7 @@ class KVirtualCreateImg;
  * @version %{VERSION}
  */
 
-class KVirtual : public KXmlGuiWindow
+class KVirtualCreateImg : public QDialog
 {
 	Q_OBJECT
 
@@ -68,60 +57,24 @@ public:
 	/**
 	 * Default Constructor
 	 */
-	KVirtual();
+	KVirtualCreateImg( QWidget *parent = 0 );
 
 	/**
 	 * Default Destructor
 	 */
-	virtual ~KVirtual();
+	virtual ~KVirtualCreateImg();
 
-	/**
-	 * Load vitual host file
-	 */
-	void load( const QString & filename );
+private:
+	Ui::Dialog_create ui_widget;
+	QString m_file;
+	QString m_type;
+	QString m_size;
 
 private slots:
-	void fileNew();
-	void fileOpen();
-	void fileSave();
-	void fileSaveAs();
-	void optionsPreferences();
-	void setConfig();
-	void startVirtual();
-	void terminateVirtual();
-	void killVirtual();
-	void readStarted( uint );
-	void readData( uint );
-	void readError( uint );
-	void closeProcess( uint, int, QProcess::ExitStatus );
-	void startVde( const QString & );
-	void setKvmExe( const QString & );
-	void setVdeSwitchExe( const QString & );
-	void setQemuImgCreator( const QString & );
-	void showCreateVDiskDlg();
-	void createVDisk( const QString &, const QString &, const QString & );
-
-private:
-	void setupActions();
-	uint getID();
-
-private:
-	Ui::prefs_base ui_prefs_base ;
-	KVirtualView *m_view;
-	KVirtualCreateImg *m_create;
-	KSystemTrayIcon *m_systray;
-	QMap<uint, KVirtualProcess*> m_processes;
-	uint m_id;
-	KVirtualOptions* m_options;
-
-	QPrinter   *m_printer;
-	KToggleAction *m_toolbarAction;
-	KToggleAction *m_statusbarAction;
-	QString m_confFilename;
-
+	void sendAccepted();
+	
 signals:
-	void vmStateChanged( uint, bool );
+	void accepted( const QString &, const QString &, const QString & );
 };
 
-#endif // _KVIRTUAL_H_
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4; 
+#endif // _KVIRTUALCREATEIMG_H_

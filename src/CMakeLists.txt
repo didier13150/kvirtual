@@ -1,4 +1,4 @@
-set(kvirtual_SRCS
+set(kvirtual_SRCS kvirtualcreateimg.cpp
    kvirtualoptions.cpp
    kvirtualprocess.cpp
    kvirtual.cpp

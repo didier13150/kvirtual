@@ -32,6 +32,7 @@ public:
 	{
 		SWITCH,
 		HOST,
+		CREATE_IMG,
 	}ProcessType;
 	
     /**

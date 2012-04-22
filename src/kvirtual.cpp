@@ -1,25 +1,42 @@
-/***************************************************************************
- *   Copyright (C) %{CURRENT_YEAR} by %{AUTHOR} <%{EMAIL}>                            *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
- ***************************************************************************/
+/*****************************************************************************
+ *      ____              ____    _       _   _                              *
+ *     /# /_\_           |  _ \  (_)   __| | (_)   ___   _ __                *
+ *    |  |/o\o\          | | | | | |  / _` | | |  / _ \ | '__|               *
+ *    |  \\_/_/          | |_| | | | | (_| | | | |  __/ | |                  *
+ *   / |_   |            |____/  |_|  \__,_| |_|  \___| |_|                  *
+ *  |  ||\_ ~|                                                               *
+ *  |  ||| \/                                                                *
+ *  |  |||       Project : KVirtual : a KDE4 GUI frontend for KVM            *
+ *  \//  |                                                                   *
+ *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
+ *   ||_  \      Date : 2012, April                                          *
+ *   \_|  o|                                             ,__,                *
+ *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *     ||||__                                            (__)    )\          *
+ *     (___)_)   File :                                     ||--|| *         *
+ *                                                                           *
+ *                                                                           *
+ *   This program is free software; you can redistribute it and/or modify    *
+ *   it under the terms of the GNU General Public License as published by    *
+ *   the Free Software Foundation; either version 2 of the License, or       *
+ *   (at your option) any later version.                                     *
+ *                                                                           *
+ *   This program is distributed in the hope that it will be useful,         *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of          *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           *
+ *   GNU General Public License for more details.                            *
+ *                                                                           *
+ *   You should have received a copy of the GNU General Public License       *
+ *   along with this program; if not, write to the                           *
+ *   Free Software Foundation, Inc.,                                         *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
+ *****************************************************************************/
 
 #include "kvirtual.h"
 #include "kvirtualview.h"
 #include "kvirtualprocess.h"
+#include "kvirtualcreateimg.h"
+
 #include "settings.h"
 
 #include <QtGui/QDropEvent>
@@ -46,8 +63,6 @@ KVirtual::KVirtual()
         m_printer( 0 )
 {
     m_id = 0;
-	m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
-	m_systray->show();
 	
     m_options = new KVirtualOptions();
     m_view->initOptions( m_options );
@@ -74,6 +89,11 @@ KVirtual::KVirtual()
 
 	// Load kvm and vde_switch executable and send result on config
 	setConfig();
+	
+	m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
+	m_systray->show();
+	
+	m_create = new KVirtualCreateImg( this );
 }
 
 KVirtual::~KVirtual()
@@ -92,6 +112,7 @@ KVirtual::~KVirtual()
 		}
 	}
     delete m_systray;
+	delete m_create;
 }
 
 void KVirtual::setupActions()
@@ -131,25 +152,24 @@ void KVirtual::setupActions()
 
 void KVirtual::showCreateVDiskDlg()
 {
-    QDialog *dialog = new QDialog();
-    ui_create_img.setupUi( dialog );
-	dialog->setModal( true );
-	connect( dialog, SIGNAL( accepted () ), SLOT( createVDisk() ) );
-    dialog->setAttribute( Qt::WA_DeleteOnClose );
-    dialog->show();
+	connect( m_create,
+			 SIGNAL( accepted ( const QString &, const QString &, const QString & ) ),
+			 SLOT( createVDisk( const QString &, const QString &, const QString & ) )
+		   );
+    m_create->show();
 }
 
-void KVirtual::createVDisk()
+void KVirtual::createVDisk( const QString & file, const QString & type, const QString & size )
 {
     uint id = getID();
-    KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::HOST );
+    KVirtualProcess * process = new KVirtualProcess( id, KVirtualProcess::CREATE_IMG );
     QStringList opts;
 	QString buffer;
 
 	opts << "create";
-	opts << "-f" << ui_create_img.comboBox_type->currentText();
-	opts << ui_create_img.kurlrequester_file->lineEdit()->text();
-	opts << ui_create_img.spinBox_size->text() + ui_create_img.comboBox_size_unit->currentText();
+	opts << "-f" << type;
+	opts << file;
+	opts << size;
 
     m_view->setOptions();
     process->setProgram( Settings::exeQemuImgCreator(), opts );
