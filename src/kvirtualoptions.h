@@ -41,17 +41,26 @@
 class KVirtualDevice
 {
 public:
+
+	typedef enum {
+		DISK    = 0,
+		CDROM   = 1,
+		FLOPPY  = 2,
+	}StorageType;
+	
 	KVirtualDevice();
-	KVirtualDevice( const QString &, const QString & );
+	KVirtualDevice( const StorageType type , const QString & );
 	KVirtualDevice( const QString &, const QString &, const QString &, const QString & );
 	~KVirtualDevice();
 
+	int getStorageType() const;
 	const QString & getType() const;
 	const QString & getFile() const;
 	const QString & getModel() const;
 	const QString & getHardwareAddress() const;
 
 protected:
+	StorageType m_storageType;
 	QString m_type;
 	QString m_file;
 	QString m_model;
@@ -79,10 +88,10 @@ public:
 	}Display;
 
 	typedef enum {
-		BOOT_ON_DISK,
-		BOOT_ON_NETWORK,
-		BOOT_ON_CDROM,
-		BOOT_ON_FLOPPY,
+		BOOT_ON_DISK    = 0,
+		BOOT_ON_CDROM   = 1,
+		BOOT_ON_FLOPPY  = 2,
+		BOOT_ON_NETWORK = 3,
 	}BootOrder;
 
 	QStringList getNeededVirtualSwitch();
@@ -109,13 +118,15 @@ public slots:
 	void setDistrib( const QString & );
 	void setDescription( const QString & );
 	void setIface( uint, const QString &, const QString &, const QString &, const QString & );
-	void setStorage( uint, const QString &, const QString & );
+	void setStorage( uint, const KVirtualDevice::StorageType , const QString & );
+	void setStorage( uint, const int , const QString & );
 	void setUsbSupported( bool );
 	void setSnapshotEnabled( bool );
 	void setVideoCard( const QString & );
 	void setMemory( uint );
 	void setNbCPU( uint );
 	void setBootDevice( BootOrder );
+	void setBootDevice( int );
 	void setKeyboard( const QString & );
 	void setVncPort( uint );
 	void setDisplay( Display );

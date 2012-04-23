@@ -358,22 +358,22 @@
        <widget class="QComboBox" name="comboBox_boot">
         <item>
          <property name="text">
-          <string>disk</string>
+          <string>Disk</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>cdrom</string>
+          <string>CD-Rom</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>floppy</string>
+          <string>Floppy</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>network</string>
+          <string>Network</string>
          </property>
         </item>
        </widget>
@@ -792,17 +792,17 @@
            <widget class="QComboBox" name="comboBox_storage_1">
             <item>
              <property name="text">
-              <string>disk</string>
+              <string>Disk</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>cdrom</string>
+              <string>CD-Rom</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>floppy</string>
+              <string>Floppy</string>
              </property>
             </item>
            </widget>
@@ -831,17 +831,17 @@
            <widget class="QComboBox" name="comboBox_storage_2">
             <item>
              <property name="text">
-              <string>disk</string>
+              <string>Disk</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>cdrom</string>
+              <string>CD-Rom</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>floppy</string>
+              <string>Floppy</string>
              </property>
             </item>
            </widget>

@@ -96,6 +96,41 @@ KVirtual::KVirtual()
 KVirtual::~KVirtual()
 {
     QMapIterator<uint, KVirtualProcess*> it(m_processes);
+
+	terminateAll();
+	sleep( 1 );
+	killAll();
+    while ( it.hasNext() )
+    {
+        it.next();
+        if ( it.value() )
+        {
+            delete it.value();
+        }
+    }
+    delete m_systray;
+    delete m_create;
+}
+
+void KVirtual::terminateAll()
+{
+    QMapIterator<uint, KVirtualProcess*> it(m_processes);
+    while ( it.hasNext() )
+    {
+        it.next();
+        if ( it.value() )
+        {
+            if ( it.value()->state() != QProcess::NotRunning )
+            {
+                it.value()->terminate();
+            }
+        }
+    }
+}
+
+void KVirtual::killAll()
+{
+    QMapIterator<uint, KVirtualProcess*> it(m_processes);
     while ( it.hasNext() )
     {
         it.next();
@@ -105,11 +140,8 @@ KVirtual::~KVirtual()
             {
                 it.value()->kill();
             }
-            delete it.value();
         }
     }
-    delete m_systray;
-    delete m_create;
 }
 
 void KVirtual::setupActions()

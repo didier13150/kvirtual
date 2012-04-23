@@ -130,7 +130,6 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 
 void KVirtualView::loadOptions()
 {
-    KVirtualOptions::BootOrder boot;
     KVirtualOptions::Display display;
     KVirtualDevice* device;
     int index;
@@ -180,41 +179,14 @@ void KVirtualView::loadOptions()
         break;
     }
     }
-    boot = m_options->getBootDevice();
-    switch ( boot )
-    {
-    case KVirtualOptions::BOOT_ON_DISK:
-    {
-        index = _ui_kvirtualview_base.comboBox_boot->findText( "disk" );
-        break;
-    }
-    case KVirtualOptions::BOOT_ON_NETWORK:
-    {
-        index = _ui_kvirtualview_base.comboBox_boot->findText( "network" );
-        break;
-    }
-    case KVirtualOptions::BOOT_ON_CDROM:
-    {
-        index = _ui_kvirtualview_base.comboBox_boot->findText( "cdrom" );
-        break;
-    }
-    case KVirtualOptions::BOOT_ON_FLOPPY:
-    {
-        index = _ui_kvirtualview_base.comboBox_boot->findText( "floppy" );
-        break;
-    }
-    }
-    if ( index >= 0 )
-        _ui_kvirtualview_base.comboBox_boot->setCurrentIndex( index );
+    _ui_kvirtualview_base.comboBox_boot->setCurrentIndex( (int) m_options->getBootDevice() );
 
     device = m_options->getStorage( 0 );
 	if ( device )
 	{
     _ui_kvirtualview_base.kurlrequester_storage_1->lineEdit()->setSqueezedTextEnabled( true );
     _ui_kvirtualview_base.kurlrequester_storage_1->lineEdit()->setText( device->getFile() );
-    index = _ui_kvirtualview_base.comboBox_storage_1->findText( device->getType() );
-    if ( index >= 0 )
-        _ui_kvirtualview_base.comboBox_storage_1->setCurrentIndex( index );
+    _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( device->getStorageType() );
 	}
 
     device = m_options->getStorage( 1 );
@@ -222,9 +194,7 @@ void KVirtualView::loadOptions()
 	{
     _ui_kvirtualview_base.kurlrequester_storage_2->lineEdit()->setSqueezedTextEnabled( true );
     _ui_kvirtualview_base.kurlrequester_storage_2->lineEdit()->setText( device->getFile() );
-    index = _ui_kvirtualview_base.comboBox_storage_2->findText( device->getType() );
-    if ( index >= 0 )
-        _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( index );
+    _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( device->getStorageType() );
 	}
 
     device = m_options->getIface( 0 );
@@ -257,7 +227,6 @@ void KVirtualView::loadOptions()
 void KVirtualView::setOptions()
 {
     QString buffer;
-    KVirtualOptions::BootOrder boot;
     KVirtualOptions::Display display;
 
     if ( not m_options )
@@ -274,16 +243,8 @@ void KVirtualView::setOptions()
     m_options->setVncPort( (uint) _ui_kvirtualview_base.spinBox_vncport->value() );
     m_options->setKeyboard( _ui_kvirtualview_base.comboBox_display_keyboard->currentText() );
     m_options->setVideoCard( _ui_kvirtualview_base.comboBox_video_card->currentText() );
-    buffer = _ui_kvirtualview_base.comboBox_boot->currentText();
-    if ( buffer == "disk" )
-        boot = KVirtualOptions::BOOT_ON_DISK;
-    else if ( buffer == "network" )
-        boot = KVirtualOptions::BOOT_ON_NETWORK;
-    else if ( buffer == "cdrom" )
-        boot = KVirtualOptions::BOOT_ON_CDROM;
-    else
-        boot = KVirtualOptions::BOOT_ON_FLOPPY;
-    m_options->setBootDevice( boot );
+    
+    m_options->setBootDevice( _ui_kvirtualview_base.comboBox_boot->currentIndex() );
     if ( _ui_kvirtualview_base.radioButton_direct->isChecked() )
         display = KVirtualOptions::DISPLAY_DIRECT;
     else if ( _ui_kvirtualview_base.radioButton_vnc->isChecked() )
@@ -305,11 +266,11 @@ void KVirtualView::setOptions()
                          _ui_kvirtualview_base.lineEdit_iface_mac_2->text()
                        );
     m_options->setStorage( 0,
-                           _ui_kvirtualview_base.comboBox_storage_1->currentText(),
+                           _ui_kvirtualview_base.comboBox_storage_1->currentIndex(),
                            _ui_kvirtualview_base.kurlrequester_storage_1->text()
                          );
     m_options->setStorage( 1,
-                           _ui_kvirtualview_base.comboBox_storage_2->currentText(),
+                           _ui_kvirtualview_base.comboBox_storage_2->currentIndex(),
                            _ui_kvirtualview_base.kurlrequester_storage_2->text()
                          );
 }

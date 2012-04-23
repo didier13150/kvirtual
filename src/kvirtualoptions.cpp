@@ -42,9 +42,27 @@ KVirtualDevice::KVirtualDevice()
 {
 }
 
-KVirtualDevice::KVirtualDevice( const QString & type, const QString & file )
+KVirtualDevice::KVirtualDevice( const KVirtualDevice::StorageType type, const QString & file )
 {
-	m_type = type;
+	m_storageType = type;
+	switch ( type )
+	{
+		case KVirtualDevice::DISK:
+		{
+			m_type = "disk";
+			break;
+		}
+		case KVirtualDevice::CDROM:
+		{
+			m_type = "cdrom";
+			break;
+		}
+		case KVirtualDevice::FLOPPY:
+		{
+			m_type = "floppy";
+			break;
+		}
+	}
 	m_file = file;
 }
 
@@ -62,6 +80,11 @@ KVirtualDevice::KVirtualDevice( const QString & type,
 
 KVirtualDevice::~KVirtualDevice()
 {
+}
+
+int KVirtualDevice::getStorageType() const
+{
+	return (int) m_storageType;
 }
 
 const QString & KVirtualDevice::getType() const
@@ -247,7 +270,7 @@ void KVirtualOptions::setNbCPU( uint nb )
 	m_cpus = nb;
 }
 
-void KVirtualOptions::setStorage( uint id, const QString & type, const QString & file )
+void KVirtualOptions::setStorage( uint id, const KVirtualDevice::StorageType type, const QString & file )
 {
 	if ( m_storages.contains( id ) )
 	{
@@ -255,6 +278,18 @@ void KVirtualOptions::setStorage( uint id, const QString & type, const QString &
 	}
 
 	KVirtualDevice* storage = new KVirtualDevice( type, file );
+
+	m_storages[id] = storage;
+}
+
+void KVirtualOptions::setStorage( uint id, const int type, const QString & file )
+{
+	if ( m_storages.contains( id ) )
+	{
+		delete m_storages[id];
+	}
+
+	KVirtualDevice* storage = new KVirtualDevice( (KVirtualDevice::StorageType) type, file );
 
 	m_storages[id] = storage;
 }
@@ -294,6 +329,11 @@ void KVirtualOptions::setVideoCard( const QString & model )
 void KVirtualOptions::setBootDevice( KVirtualOptions::BootOrder device )
 {
 	m_bootDevice = device;
+}
+
+void KVirtualOptions::setBootDevice(int device )
+{
+	m_bootDevice = (KVirtualOptions::BootOrder) device;
 }
 
 void KVirtualOptions::setKeyboard( const QString & keyboard )
@@ -453,7 +493,7 @@ void KVirtualOptions::load( const QString & filename )
 					if ( element2.tagName() == "storage" )
 					{
 						setStorage( element2.attribute( "id" ).toUInt(),
-						            element2.attribute( "type" ),
+						            (KVirtualDevice::StorageType) element2.attribute( "type" ).toInt(),
 						            element2.attribute( "file" )
 						          );
 					}
@@ -592,13 +632,10 @@ void KVirtualOptions::save( const QString & filename )
 	element.appendChild( element2 );
 
 	//TODO not implemented. Is it very usefull ?
-	element2 = doc.createElement( "memory" );
-
-	element2.setAttribute( "value", "8" );
-
-	element2.setAttribute( "unit", "mb" );
-
-	element.appendChild( element2 );
+	//element2 = doc.createElement( "memory" );
+	//element2.setAttribute( "value", "8" );
+	//element2.setAttribute( "unit", "mb" );
+	//element.appendChild( element2 );
 
 	element = doc.createElement( "storages" );
 
@@ -610,7 +647,7 @@ void KVirtualOptions::save( const QString & filename )
 	{
 		element2 = doc.createElement( "storage" );
 		element2.setAttribute( "id", buffer.setNum( *it ) );
-		element2.setAttribute( "type", m_storages[*it]->getType() );
+		element2.setAttribute( "type", buffer.setNum( (int) m_storages[*it]->getStorageType() ) );
 		element2.setAttribute( "file", m_storages[*it]->getFile() );
 
 		element.appendChild( element2 );
