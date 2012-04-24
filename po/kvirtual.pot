@@ -23,22 +23,23 @@ msgstr ""
 
 #: kvirtualview.cpp:188 kvirtualview.cpp:278 rc.cpp:72 rc.cpp:120 rc.cpp:132
 #: kvirtualoptions.cpp:764
-msgid "disk"
+msgid "Disk"
 msgstr ""
 
-#: kvirtualview.cpp:193 kvirtualview.cpp:280 rc.cpp:81 kvirtualoptions.cpp:465
-#: kvirtualoptions.cpp:619 kvirtualoptions.cpp:770 kvirtualoptions.cpp:806
-msgid "network"
+#: kvirtualview.cpp:193 kvirtualview.cpp:280 rc.cpp:81 rc.cpp:141
+#: kvirtualoptions.cpp:465 kvirtualoptions.cpp:619 kvirtualoptions.cpp:770
+#: kvirtualoptions.cpp:806
+msgid "Network"
 msgstr ""
 
 #: kvirtualview.cpp:198 kvirtualview.cpp:282 rc.cpp:75 rc.cpp:123 rc.cpp:135
 #: kvirtualoptions.cpp:776 kvirtualoptions.cpp:807
-msgid "cdrom"
+msgid "CD-Rom"
 msgstr ""
 
 #: kvirtualview.cpp:203 rc.cpp:78 rc.cpp:126 rc.cpp:138
 #: kvirtualoptions.cpp:782 kvirtualoptions.cpp:805
-msgid "floppy"
+msgid "Floppy"
 msgstr ""
 
 #: main.cpp:42
@@ -243,19 +244,15 @@ msgid "Keyboard type"
 msgstr ""
 
 #: rc.cpp:114
-msgid "Storage"
+msgid "Storage Media"
 msgstr ""
 
 #: rc.cpp:117
-msgid "Storage 1"
+msgid "Storage Media 1"
 msgstr ""
 
 #: rc.cpp:129
-msgid "Storage 2"
-msgstr ""
-
-#: rc.cpp:141
-msgid "Network"
+msgid "Storage Media 2"
 msgstr ""
 
 #: rc.cpp:144

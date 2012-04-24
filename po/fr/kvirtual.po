@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-22 17:09+0200\n"
-"PO-Revision-Date: 2012-04-22 17:19+0200\n"
+"PO-Revision-Date: 2012-04-24 19:33+0200\n"
 "Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -19,27 +19,28 @@ msgstr ""
 
 #: kvirtualview.cpp:68
 msgid "Settings changed"
-msgstr ""
+msgstr "La configuration a changé"
 
 #: kvirtualview.cpp:188 kvirtualview.cpp:278 rc.cpp:72 rc.cpp:120 rc.cpp:132
 #: kvirtualoptions.cpp:764
-msgid "disk"
-msgstr "disque"
+msgid "Disk"
+msgstr "Disque"
 
-#: kvirtualview.cpp:193 kvirtualview.cpp:280 rc.cpp:81 kvirtualoptions.cpp:465
-#: kvirtualoptions.cpp:619 kvirtualoptions.cpp:770 kvirtualoptions.cpp:806
-msgid "network"
-msgstr "réseau"
+#: kvirtualview.cpp:193 kvirtualview.cpp:280 rc.cpp:81 rc.cpp:141
+#: kvirtualoptions.cpp:465 kvirtualoptions.cpp:619 kvirtualoptions.cpp:770
+#: kvirtualoptions.cpp:806
+msgid "Network"
+msgstr "Réseau"
 
 #: kvirtualview.cpp:198 kvirtualview.cpp:282 rc.cpp:75 rc.cpp:123 rc.cpp:135
 #: kvirtualoptions.cpp:776 kvirtualoptions.cpp:807
-msgid "cdrom"
-msgstr "cdrom"
+msgid "CD-Rom"
+msgstr "CD-Rom"
 
 #: kvirtualview.cpp:203 rc.cpp:78 rc.cpp:126 rc.cpp:138
 #: kvirtualoptions.cpp:782 kvirtualoptions.cpp:805
-msgid "floppy"
-msgstr "disquette"
+msgid "Floppy"
+msgstr "Disquette"
 
 #: main.cpp:42
 msgid "A KDE 4 GUI Frontend for KVM"
@@ -104,189 +105,186 @@ msgstr "Besoin d'un switch virtuel"
 
 #: kvirtual.cpp:449
 msgid " process started, PID is "
-msgstr ""
+msgstr " processus démarré, le PID est "
 
 #: kvirtual.cpp:507
 msgid "Exit normally"
-msgstr ""
+msgstr "A terminé normalement"
 
 #: kvirtual.cpp:513
 msgid "Crash"
-msgstr ""
+msgstr "a planté"
 
 #: kvirtual.cpp:518
 msgid " terminated with retval "
-msgstr ""
+msgstr " a terminé avec le valeur de retour "
 
 #: rc.cpp:3
 msgid "&File"
-msgstr ""
+msgstr "&Fichier"
 
 #: rc.cpp:6
 msgid "&Virtual"
-msgstr ""
+msgstr "&Virtuel"
 
 #: rc.cpp:9
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Barre d'outil principale"
 
 #: rc.cpp:12
 msgid "qemu-img is the QEMU disk image utility"
-msgstr ""
+msgstr "qemu-img est l'utilitaire QEMU de création d'image de disque"
 
 #: rc.cpp:15
 msgid "KVM / QEMU Emulator"
-msgstr ""
+msgstr "Emulateur KVM / QEMU"
 
 #: rc.cpp:18
 msgid "Virtual Distributed Ethernet switch"
-msgstr ""
+msgstr "Switch Ethernet Distribué virtuel"
 
 #: rc.cpp:21
 msgid "QEMU disk image utility"
-msgstr ""
+msgstr "Utilitaire d'image disque QEMU"
 
 #: rc.cpp:24
 msgid "Executable file for kvm"
-msgstr ""
+msgstr "Fichier exécutable kvm"
 
 #: rc.cpp:27
 msgid "Executable file for vde_switch"
-msgstr ""
+msgstr "Fichier exécutable vde_switch"
 
 #: rc.cpp:30
 msgid "Executable file for qemu-img"
-msgstr ""
+msgstr "Fichier exécutable qemu-img"
 
 #: rc.cpp:33
 msgid "Create a new disk image"
-msgstr ""
+msgstr "Créer une nouvelle image disque"
 
 #: rc.cpp:36
 msgid "File"
-msgstr ""
+msgstr "Fichier"
 
 #: rc.cpp:39
 msgid "Size"
-msgstr ""
+msgstr "Taille"
 
 #: rc.cpp:42
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: rc.cpp:45
 msgid "Form"
-msgstr ""
+msgstr "Formulaire"
 
 #: rc.cpp:48
 msgid "Common"
-msgstr ""
+msgstr "Général"
 
 #: rc.cpp:51
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: rc.cpp:54
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: rc.cpp:57
 msgid "System"
-msgstr ""
+msgstr "Système"
 
 #: rc.cpp:60
 msgid "Base Memory"
-msgstr ""
+msgstr "Mémoire"
 
 #: rc.cpp:63
 msgid "Number of CPU"
-msgstr ""
+msgstr "Nombre de CPU"
 
 #: rc.cpp:66
 msgid "USB Support"
-msgstr ""
+msgstr "Support de l'USB"
 
 #: rc.cpp:69
 msgid "Snapshot"
-msgstr ""
+msgstr "Instantané"
 
 #: rc.cpp:84
 msgid "Boot on"
-msgstr ""
+msgstr "Démarrer sur"
 
 #: rc.cpp:87 rc.cpp:90
 msgid "Display"
-msgstr ""
+msgstr "Affichage"
 
 #: rc.cpp:93 rc.cpp:108 rc.cpp:150 rc.cpp:162
 msgid "None"
-msgstr ""
+msgstr "Aucun(e)"
 
 #: rc.cpp:96
 msgid "Direct"
-msgstr ""
+msgstr "Direct"
 
 #: rc.cpp:99
 msgid "VNC"
-msgstr ""
+msgstr "VNC"
 
 #: rc.cpp:102
 msgid "VNC Port"
-msgstr ""
+msgstr "Port VNC"
 
 #: rc.cpp:105
 msgid "Video Card Type"
-msgstr ""
+msgstr "Type de carte vidéo"
 
 #: rc.cpp:111
 msgid "Keyboard type"
-msgstr ""
+msgstr "Type de clavier"
 
 #: rc.cpp:114
-msgid "Storage"
-msgstr ""
+msgid "Storage Media"
+msgstr "Média de Stockage"
 
 #: rc.cpp:117
-msgid "Storage 1"
-msgstr ""
+msgid "Storage Media 1"
+msgstr "Média de Stockage 1"
 
 #: rc.cpp:129
-msgid "Storage 2"
-msgstr ""
-
-#: rc.cpp:141
-msgid "Network"
-msgstr ""
+msgid "Storage Media 2"
+msgstr "Média de Stockage 2"
 
 #: rc.cpp:144
 msgid "Iface 1"
-msgstr ""
+msgstr "Interface réseau 1"
 
 #: rc.cpp:147 rc.cpp:159
 msgid "Model"
-msgstr ""
+msgstr "Modèle"
 
 #: rc.cpp:153 rc.cpp:165
 msgid "MAC Adress"
-msgstr ""
+msgstr "Adresse MAC"
 
 #: rc.cpp:156
 msgid "Iface 2"
-msgstr ""
+msgstr "Interface réseau 2"
 
 #: kvirtualoptions.cpp:324
 msgid "filename is null"
-msgstr ""
+msgstr "Le nom de fichier est nul"
 
 #: kvirtualoptions.cpp:338
 msgid "Can't open filename in read mode"
-msgstr ""
+msgstr "Ne peut ouvrir le fichier en lecture seule"
 
 #: kvirtualoptions.cpp:345
 msgid "Can't parse XML file"
-msgstr ""
+msgstr "Ne peut décoder le fichier XML"
 
 #: kvirtualoptions.cpp:355
 msgid "Wrong root node"
-msgstr ""
+msgstr "Mauvais nœud principal"
+
 
