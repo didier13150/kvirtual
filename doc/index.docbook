@@ -262,6 +262,29 @@ which will be expanded to:
 </sect2>
 
 <sect2>
+  <title>The Virtual Menu</title>
+  <para>
+    <variablelist>
+
+      <varlistentry  id="virtual-start">
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Ctrl;<keycap>D</keycap></keycombo>
+            </shortcut>
+            <guimenu>Virtual</guimenu>
+            <guimenuitem>Start VM</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para><action>Start the virtual host as defined in the application</action></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </para>
+</sect2>
+
+<sect2>
 <title>The Help Menu</title>
 
 <!-- Assuming you have a standard help menu (help, what's this, about -->
@@ -275,20 +298,20 @@ which will be expanded to:
 
 </sect1>
 </chapter>
-
+<!--
 <chapter id="developers">
-<title>Developer's Guide to &kmyapplication;</title>
+<title>Developer's Guide to &kmyapplication;</title> -->
 
 <!-- (OPTIONAL) A Programming/Scripting reference chapter should be
 used for apps that use plugins or that provide their own scripting hooks
 and/or development libraries. -->
 
-<para>
+<!-- <para>
 Programming &kmyapplication; plugins is a joy to behold.
 </para>
 
 
-</chapter>
+</chapter> -->
 
 <chapter id="faq">
 <title>Questions and Answers</title>
@@ -341,9 +364,9 @@ distribution. -->
 &kmyapplication;
 </para>
 <para>
-Program copyright 1997 John Q. Hacker <email>jqh@kde.org</email>
+Program copyright 2012 Didier Fabert <email>didier.fabert@gmail.com</email>
 </para>
-<para>
+<!-- <para>
 Contributors:
 <itemizedlist>
 <listitem><para>Konqui the &kde; Dragon <email>konqui@kde.org</email></para>
@@ -351,26 +374,16 @@ Contributors:
 <listitem><para>Tux the &Linux; Penguin <email>tux@linux.org</email></para>
 </listitem>
 </itemizedlist>
-</para>
+</para> -->
 
 <para>
-Documentation Copyright &copy; 1999 George N. Ugnacious <email>gnu@kde.org</email>
+Documentation Copyright &copy; 2012 Didier Fabert <email>didier.fabert@gmail.com</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
 &underFDL;               <!-- FDL: do not remove -->
-
-<!-- Determine which license your application is licensed under,
-     and delete all the remaining licenses below:
-
-     (NOTE:  All documentation are licensed under the FDL,
-     regardless of what license the application uses) -->
-
-&underGPL;        	 <!-- GPL License -->
-&underBSDLicense;        <!-- BSD License -->
-&underArtisticLicense;   <!-- BSD Artistic License -->
-&underX11License;        <!-- X11 License  -->
+&underGPL;
 
 </chapter>
 
@@ -383,8 +396,11 @@ Documentation Copyright &copy; 1999 George N. Ugnacious <email>gnu@kde.org</emai
 <!-- This first entity contains boiler plate for applications that are
 part of KDE archiv.  You should remove it if you are releasing your
 application -->
-
-&install.intro.documentation;
+<para>
+&kmyapplication; can be found on
+<ulink url="https://github.com/didier13150/kvirtual">
+The &kmyapplication; home page on github</ulink>.
+</para>
 
 </sect1>
 
@@ -403,22 +419,22 @@ information here.
 -->
 
 <para>
-In order to successfully use &kmyapplication;, you need &kde; 4.5. Foobar.lib is
-required in order to support the advanced &kmyapplication; features. &kmyapplication; uses
-about 5 megs of memory to run, but this may vary depending on your
-platform and configuration.
+In order to successfully use &kmyapplication;, you need kvm or qemu and vde if
+you want to use private subnetwork between vitual hosts.
 </para>
 
 <para>
 All required libraries as well as &kmyapplication; itself can be found
-on <ulink url="ftp://ftp.kapp.org">The &kmyapplication; home page</ulink>.
+on <ulink url="https://github.com/didier13150/kvirtual">
+The &kmyapplication; home page on github</ulink>.
 </para>
 
 <!-- For a list of updates, you may refer to the application web site
 or the ChangeLog file, or ... -->
 <para>
 You can find a list of changes at <ulink
-url="http://apps.kde.org/kapp">http://apps.kde.org/kapp</ulink>.
+url="https://github.com/didier13150/kvirtual/commits/master">
+&kmyapplication; commit history</ulink>.
 </para>
 </sect1>
 
