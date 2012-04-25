@@ -1,22 +1,22 @@
 set(KVIRTUAL_DATA_FILES
-    linux.png
-    centos.png
-    debian.png
-    fedora.png
-    freebsd.png
-    netbsd.png
-    redhat.png
-    mandriva.png
-    openbsd.png
-    windows.png
-    archlinux.png
-    gentoo.png
-    knoppix.png
-    linuxmint.png
-    mepis.png
-    opensuse.png
-    slackware.png
-    ubuntu.png
+    linux.svg
+    centos.svg
+    debian.svg
+    fedora.svg
+    freebsd.svg
+    netbsd.svg
+    redhat.svg
+    mandriva.svg
+    openbsd.svg
+    windows.svg
+    archlinux.svg
+    gentoo.svg
+    knoppix.svg
+    linuxmint.svg
+    mepis.svg
+    opensuse.svg
+    slackware.svg
+    ubuntu.svg
 )
 
 message(STATUS ${KDE4_DATA_DIR})

@@ -41,7 +41,7 @@
 #include <KLed>
 #include <KStandardDirs>
 
-#include <QPixmap>
+//#include <Q>
 
 #include <sys/sysinfo.h>
 
@@ -70,21 +70,15 @@ void KVirtualView::settingsChanged()
 
 void KVirtualView::setPixmap( const QString & distrib )
 {
-	QPixmap pixmap;
+	QString img = KStandardDirs::locate( "appdata", distrib + ".svg" );
 
-	QString buffer = KStandardDirs::locate( "appdata", distrib + ".png" );
-
-	if ( buffer.isNull() ) buffer = "linux";
-	pixmap.load( buffer );
-	_ui_kvirtualview_base.label_logo->setPixmap( pixmap );
+	if ( img.isNull() ) img = "linux.svg";
+	_ui_kvirtualview_base.widget_logo->load ( img );
 }
 
 void KVirtualView::setState( uint, bool state )
 {
-	if ( state )
-		_ui_kvirtualview_base.kled_state->setState( KLed::On );
-	else
-		_ui_kvirtualview_base.kled_state->setState( KLed::Off );
+	_ui_kvirtualview_base.widget_logo->setEnabled( state );
 }
 
 void KVirtualView::initOptions( KVirtualOptions* opts )
