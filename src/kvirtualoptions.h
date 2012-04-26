@@ -43,9 +43,10 @@ class KVirtualDevice
 public:
 
 	typedef enum {
-		DISK    = 0,
-		CDROM   = 1,
-		FLOPPY  = 2,
+		NONE    = 0,
+		DISK    = 1,
+		CDROM   = 2,
+		FLOPPY  = 3,
 	}StorageType;
 	
 	KVirtualDevice();

@@ -37,6 +37,7 @@
 #include <QDebug>
 #include <QDomDocument>
 #include <QFile>
+#include <KStandardDirs>
 
 KVirtualDevice::KVirtualDevice()
 {
@@ -60,6 +61,11 @@ KVirtualDevice::KVirtualDevice( const KVirtualDevice::StorageType type, const QS
 		case KVirtualDevice::FLOPPY:
 		{
 			m_type = "floppy";
+			break;
+		}
+		case KVirtualDevice::NONE:
+		{
+			m_type = "none";
 			break;
 		}
 	}
@@ -127,10 +133,10 @@ void KVirtualOptions::clear()
 	m_bootDevice = KVirtualOptions::BOOT_ON_DISK;
 	m_vncport = 1;
 	m_keyboard = "fr";
-	m_videoCard = "std";
+	m_videoCard.clear();
 	m_description.clear();
 	m_name.clear();
-	m_distrib = "centos";
+	m_distrib = "linux";
 	m_storages.clear();
 	m_ifaces.clear();
 	m_opts.clear();
@@ -161,7 +167,7 @@ QStringList KVirtualOptions::getNeededVirtualSwitch()
 
 const QStringList & KVirtualOptions::getArgs()
 {
-	QString buffer, id;
+	QString buffer, id, img;
 	QList<uint>::ConstIterator it;
 	QList<uint> keys;
 
@@ -179,32 +185,38 @@ const QStringList & KVirtualOptions::getArgs()
 
 	for ( it = keys.begin() ; it != keys.end() ; ++it )
 	{
-		buffer = "file=" + m_storages[*it]->getFile() + ",media=" + m_storages[*it]->getType();
-		m_opts << "-drive" << buffer;
+		if ( m_storages[*it]->getStorageType() )
+		{
+			buffer = "file=" + m_storages[*it]->getFile() + ",media=" + m_storages[*it]->getType();
+			m_opts << "-drive" << buffer;
+		}
 	}
 
 	keys = m_ifaces.keys();
 
 	for ( it = keys.begin() ; it != keys.end() ; ++it )
 	{
-		id.setNum( *it );
-		buffer = "nic,macaddr=" + m_ifaces[*it]->getHardwareAddress() + ",model=" + m_ifaces[*it]->getModel() + ",vlan=" + id;
-		m_opts << "-net" << buffer;
-
-		buffer = m_ifaces[*it]->getType();
-
-		if ( buffer == "tap" )
+		if ( ! m_ifaces[*it]->getModel().isNull() )
 		{
-			buffer += ",ifname=" + m_ifaces[*it]->getFile() + ",script=no";
-		}
-		else if ( buffer == "vde" )
-		{
-			buffer += ",sock=" + m_ifaces[*it]->getFile();
-		}
+			id.setNum( *it );
+			buffer = "nic,macaddr=" + m_ifaces[*it]->getHardwareAddress() + ",model=" + m_ifaces[*it]->getModel() + ",vlan=" + id;
+			m_opts << "-net" << buffer;
 
-		buffer += ",vlan=" + id;
+			buffer = m_ifaces[*it]->getType();
 
-		m_opts << "-net" << buffer;
+			if ( buffer == "tap" )
+			{
+				buffer += ",ifname=" + m_ifaces[*it]->getFile() + ",script=no";
+			}
+			else if ( buffer == "vde" )
+			{
+				buffer += ",sock=" + m_ifaces[*it]->getFile();
+			}
+
+			buffer += ",vlan=" + id;
+
+			m_opts << "-net" << buffer;
+		}
 	}
 
 	switch ( m_display )
@@ -239,8 +251,52 @@ const QStringList & KVirtualOptions::getArgs()
 	if ( m_snapshot )
 		m_opts << "-snapshot";
 
-	if ( m_keyboard.isEmpty() )
+	if ( ! m_keyboard.isNull() )
 		m_opts << "-k" << m_keyboard;
+
+	if ( m_videoCard.isNull() )
+	{
+		buffer = "none";
+	}
+	else
+	{
+		buffer = m_videoCard;
+	}
+	m_opts << "-vga" << buffer;
+
+	switch( m_bootDevice )
+	{
+		case KVirtualOptions::BOOT_ON_DISK:
+		{
+			buffer = "c";
+			break;
+		}
+		case KVirtualOptions::BOOT_ON_CDROM:
+		{
+			buffer = "d";
+			break;
+		}
+		case KVirtualOptions::BOOT_ON_FLOPPY:
+		{
+			buffer = "a";
+			break;
+		}
+		case KVirtualOptions::BOOT_ON_NETWORK:
+		{
+			buffer = "n";
+			break;
+		}
+	}
+	buffer.prepend( "once=" );
+
+	//TODO uncomment when kvm not crash with this option
+	/*img = KStandardDirs::locate( "appdata", "boot.jpg" );
+	if ( ! img.isNull() )
+	{
+		//buffer += ",splash=" + img + ",splash-time=5000";
+	}*/
+	m_opts << "-boot" << buffer;
+	
 
 	return m_opts;
 }
