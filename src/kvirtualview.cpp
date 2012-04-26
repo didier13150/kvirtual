@@ -41,8 +41,6 @@
 #include <KLed>
 #include <KStandardDirs>
 
-//#include <Q>
-
 #include <sys/sysinfo.h>
 
 KVirtualView::KVirtualView( QWidget * )
@@ -194,7 +192,7 @@ void KVirtualView::loadOptions()
     device = m_options->getIface( 0 );
     if ( device )
     {
-        index= _ui_kvirtualview_base.comboBox_iface_model_1->findText( device->getModel() );
+        index = _ui_kvirtualview_base.comboBox_iface_model_1->findText( device->getModel() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_model_1->setCurrentIndex( index );
         index = _ui_kvirtualview_base.comboBox_iface_type_1->findText( device->getType() );
@@ -207,7 +205,7 @@ void KVirtualView::loadOptions()
     device = m_options->getIface( 1 );
     if ( device )
     {
-        index= _ui_kvirtualview_base.comboBox_iface_model_2->findText( device->getModel() );
+        index = _ui_kvirtualview_base.comboBox_iface_model_2->findText( device->getModel() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_model_2->setCurrentIndex( index );
         index = _ui_kvirtualview_base.comboBox_iface_type_2->findText( device->getType() );

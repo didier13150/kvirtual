@@ -591,6 +591,14 @@
           </item>
           <item row="0" column="1">
            <widget class="QComboBox" name="comboBox_storage_1">
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>Disk</string>
@@ -630,6 +638,14 @@
           </item>
           <item row="0" column="1">
            <widget class="QComboBox" name="comboBox_storage_2">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>Disk</string>
@@ -735,7 +751,7 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="2">
+          <item row="0" column="2" colspan="2">
            <spacer name="horizontalSpacer_6">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -748,21 +764,7 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="3">
-           <widget class="QComboBox" name="comboBox_iface_type_1">
-            <item>
-             <property name="text">
-              <string notr="true">tap</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">vde</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="0" column="4">
+          <item row="0" column="5">
            <widget class="QLineEdit" name="lineEdit_iface_detail_1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -784,14 +786,47 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="0" column="4">
+           <widget class="QComboBox" name="comboBox_iface_type_1">
+            <item>
+             <property name="text">
+              <string notr="true">tap</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">vde</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEdit_scriptup_1"/>
+          </item>
+          <item row="3" column="5">
+           <widget class="QLineEdit" name="lineEdit_scriptdown_1"/>
+          </item>
+          <item row="3" column="2" colspan="2">
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="4" column="0">
            <widget class="QLabel" name="label_iface_mac_1">
             <property name="text">
              <string>MAC Adress</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" colspan="2">
+          <item row="4" column="1" colspan="3">
            <widget class="QLineEdit" name="lineEdit_iface_mac_1">
             <property name="inputMask">
              <string notr="true">HH:HH:HH:HH:HH:HH; </string>
@@ -801,7 +836,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="3" colspan="2">
+          <item row="4" column="4" colspan="2">
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -814,17 +849,38 @@
             </property>
            </spacer>
           </item>
+          <item row="3" column="4">
+           <widget class="QCheckBox" name="checkBox_scriptdown_1">
+            <property name="text">
+             <string>Script (down)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="checkBox_scriptup_1">
+            <property name="text">
+             <string>Script (up)</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="tab_4">
          <attribute name="title">
           <string>Iface 2</string>
          </attribute>
-         <layout class="QGridLayout" name="gridLayout_8">
+         <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
            <widget class="QLabel" name="label_iface_model_2">
             <property name="text">
              <string>Model</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_iface_mac_2">
+            <property name="text">
+             <string>MAC Adress</string>
             </property>
            </widget>
           </item>
@@ -880,20 +936,20 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="2">
-           <spacer name="horizontalSpacer_7">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>132</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEdit_scriptup_2"/>
           </item>
-          <item row="0" column="3">
+          <item row="2" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_iface_mac_2">
+            <property name="inputMask">
+             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
+            </property>
+            <property name="text">
+             <string notr="true">52:54:00:12:36:56</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
            <widget class="QComboBox" name="comboBox_iface_type_2">
             <property name="currentIndex">
              <number>0</number>
@@ -910,7 +966,7 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="4">
+          <item row="0" column="5">
            <widget class="QLineEdit" name="lineEdit_iface_detail_2">
             <property name="minimumSize">
              <size>
@@ -926,35 +982,61 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_iface_mac_2">
-            <property name="text">
-             <string>MAC Adress</string>
-            </property>
-           </widget>
+          <item row="1" column="5">
+           <widget class="QLineEdit" name="lineEdit_scriptdown_2"/>
           </item>
-          <item row="1" column="1" colspan="2">
-           <widget class="QLineEdit" name="lineEdit_iface_mac_2">
-            <property name="inputMask">
-             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
+          <item row="0" column="2" colspan="2">
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="text">
-             <string notr="true">52:54:00:12:36:56</string>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
             </property>
-           </widget>
+           </spacer>
           </item>
-          <item row="1" column="3" colspan="2">
+          <item row="1" column="2" colspan="2">
            <spacer name="horizontalSpacer_9">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>132</width>
+              <width>40</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="2" column="4" colspan="2">
+           <spacer name="horizontalSpacer_10">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_scriptup_2">
+            <property name="text">
+             <string>Script (up)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="checkBox_scriptdown_2">
+            <property name="text">
+             <string>Script (down)</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
