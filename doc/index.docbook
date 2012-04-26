@@ -270,16 +270,77 @@ which will be expanded to:
         <term>
           <menuchoice>
             <shortcut>
-              <keycombo action="simul">&Ctrl;<keycap>D</keycap></keycombo>
+              <keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
             </shortcut>
             <guimenu>Virtual</guimenu>
             <guimenuitem>Start VM</guimenuitem>
           </menuchoice>
         </term>
         <listitem>
-          <para><action>Start the virtual host as defined in the application</action></para>
+          <para><action>Start the virtual host</action></para>
         </listitem>
       </varlistentry>
+
+      <varlistentry  id="virtual-stop">
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Ctrl;<keycap>T</keycap></keycombo>
+            </shortcut>
+            <guimenu>Virtual</guimenu>
+            <guimenuitem>Terminate VM</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para><action>Stop the virtual host</action></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry  id="virtual-kill">
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Ctrl;<keycap>K</keycap></keycombo>
+            </shortcut>
+            <guimenu>Virtual</guimenu>
+            <guimenuitem>Kill VM</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para><action>Kill the virtual host</action></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry  id="virtual-toggle-output">
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Ctrl;<keycap>H</keycap></keycombo>
+            </shortcut>
+            <guimenu>Virtual</guimenu>
+            <guimenuitem>Show/Hide Output</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para><action>Toggle display of output widget</action></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry  id="virtual-create-new-img">
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
+            </shortcut>
+            <guimenu>Virtual</guimenu>
+            <guimenuitem>Create a new virtual disk image</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para><action>Create a new virtual disk image</action></para>
+        </listitem>
+      </varlistentry>
+
     </variablelist>
   </para>
 </sect2>
