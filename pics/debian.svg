@@ -15,9 +15,9 @@
    i:viewOrigin="251 467"
    i:rulerOrigin="0 0"
    i:pageBounds="0 792 612 0"
-   width="72.449974"
+   width="90.449974"
    height="90.175995"
-   viewBox="0 0 72.449972 90.175998"
+   viewBox="0 0 90.449971 90.175998"
    overflow="visible"
    enable-background="new 0 0 108.758 144.133"
    xml:space="preserve"
@@ -42,12 +42,12 @@
    id="namedview47"
    showgrid="false"
    fit-margin-top="0"
-   fit-margin-left="0"
-   fit-margin-right="0"
+   fit-margin-left="9"
+   fit-margin-right="9"
    fit-margin-bottom="0"
    inkscape:zoom="1.6373766"
-   inkscape:cx="36.707974"
-   inkscape:cy="18.109499"
+   inkscape:cx="45.707975"
+   inkscape:cy="18.109501"
    inkscape:window-x="0"
    inkscape:window-y="0"
    inkscape:window-maximized="0"
@@ -76,7 +76,7 @@
        rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata>
 	<g
    id="g7"
-   transform="translate(-17.671028,0)">
+   transform="translate(-8.6710265,0)">
 			<path
    style="fill:#d70751"
    inkscape:connector-curvature="0"

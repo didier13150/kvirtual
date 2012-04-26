@@ -12,7 +12,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="331.89532"
-   height="286.16925"
+   height="330.16925"
    id="svg2"
    style="display:inline"
    inkscape:version="0.48.3.1 r9886"
@@ -32,15 +32,15 @@
      showgrid="false"
      inkscape:zoom="0.51304348"
      inkscape:cx="167.63908"
-     inkscape:cy="69.80959"
+     inkscape:cy="91.809601"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2"
-     fit-margin-top="0"
+     fit-margin-top="22"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0"
+     fit-margin-bottom="22"
      showborder="false"
      inkscape:showpageshadow="false" />
   <title
@@ -382,7 +382,7 @@ Cartoon Puffy with logo below svg</dc:description>
      d="" />
   <g
      id="g8735"
-     transform="translate(-199.23588,-17.698956)">
+     transform="translate(-199.23588,4.301044)">
     <path
        inkscape:connector-curvature="0"
        id="path27245"
