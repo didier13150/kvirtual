@@ -255,6 +255,10 @@ msgstr ""
 msgid "Storage Media 2"
 msgstr ""
 
+#: rc.cpp:129
+msgid "Storage Media 3"
+msgstr ""
+
 #: rc.cpp:144
 msgid "Iface 1"
 msgstr ""
@@ -269,6 +273,30 @@ msgstr ""
 
 #: rc.cpp:156
 msgid "Iface 2"
+msgstr ""
+
+#: rc.cpp:156
+msgid "Iface 3"
+msgstr ""
+
+#: rc.cpp
+msgid "Script (up)"
+msgstr ""
+
+#: rc.cpp
+msgid "Script (down)"
+msgstr ""
+
+#: rc.cpp
+msgid "Distribution"
+msgstr ""
+
+#: rc.cpp
+msgid "Connected to"
+msgstr ""
+
+#: rc.cpp
+msgid "Nothing"
 msgstr ""
 
 #: kvirtualoptions.cpp:324

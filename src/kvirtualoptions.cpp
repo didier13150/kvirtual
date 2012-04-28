@@ -70,6 +70,8 @@ KVirtualDevice::KVirtualDevice( const KVirtualDevice::StorageType type, const QS
 		}
 	}
 	m_file = file;
+	m_isScriptUp = false;
+	m_isScriptDown = false;
 }
 
 KVirtualDevice::KVirtualDevice( const QString & type,
@@ -82,10 +84,30 @@ KVirtualDevice::KVirtualDevice( const QString & type,
 	m_file = file;
 	m_model = model;
 	m_hwaddr = hwaddr;
+	m_isScriptUp = false;
+	m_isScriptDown = false;
 }
 
 KVirtualDevice::~KVirtualDevice()
 {
+}
+
+void KVirtualDevice::setScriptUp( const QString & script )
+{
+	m_scriptUp = script;
+	if ( ! m_scriptUp.isNull() ) m_isScriptUp = true;
+}
+
+void KVirtualDevice::setScriptDown( const QString & script )
+{
+	m_scriptDown = script;
+	if ( ! m_scriptDown.isNull() ) m_isScriptDown = true;
+}
+
+void KVirtualDevice::setScriptsEnabled( bool up, bool down )
+{
+	m_isScriptUp = up;
+	m_isScriptDown = down;
 }
 
 int KVirtualDevice::getStorageType() const
@@ -111,6 +133,26 @@ const QString & KVirtualDevice::getModel() const
 const QString & KVirtualDevice::getHardwareAddress() const
 {
 	return m_hwaddr;
+}
+
+const QString & KVirtualDevice::getScriptUp() const
+{
+	return m_scriptUp;
+}
+
+const QString & KVirtualDevice::getScriptDown() const
+{
+	return m_scriptDown;
+}
+
+bool KVirtualDevice::isScriptUpEnabled() const
+{
+	return m_isScriptUp;
+}
+
+bool KVirtualDevice::isScriptDownEnabled() const
+{
+	return m_isScriptDown;
 }
 
 /***************************************************************************/
@@ -206,7 +248,20 @@ const QStringList & KVirtualOptions::getArgs()
 
 			if ( buffer == "tap" )
 			{
-				buffer += ",ifname=" + m_ifaces[*it]->getFile() + ",script=no";
+				buffer += ",ifname=" + m_ifaces[*it]->getFile();
+				if ( ! m_ifaces[*it]->getScriptUp().isNull() &&
+					! m_ifaces[*it]->getScriptDown().isNull() &&
+					m_ifaces[*it]->isScriptUpEnabled() &&
+					m_ifaces[*it]->isScriptDownEnabled()
+				)
+				{
+					buffer += ",script=" + m_ifaces[*it]->getScriptUp();
+					buffer += ",downscript=" + m_ifaces[*it]->getScriptDown();
+				}
+				else
+				{
+					buffer += ",script=no";
+				}
 			}
 			else if ( buffer == "vde" )
 			{
@@ -367,6 +422,26 @@ void KVirtualOptions::setIface( uint id,
 	m_ifaces[id] = iface;
 }
 
+void KVirtualOptions::setScripts( uint id,
+								  const QString & up,
+								  const QString & down
+								)
+{
+	if ( m_ifaces.contains( id ) )
+	{
+		m_ifaces[id]->setScriptUp( up );
+		m_ifaces[id]->setScriptDown( down );
+	}
+}
+
+void KVirtualOptions::setScriptsEnabled( uint id, bool up, bool down )
+{
+	if ( m_ifaces.contains( id ) )
+	{
+		m_ifaces[id]->setScriptsEnabled( up, down );
+	}
+}
+
 void KVirtualOptions::setUsbSupported( bool state )
 {
 	m_usb = state;
@@ -423,9 +498,10 @@ void KVirtualOptions::load( const QString & filename )
 
 	QDomDocument doc;
 
-	QDomElement root, element, element2;
-	QDomNode node, child;
+	QDomElement root, element, element2, element3;
+	QDomNode node, child, littlechild;
 	QString buffer;
+	bool scriptup, scriptdown;
 
 	QFile file( filename );
 
@@ -575,6 +651,53 @@ void KVirtualOptions::load( const QString & filename )
 						          element2.attribute( "addr" )
 						        );
 					}
+					
+					littlechild = element2.firstChild();
+					while ( ! littlechild.isNull() )
+					{
+						element3 = littlechild.toElement();
+						if ( element3.tagName() == "scripts" )
+						{
+							setScripts( element2.attribute( "id" ).toUInt(),
+										element3.attribute( "up" ),
+										element3.attribute( "down" )
+							);
+							
+							switch ( element3.attribute( "flag" ).toInt() )
+							{
+								case 1:
+								{
+									scriptup = true;
+									scriptdown = false;
+									break;
+								}
+								case 2:
+								{
+									scriptup = false;
+									scriptdown = true;
+									break;
+								}
+								case 3:
+								{
+									scriptup = true;
+									scriptdown = true;
+									break;
+								}
+								default:
+								{
+									scriptup = false;
+									scriptdown = false;
+									break;
+								}
+							}
+							setScriptsEnabled( element2.attribute( "id" ).toUInt(),
+											   scriptup,
+											   scriptdown
+							);
+						}
+						
+						littlechild = littlechild.nextSibling();
+					}
 
 					child = child.nextSibling();
 				}
@@ -594,12 +717,13 @@ void KVirtualOptions::save( const QString & filename )
 
 	QDomDocument doc;
 
-	QDomElement root, element, element2;
-	QDomNode node, child;
+	QDomElement root, element, element2, element3;
+	QDomNode node, child, littlechild;
 	QDomCDATASection cdata;
 	QString buffer;
 	QList<uint> keys;
 	QList<uint>::ConstIterator it;
+	int flag;
 
 	QFile file( filename );
 
@@ -724,6 +848,23 @@ void KVirtualOptions::save( const QString & filename )
 		element2.setAttribute( "model", m_ifaces[*it]->getModel() );
 		element2.setAttribute( "addr", m_ifaces[*it]->getHardwareAddress() );
 		element2.setAttribute( "vlan", buffer );
+
+		element3 = doc.createElement( "scripts" );
+		element3.setAttribute( "up", m_ifaces[*it]->getScriptUp() );
+		element3.setAttribute( "down", m_ifaces[*it]->getScriptDown() );
+
+		flag = 0;
+		if ( m_ifaces[*it]->isScriptUpEnabled() )
+			
+		{
+			flag |= 0x01;
+		}
+		if ( m_ifaces[*it]->isScriptDownEnabled() )
+		{
+			flag |= 0x2;
+		}
+		element3.setAttribute( "flag", buffer.setNum( flag ) );
+		element2.appendChild( element3 );
 
 		element.appendChild( element2 );
 	}

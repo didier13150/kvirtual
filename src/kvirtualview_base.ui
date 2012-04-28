@@ -6,14 +6,198 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>502</width>
-    <height>816</height>
+    <width>610</width>
+    <height>774</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_11">
+  <layout class="QGridLayout" name="gridLayout_7">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="gbCommon">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Common</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_name">
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="lineEdit_name"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_description">
+        <property name="text">
+         <string>Description</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2" rowspan="2" colspan="3">
+       <widget class="QTextEdit" name="textEdit_description">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Distribution</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QComboBox" name="comboBox_distrib">
+        <item>
+         <property name="text">
+          <string notr="true">linux</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">archlinux</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">centos</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">debian</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">fedora</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">freebsd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">knoppix</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">linuxmint</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">mandriva</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">mepis</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">openbsd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">redhat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">netbsd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">slackware</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ubuntu</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">windows</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="4" rowspan="2">
+       <widget class="QSvgWidget" name="widget_logo" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="3" rowspan="2">
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="1" column="0">
     <widget class="QGroupBox" name="gbSystem">
      <property name="sizePolicy">
@@ -639,7 +823,54 @@
           <item row="0" column="1">
            <widget class="QComboBox" name="comboBox_storage_2">
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Disk</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>CD-Rom</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Floppy</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_8">
+         <attribute name="title">
+          <string>Storage Media 3</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_14">
+          <item row="0" column="0">
+           <widget class="KUrlRequester" name="kurlrequester_storage_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="acceptDrops">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_storage_3">
+            <property name="currentIndex">
+             <number>0</number>
             </property>
             <item>
              <property name="text">
@@ -691,7 +922,7 @@
          <attribute name="title">
           <string>Iface 1</string>
          </attribute>
-         <layout class="QGridLayout" name="gridLayout_7">
+         <layout class="QGridLayout" name="gridLayout_11">
           <item row="0" column="0">
            <widget class="QLabel" name="label_iface_model_1">
             <property name="text">
@@ -751,18 +982,27 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="2" colspan="2">
-           <spacer name="horizontalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="0" column="4">
+           <widget class="QComboBox" name="comboBox_iface_type_1">
+            <property name="currentIndex">
+             <number>1</number>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
+            <item>
+             <property name="text">
+              <string>Nothing</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">tap</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">vde</string>
+             </property>
+            </item>
+           </widget>
           </item>
           <item row="0" column="5">
            <widget class="QLineEdit" name="lineEdit_iface_detail_1">
@@ -786,47 +1026,42 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
-           <widget class="QComboBox" name="comboBox_iface_type_1">
-            <item>
-             <property name="text">
-              <string notr="true">tap</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">vde</string>
-             </property>
-            </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_scriptup_1">
+            <property name="text">
+             <string>Script (up)</string>
+            </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_scriptup_1"/>
-          </item>
-          <item row="3" column="5">
-           <widget class="QLineEdit" name="lineEdit_scriptdown_1"/>
-          </item>
-          <item row="3" column="2" colspan="2">
-           <spacer name="horizontalSpacer_8">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="1" column="1">
+           <widget class="KUrlRequester" name="kurlrequester_scriptup_1">
+            <property name="enabled">
+             <bool>false</bool>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
+           </widget>
           </item>
-          <item row="4" column="0">
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="checkBox_scriptdown_1">
+            <property name="text">
+             <string>Script (down)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="KUrlRequester" name="kurlrequester_scriptdown_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
            <widget class="QLabel" name="label_iface_mac_1">
             <property name="text">
              <string>MAC Adress</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1" colspan="3">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="lineEdit_iface_mac_1">
             <property name="inputMask">
              <string notr="true">HH:HH:HH:HH:HH:HH; </string>
@@ -836,7 +1071,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="4" colspan="2">
+          <item row="0" column="2">
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -849,19 +1084,38 @@
             </property>
            </spacer>
           </item>
-          <item row="3" column="4">
-           <widget class="QCheckBox" name="checkBox_scriptdown_1">
+          <item row="2" column="2" colspan="4">
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_connect_1">
             <property name="text">
-             <string>Script (down)</string>
+             <string>Connected to</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QCheckBox" name="checkBox_scriptup_1">
-            <property name="text">
-             <string>Script (up)</string>
+          <item row="1" column="2" colspan="2">
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-           </widget>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -874,13 +1128,6 @@
            <widget class="QLabel" name="label_iface_model_2">
             <property name="text">
              <string>Model</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_iface_mac_2">
-            <property name="text">
-             <string>MAC Adress</string>
             </property>
            </widget>
           </item>
@@ -936,24 +1183,16 @@
             </item>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_scriptup_2"/>
-          </item>
-          <item row="2" column="1" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_iface_mac_2">
-            <property name="inputMask">
-             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
-            </property>
-            <property name="text">
-             <string notr="true">52:54:00:12:36:56</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="4">
            <widget class="QComboBox" name="comboBox_iface_type_2">
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
+            <item>
+             <property name="text">
+              <string>Nothing</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string notr="true">tap</string>
@@ -982,10 +1221,52 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="5">
-           <widget class="QLineEdit" name="lineEdit_scriptdown_2"/>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_scriptup_2">
+            <property name="text">
+             <string>Script (up)</string>
+            </property>
+           </widget>
           </item>
-          <item row="0" column="2" colspan="2">
+          <item row="1" column="1">
+           <widget class="KUrlRequester" name="kurlrequester_scriptup_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="checkBox_scriptdown_2">
+            <property name="text">
+             <string>Script (down)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_iface_mac_2">
+            <property name="text">
+             <string>MAC Adress</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit_iface_mac_2">
+            <property name="inputMask">
+             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
+            </property>
+            <property name="text">
+             <string notr="true">52:54:00:12:36:56</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="KUrlRequester" name="kurlrequester_scriptdown_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
            <spacer name="horizontalSpacer_7">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1011,7 +1292,7 @@
             </property>
            </spacer>
           </item>
-          <item row="2" column="4" colspan="2">
+          <item row="2" column="2" colspan="4">
            <spacer name="horizontalSpacer_10">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1024,17 +1305,208 @@
             </property>
            </spacer>
           </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_connecte_2">
+            <property name="text">
+             <string>Connected to</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Iface 3</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_iface_model_3">
+            <property name="text">
+             <string>Model</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_iface_model_3">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">virtio</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">ne2k_pci</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">i82551</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">i82557b</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">i82559er</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">rtl8139</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">e1000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">pcnet</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QComboBox" name="comboBox_iface_type_3">
+            <item>
+             <property name="text">
+              <string>Nothing</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">tap</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">vde</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLineEdit" name="lineEdit_iface_detail_3">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
-           <widget class="QCheckBox" name="checkBox_scriptup_2">
+           <widget class="QCheckBox" name="checkBox_scriptup_3">
             <property name="text">
              <string>Script (up)</string>
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="KUrlRequester" name="kurlrequester_scriptup_3">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="4">
-           <widget class="QCheckBox" name="checkBox_scriptdown_2">
+           <widget class="QCheckBox" name="checkBox_scriptdown_3">
             <property name="text">
              <string>Script (down)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="KUrlRequester" name="kurlrequester_scriptdown_3">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_iface_mac_3">
+            <property name="text">
+             <string>MAC Adress</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit_iface_mac_3">
+            <property name="inputMask">
+             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
+            </property>
+            <property name="text">
+             <string notr="true">52:54:00:12:38:56</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="2" colspan="2">
+           <spacer name="horizontalSpacer_13">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="2" colspan="4">
+           <spacer name="horizontalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_connect_3">
+            <property name="text">
+             <string>Connected to</string>
             </property>
            </widget>
           </item>
@@ -1053,190 +1525,6 @@
        <verstretch>10</verstretch>
       </sizepolicy>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QGroupBox" name="gbCommon">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Common</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_name">
-        <property name="text">
-         <string>Name</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLineEdit" name="lineEdit_name"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="label_description">
-        <property name="text">
-         <string>Description</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2" rowspan="2" colspan="3">
-       <widget class="QTextEdit" name="textEdit_description">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Distribution</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QComboBox" name="comboBox_distrib">
-        <item>
-         <property name="text">
-          <string notr="true">linux</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">archlinux</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">centos</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">debian</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">fedora</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">freebsd</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">knoppix</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">linuxmint</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">mandriva</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">mepis</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">openbsd</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">redhat</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">netbsd</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">slackware</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">ubuntu</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">windows</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="0" column="4" rowspan="2">
-       <widget class="QSvgWidget" name="widget_logo" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="3" rowspan="2">
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
     </widget>
    </item>
   </layout>
@@ -1259,5 +1547,102 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>checkBox_scriptup_1</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kurlrequester_scriptup_1</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>632</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>178</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_scriptdown_1</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kurlrequester_scriptdown_1</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>405</x>
+     <y>632</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>527</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_scriptup_2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kurlrequester_scriptup_2</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>632</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>178</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_scriptdown_2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBox_scriptdown_2</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>405</x>
+     <y>632</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_scriptup_3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBox_scriptup_3</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>632</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_scriptdown_3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBox_scriptdown_3</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>405</x>
+     <y>632</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

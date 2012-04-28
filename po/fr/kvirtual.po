@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-22 17:09+0200\n"
-"PO-Revision-Date: 2012-04-24 19:33+0200\n"
+"PO-Revision-Date: 2012-04-26 20:00+0200\n"
 "Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -221,7 +221,7 @@ msgstr "Affichage"
 
 #: rc.cpp:93 rc.cpp:108 rc.cpp:150 rc.cpp:162
 msgid "None"
-msgstr "Aucun(e)"
+msgstr "Aucun"
 
 #: rc.cpp:96
 msgid "Direct"
@@ -255,6 +255,10 @@ msgstr "Média de Stockage 1"
 msgid "Storage Media 2"
 msgstr "Média de Stockage 2"
 
+#: rc.cpp:129
+msgid "Storage Media 3"
+msgstr "Média de Stockage 3"
+
 #: rc.cpp:144
 msgid "Iface 1"
 msgstr "Interface réseau 1"
@@ -270,6 +274,30 @@ msgstr "Adresse MAC"
 #: rc.cpp:156
 msgid "Iface 2"
 msgstr "Interface réseau 2"
+
+#: rc.cpp:156
+msgid "Iface 3"
+msgstr "Interface réseau 3"
+
+#: rc.cpp
+msgid "Script (up)"
+msgstr "Script (montage)"
+
+#: rc.cpp
+msgid "Script (down)"
+msgstr "Script (démontage)"
+
+#: rc.cpp
+msgid "Distribution"
+msgstr "Distribution"
+
+#: rc.cpp
+msgid "Connected to"
+msgstr "Connecté à"
+
+#: rc.cpp
+msgid "Nothing"
+msgstr "Rien"
 
 #: kvirtualoptions.cpp:324
 msgid "filename is null"

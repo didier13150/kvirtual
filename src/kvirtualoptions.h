@@ -54,11 +54,19 @@ public:
 	KVirtualDevice( const QString &, const QString &, const QString &, const QString & );
 	~KVirtualDevice();
 
+	void setScriptUp(  const QString & );
+	void setScriptDown(  const QString & );
+	void setScriptsEnabled( bool, bool );
+
 	int getStorageType() const;
 	const QString & getType() const;
 	const QString & getFile() const;
 	const QString & getModel() const;
 	const QString & getHardwareAddress() const;
+	const QString & getScriptUp() const;
+	const QString & getScriptDown() const;
+	bool isScriptUpEnabled() const;
+	bool isScriptDownEnabled() const;
 
 protected:
 	StorageType m_storageType;
@@ -66,6 +74,10 @@ protected:
 	QString m_file;
 	QString m_model;
 	QString m_hwaddr;
+	QString m_scriptUp;
+	QString m_scriptDown;
+	bool m_isScriptUp;
+	bool m_isScriptDown;
 };
 
 
@@ -135,6 +147,8 @@ public slots:
 	void save( const QString & file );
 	void setUsedSwitch( const QString & );
 	void clear();
+	void setScripts( uint, const QString &, const QString & );
+	void setScriptsEnabled( uint, bool, bool );
 
 protected:
 	QStringList m_opts;

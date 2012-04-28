@@ -118,6 +118,66 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
              _ui_kvirtualview_base.horizontalSlider_nb_of_cpu,
              SLOT( setValue( int ) )
            );
+	connect( _ui_kvirtualview_base.comboBox_iface_type_1,
+			 SIGNAL( currentIndexChanged( int ) ),
+			 SLOT( setType1Enable( int ) )
+	);
+	connect( _ui_kvirtualview_base.comboBox_iface_type_2,
+			 SIGNAL( currentIndexChanged( int ) ),
+			 SLOT( setType2Enable( int ) )
+	);
+	connect( _ui_kvirtualview_base.comboBox_iface_type_3,
+			 SIGNAL( currentIndexChanged( int ) ),
+			 SLOT( setType3Enable( int ) )
+	);
+}
+
+void KVirtualView::setType1Enable( int id )
+{
+	bool state = true;
+	if ( ! id )
+	{
+		state = false;
+		_ui_kvirtualview_base.kurlrequester_scriptup_1->setEnabled( false );
+		_ui_kvirtualview_base.kurlrequester_scriptdown_1->setEnabled( false );
+		_ui_kvirtualview_base.checkBox_scriptup_1->setChecked( false );
+		_ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( false );
+	}
+	_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( state );
+}
+
+void KVirtualView::setType2Enable( int id )
+{
+	bool state = true;
+	if ( ! id )
+	{
+		state = false;
+		_ui_kvirtualview_base.kurlrequester_scriptup_2->setEnabled( state );
+		_ui_kvirtualview_base.kurlrequester_scriptdown_2->setEnabled( state );
+		_ui_kvirtualview_base.checkBox_scriptup_2->setChecked( false );
+		_ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( false );
+	}
+	_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( state );
+}
+
+void KVirtualView::setType3Enable( int id )
+{
+	bool state = true;
+	if ( ! id )
+	{
+		state = false;
+		_ui_kvirtualview_base.kurlrequester_scriptup_3->setEnabled( state );
+		_ui_kvirtualview_base.kurlrequester_scriptdown_3->setEnabled( state );
+		_ui_kvirtualview_base.checkBox_scriptup_3->setChecked( false );
+		_ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( false );
+	}
+	_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( state );
 }
 
 void KVirtualView::loadOptions()
@@ -189,6 +249,14 @@ void KVirtualView::loadOptions()
         _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( device->getStorageType() );
     }
 
+    device = m_options->getStorage( 2 );
+    if ( device )
+    {
+        _ui_kvirtualview_base.kurlrequester_storage_3->lineEdit()->setSqueezedTextEnabled( true );
+        _ui_kvirtualview_base.kurlrequester_storage_3->lineEdit()->setText( device->getFile() );
+        _ui_kvirtualview_base.comboBox_storage_3->setCurrentIndex( device->getStorageType() );
+    }
+
     device = m_options->getIface( 0 );
     if ( device )
     {
@@ -200,6 +268,10 @@ void KVirtualView::loadOptions()
             _ui_kvirtualview_base.comboBox_iface_type_1->setCurrentIndex( index );
         _ui_kvirtualview_base.lineEdit_iface_detail_1->setText( device->getFile() );
         _ui_kvirtualview_base.lineEdit_iface_mac_1->setText( device->getHardwareAddress() );
+		 _ui_kvirtualview_base.kurlrequester_scriptup_1->lineEdit()->setText( device->getScriptUp() );
+		 _ui_kvirtualview_base.kurlrequester_scriptdown_1->lineEdit()->setText( device->getScriptDown() );
+		 _ui_kvirtualview_base.checkBox_scriptup_1->setChecked( device->isScriptUpEnabled() );
+		 _ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( device->isScriptDownEnabled() );
     }
 
     device = m_options->getIface( 1 );
@@ -213,6 +285,27 @@ void KVirtualView::loadOptions()
             _ui_kvirtualview_base.comboBox_iface_type_2->setCurrentIndex( index );
         _ui_kvirtualview_base.lineEdit_iface_detail_2->setText( device->getFile() );
         _ui_kvirtualview_base.lineEdit_iface_mac_2->setText( device->getHardwareAddress() );
+		 _ui_kvirtualview_base.kurlrequester_scriptup_2->lineEdit()->setText( device->getScriptUp() );
+		 _ui_kvirtualview_base.kurlrequester_scriptdown_2->lineEdit()->setText( device->getScriptDown() );
+		 _ui_kvirtualview_base.checkBox_scriptup_2->setChecked( device->isScriptUpEnabled() );
+		 _ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( device->isScriptDownEnabled() );
+    }
+
+    device = m_options->getIface( 2 );
+    if ( device )
+    {
+        index = _ui_kvirtualview_base.comboBox_iface_model_3->findText( device->getModel() );
+        if ( index >= 0 )
+            _ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( index );
+        index = _ui_kvirtualview_base.comboBox_iface_type_3->findText( device->getType() );
+        if ( index >= 0 )
+            _ui_kvirtualview_base.comboBox_iface_type_3->setCurrentIndex( index );
+        _ui_kvirtualview_base.lineEdit_iface_detail_3->setText( device->getFile() );
+        _ui_kvirtualview_base.lineEdit_iface_mac_3->setText( device->getHardwareAddress() );
+		 _ui_kvirtualview_base.kurlrequester_scriptup_3->lineEdit()->setText( device->getScriptUp() );
+		 _ui_kvirtualview_base.kurlrequester_scriptdown_3->lineEdit()->setText( device->getScriptDown() );
+		 _ui_kvirtualview_base.checkBox_scriptup_3->setChecked( device->isScriptUpEnabled() );
+		 _ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( device->isScriptDownEnabled() );
     }
 }
 
@@ -260,13 +353,20 @@ void KVirtualView::setOptions()
     {
         buffer.clear();
     }
-    qDebug() << "iface model in kvirtualview" << buffer;
     m_options->setIface( 0,
 						 _ui_kvirtualview_base.comboBox_iface_type_1->currentText(),
                          _ui_kvirtualview_base.lineEdit_iface_detail_1->text(),
                          buffer,
                          _ui_kvirtualview_base.lineEdit_iface_mac_1->text()
                        );
+	m_options->setScripts( 0,
+						   _ui_kvirtualview_base.kurlrequester_scriptup_1->lineEdit()->text(),
+						   _ui_kvirtualview_base.kurlrequester_scriptdown_1->lineEdit()->text()
+	);
+	m_options->setScriptsEnabled( 0,
+								  _ui_kvirtualview_base.checkBox_scriptup_1->isChecked(),
+								  _ui_kvirtualview_base.checkBox_scriptdown_1->isChecked()
+	);
 
     if ( _ui_kvirtualview_base.comboBox_iface_model_2->currentIndex() )
     {
@@ -282,6 +382,37 @@ void KVirtualView::setOptions()
                          buffer,
                          _ui_kvirtualview_base.lineEdit_iface_mac_2->text()
                        );
+	m_options->setScripts( 1,
+						   _ui_kvirtualview_base.kurlrequester_scriptup_2->lineEdit()->text(),
+						   _ui_kvirtualview_base.kurlrequester_scriptdown_2->lineEdit()->text()
+	);
+	m_options->setScriptsEnabled( 1,
+								  _ui_kvirtualview_base.checkBox_scriptup_2->isChecked(),
+								  _ui_kvirtualview_base.checkBox_scriptdown_2->isChecked()
+	);
+    if ( _ui_kvirtualview_base.comboBox_iface_model_3->currentIndex() )
+    {
+        buffer = _ui_kvirtualview_base.comboBox_iface_model_3->currentText();
+    }
+    else
+    {
+        buffer.clear();
+    }
+    m_options->setIface( 2,
+                         _ui_kvirtualview_base.comboBox_iface_type_3->currentText(),
+                         _ui_kvirtualview_base.lineEdit_iface_detail_3->text(),
+                         buffer,
+                         _ui_kvirtualview_base.lineEdit_iface_mac_3->text()
+                       );
+	m_options->setScripts( 2,
+						   _ui_kvirtualview_base.kurlrequester_scriptup_3->lineEdit()->text(),
+						   _ui_kvirtualview_base.kurlrequester_scriptdown_3->lineEdit()->text()
+	);
+	m_options->setScriptsEnabled( 2,
+								  _ui_kvirtualview_base.checkBox_scriptup_3->isChecked(),
+								  _ui_kvirtualview_base.checkBox_scriptdown_3->isChecked()
+	);
+	
     m_options->setStorage( 0,
                            _ui_kvirtualview_base.comboBox_storage_1->currentIndex(),
                            _ui_kvirtualview_base.kurlrequester_storage_1->text()
@@ -289,6 +420,10 @@ void KVirtualView::setOptions()
     m_options->setStorage( 1,
                            _ui_kvirtualview_base.comboBox_storage_2->currentIndex(),
                            _ui_kvirtualview_base.kurlrequester_storage_2->text()
+                         );
+    m_options->setStorage( 2,
+                           _ui_kvirtualview_base.comboBox_storage_3->currentIndex(),
+                           _ui_kvirtualview_base.kurlrequester_storage_3->text()
                          );
 }
 
