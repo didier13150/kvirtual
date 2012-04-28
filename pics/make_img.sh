@@ -6,7 +6,7 @@
 # 
 # Didier Fabert
 #
-SIZE="32x32"
+SIZE="22x22"
 
 function convert_svg() {
 	local svg=$1
