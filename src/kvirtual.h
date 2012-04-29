@@ -99,6 +99,7 @@ private slots:
 	void setQemuImgCreator( const QString & );
 	void showCreateVDiskDlg();
 	void createVDisk( const QString &, const QString &, const QString & );
+	void exitCalled();
 
 private:
 	void setupActions();

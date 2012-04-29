@@ -125,6 +125,7 @@ public:
 	const QString & getVideoCard() const;
 	bool isUsbSupported() const;
 	bool isSnapshotEnabled() const;
+	bool isModified( const QString & ) const;
 
 public slots:
 	void setName( const QString & );
@@ -143,8 +144,8 @@ public slots:
 	void setKeyboard( const QString & );
 	void setVncPort( uint );
 	void setDisplay( Display );
-	void load( const QString & file );
-	void save( const QString & file );
+	void load( const QString & );
+	void save( const QString & );
 	void setUsedSwitch( const QString & );
 	void clear();
 	void setScripts( uint, const QString &, const QString & );

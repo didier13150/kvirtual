@@ -116,6 +116,9 @@ private slots:
 	void setType1Enable( int );
 	void setType2Enable( int );
 	void setType3Enable( int );
+	void setIface1Enabled( int );
+	void setIface2Enabled( int );
+	void setIface3Enabled( int );
 };
 
 #endif // KVirtualVIEW_H

@@ -53,6 +53,7 @@
 #include <KSystemTrayIcon>
 #include <KFileDialog>
 #include <KLineEdit>
+#include <KMessageBox>
 
 #include <KLocale>
 
@@ -177,6 +178,23 @@ void KVirtual::setupActions()
     KAction *vdisk = new KAction( KIcon( "document-export-table" ), i18n( "Create a new virtual disk image" ), this );
     actionCollection()->addAction( QLatin1String( "new_vdisk" ), vdisk );
     connect( vdisk, SIGNAL( triggered( bool ) ), SLOT( showCreateVDiskDlg() ) );
+
+    // test
+    KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Test config" ), this );
+    actionCollection()->addAction( QLatin1String( "test_config" ), test );
+    connect( test, SIGNAL( triggered( bool ) ), SLOT( exitCalled() ) );
+}
+
+void KVirtual::exitCalled()
+{
+	if ( m_options->isModified( m_confFilename ) )
+	{
+		KMessageBox::information( this, "Config not sync" );
+	}
+	else
+	{
+		KMessageBox::information( this, "Config sync" );
+	}
 }
 
 void KVirtual::showCreateVDiskDlg()
