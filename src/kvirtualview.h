@@ -42,6 +42,7 @@
 #include "kvirtualoptions.h"
 
 class QPainter;
+class QButtonGroup;
 
 class KUrl;
 
@@ -91,6 +92,7 @@ private:
 	Ui::kvirtualview_base _ui_kvirtualview_base;
 
 	KVirtualOptions* m_options;
+	QButtonGroup* m_displayGroup;
 
 signals:
 	/**
@@ -121,7 +123,15 @@ private slots:
 	void setIface1Enabled( int );
 	void setIface2Enabled( int );
 	void setIface3Enabled( int );
+	void syncDescription();
+	void syncVideoCard();
+	void syncStorage1();
+	void syncStorage2();
+	void syncStorage3();
+	void syncIface1();
+	void syncIface2();
+	void syncIface3();
 };
 
-#endif // KVirtualVIEW_H
+#endif // _KVIRTUALVIEW_H_
 // kate: indent-mode cstyle; replace-tabs off; tab-width 4;

@@ -57,9 +57,9 @@ public:
 	virtual ~KVirtualOptions();
 
 	typedef enum {
-		DISPLAY_DIRECT,
-		DISPLAY_VNC,
-		DISPLAY_NONE,
+		DISPLAY_NONE   = 0,
+		DISPLAY_DIRECT = 1,
+		DISPLAY_VNC    = 2,
 	}Display;
 
 	typedef enum {
@@ -94,24 +94,24 @@ public slots:
 	void setDistrib( const QString & );
 	void setDescription( const QString & );
 	void setIface( uint, const QString &, const QString &, const QString &, const QString & );
-	//void setStorage( uint, const KVirtualStorage::StorageType , const QString & );
 	void setStorage( uint, const int , const QString & );
-	void setUsbSupported( bool );
-	void setSnapshotEnabled( bool );
+	void setUsbSupported( int );
+	void setSnapshotEnabled( int );
 	void setVideoCard( const QString & );
-	void setMemory( uint );
-	void setNbCPU( uint );
-	void setBootDevice( BootOrder );
+	void setMemory( int );
+	void setNbCPU( int );
 	void setBootDevice( int );
 	void setKeyboard( const QString & );
-	void setVncPort( uint );
+	void setVncPort( int port );
 	void setDisplay( Display );
+	void setDisplay( int );
 	void load( const QString & );
 	void save( const QString & );
 	void setUsedSwitch( const QString & );
 	void clear();
 	void setScripts( uint, const QString &, const QString & );
-	void setScriptsEnabled( uint, bool, bool );
+	void setScriptUpEnabled( uint, bool );
+	void setScriptDownEnabled( uint, bool );
 
 protected:
 	QStringList m_opts;

@@ -46,14 +46,18 @@ public:
     KVirtualIface( const QString &, const QString &, const QString &, const QString & );
     virtual ~KVirtualIface();
 
-	void setScriptUp(  const QString & );
-	void setScriptDown(  const QString & );
-	void setScriptsEnabled( bool, bool );
+	void setScriptUp( const QString & );
+	void setScriptDown( const QString & );
+	void setScriptUpEnabled( bool );
+	void setScriptDownEnabled( bool );
+	void setHardwareAddress( const QString & );
+	void setModel( const QString & );
 	
 	const QString & getModel() const;
 	const QString & getHardwareAddress() const;
 	const QString & getScriptUp() const;
 	const QString & getScriptDown() const;
+	
 	bool isScriptUpEnabled() const;
 	bool isScriptDownEnabled() const;
 	

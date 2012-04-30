@@ -51,7 +51,16 @@ KVirtualIface::KVirtualIface( const QString & type,
 
 KVirtualIface::~KVirtualIface()
 {
+}
 
+void KVirtualIface::setHardwareAddress( const QString & hwaddr )
+{
+	m_hwaddr = hwaddr;
+}
+
+void KVirtualIface::setModel( const QString & model )
+{
+	m_model = model;
 }
 
 void KVirtualIface::setScriptUp( const QString & script )
@@ -66,11 +75,16 @@ void KVirtualIface::setScriptDown( const QString & script )
 	if ( ! m_scriptDown.isNull() ) m_isScriptDown = true;
 }
 
-void KVirtualIface::setScriptsEnabled( bool up, bool down )
+void KVirtualIface::setScriptUpEnabled( bool state )
 {
-	m_isScriptUp = up;
-	m_isScriptDown = down;
+	m_isScriptUp = state;
 }
+
+void KVirtualIface::setScriptDownEnabled( bool state )
+{
+	m_isScriptDown = state;
+}
+
 const QString & KVirtualIface::getModel() const
 {
 	return m_model;

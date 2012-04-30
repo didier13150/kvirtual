@@ -42,10 +42,14 @@ KVirtualDevice::~KVirtualDevice()
 {
 }
 
-
-const QString & KVirtualDevice::getType() const
+void KVirtualDevice::setFile( const QString & file )
 {
-	return m_type;
+	m_file = file;
+}
+
+void KVirtualDevice::setType( const QString & type )
+{
+	m_type = type;
 }
 
 const QString & KVirtualDevice::getFile() const
@@ -53,4 +57,7 @@ const QString & KVirtualDevice::getFile() const
 	return m_file;
 }
 
-
+const QString & KVirtualDevice::getType() const
+{
+	return m_type;
+}

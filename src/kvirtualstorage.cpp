@@ -34,9 +34,9 @@
 
 #include "kvirtualstorage.h"
 
-KVirtualStorage::KVirtualStorage( const KVirtualStorage::StorageType type, const QString & file )
+KVirtualStorage::KVirtualStorage( const KVirtualStorage::Type type, const QString & file )
 {
-	m_storageType = type;
+	m_typeID = type;
 	switch ( type )
 	{
 		case KVirtualStorage::DISK:
@@ -68,7 +68,17 @@ KVirtualStorage::~KVirtualStorage()
 {
 }
 
-int KVirtualStorage::getStorageType() const
+int KVirtualStorage::getTypeID() const
 {
-	return (int) m_storageType;
+	return (int) m_typeID;
+}
+
+void KVirtualStorage::setTypeID( const Type id )
+{
+	m_typeID = id;
+}
+
+void KVirtualStorage::setTypeID( int id )
+{
+	m_typeID = ( KVirtualStorage::Type ) id;
 }

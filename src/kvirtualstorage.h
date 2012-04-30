@@ -48,16 +48,18 @@ public:
 		DISK    = 1,
 		CDROM   = 2,
 		FLOPPY  = 3,
-	}StorageType;
+	}Type;
 	
     KVirtualStorage();
-	KVirtualStorage( const StorageType type , const QString & );
+	KVirtualStorage( const Type type , const QString & );
     virtual ~KVirtualStorage();
 	
-	int getStorageType() const;
+	void setTypeID( const Type );
+	void setTypeID( int );
+	int getTypeID() const;	
 	
-protected:	
-	StorageType m_storageType;
+protected:
+	Type m_typeID;
 };
 
 #endif // KVIRTUALSTORAGE_H
