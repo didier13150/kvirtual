@@ -34,11 +34,13 @@
 
 #include "kvirtualview.h"
 #include "kvirtualoptions.h"
+#include "kvirtualstorage.h"
+#include "kvirtualiface.h"
+
 #include "settings.h"
 
 #include <KLocale>
 #include <KLineEdit>
-#include <KLed>
 #include <KStandardDirs>
 
 #include <sys/sysinfo.h>
@@ -247,7 +249,8 @@ void KVirtualView::setType3Enable( int id )
 void KVirtualView::loadOptions()
 {
     KVirtualOptions::Display display;
-    KVirtualDevice* device;
+    KVirtualStorage* storage;
+	KVirtualIface* iface;
     int index;
 
     if ( ! m_options ) return;
@@ -297,79 +300,79 @@ void KVirtualView::loadOptions()
     }
     _ui_kvirtualview_base.comboBox_boot->setCurrentIndex( (int) m_options->getBootDevice() );
 
-    device = m_options->getStorage( 0 );
-    if ( device )
+    storage = m_options->getStorage( 0 );
+    if ( storage )
     {
         _ui_kvirtualview_base.kurlrequester_storage_1->lineEdit()->setSqueezedTextEnabled( true );
-        _ui_kvirtualview_base.kurlrequester_storage_1->lineEdit()->setText( device->getFile() );
-        _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( device->getStorageType() );
+        _ui_kvirtualview_base.kurlrequester_storage_1->lineEdit()->setText( storage->getFile() );
+        _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( storage->getStorageType() );
     }
 
-    device = m_options->getStorage( 1 );
-    if ( device )
+    storage = m_options->getStorage( 1 );
+    if ( storage )
     {
         _ui_kvirtualview_base.kurlrequester_storage_2->lineEdit()->setSqueezedTextEnabled( true );
-        _ui_kvirtualview_base.kurlrequester_storage_2->lineEdit()->setText( device->getFile() );
-        _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( device->getStorageType() );
+        _ui_kvirtualview_base.kurlrequester_storage_2->lineEdit()->setText( storage->getFile() );
+        _ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( storage->getStorageType() );
     }
 
-    device = m_options->getStorage( 2 );
-    if ( device )
+    storage = m_options->getStorage( 2 );
+    if ( storage )
     {
         _ui_kvirtualview_base.kurlrequester_storage_3->lineEdit()->setSqueezedTextEnabled( true );
-        _ui_kvirtualview_base.kurlrequester_storage_3->lineEdit()->setText( device->getFile() );
-        _ui_kvirtualview_base.comboBox_storage_3->setCurrentIndex( device->getStorageType() );
+        _ui_kvirtualview_base.kurlrequester_storage_3->lineEdit()->setText( storage->getFile() );
+        _ui_kvirtualview_base.comboBox_storage_3->setCurrentIndex( storage->getStorageType() );
     }
 
-    device = m_options->getIface( 0 );
-    if ( device )
+    iface = m_options->getIface( 0 );
+    if ( iface )
     {
-        index = _ui_kvirtualview_base.comboBox_iface_model_1->findText( device->getModel() );
+        index = _ui_kvirtualview_base.comboBox_iface_model_1->findText( iface->getModel() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_model_1->setCurrentIndex( index );
-        index = _ui_kvirtualview_base.comboBox_iface_type_1->findText( device->getType() );
+        index = _ui_kvirtualview_base.comboBox_iface_type_1->findText( iface->getType() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_type_1->setCurrentIndex( index );
-        _ui_kvirtualview_base.lineEdit_iface_detail_1->setText( device->getFile() );
-        _ui_kvirtualview_base.lineEdit_iface_mac_1->setText( device->getHardwareAddress() );
-        _ui_kvirtualview_base.kurlrequester_scriptup_1->lineEdit()->setText( device->getScriptUp() );
-        _ui_kvirtualview_base.kurlrequester_scriptdown_1->lineEdit()->setText( device->getScriptDown() );
-        _ui_kvirtualview_base.checkBox_scriptup_1->setChecked( device->isScriptUpEnabled() );
-        _ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( device->isScriptDownEnabled() );
+        _ui_kvirtualview_base.lineEdit_iface_detail_1->setText( iface->getFile() );
+        _ui_kvirtualview_base.lineEdit_iface_mac_1->setText( iface->getHardwareAddress() );
+        _ui_kvirtualview_base.kurlrequester_scriptup_1->lineEdit()->setText( iface->getScriptUp() );
+        _ui_kvirtualview_base.kurlrequester_scriptdown_1->lineEdit()->setText( iface->getScriptDown() );
+        _ui_kvirtualview_base.checkBox_scriptup_1->setChecked( iface->isScriptUpEnabled() );
+        _ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( iface->isScriptDownEnabled() );
     }
 
-    device = m_options->getIface( 1 );
-    if ( device )
+    iface = m_options->getIface( 1 );
+    if ( iface )
     {
-        index = _ui_kvirtualview_base.comboBox_iface_model_2->findText( device->getModel() );
+        index = _ui_kvirtualview_base.comboBox_iface_model_2->findText( iface->getModel() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_model_2->setCurrentIndex( index );
-        index = _ui_kvirtualview_base.comboBox_iface_type_2->findText( device->getType() );
+        index = _ui_kvirtualview_base.comboBox_iface_type_2->findText( iface->getType() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_type_2->setCurrentIndex( index );
-        _ui_kvirtualview_base.lineEdit_iface_detail_2->setText( device->getFile() );
-        _ui_kvirtualview_base.lineEdit_iface_mac_2->setText( device->getHardwareAddress() );
-        _ui_kvirtualview_base.kurlrequester_scriptup_2->lineEdit()->setText( device->getScriptUp() );
-        _ui_kvirtualview_base.kurlrequester_scriptdown_2->lineEdit()->setText( device->getScriptDown() );
-        _ui_kvirtualview_base.checkBox_scriptup_2->setChecked( device->isScriptUpEnabled() );
-        _ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( device->isScriptDownEnabled() );
+        _ui_kvirtualview_base.lineEdit_iface_detail_2->setText( iface->getFile() );
+        _ui_kvirtualview_base.lineEdit_iface_mac_2->setText( iface->getHardwareAddress() );
+        _ui_kvirtualview_base.kurlrequester_scriptup_2->lineEdit()->setText( iface->getScriptUp() );
+        _ui_kvirtualview_base.kurlrequester_scriptdown_2->lineEdit()->setText( iface->getScriptDown() );
+        _ui_kvirtualview_base.checkBox_scriptup_2->setChecked( iface->isScriptUpEnabled() );
+        _ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( iface->isScriptDownEnabled() );
     }
 
-    device = m_options->getIface( 2 );
-    if ( device )
+    iface = m_options->getIface( 2 );
+    if ( iface )
     {
-        index = _ui_kvirtualview_base.comboBox_iface_model_3->findText( device->getModel() );
+        index = _ui_kvirtualview_base.comboBox_iface_model_3->findText( iface->getModel() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( index );
-        index = _ui_kvirtualview_base.comboBox_iface_type_3->findText( device->getType() );
+        index = _ui_kvirtualview_base.comboBox_iface_type_3->findText( iface->getType() );
         if ( index >= 0 )
             _ui_kvirtualview_base.comboBox_iface_type_3->setCurrentIndex( index );
-        _ui_kvirtualview_base.lineEdit_iface_detail_3->setText( device->getFile() );
-        _ui_kvirtualview_base.lineEdit_iface_mac_3->setText( device->getHardwareAddress() );
-        _ui_kvirtualview_base.kurlrequester_scriptup_3->lineEdit()->setText( device->getScriptUp() );
-        _ui_kvirtualview_base.kurlrequester_scriptdown_3->lineEdit()->setText( device->getScriptDown() );
-        _ui_kvirtualview_base.checkBox_scriptup_3->setChecked( device->isScriptUpEnabled() );
-        _ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( device->isScriptDownEnabled() );
+        _ui_kvirtualview_base.lineEdit_iface_detail_3->setText( iface->getFile() );
+        _ui_kvirtualview_base.lineEdit_iface_mac_3->setText( iface->getHardwareAddress() );
+        _ui_kvirtualview_base.kurlrequester_scriptup_3->lineEdit()->setText( iface->getScriptUp() );
+        _ui_kvirtualview_base.kurlrequester_scriptdown_3->lineEdit()->setText( iface->getScriptDown() );
+        _ui_kvirtualview_base.checkBox_scriptup_3->setChecked( iface->isScriptUpEnabled() );
+        _ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( iface->isScriptDownEnabled() );
     }
 }
 

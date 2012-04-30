@@ -33,129 +33,15 @@
  *****************************************************************************/
 
 #include "kvirtualoptions.h"
+#include "kvirtualstorage.h"
+#include "kvirtualiface.h"
+
 #include <QList>
 #include <QDebug>
 #include <QDomDocument>
 #include <QFile>
 #include <KStandardDirs>
 
-KVirtualDevice::KVirtualDevice()
-{
-}
-
-KVirtualDevice::KVirtualDevice( const KVirtualDevice::StorageType type, const QString & file )
-{
-	m_storageType = type;
-	switch ( type )
-	{
-		case KVirtualDevice::DISK:
-		{
-			m_type = "disk";
-			break;
-		}
-		case KVirtualDevice::CDROM:
-		{
-			m_type = "cdrom";
-			break;
-		}
-		case KVirtualDevice::FLOPPY:
-		{
-			m_type = "floppy";
-			break;
-		}
-		case KVirtualDevice::NONE:
-		{
-			m_type = "none";
-			break;
-		}
-	}
-	m_file = file;
-	m_isScriptUp = false;
-	m_isScriptDown = false;
-}
-
-KVirtualDevice::KVirtualDevice( const QString & type,
-                                const QString & file,
-                                const QString & model,
-                                const QString & hwaddr
-                              )
-{
-	m_type = type;
-	m_file = file;
-	m_model = model;
-	m_hwaddr = hwaddr;
-	m_isScriptUp = false;
-	m_isScriptDown = false;
-}
-
-KVirtualDevice::~KVirtualDevice()
-{
-}
-
-void KVirtualDevice::setScriptUp( const QString & script )
-{
-	m_scriptUp = script;
-	if ( ! m_scriptUp.isNull() ) m_isScriptUp = true;
-}
-
-void KVirtualDevice::setScriptDown( const QString & script )
-{
-	m_scriptDown = script;
-	if ( ! m_scriptDown.isNull() ) m_isScriptDown = true;
-}
-
-void KVirtualDevice::setScriptsEnabled( bool up, bool down )
-{
-	m_isScriptUp = up;
-	m_isScriptDown = down;
-}
-
-int KVirtualDevice::getStorageType() const
-{
-	return (int) m_storageType;
-}
-
-const QString & KVirtualDevice::getType() const
-{
-	return m_type;
-}
-
-const QString & KVirtualDevice::getFile() const
-{
-	return m_file;
-}
-
-const QString & KVirtualDevice::getModel() const
-{
-	return m_model;
-}
-
-const QString & KVirtualDevice::getHardwareAddress() const
-{
-	return m_hwaddr;
-}
-
-const QString & KVirtualDevice::getScriptUp() const
-{
-	return m_scriptUp;
-}
-
-const QString & KVirtualDevice::getScriptDown() const
-{
-	return m_scriptDown;
-}
-
-bool KVirtualDevice::isScriptUpEnabled() const
-{
-	return m_isScriptUp;
-}
-
-bool KVirtualDevice::isScriptDownEnabled() const
-{
-	return m_isScriptDown;
-}
-
-/***************************************************************************/
 KVirtualOptions::KVirtualOptions()
 {
 	clear();
@@ -381,17 +267,17 @@ void KVirtualOptions::setNbCPU( uint nb )
 	m_cpus = nb;
 }
 
-void KVirtualOptions::setStorage( uint id, const KVirtualDevice::StorageType type, const QString & file )
+/*void KVirtualOptions::setStorage( uint id, const KVirtualStorage::StorageType type, const QString & file )
 {
 	if ( m_storages.contains( id ) )
 	{
 		delete m_storages[id];
 	}
 
-	KVirtualDevice* storage = new KVirtualDevice( type, file );
+	KVirtualStorage* storage = new KVirtualStorage( type, file );
 
 	m_storages[id] = storage;
-}
+}*/
 
 void KVirtualOptions::setStorage( uint id, const int type, const QString & file )
 {
@@ -400,7 +286,7 @@ void KVirtualOptions::setStorage( uint id, const int type, const QString & file 
 		delete m_storages[id];
 	}
 
-	KVirtualDevice* storage = new KVirtualDevice( (KVirtualDevice::StorageType) type, file );
+	KVirtualStorage* storage = new KVirtualStorage( (KVirtualStorage::StorageType) type, file );
 
 	m_storages[id] = storage;
 }
@@ -417,7 +303,7 @@ void KVirtualOptions::setIface( uint id,
 		delete m_ifaces[id];
 	}
 
-	KVirtualDevice* iface = new KVirtualDevice( type, file, model, mac );
+	KVirtualIface* iface = new KVirtualIface( type, file, model, mac );
 
 	m_ifaces[id] = iface;
 }
@@ -908,7 +794,7 @@ void KVirtualOptions::load( const QString & filename )
 					if ( element2.tagName() == "storage" )
 					{
 						setStorage( element2.attribute( "id" ).toUInt(),
-						            (KVirtualDevice::StorageType) element2.attribute( "type" ).toInt(),
+						            (KVirtualStorage::StorageType) element2.attribute( "type" ).toInt(),
 						            element2.attribute( "file" )
 						          );
 					}
@@ -1185,7 +1071,7 @@ uint KVirtualOptions::getNbCPU() const
 	return m_cpus;
 }
 
-KVirtualDevice* KVirtualOptions::getStorage( uint id ) const
+KVirtualStorage* KVirtualOptions::getStorage( uint id ) const
 {
 	if ( ! m_storages.contains( id ) )
 	{
@@ -1195,7 +1081,7 @@ KVirtualDevice* KVirtualOptions::getStorage( uint id ) const
 	return m_storages[ id ];
 }
 
-KVirtualDevice* KVirtualOptions::getIface( uint id ) const
+KVirtualIface* KVirtualOptions::getIface( uint id ) const
 {
 	if ( ! m_ifaces.contains( id ) )
 	{

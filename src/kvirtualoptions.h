@@ -37,52 +37,14 @@
 
 #include <QStringList>
 #include <QMap>
+#include <QObject>
 
-class KVirtualDevice
+class KVirtualStorage;
+class KVirtualIface;
+
+class KVirtualOptions : public QObject
 {
-public:
-
-	typedef enum {
-		NONE    = 0,
-		DISK    = 1,
-		CDROM   = 2,
-		FLOPPY  = 3,
-	}StorageType;
-	
-	KVirtualDevice();
-	KVirtualDevice( const StorageType type , const QString & );
-	KVirtualDevice( const QString &, const QString &, const QString &, const QString & );
-	~KVirtualDevice();
-
-	void setScriptUp(  const QString & );
-	void setScriptDown(  const QString & );
-	void setScriptsEnabled( bool, bool );
-
-	int getStorageType() const;
-	const QString & getType() const;
-	const QString & getFile() const;
-	const QString & getModel() const;
-	const QString & getHardwareAddress() const;
-	const QString & getScriptUp() const;
-	const QString & getScriptDown() const;
-	bool isScriptUpEnabled() const;
-	bool isScriptDownEnabled() const;
-
-protected:
-	StorageType m_storageType;
-	QString m_type;
-	QString m_file;
-	QString m_model;
-	QString m_hwaddr;
-	QString m_scriptUp;
-	QString m_scriptDown;
-	bool m_isScriptUp;
-	bool m_isScriptDown;
-};
-
-
-class KVirtualOptions
-{
+	Q_OBJECT
 public:
 	/**
 	 * Default Constructor
@@ -120,8 +82,8 @@ public:
 	uint getNbCPU() const;
 	Display getDisplay() const;
 	BootOrder getBootDevice() const;
-	KVirtualDevice* getStorage( uint ) const;
-	KVirtualDevice* getIface( uint ) const;
+	KVirtualStorage* getStorage( uint ) const;
+	KVirtualIface* getIface( uint ) const;
 	const QString & getVideoCard() const;
 	bool isUsbSupported() const;
 	bool isSnapshotEnabled() const;
@@ -132,7 +94,7 @@ public slots:
 	void setDistrib( const QString & );
 	void setDescription( const QString & );
 	void setIface( uint, const QString &, const QString &, const QString &, const QString & );
-	void setStorage( uint, const KVirtualDevice::StorageType , const QString & );
+	//void setStorage( uint, const KVirtualStorage::StorageType , const QString & );
 	void setStorage( uint, const int , const QString & );
 	void setUsbSupported( bool );
 	void setSnapshotEnabled( bool );
@@ -154,8 +116,8 @@ public slots:
 protected:
 	QStringList m_opts;
 	QStringList m_usedSwitches;
-	QMap<uint, KVirtualDevice*> m_storages;
-	QMap<uint, KVirtualDevice*> m_ifaces;
+	QMap<uint, KVirtualStorage*> m_storages;
+	QMap<uint, KVirtualIface*> m_ifaces;
 	QString m_file;
 	QString m_name;
 	QString m_distrib;
