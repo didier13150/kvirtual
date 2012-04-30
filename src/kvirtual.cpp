@@ -54,6 +54,7 @@
 #include <KFileDialog>
 #include <KLineEdit>
 #include <KMessageBox>
+#include <KStandardDirs>
 
 #include <KLocale>
 
@@ -67,7 +68,6 @@ KVirtual::KVirtual()
 
     m_options = new KVirtualOptions();
     m_view->initOptions( m_options );
-    connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );
 
     // accept dnd
     setAcceptDrops( true );
@@ -183,6 +183,25 @@ void KVirtual::setupActions()
     KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Test config" ), this );
     actionCollection()->addAction( QLatin1String( "test_config" ), test );
     connect( test, SIGNAL( triggered( bool ) ), SLOT( exitCalled() ) );
+	
+	
+    connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );
+	connect( m_view, SIGNAL( signalChangeDistribution( QString ) ), SLOT( changeIcon( QString ) ) );
+}
+
+void KVirtual::changeIcon( const QString & distrib )
+{
+    QString img = KStandardDirs::locate( "appdata", distrib + ".png" );
+	QIcon icon;
+    if ( img.isNull() )
+	{
+		icon = m_systray->loadIcon( KStandardDirs::locate( "appdata", "linux.png" ) );
+	}
+	else
+	{
+		icon = m_systray->loadIcon( img );
+	}
+	m_systray->setIcon( icon );
 }
 
 void KVirtual::exitCalled()

@@ -72,6 +72,7 @@ void KVirtualView::setPixmap( const QString & distrib )
 
     if ( img.isNull() ) img = "linux.svg";
     _ui_kvirtualview_base.widget_logo->load ( img );
+	emit( signalChangeDistribution( distrib ) );
 }
 
 void KVirtualView::setState( uint, bool state )

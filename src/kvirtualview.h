@@ -102,6 +102,8 @@ signals:
 	 * Use this signal to change the content of the caption
 	 */
 	void signalChangeCaption( const QString& text );
+	
+	void signalChangeDistribution( const QString& distrib );
 
 public slots:
 	void addOutput( const QString & );

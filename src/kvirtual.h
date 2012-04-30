@@ -100,6 +100,7 @@ private slots:
 	void showCreateVDiskDlg();
 	void createVDisk( const QString &, const QString &, const QString & );
 	void exitCalled();
+	void changeIcon( const QString & );
 
 private:
 	void setupActions();
