@@ -40,34 +40,36 @@
 
 class KVirtualIface : public KVirtualDevice
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
+    KVirtualIface();
     KVirtualIface( const QString &, const QString &, const QString &, const QString & );
     virtual ~KVirtualIface();
 
-	void setScriptUp( const QString & );
-	void setScriptDown( const QString & );
-	void setScriptUpEnabled( bool );
-	void setScriptDownEnabled( bool );
-	void setHardwareAddress( const QString & );
-	void setModel( const QString & );
-	
-	const QString & getModel() const;
-	const QString & getHardwareAddress() const;
-	const QString & getScriptUp() const;
-	const QString & getScriptDown() const;
-	
-	bool isScriptUpEnabled() const;
-	bool isScriptDownEnabled() const;
-	
+    void setScriptUp( const QString & );
+    void setScriptDown( const QString & );
+    void setScriptUpEnabled( bool );
+    void setScriptDownEnabled( bool );
+    void setHardwareAddress( const QString & );
+    void setModel( const QString & );
+
+    const QString & getModel() const;
+    const QString & getHardwareAddress() const;
+    const QString & getScriptUp() const;
+    const QString & getScriptDown() const;
+
+    bool isScriptUpEnabled() const;
+    bool isScriptDownEnabled() const;
+
 protected:
-	QString m_model;
-	QString m_hwaddr;
-	QString m_scriptUp;
-	QString m_scriptDown;
-	bool m_isScriptUp;
-	bool m_isScriptDown;
+    QString m_model;
+    QString m_hwaddr;
+    QString m_scriptUp;
+    QString m_scriptDown;
+    bool m_isScriptUp;
+    bool m_isScriptDown;
 };
 
 #endif // KVIRTUALIFACE_H
+// kate: indent-mode cstyle; space-indent on; indent-width 0; 

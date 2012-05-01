@@ -51,30 +51,31 @@
 
 class KVirtualCreateImg : public QDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	/**
-	 * Default Constructor
-	 */
-	KVirtualCreateImg( QWidget *parent = 0 );
+    /**
+     * Default Constructor
+     */
+    KVirtualCreateImg( QWidget *parent = 0 );
 
-	/**
-	 * Default Destructor
-	 */
-	virtual ~KVirtualCreateImg();
+    /**
+     * Default Destructor
+     */
+    virtual ~KVirtualCreateImg();
 
 private:
-	Ui::Dialog_create ui_widget;
-	QString m_file;
-	QString m_type;
-	QString m_size;
+    Ui::Dialog_create ui_widget;
+    QString m_file;
+    QString m_type;
+    QString m_size;
 
 private slots:
-	void sendAccepted();
+    void sendAccepted();
 
 signals:
-	void accepted( const QString &, const QString &, const QString & );
+    void accepted( const QString &, const QString &, const QString & );
 };
 
 #endif // _KVIRTUALCREATEIMG_H_
+// kate: indent-mode cstyle; space-indent on; indent-width 0; 

@@ -48,7 +48,7 @@ class KUrl;
 class KVirtualView;
 class KVirtualOptions;
 class KVirtualProcess;
-class KSystemTrayIcon;
+class KStatusNotifierItem;
 class KVirtualCreateImg;
 
 /**
@@ -62,69 +62,72 @@ class KVirtualCreateImg;
 
 class KVirtual : public KXmlGuiWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	/**
-	 * Default Constructor
-	 */
-	KVirtual();
+    /**
+     * Default Constructor
+     */
+    KVirtual();
 
-	/**
-	 * Default Destructor
-	 */
-	virtual ~KVirtual();
+    /**
+     * Default Destructor
+     */
+    virtual ~KVirtual();
 
-	/**
-	 * Load vitual host file
-	 */
-	void load( const QString & filename );
+    /**
+     * Load vitual host file
+     */
+    void load( const QString & filename );
 
 private slots:
-	void fileNew();
-	void fileOpen();
-	void fileSave();
-	void fileSaveAs();
-	void optionsPreferences();
-	void startVirtual();
-	void terminateVirtual();
-	void killVirtual();
-	void readStarted( uint );
-	void readData( uint );
-	void readError( uint );
-	void closeProcess( uint, int, QProcess::ExitStatus );
-	void startVde( const QString & );
-	void setKvmExe( const QString & );
-	void setVdeSwitchExe( const QString & );
-	void setQemuImgCreator( const QString & );
-	void showCreateVDiskDlg();
-	void createVDisk( const QString &, const QString &, const QString & );
-	void exitCalled();
-	void changeIcon( const QString & );
+    void fileNew();
+    void fileOpen();
+    void fileSave();
+    void fileSaveAs();
+    void optionsPreferences();
+    void startVirtual();
+    void terminateVirtual();
+    void killVirtual();
+    void readStarted( uint );
+    void readData( uint );
+    void readError( uint );
+    void closeProcess( uint, int, QProcess::ExitStatus );
+    void startVde( const QString & );
+    void setKvmExe( const QString & );
+    void setVdeSwitchExe( const QString & );
+    void setQemuImgCreator( const QString & );
+    void showCreateVDiskDlg();
+    void createVDisk( const QString &, const QString &, const QString & );
+    void changeIcon( const QString & );
+
+protected:
+    bool queryClose();
+    bool queryExit();
 
 private:
-	void setupActions();
-	uint getID();
-	void terminateAll();
-	void killAll();
+    void setupActions();
+    uint getID();
+    void terminateAll();
+    void killAll();
 
 private:
-	Ui::prefs_base ui_prefs_base ;
-	KVirtualView *m_view;
-	KVirtualCreateImg *m_create;
-	KSystemTrayIcon *m_systray;
-	QMap<uint, KVirtualProcess*> m_processes;
-	uint m_id;
-	KVirtualOptions* m_options;
+    Ui::prefs_base ui_prefs_base ;
+    KVirtualView *m_view;
+    KVirtualCreateImg *m_create;
+    KStatusNotifierItem *m_systray;
+    QMap<uint, KVirtualProcess*> m_processes;
+    uint m_id;
+    KVirtualOptions* m_options;
 
-	QPrinter   *m_printer;
-	KToggleAction *m_toolbarAction;
-	KToggleAction *m_statusbarAction;
-	QString m_confFilename;
+    QPrinter   *m_printer;
+    KToggleAction *m_toolbarAction;
+    KToggleAction *m_statusbarAction;
+    QString m_confFilename;
 
 signals:
-	void vmStateChanged( uint, bool );
+    void vmStateChanged( uint, bool );
 };
 
 #endif // _KVIRTUAL_H_
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4; 
+// kate: indent-mode cstyle; space-indent on; indent-width 0;   replace-tabs off;

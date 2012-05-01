@@ -50,7 +50,7 @@
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KIconLoader>
-#include <KSystemTrayIcon>
+#include <KStatusNotifierItem>
 #include <KFileDialog>
 #include <KLineEdit>
 #include <KMessageBox>
@@ -68,6 +68,10 @@ KVirtual::KVirtual()
 
     m_options = new KVirtualOptions();
     m_view->initOptions( m_options );
+    connect( m_view,
+             SIGNAL( signalChangeDistribution( QString ) ),
+             SLOT( changeIcon( QString ) )
+           );
 
     // accept dnd
     setAcceptDrops( true );
@@ -88,8 +92,11 @@ KVirtual::KVirtual()
     // toolbar position, icon size, etc.
     setupGUI();
 
-    m_systray = new KSystemTrayIcon( MainBarIconSet( "kvirtual" ), this );
-    m_systray->show();
+    m_systray = new KStatusNotifierItem( this );
+    m_systray->setStandardActionsEnabled( true );
+    m_systray->activate();
+	m_systray->setStatus( KStatusNotifierItem::Passive );
+	changeIcon( m_options->getDistrib() );
 
     m_create = new KVirtualCreateImg( this );
 }
@@ -98,9 +105,9 @@ KVirtual::~KVirtual()
 {
     QMapIterator<uint, KVirtualProcess*> it(m_processes);
 
-	terminateAll();
-	sleep( 1 );
-	killAll();
+    terminateAll();
+    sleep( 1 );
+    killAll();
     while ( it.hasNext() )
     {
         it.next();
@@ -152,7 +159,7 @@ void KVirtual::setupActions()
     KStandardAction::open( this, SLOT( fileOpen() ), actionCollection() );
     KStandardAction::save( this, SLOT( fileSave() ), actionCollection() );
     KStandardAction::saveAs( this, SLOT( fileSaveAs() ), actionCollection() );
-    KStandardAction::quit( qApp, SLOT( closeAllWindows() ), actionCollection() );
+    KStandardAction::quit( qApp, SLOT( quit() ), actionCollection() );
 
     KStandardAction::preferences( this, SLOT( optionsPreferences() ), actionCollection() );
 
@@ -180,40 +187,54 @@ void KVirtual::setupActions()
     connect( vdisk, SIGNAL( triggered( bool ) ), SLOT( showCreateVDiskDlg() ) );
 
     // test
-    KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Test config" ), this );
+    /*KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Test config" ), this );
     actionCollection()->addAction( QLatin1String( "test_config" ), test );
-    connect( test, SIGNAL( triggered( bool ) ), SLOT( exitCalled() ) );
-	
-	
+    connect( test, SIGNAL( triggered( bool ) ), SLOT( exitCalled() ) );*/
+
+
     connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );
-	connect( m_view, SIGNAL( signalChangeDistribution( QString ) ), SLOT( changeIcon( QString ) ) );
 }
 
 void KVirtual::changeIcon( const QString & distrib )
 {
     QString img = KStandardDirs::locate( "appdata", distrib + ".png" );
-	QIcon icon;
     if ( img.isNull() )
-	{
-		icon = m_systray->loadIcon( KStandardDirs::locate( "appdata", "linux.png" ) );
-	}
-	else
-	{
-		icon = m_systray->loadIcon( img );
-	}
-	m_systray->setIcon( icon );
+    {
+        img = KStandardDirs::locate( "appdata", "linux.png" );
+    }
+    m_systray->setIconByName( img );
 }
 
-void KVirtual::exitCalled()
+bool KVirtual::queryClose() //exitCalled()
 {
-	if ( m_options->isModified( m_confFilename ) )
-	{
-		KMessageBox::information( this, "Config not sync" );
-	}
-	else
-	{
-		KMessageBox::information( this, "Config sync" );
-	}
+    hide();
+	return false;
+}
+
+bool KVirtual::queryExit() //exitCalled()
+{
+    if ( m_options->isModified( m_confFilename ) )
+    {
+        switch ( KMessageBox::warningYesNoCancel( this,
+                i18n("Save changes to virtual host definition document ?") ) )
+		{
+			case KMessageBox::Yes:
+			{
+				// save document here. If saving fails, return false;
+				m_options->save( m_confFilename );
+				break;
+			}
+			case KMessageBox::No:
+			{
+				break;
+			}
+			default: // cancel
+			{
+				return false;
+			}
+		}
+    }
+    return true;
 }
 
 void KVirtual::showCreateVDiskDlg()
@@ -237,7 +258,6 @@ void KVirtual::createVDisk( const QString & file, const QString & type, const QS
     opts << file;
     opts << size;
 
-    m_view->setOptions();
     process->setProgram( Settings::exeQemuImgCreator(), opts );
     process->setOutputChannelMode( KProcess::SeparateChannels );
     connect( process,
@@ -301,7 +321,6 @@ void KVirtual::fileSave()
         fileSaveAs();
         return;
     }
-    m_view->setOptions();
     m_options->save( m_confFilename );
 }
 
@@ -310,7 +329,6 @@ void KVirtual::fileSaveAs()
     KUrl url = KUrl::fromPath ( QDir::homePath() );
 
     m_confFilename = KFileDialog::getSaveFileName( url, "*.xml", this );
-    m_view->setOptions();
     m_options->save( m_confFilename );
 }
 
@@ -457,7 +475,6 @@ void KVirtual::startVirtual()
     QStringList vswitch;
     QString buffer;
 
-    m_view->setOptions();
     process->setProgram( Settings::exeKvm(), m_options->getArgs() );
     process->setOutputChannelMode( KProcess::SeparateChannels );
     connect( process,
@@ -510,6 +527,7 @@ void KVirtual::readStarted( uint id )
     if ( process->getVirtualType() == KVirtualProcess::HOST )
     {
         emit( vmStateChanged( id, true ) );
+		m_systray->setStatus( KStatusNotifierItem::Active );
     }
     buffer.setNum( id );
     buffer.prepend( "Process" );
@@ -597,9 +615,12 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
                SIGNAL( finished( uint, int, QProcess::ExitStatus ) ) );
 
     if ( process->getVirtualType() == KVirtualProcess::HOST )
+	{
         emit( vmStateChanged( id, false ) );
+		m_systray->setStatus( KStatusNotifierItem::Passive );
+	}
     delete process;
 }
 
 #include "kvirtual.moc"
-// kate: indent-mode cstyle; space-indent on; indent-width 0;   replace-tabs off;
+// kate: indent-mode cstyle; space-indent on; indent-width 0;     replace-tabs off;

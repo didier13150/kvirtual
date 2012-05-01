@@ -37,7 +37,7 @@
 KVirtualProcess::KVirtualProcess( uint id, KVirtualProcess::ProcessType type )
 {
     m_id = id;
-	m_type = type;
+    m_type = type;
     connect( this, SIGNAL( readyReadStandardOutput() ), SLOT( sendReadyReadStandardOutput() ) );
     connect( this, SIGNAL( readyReadStandardError() ), SLOT( sendReadyReadStandardError() ) );
     connect( this, SIGNAL( started() ), SLOT( sendStarted() ) );
@@ -50,12 +50,12 @@ KVirtualProcess::~KVirtualProcess()
 
 KVirtualProcess::ProcessType KVirtualProcess::getVirtualType()
 {
-	return m_type;
+    return m_type;
 }
 
 void KVirtualProcess::sendStarted()
 {
-	emit( started( m_id ) );
+    emit( started( m_id ) );
 }
 
 void KVirtualProcess::sendReadyReadStandardOutput()
@@ -72,4 +72,4 @@ void KVirtualProcess::sendFinished( int retval, QProcess::ExitStatus status )
 {
     emit( finished( m_id, retval, status ) );
 }
-// kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;
+// kate: indent-mode cstyle; space-indent on; indent-width 0;   replace-tabs off;

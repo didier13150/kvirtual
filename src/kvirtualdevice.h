@@ -40,20 +40,21 @@
 
 class KVirtualDevice : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	KVirtualDevice();
-	virtual ~KVirtualDevice();
+    KVirtualDevice();
+    virtual ~KVirtualDevice();
 
-	const QString & getFile() const;
-	const QString & getType() const;
+    const QString & getFile() const;
+    const QString & getType() const;
 
-	void setFile( const QString & );
-	void setType( const QString & );
-	
+    void setFile( const QString & );
+    void setType( const QString & );
+
 protected:
-	QString m_file;
-	QString m_type;
+    QString m_file;
+    QString m_type;
 };
 
 #endif // KVIRTUALDEVICE_H
+// kate: indent-mode cstyle; space-indent on; indent-width 0; 

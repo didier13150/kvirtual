@@ -40,26 +40,27 @@
 
 class KVirtualStorage : public KVirtualDevice
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	typedef enum {
-		NONE    = 0,
-		DISK    = 1,
-		CDROM   = 2,
-		FLOPPY  = 3,
-	}Type;
-	
+    typedef enum {
+        NONE    = 0,
+        DISK    = 1,
+        CDROM   = 2,
+        FLOPPY  = 3,
+    }Type;
+
     KVirtualStorage();
-	KVirtualStorage( const Type type , const QString & );
+    KVirtualStorage( const Type type , const QString & );
     virtual ~KVirtualStorage();
-	
-	void setTypeID( const Type );
-	void setTypeID( int );
-	int getTypeID() const;	
-	
+
+    void setTypeID( const Type );
+    void setTypeID( int );
+    int getTypeID() const;
+
 protected:
-	Type m_typeID;
+    Type m_typeID;
 };
 
 #endif // KVIRTUALSTORAGE_H
+// kate: indent-mode cstyle; space-indent on; indent-width 0; 

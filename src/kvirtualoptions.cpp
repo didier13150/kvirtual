@@ -44,7 +44,7 @@
 
 KVirtualOptions::KVirtualOptions()
 {
-	clear();
+    clear();
 }
 
 KVirtualOptions::~KVirtualOptions()
@@ -54,229 +54,283 @@ KVirtualOptions::~KVirtualOptions()
 
 void KVirtualOptions::clear()
 {
-	m_usb = false;
-	m_snapshot = false;
-	m_memory = 128;
-	m_display = KVirtualOptions::DISPLAY_DIRECT;
-	m_bootDevice = KVirtualOptions::BOOT_ON_DISK;
-	m_vncport = 1;
-	m_keyboard = "fr";
-	m_videoCard.clear();
-	m_description.clear();
-	m_name.clear();
-	m_distrib = "linux";
-	m_storages.clear();
-	m_ifaces.clear();
-	m_opts.clear();
+    m_usb = false;
+    m_snapshot = false;
+    m_memory = 128;
+    m_display = KVirtualOptions::DISPLAY_DIRECT;
+    m_bootDevice = KVirtualOptions::BOOT_ON_DISK;
+    m_vncport = 1;
+    m_keyboard = "fr";
+    m_videoCard.clear();
+    m_description.clear();
+    m_name.clear();
+    m_distrib = "linux";
+    m_storages.clear();
+    m_ifaces.clear();
+    m_opts.clear();
 
 }
 
 QStringList KVirtualOptions::getNeededVirtualSwitch()
 {
-	QStringList needed;
-	QString buffer;
+    QStringList needed;
+    QString buffer;
 
-	QList<uint>::ConstIterator it;
-	QList<uint> keys = m_ifaces.keys();
+    QList<uint>::ConstIterator it;
+    QList<uint> keys = m_ifaces.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
-	{
-		if ( m_ifaces[*it]->getType() == "vde" )
-		{
-			buffer = m_ifaces[*it]->getFile();
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        if ( m_ifaces[*it]->getType() == "vde" )
+        {
+            buffer = m_ifaces[*it]->getFile();
 
-			if ( not m_usedSwitches.contains( buffer ) )
-				needed << buffer;
-		}
-	}
+            if ( not m_usedSwitches.contains( buffer ) )
+                needed << buffer;
+        }
+    }
 
-	return needed;
+    return needed;
 }
 
 const QStringList & KVirtualOptions::getArgs()
 {
-	QString buffer, id, img;
-	QList<uint>::ConstIterator it;
-	QList<uint> keys;
+    QString buffer, id, img;
+    QList<uint>::ConstIterator it;
+    QList<uint> keys;
 
-	m_opts.clear();
-	buffer.setNum( m_memory );
-	m_opts << "-m" << buffer;
+    m_opts.clear();
+    buffer.setNum( m_memory );
+    m_opts << "-m" << buffer;
 
-	if ( m_cpus > 1 )
-	{
-		buffer.setNum( m_cpus );
-		m_opts << "-smp" << buffer;
-	}
+    if ( m_cpus > 1 )
+    {
+        buffer.setNum( m_cpus );
+        m_opts << "-smp" << buffer;
+    }
 
-	keys = m_storages.keys();
+    keys = m_storages.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
-	{
-		if ( m_storages[*it]->getTypeID() )
-		{
-			buffer = "file=" + m_storages[*it]->getFile() + ",media=" + m_storages[*it]->getType();
-			m_opts << "-drive" << buffer;
-		}
-	}
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        if ( m_storages[*it]->getTypeID() )
+        {
+            buffer = "file=" + m_storages[*it]->getFile() + ",media=" + m_storages[*it]->getType();
+            m_opts << "-drive" << buffer;
+        }
+    }
 
-	keys = m_ifaces.keys();
+    keys = m_ifaces.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
-	{
-		if ( ! m_ifaces[*it]->getModel().isNull() )
-		{
-			id.setNum( *it );
-			buffer = "nic,macaddr=" + m_ifaces[*it]->getHardwareAddress() + ",model=" + m_ifaces[*it]->getModel() + ",vlan=" + id;
-			m_opts << "-net" << buffer;
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        if ( ! m_ifaces[*it]->getModel().isNull() )
+        {
+            id.setNum( *it );
+            buffer = "nic,macaddr=" + m_ifaces[*it]->getHardwareAddress() + ",model=" + m_ifaces[*it]->getModel() + ",vlan=" + id;
+            m_opts << "-net" << buffer;
 
-			buffer = m_ifaces[*it]->getType();
+            buffer = m_ifaces[*it]->getType();
 
-			if ( buffer == "tap" )
-			{
-				buffer += ",ifname=" + m_ifaces[*it]->getFile();
-				if ( ! m_ifaces[*it]->getScriptUp().isNull() &&
-					! m_ifaces[*it]->getScriptDown().isNull() &&
-					m_ifaces[*it]->isScriptUpEnabled() &&
-					m_ifaces[*it]->isScriptDownEnabled()
-				)
-				{
-					buffer += ",script=" + m_ifaces[*it]->getScriptUp();
-					buffer += ",downscript=" + m_ifaces[*it]->getScriptDown();
-				}
-				else
-				{
-					buffer += ",script=no";
-				}
-			}
-			else if ( buffer == "vde" )
-			{
-				buffer += ",sock=" + m_ifaces[*it]->getFile();
-			}
+            if ( buffer == "tap" )
+            {
+                buffer += ",ifname=" + m_ifaces[*it]->getFile();
+                if ( ! m_ifaces[*it]->getScriptUp().isNull() &&
+                        ! m_ifaces[*it]->getScriptDown().isNull() &&
+                        m_ifaces[*it]->isScriptUpEnabled() &&
+                        m_ifaces[*it]->isScriptDownEnabled()
+                   )
+                {
+                    buffer += ",script=" + m_ifaces[*it]->getScriptUp();
+                    buffer += ",downscript=" + m_ifaces[*it]->getScriptDown();
+                }
+                else
+                {
+                    buffer += ",script=no";
+                }
+            }
+            else if ( buffer == "vde" )
+            {
+                buffer += ",sock=" + m_ifaces[*it]->getFile();
+            }
 
-			buffer += ",vlan=" + id;
+            buffer += ",vlan=" + id;
 
-			m_opts << "-net" << buffer;
-		}
-	}
+            m_opts << "-net" << buffer;
+        }
+    }
 
-	switch ( m_display )
-	{
+    switch ( m_display )
+    {
 
-		case KVirtualOptions::DISPLAY_DIRECT:
-		{
-			buffer = "sdl";
-			break;
-		}
+    case KVirtualOptions::DISPLAY_DIRECT:
+    {
+        buffer = "sdl";
+        break;
+    }
 
-		case KVirtualOptions::DISPLAY_VNC:
-		{
-			buffer.setNum( m_vncport );
-			buffer.prepend( "vnc=:" );
-			break;
-		}
+    case KVirtualOptions::DISPLAY_VNC:
+    {
+        buffer.setNum( m_vncport );
+        buffer.prepend( "vnc=:" );
+        break;
+    }
 
-		default:
-		{
-			buffer = "none";
-			break;
-		}
+    default:
+    {
+        buffer = "none";
+        break;
+    }
 
-	}
+    }
 
-	m_opts << "-display" << buffer;
+    m_opts << "-display" << buffer;
 
-	if ( m_usb )
-		m_opts << "-usb";
+    if ( m_usb )
+        m_opts << "-usb";
 
-	if ( m_snapshot )
-		m_opts << "-snapshot";
+    if ( m_snapshot )
+        m_opts << "-snapshot";
 
-	if ( ! m_keyboard.isNull() )
-		m_opts << "-k" << m_keyboard;
+    if ( ! m_keyboard.isNull() )
+        m_opts << "-k" << m_keyboard;
 
-	if ( m_videoCard.isNull() )
-	{
-		buffer = "none";
-	}
-	else
-	{
-		buffer = m_videoCard;
-	}
-	m_opts << "-vga" << buffer;
+    if ( m_videoCard.isNull() )
+    {
+        buffer = "none";
+    }
+    else
+    {
+        buffer = m_videoCard;
+    }
+    m_opts << "-vga" << buffer;
 
-	switch( m_bootDevice )
-	{
-		case KVirtualOptions::BOOT_ON_DISK:
-		{
-			buffer = "c";
-			break;
-		}
-		case KVirtualOptions::BOOT_ON_CDROM:
-		{
-			buffer = "d";
-			break;
-		}
-		case KVirtualOptions::BOOT_ON_FLOPPY:
-		{
-			buffer = "a";
-			break;
-		}
-		case KVirtualOptions::BOOT_ON_NETWORK:
-		{
-			buffer = "n";
-			break;
-		}
-	}
-	buffer.prepend( "once=" );
+    switch ( m_bootDevice )
+    {
+    case KVirtualOptions::BOOT_ON_DISK:
+    {
+        buffer = "c";
+        break;
+    }
+    case KVirtualOptions::BOOT_ON_CDROM:
+    {
+        buffer = "d";
+        break;
+    }
+    case KVirtualOptions::BOOT_ON_FLOPPY:
+    {
+        buffer = "a";
+        break;
+    }
+    case KVirtualOptions::BOOT_ON_NETWORK:
+    {
+        buffer = "n";
+        break;
+    }
+    }
+    buffer.prepend( "once=" );
 
-	//TODO uncomment when kvm not crash with this option
-	/*img = KStandardDirs::locate( "appdata", "boot.jpg" );
-	if ( ! img.isNull() )
-	{
-		//buffer += ",splash=" + img + ",splash-time=5000";
-	}*/
-	m_opts << "-boot" << buffer;
-	
+    //TODO uncomment when kvm not crash with this option
+    /*img = KStandardDirs::locate( "appdata", "boot.jpg" );
+    if ( ! img.isNull() )
+    {
+    	//buffer += ",splash=" + img + ",splash-time=5000";
+    }*/
+    m_opts << "-boot" << buffer;
 
-	return m_opts;
+
+    return m_opts;
 }
 
 void KVirtualOptions::setName( const QString & name )
 {
-	m_name = name;
+    m_name = name;
 }
 
 void KVirtualOptions::setDistrib( const QString & distrib )
 {
-	m_distrib = distrib;
+    m_distrib = distrib;
 }
 
 void KVirtualOptions::setDescription( const QString & desc )
 {
-	m_description = desc;
+    m_description = desc;
 }
 
 void KVirtualOptions::setMemory( int mem )
 {
-	m_memory = (uint) mem;
+    m_memory = (uint) mem;
 }
 
 void KVirtualOptions::setNbCPU( int nb )
 {
-	m_cpus = (uint) nb;
+    m_cpus = (uint) nb;
+}
+
+void KVirtualOptions::setStorageType( uint id, const int type )
+{
+    if ( ! m_storages.contains( id ) )
+    {
+        m_storages[id] = new KVirtualStorage();
+    }
+    m_storages[id]->setTypeID( type );
+}
+
+void KVirtualOptions::setStorageFile( uint id, const QString & file )
+{
+    if ( ! m_storages.contains( id ) )
+    {
+        m_storages[id] = new KVirtualStorage();
+    }
+    m_storages[id]->setFile( file );
 }
 
 void KVirtualOptions::setStorage( uint id, const int type, const QString & file )
 {
-	if ( m_storages.contains( id ) )
-	{
-		delete m_storages[id];
-	}
+    if ( m_storages.contains( id ) )
+    {
+        delete m_storages[id];
+    }
 
-	KVirtualStorage* storage = new KVirtualStorage( (KVirtualStorage::Type) type, file );
+    KVirtualStorage* storage = new KVirtualStorage( (KVirtualStorage::Type) type, file );
 
-	m_storages[id] = storage;
+    m_storages[id] = storage;
+}
+
+void KVirtualOptions::setIfaceType( uint id, const QString & type )
+{
+    if ( ! m_ifaces.contains( id ) )
+    {
+        m_ifaces[id] = new KVirtualIface();
+    }
+    m_ifaces[id]->setType( type );
+}
+
+void KVirtualOptions::setIfaceFile( uint id, const QString & file )
+{
+    if ( ! m_ifaces.contains( id ) )
+    {
+        m_ifaces[id] = new KVirtualIface();
+    }
+    m_ifaces[id]->setFile( file );
+}
+
+void KVirtualOptions::setIfaceModel( uint id, const QString & model )
+{
+    if ( ! m_ifaces.contains( id ) )
+    {
+        m_ifaces[id] = new KVirtualIface();
+    }
+    m_ifaces[id]->setModel( model );
+}
+
+void KVirtualOptions::setIfaceHwAddr( uint id, const QString & hwaddr )
+{
+    if ( ! m_ifaces.contains( id ) )
+    {
+        m_ifaces[id] = new KVirtualIface();
+    }
+    m_ifaces[id]->setHardwareAddress( hwaddr );
 }
 
 void KVirtualOptions::setIface( uint id,
@@ -286,934 +340,940 @@ void KVirtualOptions::setIface( uint id,
                                 const QString & mac
                               )
 {
-	if ( m_ifaces.contains( id ) )
-	{
-		delete m_ifaces[id];
-	}
+    if ( m_ifaces.contains( id ) )
+    {
+        delete m_ifaces[id];
+    }
 
-	KVirtualIface* iface = new KVirtualIface( type, file, model, mac );
+    KVirtualIface* iface = new KVirtualIface( type, file, model, mac );
 
-	m_ifaces[id] = iface;
+    m_ifaces[id] = iface;
 }
 
-void KVirtualOptions::setScripts( uint id,
-								  const QString & up,
-								  const QString & down
-								)
+void KVirtualOptions::setScriptUp( uint id, const QString & script )
 {
-	if ( m_ifaces.contains( id ) )
-	{
-		m_ifaces[id]->setScriptUp( up );
-		m_ifaces[id]->setScriptDown( down );
-	}
+    if ( m_ifaces.contains( id ) )
+    {
+        m_ifaces[id]->setScriptUp( script );
+    }
+}
+
+void KVirtualOptions::setScriptDown( uint id, const QString & script )
+{
+    if ( m_ifaces.contains( id ) )
+    {
+        m_ifaces[id]->setScriptDown( script );
+    }
 }
 
 void KVirtualOptions::setScriptUpEnabled( uint id, bool state )
 {
-	if ( m_ifaces.contains( id ) )
-	{
-		m_ifaces[id]->setScriptUpEnabled( state );
-	}
+    if ( m_ifaces.contains( id ) )
+    {
+        m_ifaces[id]->setScriptUpEnabled( state );
+    }
 }
 
 void KVirtualOptions::setScriptDownEnabled( uint id, bool state )
 {
-	if ( m_ifaces.contains( id ) )
-	{
-		m_ifaces[id]->setScriptDownEnabled( state );
-	}
+    if ( m_ifaces.contains( id ) )
+    {
+        m_ifaces[id]->setScriptDownEnabled( state );
+    }
 }
 
 void KVirtualOptions::setUsbSupported( int state )
 {
-	m_usb = (bool) state;
+    m_usb = (bool) state;
 }
 
 void KVirtualOptions::setSnapshotEnabled( int enable )
 {
-	m_snapshot = (bool) enable;
+    m_snapshot = (bool) enable;
 }
 
 void KVirtualOptions::setVideoCard( const QString & model )
 {
-	m_videoCard = model;
+    m_videoCard = model;
 }
 
 void KVirtualOptions::setBootDevice( int device )
 {
-	m_bootDevice = (KVirtualOptions::BootOrder) device;
+    m_bootDevice = (KVirtualOptions::BootOrder) device;
 }
 
 void KVirtualOptions::setKeyboard( const QString & keyboard )
 {
-	m_keyboard = keyboard;
+    m_keyboard = keyboard;
 }
 
 void KVirtualOptions::setVncPort( int port )
 {
-	m_vncport = (uint) port;
+    m_vncport = (uint) port;
 }
 
 void KVirtualOptions::setDisplay( KVirtualOptions::Display type )
 {
-	m_display = type;
+    m_display = type;
 }
 
 void KVirtualOptions::setDisplay( int type )
 {
-	m_display = (KVirtualOptions::Display) type;
+    m_display = (KVirtualOptions::Display) type;
 }
 
 void KVirtualOptions::setUsedSwitch( const QString & vswitch )
 {
-	if ( not m_usedSwitches.contains( vswitch ) )
-		m_usedSwitches << vswitch;
+    if ( not m_usedSwitches.contains( vswitch ) )
+        m_usedSwitches << vswitch;
 }
 
 bool KVirtualOptions::isModified( const QString & filename ) const
 {
-	if ( filename.isNull() )
-	{
-		qDebug() << "filename is null";
-		return true;
-	}
+    if ( filename.isNull() )
+    {
+        qDebug() << "filename is null";
+        return true;
+    }
 
-	QDomDocument doc;
+    QDomDocument doc;
 
-	QDomElement root, element, element2, element3;
-	QDomNode node, child, littlechild;
-	QString buffer;
-	uint id;
-	bool scriptup, scriptdown;
+    QDomElement root, element, element2, element3;
+    QDomNode node, child, littlechild;
+    QString buffer;
+    uint id;
+    bool scriptup, scriptdown;
 
-	QFile file( filename );
+    QFile file( filename );
 
-	if ( !file.open( QIODevice::ReadOnly ) )
-	{
-		qDebug() << "Can't open filename in read mode";
-		return true;
-	}
+    if ( !file.open( QIODevice::ReadOnly ) )
+    {
+        qDebug() << "Can't open filename in read mode";
+        return true;
+    }
 
-	if ( !doc.setContent( &file ) )
-	{
-		file.close();
-		qDebug() << "Can't parse XML file";
-		return true;
-	}
+    if ( !doc.setContent( &file ) )
+    {
+        file.close();
+        qDebug() << "Can't parse XML file";
+        return true;
+    }
 
-	file.close();
+    file.close();
 
-	root = doc.documentElement();
+    root = doc.documentElement();
 
-	if ( root.tagName() != "host" )
-	{
-		qDebug() << "Wrong root node" << root.tagName();
-		return true;
-	}
+    if ( root.tagName() != "host" )
+    {
+        qDebug() << "Wrong root node" << root.tagName();
+        return true;
+    }
 
-	if( root.attribute( "distribution" ) != getDistrib() )
-	{
-		return true;
-	}
+    if ( root.attribute( "distribution" ) != getDistrib() )
+    {
+        return true;
+    }
 
-	node = root.firstChild();
+    node = root.firstChild();
 
-	while ( ! node.isNull() )
-	{
-		element = node.toElement();
+    while ( ! node.isNull() )
+    {
+        element = node.toElement();
 
-		if ( ! element.isNull() )
-		{
-			if ( element.tagName() == "name" )
-			{
-				if ( getName() != element.text() )
-				{
-					qDebug() << "name is not sync" << getName() << element.text();
-					return true;
-				}
-			}
+        if ( ! element.isNull() )
+        {
+            if ( element.tagName() == "name" )
+            {
+                if ( getName() != element.text() )
+                {
+                    qDebug() << "name is not sync" << getName() << element.text();
+                    return true;
+                }
+            }
 
-			if ( element.tagName() == "description" )
-			{
-				if ( getDescription() != element.text() )
-				{
-					qDebug() << "description is not sync" << getDescription() << element.text();
-					return true;
-				}
-			}
+            if ( element.tagName() == "description" )
+            {
+                if ( getDescription() != element.text() )
+                {
+                    qDebug() << "description is not sync" << getDescription() << element.text();
+                    return true;
+                }
+            }
 
-			if ( element.tagName() == "system" )
-			{
-				child = element.firstChild();
+            if ( element.tagName() == "system" )
+            {
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "memory" )
-					{
-						if ( getMemory() !=  element2.attribute( "value" ).toUInt() )
-						{
-							qDebug() << "memory is not sync" << getMemory() << element2.attribute( "value" );
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "memory" )
+                    {
+                        if ( getMemory() !=  element2.attribute( "value" ).toUInt() )
+                        {
+                            qDebug() << "memory is not sync" << getMemory() << element2.attribute( "value" );
+                            return true;
+                        }
+                    }
 
-					if ( element2.tagName() == "boot" )
-					{
-						buffer = element2.attribute( "device" );
-						if ( getBootDevice() != BootOrderFromString( buffer ) )
-						{
-							qDebug() << "boot device is not sync" << getBootDevice() << BootOrderFromString( buffer );
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "boot" )
+                    {
+                        buffer = element2.attribute( "device" );
+                        if ( getBootDevice() != BootOrderFromString( buffer ) )
+                        {
+                            qDebug() << "boot device is not sync" << getBootDevice() << BootOrderFromString( buffer );
+                            return true;
+                        }
+                    }
 
-					if ( element2.tagName() == "usb" )
-					{
-						if ( isUsbSupported() != element2.attribute( "enabled" ).toInt() )
-						{
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "usb" )
+                    {
+                        if ( isUsbSupported() != element2.attribute( "enabled" ).toInt() )
+                        {
+                            return true;
+                        }
+                    }
 
-					if ( element2.tagName() == "snapshot" )
-					{
-						if ( isSnapshotEnabled() != element2.attribute( "enabled" ).toInt() )
-						{
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "snapshot" )
+                    {
+                        if ( isSnapshotEnabled() != element2.attribute( "enabled" ).toInt() )
+                        {
+                            return true;
+                        }
+                    }
 
-					if ( element2.tagName() == "core" )
-					{
-						if ( getNbCPU() != element2.attribute( "value" ).toUInt() )
-						{
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "core" )
+                    {
+                        if ( getNbCPU() != element2.attribute( "value" ).toUInt() )
+                        {
+                            return true;
+                        }
+                    }
 
-					child = child.nextSibling();
-				}
-			}
+                    child = child.nextSibling();
+                }
+            }
 
-			if ( element.tagName() == "display" )
-			{
-				buffer = element.attribute( "method" );
-				if( getDisplay() != DisplayFromString( buffer ) )
-				{
-					return true;
-				}
-				child = element.firstChild();
+            if ( element.tagName() == "display" )
+            {
+                buffer = element.attribute( "method" );
+                if ( getDisplay() != DisplayFromString( buffer ) )
+                {
+                    return true;
+                }
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "card" )
-					{
-						if ( getVideoCard() != element2.attribute( "model" ) )
-						{
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "card" )
+                    {
+                        if ( getVideoCard() != element2.attribute( "model" ) )
+                        {
+                            return true;
+                        }
+                    }
 
-					if ( element2.tagName() == "vnc" )
-					{
-						if ( getVncPort() != element2.attribute( "port" ).toUInt() )
-						{
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "vnc" )
+                    {
+                        if ( getVncPort() != element2.attribute( "port" ).toUInt() )
+                        {
+                            return true;
+                        }
+                    }
 
-					if ( element2.tagName() == "keyboard" )
-					{
-						if ( getKeyboard() != element2.attribute( "model" ) )
-						{
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "keyboard" )
+                    {
+                        if ( getKeyboard() != element2.attribute( "model" ) )
+                        {
+                            return true;
+                        }
+                    }
 
-					child = child.nextSibling();
-				}
-			}
+                    child = child.nextSibling();
+                }
+            }
 
-			if ( element.tagName() == "storages" )
-			{
-				child = element.firstChild();
+            if ( element.tagName() == "storages" )
+            {
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "storage" )
-					{
-						id = element2.attribute( "id" ).toUInt();
-						if ( element2.attribute( "type" ).toInt() != getStorage( id )->getTypeID() )
-						{
-							return true;
-						}
-						if ( element2.attribute( "file" ) != getStorage( id )->getFile() )
-						{
-							return true;
-						}
-					}
+                    if ( element2.tagName() == "storage" )
+                    {
+                        id = element2.attribute( "id" ).toUInt();
+                        if ( element2.attribute( "type" ).toInt() != getStorage( id )->getTypeID() )
+                        {
+                            return true;
+                        }
+                        if ( element2.attribute( "file" ) != getStorage( id )->getFile() )
+                        {
+                            return true;
+                        }
+                    }
 
-					child = child.nextSibling();
-				}
-			}
+                    child = child.nextSibling();
+                }
+            }
 
-			if ( element.tagName() == "network" )
-			{
-				child = element.firstChild();
+            if ( element.tagName() == "network" )
+            {
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "iface" )
-					{
-						id = element2.attribute( "id" ).toUInt();
-						if ( element2.attribute( "type" ) != getIface( id )->getType() )
-						{
-							return true;
-						}
-						if ( element2.attribute( "file" ) != getIface( id )->getFile() )
-						{
-							return true;
-						}
-						if ( element2.attribute( "model" ) != getIface( id )->getModel() )
-						{
-							return true;
-						}
-						if ( element2.attribute( "addr" ) != getIface( id )->getHardwareAddress() )
-						{
-							return true;
-						}
+                    if ( element2.tagName() == "iface" )
+                    {
+                        id = element2.attribute( "id" ).toUInt();
+                        if ( element2.attribute( "type" ) != getIface( id )->getType() )
+                        {
+                            return true;
+                        }
+                        if ( element2.attribute( "file" ) != getIface( id )->getFile() )
+                        {
+                            return true;
+                        }
+                        if ( element2.attribute( "model" ) != getIface( id )->getModel() )
+                        {
+                            return true;
+                        }
+                        if ( element2.attribute( "addr" ) != getIface( id )->getHardwareAddress() )
+                        {
+                            return true;
+                        }
 
-						littlechild = element2.firstChild();
-						while ( ! littlechild.isNull() )
-						{
-							element3 = littlechild.toElement();
-							if ( element3.tagName() == "scripts" )
-							{
-								if( getIface( id )->getScriptUp() != element3.attribute( "up" ) )
-								{
-									return true;
-								}
-								if( getIface( id )->getScriptDown() != element3.attribute( "down" ) )
-								{
-									return true;
-								}
+                        littlechild = element2.firstChild();
+                        while ( ! littlechild.isNull() )
+                        {
+                            element3 = littlechild.toElement();
+                            if ( element3.tagName() == "scripts" )
+                            {
+                                if ( getIface( id )->getScriptUp() != element3.attribute( "up" ) )
+                                {
+                                    return true;
+                                }
+                                if ( getIface( id )->getScriptDown() != element3.attribute( "down" ) )
+                                {
+                                    return true;
+                                }
 
-								switch ( element3.attribute( "flag" ).toInt() )
-								{
-									case 1:
-									{
-										scriptup = true;
-										scriptdown = false;
-										break;
-									}
-									case 2:
-									{
-										scriptup = false;
-										scriptdown = true;
-										break;
-									}
-									case 3:
-									{
-										scriptup = true;
-										scriptdown = true;
-										break;
-									}
-									default:
-									{
-										scriptup = false;
-										scriptdown = false;
-										break;
-									}
-								}
-								if ( getIface( id )->isScriptUpEnabled() != scriptup )
-								{
-									return true;
-								}
-								if ( getIface( id )->isScriptDownEnabled() != scriptdown )
-								{
-									return true;
-								}
-							}
+                                switch ( element3.attribute( "flag" ).toInt() )
+                                {
+                                case 1:
+                                {
+                                    scriptup = true;
+                                    scriptdown = false;
+                                    break;
+                                }
+                                case 2:
+                                {
+                                    scriptup = false;
+                                    scriptdown = true;
+                                    break;
+                                }
+                                case 3:
+                                {
+                                    scriptup = true;
+                                    scriptdown = true;
+                                    break;
+                                }
+                                default:
+                                {
+                                    scriptup = false;
+                                    scriptdown = false;
+                                    break;
+                                }
+                                }
+                                if ( getIface( id )->isScriptUpEnabled() != scriptup )
+                                {
+                                    return true;
+                                }
+                                if ( getIface( id )->isScriptDownEnabled() != scriptdown )
+                                {
+                                    return true;
+                                }
+                            }
 
-							littlechild = littlechild.nextSibling();
-						}
-					}
+                            littlechild = littlechild.nextSibling();
+                        }
+                    }
 
-					child = child.nextSibling();
-				}
-			}
-		}
+                    child = child.nextSibling();
+                }
+            }
+        }
 
-		node = node.nextSibling();
-	}
-	return false;
+        node = node.nextSibling();
+    }
+    return false;
 }
 
 void KVirtualOptions::load( const QString & filename )
 {
-	if ( filename.isNull() )
-	{
-		qDebug() << "filename is null";
-		return;
-	}
+    if ( filename.isNull() )
+    {
+        qDebug() << "filename is null";
+        return;
+    }
 
-	QDomDocument doc;
+    QDomDocument doc;
 
-	QDomElement root, element, element2, element3;
-	QDomNode node, child, littlechild;
-	QString buffer;
-	bool scriptup, scriptdown;
+    QDomElement root, element, element2, element3;
+    QDomNode node, child, littlechild;
+    QString buffer;
+    bool scriptup, scriptdown;
 
-	QFile file( filename );
+    QFile file( filename );
 
-	if ( !file.open( QIODevice::ReadOnly ) )
-	{
-		qDebug() << "Can't open filename in read mode";
-		return;
-	}
+    if ( !file.open( QIODevice::ReadOnly ) )
+    {
+        qDebug() << "Can't open filename in read mode";
+        return;
+    }
 
-	if ( !doc.setContent( &file ) )
-	{
-		file.close();
-		qDebug() << "Can't parse XML file";
-		return;
-	}
+    if ( !doc.setContent( &file ) )
+    {
+        file.close();
+        qDebug() << "Can't parse XML file";
+        return;
+    }
 
-	file.close();
+    file.close();
 
-	root = doc.documentElement();
+    root = doc.documentElement();
 
-	if ( root.tagName() != "host" )
-	{
-		qDebug() << "Wrong root node" << root.tagName();
-		return;
-	}
-	setDistrib( root.attribute( "distribution" ) );
+    if ( root.tagName() != "host" )
+    {
+        qDebug() << "Wrong root node" << root.tagName();
+        return;
+    }
+    setDistrib( root.attribute( "distribution" ) );
 
-	node = root.firstChild();
+    node = root.firstChild();
 
-	while ( ! node.isNull() )
-	{
-		element = node.toElement();
+    while ( ! node.isNull() )
+    {
+        element = node.toElement();
 
-		if ( ! element.isNull() )
-		{
-			if ( element.tagName() == "name" )
-			{
-				setName( element.text() );
-			}
+        if ( ! element.isNull() )
+        {
+            if ( element.tagName() == "name" )
+            {
+                setName( element.text() );
+            }
 
-			if ( element.tagName() == "description" )
-			{
-				setDescription( element.text() );
-			}
+            if ( element.tagName() == "description" )
+            {
+                setDescription( element.text() );
+            }
 
-			if ( element.tagName() == "system" )
-			{
-				child = element.firstChild();
+            if ( element.tagName() == "system" )
+            {
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "memory" )
-					{
-						setMemory( element2.attribute( "value" ).toUInt() );
-					}
+                    if ( element2.tagName() == "memory" )
+                    {
+                        setMemory( element2.attribute( "value" ).toUInt() );
+                    }
 
-					if ( element2.tagName() == "boot" )
-					{
-						buffer = element2.attribute( "device" );
-						setBootDevice( BootOrderFromString( buffer ) );
-					}
+                    if ( element2.tagName() == "boot" )
+                    {
+                        buffer = element2.attribute( "device" );
+                        setBootDevice( BootOrderFromString( buffer ) );
+                    }
 
-					if ( element2.tagName() == "usb" )
-					{
-						setUsbSupported( element2.attribute( "enabled" ).toInt() );
-					}
+                    if ( element2.tagName() == "usb" )
+                    {
+                        setUsbSupported( element2.attribute( "enabled" ).toInt() );
+                    }
 
-					if ( element2.tagName() == "snapshot" )
-					{
-						setSnapshotEnabled( element2.attribute( "enabled" ).toInt() );
-					}
+                    if ( element2.tagName() == "snapshot" )
+                    {
+                        setSnapshotEnabled( element2.attribute( "enabled" ).toInt() );
+                    }
 
-					if ( element2.tagName() == "core" )
-					{
-						setNbCPU( element2.attribute( "value" ).toUInt() );
-					}
+                    if ( element2.tagName() == "core" )
+                    {
+                        setNbCPU( element2.attribute( "value" ).toUInt() );
+                    }
 
-					child = child.nextSibling();
-				}
-			}
+                    child = child.nextSibling();
+                }
+            }
 
-			if ( element.tagName() == "display" )
-			{
-				buffer = element.attribute( "method" );
-				setDisplay( DisplayFromString( buffer ) );
-				child = element.firstChild();
+            if ( element.tagName() == "display" )
+            {
+                buffer = element.attribute( "method" );
+                setDisplay( DisplayFromString( buffer ) );
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "card" )
-					{
-						setVideoCard( element2.attribute( "model" ) );
-					}
+                    if ( element2.tagName() == "card" )
+                    {
+                        setVideoCard( element2.attribute( "model" ) );
+                    }
 
-					if ( element2.tagName() == "vnc" )
-					{
-						setVncPort( element2.attribute( "port" ).toUInt() );
-					}
+                    if ( element2.tagName() == "vnc" )
+                    {
+                        setVncPort( element2.attribute( "port" ).toUInt() );
+                    }
 
-					if ( element2.tagName() == "keyboard" )
-					{
-						setKeyboard( element2.attribute( "model" ) );
-					}
+                    if ( element2.tagName() == "keyboard" )
+                    {
+                        setKeyboard( element2.attribute( "model" ) );
+                    }
 
-					child = child.nextSibling();
-				}
-			}
+                    child = child.nextSibling();
+                }
+            }
 
-			if ( element.tagName() == "storages" )
-			{
-				child = element.firstChild();
+            if ( element.tagName() == "storages" )
+            {
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "storage" )
-					{
-						setStorage( element2.attribute( "id" ).toUInt(),
-						            (KVirtualStorage::Type) element2.attribute( "type" ).toInt(),
-						            element2.attribute( "file" )
-						          );
-					}
+                    if ( element2.tagName() == "storage" )
+                    {
+                        setStorage( element2.attribute( "id" ).toUInt(),
+                                    (KVirtualStorage::Type) element2.attribute( "type" ).toInt(),
+                                    element2.attribute( "file" )
+                                  );
+                    }
 
-					child = child.nextSibling();
-				}
-			}
+                    child = child.nextSibling();
+                }
+            }
 
-			if ( element.tagName() == "network" )
-			{
-				child = element.firstChild();
+            if ( element.tagName() == "network" )
+            {
+                child = element.firstChild();
 
-				while ( ! child.isNull() )
-				{
-					element2 = child.toElement();
+                while ( ! child.isNull() )
+                {
+                    element2 = child.toElement();
 
-					if ( element2.tagName() == "iface" )
-					{
-						setIface( element2.attribute( "id" ).toUInt(),
-						          element2.attribute( "type" ),
-						          element2.attribute( "file" ),
-						          element2.attribute( "model" ),
-						          element2.attribute( "addr" )
-						        );
-					}
-					
-					littlechild = element2.firstChild();
-					while ( ! littlechild.isNull() )
-					{
-						element3 = littlechild.toElement();
-						if ( element3.tagName() == "scripts" )
-						{
-							setScripts( element2.attribute( "id" ).toUInt(),
-										element3.attribute( "up" ),
-										element3.attribute( "down" )
-							);
-							
-							switch ( element3.attribute( "flag" ).toInt() )
-							{
-								case 1:
-								{
-									scriptup = true;
-									scriptdown = false;
-									break;
-								}
-								case 2:
-								{
-									scriptup = false;
-									scriptdown = true;
-									break;
-								}
-								case 3:
-								{
-									scriptup = true;
-									scriptdown = true;
-									break;
-								}
-								default:
-								{
-									scriptup = false;
-									scriptdown = false;
-									break;
-								}
-							}
-							setScriptUpEnabled( element2.attribute( "id" ).toUInt(),
-											   scriptup
-							);
-							setScriptDownEnabled( element2.attribute( "id" ).toUInt(),
-											   scriptdown
-							);
-						}
-						
-						littlechild = littlechild.nextSibling();
-					}
+                    if ( element2.tagName() == "iface" )
+                    {
+                        setIface( element2.attribute( "id" ).toUInt(),
+                                  element2.attribute( "type" ),
+                                  element2.attribute( "file" ),
+                                  element2.attribute( "model" ),
+                                  element2.attribute( "addr" )
+                                );
+                    }
 
-					child = child.nextSibling();
-				}
-			}
-		}
+                    littlechild = element2.firstChild();
+                    while ( ! littlechild.isNull() )
+                    {
+                        element3 = littlechild.toElement();
+                        if ( element3.tagName() == "scripts" )
+                        {
+                            setScriptUp( element2.attribute( "id" ).toUInt(),
+                                         element3.attribute( "up" )
+                                       );
+                            setScriptDown( element2.attribute( "id" ).toUInt(),
+                                           element3.attribute( "down" )
+                                         );
 
-		node = node.nextSibling();
-	}
+                            switch ( element3.attribute( "flag" ).toInt() )
+                            {
+                            case 1:
+                            {
+                                scriptup = true;
+                                scriptdown = false;
+                                break;
+                            }
+                            case 2:
+                            {
+                                scriptup = false;
+                                scriptdown = true;
+                                break;
+                            }
+                            case 3:
+                            {
+                                scriptup = true;
+                                scriptdown = true;
+                                break;
+                            }
+                            default:
+                            {
+                                scriptup = false;
+                                scriptdown = false;
+                                break;
+                            }
+                            }
+                            setScriptUpEnabled( element2.attribute( "id" ).toUInt(),
+                                                scriptup
+                                              );
+                            setScriptDownEnabled( element2.attribute( "id" ).toUInt(),
+                                                  scriptdown
+                                                );
+                        }
+
+                        littlechild = littlechild.nextSibling();
+                    }
+
+                    child = child.nextSibling();
+                }
+            }
+        }
+
+        node = node.nextSibling();
+    }
 }
 
 void KVirtualOptions::save( const QString & filename )
 {
-	if ( filename.isNull() )
-	{
-		return;
-	}
+    if ( filename.isNull() )
+    {
+        return;
+    }
 
-	QDomDocument doc;
+    QDomDocument doc;
 
-	QDomElement root, element, element2, element3;
-	QDomNode node, child, littlechild;
-	QDomCDATASection cdata;
-	QString buffer;
-	QList<uint> keys;
-	QList<uint>::ConstIterator it;
-	int flag;
+    QDomElement root, element, element2, element3;
+    QDomNode node, child, littlechild;
+    QDomCDATASection cdata;
+    QString buffer;
+    QList<uint> keys;
+    QList<uint>::ConstIterator it;
+    int flag;
 
-	QFile file( filename );
+    QFile file( filename );
 
-	if ( !file.open( QIODevice::WriteOnly ) ) return;
+    if ( !file.open( QIODevice::WriteOnly ) ) return;
 
-	root = doc.createElement( "host" );
+    root = doc.createElement( "host" );
 
-	root.setAttribute( "distribution", getDistrib() );
+    root.setAttribute( "distribution", getDistrib() );
 
-	doc.appendChild( root );
+    doc.appendChild( root );
 
-	element = doc.createElement( "name" );
+    element = doc.createElement( "name" );
 
-	root.appendChild( element );
+    root.appendChild( element );
 
-	cdata = doc.createCDATASection( getName() );
+    cdata = doc.createCDATASection( getName() );
 
-	element.appendChild( cdata );
+    element.appendChild( cdata );
 
-	element = doc.createElement( "description" );
+    element = doc.createElement( "description" );
 
-	root.appendChild( element );
+    root.appendChild( element );
 
-	cdata = doc.createCDATASection( getDescription() );
+    cdata = doc.createCDATASection( getDescription() );
 
-	element.appendChild( cdata );
+    element.appendChild( cdata );
 
-	element = doc.createElement( "system" );
+    element = doc.createElement( "system" );
 
-	root.appendChild( element );
+    root.appendChild( element );
 
-	element2 = doc.createElement( "memory" );
+    element2 = doc.createElement( "memory" );
 
-	element2.setAttribute( "value", buffer.setNum( getMemory() ) );
+    element2.setAttribute( "value", buffer.setNum( getMemory() ) );
 
-	element2.setAttribute( "unit", "mb" );
+    element2.setAttribute( "unit", "mb" );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	element2 = doc.createElement( "boot" );
+    element2 = doc.createElement( "boot" );
 
-	element2.setAttribute( "device", BootOrderToString( getBootDevice() ) );
+    element2.setAttribute( "device", BootOrderToString( getBootDevice() ) );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	element2 = doc.createElement( "usb" );
+    element2 = doc.createElement( "usb" );
 
-	element2.setAttribute( "enabled", buffer.setNum( isUsbSupported() ) );
+    element2.setAttribute( "enabled", buffer.setNum( isUsbSupported() ) );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	element2 = doc.createElement( "snapshot" );
+    element2 = doc.createElement( "snapshot" );
 
-	element2.setAttribute( "enabled", buffer.setNum( isSnapshotEnabled() ) );
+    element2.setAttribute( "enabled", buffer.setNum( isSnapshotEnabled() ) );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	element2 = doc.createElement( "core" );
+    element2 = doc.createElement( "core" );
 
-	element2.setAttribute( "value", buffer.setNum( getNbCPU() ) );
+    element2.setAttribute( "value", buffer.setNum( getNbCPU() ) );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	element = doc.createElement( "display" );
+    element = doc.createElement( "display" );
 
-	element.setAttribute( "method", DisplayToString( getDisplay() ) );
+    element.setAttribute( "method", DisplayToString( getDisplay() ) );
 
-	root.appendChild( element );
+    root.appendChild( element );
 
-	element2 = doc.createElement( "card" );
+    element2 = doc.createElement( "card" );
 
-	element2.setAttribute( "model", getVideoCard() );
+    element2.setAttribute( "model", getVideoCard() );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	element2 = doc.createElement( "vnc" );
+    element2 = doc.createElement( "vnc" );
 
-	element2.setAttribute( "port", buffer.setNum( getVncPort() ) );
+    element2.setAttribute( "port", buffer.setNum( getVncPort() ) );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	element2 = doc.createElement( "keyboard" );
+    element2 = doc.createElement( "keyboard" );
 
-	element2.setAttribute( "model", getKeyboard() );
+    element2.setAttribute( "model", getKeyboard() );
 
-	element.appendChild( element2 );
+    element.appendChild( element2 );
 
-	//TODO not implemented. Is it very usefull ?
-	//element2 = doc.createElement( "memory" );
-	//element2.setAttribute( "value", "8" );
-	//element2.setAttribute( "unit", "mb" );
-	//element.appendChild( element2 );
+    //TODO not implemented. Is it very usefull ?
+    //element2 = doc.createElement( "memory" );
+    //element2.setAttribute( "value", "8" );
+    //element2.setAttribute( "unit", "mb" );
+    //element.appendChild( element2 );
 
-	element = doc.createElement( "storages" );
+    element = doc.createElement( "storages" );
 
-	root.appendChild( element );
+    root.appendChild( element );
 
-	keys = m_storages.keys();
+    keys = m_storages.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
-	{
-		element2 = doc.createElement( "storage" );
-		element2.setAttribute( "id", buffer.setNum( *it ) );
-		element2.setAttribute( "type", buffer.setNum( (int) m_storages[*it]->getTypeID() ) );
-		element2.setAttribute( "file", m_storages[*it]->getFile() );
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        element2 = doc.createElement( "storage" );
+        element2.setAttribute( "id", buffer.setNum( *it ) );
+        element2.setAttribute( "type", buffer.setNum( (int) m_storages[*it]->getTypeID() ) );
+        element2.setAttribute( "file", m_storages[*it]->getFile() );
 
-		element.appendChild( element2 );
-	}
+        element.appendChild( element2 );
+    }
 
-	element = doc.createElement( "network" );
+    element = doc.createElement( "network" );
 
-	root.appendChild( element );
+    root.appendChild( element );
 
-	keys = m_ifaces.keys();
+    keys = m_ifaces.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
-	{
-		element2 = doc.createElement( "iface" );
-		element2.setAttribute( "id", buffer.setNum( *it ) );
-		element2.setAttribute( "type", m_ifaces[*it]->getType() );
-		element2.setAttribute( "file", m_ifaces[*it]->getFile() );
-		element2.setAttribute( "model", m_ifaces[*it]->getModel() );
-		element2.setAttribute( "addr", m_ifaces[*it]->getHardwareAddress() );
-		element2.setAttribute( "vlan", buffer );
+    for ( it = keys.begin() ; it != keys.end() ; ++it )
+    {
+        element2 = doc.createElement( "iface" );
+        element2.setAttribute( "id", buffer.setNum( *it ) );
+        element2.setAttribute( "type", m_ifaces[*it]->getType() );
+        element2.setAttribute( "file", m_ifaces[*it]->getFile() );
+        element2.setAttribute( "model", m_ifaces[*it]->getModel() );
+        element2.setAttribute( "addr", m_ifaces[*it]->getHardwareAddress() );
+        element2.setAttribute( "vlan", buffer );
 
-		element3 = doc.createElement( "scripts" );
-		element3.setAttribute( "up", m_ifaces[*it]->getScriptUp() );
-		element3.setAttribute( "down", m_ifaces[*it]->getScriptDown() );
+        element3 = doc.createElement( "scripts" );
+        element3.setAttribute( "up", m_ifaces[*it]->getScriptUp() );
+        element3.setAttribute( "down", m_ifaces[*it]->getScriptDown() );
 
-		flag = 0;
-		if ( m_ifaces[*it]->isScriptUpEnabled() )
-			
-		{
-			flag |= 0x01;
-		}
-		if ( m_ifaces[*it]->isScriptDownEnabled() )
-		{
-			flag |= 0x2;
-		}
-		element3.setAttribute( "flag", buffer.setNum( flag ) );
-		element2.appendChild( element3 );
+        flag = 0;
+        if ( m_ifaces[*it]->isScriptUpEnabled() )
 
-		element.appendChild( element2 );
-	}
+        {
+            flag |= 0x01;
+        }
+        if ( m_ifaces[*it]->isScriptDownEnabled() )
+        {
+            flag |= 0x2;
+        }
+        element3.setAttribute( "flag", buffer.setNum( flag ) );
+        element2.appendChild( element3 );
 
-	QTextStream stream( &file );
+        element.appendChild( element2 );
+    }
 
-	stream << "<?xml version=\"1\"?>\n";
-	stream << doc.toString();
+    QTextStream stream( &file );
 
-	file.close();
+    stream << "<?xml version=\"1\"?>\n";
+    stream << doc.toString();
+
+    file.close();
 }
 
 const QString & KVirtualOptions::getName() const
 {
-	return m_name;
+    return m_name;
 }
 
 const QString & KVirtualOptions::getDistrib() const
 {
-	return m_distrib;
+    return m_distrib;
 }
 
 const QString & KVirtualOptions::getDescription() const
 {
-	return m_description;
+    return m_description;
 }
 
 uint KVirtualOptions::getMemory() const
 {
-	return m_memory;
+    return m_memory;
 }
 
 uint KVirtualOptions::getNbCPU() const
 {
-	return m_cpus;
+    return m_cpus;
 }
 
 KVirtualStorage* KVirtualOptions::getStorage( uint id ) const
 {
-	if ( ! m_storages.contains( id ) )
-	{
-		return 0;
-	}
+    if ( ! m_storages.contains( id ) )
+    {
+        return 0;
+    }
 
-	return m_storages[ id ];
+    return m_storages[ id ];
 }
 
 KVirtualIface* KVirtualOptions::getIface( uint id ) const
 {
-	if ( ! m_ifaces.contains( id ) )
-	{
-		return 0;
-	}
+    if ( ! m_ifaces.contains( id ) )
+    {
+        return 0;
+    }
 
-	return m_ifaces[ id ];
+    return m_ifaces[ id ];
 }
 
 const QString & KVirtualOptions::getVideoCard() const
 {
-	return m_videoCard;
+    return m_videoCard;
 }
 
 bool KVirtualOptions::isUsbSupported() const
 {
-	return m_usb;
+    return m_usb;
 }
 
 bool KVirtualOptions::isSnapshotEnabled() const
 {
-	return m_snapshot;
+    return m_snapshot;
 }
 
 uint KVirtualOptions::getVncPort() const
 {
-	return m_vncport;
+    return m_vncport;
 }
 
 KVirtualOptions::Display KVirtualOptions::getDisplay() const
 {
-	return m_display;
+    return m_display;
 }
 
 KVirtualOptions::BootOrder KVirtualOptions::getBootDevice() const
 {
-	return m_bootDevice;
+    return m_bootDevice;
 }
 
 const QString & KVirtualOptions::getKeyboard() const
 {
-	return m_keyboard;
+    return m_keyboard;
 }
 
 inline QString DisplayToString( KVirtualOptions::Display display )
 {
-	QString buffer;
+    QString buffer;
 
-	switch ( display )
-	{
+    switch ( display )
+    {
 
-		case KVirtualOptions::DISPLAY_DIRECT:
-		{
-			buffer = "direct";
-			break;
-		}
+    case KVirtualOptions::DISPLAY_DIRECT:
+    {
+        buffer = "direct";
+        break;
+    }
 
-		case KVirtualOptions::DISPLAY_VNC:
-		{
-			buffer = "vnc";
-			break;
-		}
+    case KVirtualOptions::DISPLAY_VNC:
+    {
+        buffer = "vnc";
+        break;
+    }
 
-		case KVirtualOptions::DISPLAY_NONE:
-		{
-			buffer = "none";
-			break;
-		}
-	}
+    case KVirtualOptions::DISPLAY_NONE:
+    {
+        buffer = "none";
+        break;
+    }
+    }
 
-	return buffer;
+    return buffer;
 }
 
 inline QString BootOrderToString( KVirtualOptions::BootOrder order )
 {
-	QString buffer;
+    QString buffer;
 
-	switch ( order )
-	{
+    switch ( order )
+    {
 
-		case KVirtualOptions::BOOT_ON_DISK:
-		{
-			buffer = "disk";
-			break;
-		}
+    case KVirtualOptions::BOOT_ON_DISK:
+    {
+        buffer = "disk";
+        break;
+    }
 
-		case KVirtualOptions::BOOT_ON_NETWORK:
-		{
-			buffer = "network";
-			break;
-		}
+    case KVirtualOptions::BOOT_ON_NETWORK:
+    {
+        buffer = "network";
+        break;
+    }
 
-		case KVirtualOptions::BOOT_ON_CDROM:
-		{
-			buffer = "cdrom";
-			break;
-		}
+    case KVirtualOptions::BOOT_ON_CDROM:
+    {
+        buffer = "cdrom";
+        break;
+    }
 
-		case KVirtualOptions::BOOT_ON_FLOPPY:
-		{
-			buffer = "floppy";
-			break;
-		}
-	}
+    case KVirtualOptions::BOOT_ON_FLOPPY:
+    {
+        buffer = "floppy";
+        break;
+    }
+    }
 
-	return buffer;
+    return buffer;
 }
 
 inline KVirtualOptions::Display DisplayFromString( const QString & display )
 {
-	KVirtualOptions::Display type;
+    KVirtualOptions::Display type;
 
-	if ( display == "direct" ) type = KVirtualOptions::DISPLAY_DIRECT;
-	else if ( display == "vnc" ) type = KVirtualOptions::DISPLAY_VNC;
-	else type = KVirtualOptions::DISPLAY_NONE;
+    if ( display == "direct" ) type = KVirtualOptions::DISPLAY_DIRECT;
+    else if ( display == "vnc" ) type = KVirtualOptions::DISPLAY_VNC;
+    else type = KVirtualOptions::DISPLAY_NONE;
 
-	return type;
+    return type;
 }
 
 inline KVirtualOptions::BootOrder BootOrderFromString( const QString & order )
 {
-	KVirtualOptions::BootOrder boot;
+    KVirtualOptions::BootOrder boot;
 
-	if ( order == "floppy" ) boot = KVirtualOptions::BOOT_ON_FLOPPY;
-	else if ( order == "network" ) boot = KVirtualOptions::BOOT_ON_NETWORK;
-	else if ( order == "cdrom" ) boot = KVirtualOptions::BOOT_ON_CDROM;
-	else boot = KVirtualOptions::BOOT_ON_DISK;
+    if ( order == "floppy" ) boot = KVirtualOptions::BOOT_ON_FLOPPY;
+    else if ( order == "network" ) boot = KVirtualOptions::BOOT_ON_NETWORK;
+    else if ( order == "cdrom" ) boot = KVirtualOptions::BOOT_ON_CDROM;
+    else boot = KVirtualOptions::BOOT_ON_DISK;
 
-	return boot;
+    return boot;
 }
 
 
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4;        replace-tabs off;
+// kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;        replace-tabs off;

@@ -43,12 +43,12 @@ class KVirtualProcess : public KProcess
     Q_OBJECT
 
 public:
-	typedef enum
-	{
-		SWITCH,
-		HOST,
-		CREATE_IMG,
-	}ProcessType;
+    typedef enum
+    {
+        SWITCH,
+        HOST,
+        CREATE_IMG,
+    }ProcessType;
 
     /**
      * Default Constructor
@@ -60,26 +60,26 @@ public:
      */
     virtual ~KVirtualProcess();
 
-	ProcessType getVirtualType();
+    ProcessType getVirtualType();
 
 
 protected:
     uint m_id;
-	ProcessType m_type;
+    ProcessType m_type;
 
 protected slots:
     void sendReadyReadStandardOutput();
     void sendReadyReadStandardError();
     void sendFinished( int, QProcess::ExitStatus );
-	void sendStarted();
+    void sendStarted();
 
 signals:
     void readyReadStandardOutput( uint );
     void readyReadStandardError( uint );
     void finished( uint, int, QProcess::ExitStatus );
-	void started( uint );
+    void started( uint );
 };
 
 
 #endif // _KVIRTUALPROCESS_H_
-// kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;
+// kate: indent-mode cstyle; space-indent on; indent-width 0;   replace-tabs off;
