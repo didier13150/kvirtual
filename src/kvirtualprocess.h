@@ -40,46 +40,46 @@
 
 class KVirtualProcess : public KProcess
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    typedef enum
-    {
-        SWITCH,
-        HOST,
-        CREATE_IMG,
-    }ProcessType;
+	typedef enum
+	{
+		SWITCH,
+		HOST,
+		CREATE_IMG,
+	}ProcessType;
 
-    /**
-     * Default Constructor
-     */
-    KVirtualProcess( uint, ProcessType );
+	/**
+	 * Default Constructor
+	 */
+	KVirtualProcess( uint, ProcessType );
 
-    /**
-     * Default Destructor
-     */
-    virtual ~KVirtualProcess();
+	/**
+	 * Default Destructor
+	 */
+	virtual ~KVirtualProcess();
 
-    ProcessType getVirtualType();
+	ProcessType getVirtualType();
 
 
 protected:
-    uint m_id;
-    ProcessType m_type;
+	uint m_id;
+	ProcessType m_type;
 
 protected slots:
-    void sendReadyReadStandardOutput();
-    void sendReadyReadStandardError();
-    void sendFinished( int, QProcess::ExitStatus );
-    void sendStarted();
+	void sendReadyReadStandardOutput();
+	void sendReadyReadStandardError();
+	void sendFinished( int, QProcess::ExitStatus );
+	void sendStarted();
 
 signals:
-    void readyReadStandardOutput( uint );
-    void readyReadStandardError( uint );
-    void finished( uint, int, QProcess::ExitStatus );
-    void started( uint );
+	void readyReadStandardOutput( uint );
+	void readyReadStandardError( uint );
+	void finished( uint, int, QProcess::ExitStatus );
+	void started( uint );
 };
 
 
 #endif // _KVIRTUALPROCESS_H_
-// kate: indent-mode cstyle; space-indent on; indent-width 0;   replace-tabs off;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;    replace-tabs off;

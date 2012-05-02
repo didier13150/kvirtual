@@ -44,22 +44,23 @@ KVirtualDevice::~KVirtualDevice()
 
 void KVirtualDevice::setFile( const QString & file )
 {
-    m_file = file;
+	m_file = file;
 }
 
 void KVirtualDevice::setType( const QString & type )
 {
-    m_type = type;
+	m_type = type;
 }
 
 const QString & KVirtualDevice::getFile() const
 {
-    return m_file;
+	return m_file;
 }
 
 const QString & KVirtualDevice::getType() const
 {
-    return m_type;
+	return m_type;
 }
+
 #include "kvirtualdevice.moc"
-// kate: indent-mode cstyle; space-indent on; indent-width 0;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;

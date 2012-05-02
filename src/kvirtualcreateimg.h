@@ -73,4 +73,4 @@ signals:
 };
 
 #endif // _KVIRTUALCREATEIMG_H_
-// kate: indent-mode cstyle; space-indent on; indent-width 0;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4; 

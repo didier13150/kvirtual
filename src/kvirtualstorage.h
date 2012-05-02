@@ -43,7 +43,8 @@ class KVirtualStorage : public KVirtualDevice
     Q_OBJECT
 
 public:
-    typedef enum {
+    typedef enum
+    {
         NONE    = 0,
         DISK    = 1,
         CDROM   = 2,
@@ -66,4 +67,4 @@ protected:
 };
 
 #endif // KVIRTUALSTORAGE_H
-// kate: indent-mode cstyle; space-indent on; indent-width 0;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4; 

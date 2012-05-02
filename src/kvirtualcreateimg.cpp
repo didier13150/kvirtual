@@ -37,12 +37,12 @@
 #include <QDir>
 
 KVirtualCreateImg::KVirtualCreateImg( QWidget *parent )
-        : QDialog( parent )
+		: QDialog( parent )
 {
-    ui_widget.setupUi( this );
-    ui_widget.kurlrequester_file->setText( QDir::homePath() );
-    connect( this, SIGNAL( accepted() ), SLOT( sendAccepted() ) );
-    connect( this, SIGNAL( rejected() ), SLOT( hide() ) );
+	ui_widget.setupUi( this );
+	ui_widget.kurlrequester_file->setText( QDir::homePath() );
+	connect( this, SIGNAL( accepted() ), SLOT( sendAccepted() ) );
+	connect( this, SIGNAL( rejected() ), SLOT( hide() ) );
 }
 
 KVirtualCreateImg::~KVirtualCreateImg()
@@ -51,12 +51,13 @@ KVirtualCreateImg::~KVirtualCreateImg()
 
 void KVirtualCreateImg::sendAccepted()
 {
-    m_type = ui_widget.comboBox_type->currentText();
-    m_file = ui_widget.kurlrequester_file->lineEdit()->text();
-    m_size = ui_widget.spinBox_size->text() + ui_widget.comboBox_size_unit->currentText();
+	m_type = ui_widget.comboBox_type->currentText();
+	m_file = ui_widget.kurlrequester_file->lineEdit()->text();
+	m_size = ui_widget.spinBox_size->text() + ui_widget.comboBox_size_unit->currentText();
 
-    if ( not m_file.isNull() )
-        emit( accepted( m_file, m_type, m_size ) );
+	if ( not m_file.isNull() )
+		emit( accepted( m_file, m_type, m_size ) );
 }
+
 #include "kvirtualcreateimg.moc"
-// kate: indent-mode cstyle; space-indent on; indent-width 0;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;

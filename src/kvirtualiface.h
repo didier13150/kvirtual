@@ -80,4 +80,4 @@ protected:
 };
 
 #endif // KVIRTUALIFACE_H
-// kate: indent-mode cstyle; space-indent on; indent-width 0;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4; 

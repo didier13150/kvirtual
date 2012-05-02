@@ -39,61 +39,65 @@
 #include <KDE/KLocale>
 
 static const char description[] =
-    I18N_NOOP("A KDE 4 GUI Frontend for KVM");
+	I18N_NOOP( "A KDE 4 GUI Frontend for KVM" );
 
 static const char version[] = "1.0.0";
 
-int main(int argc, char **argv)
+int main( int argc, char **argv )
 {
-    KAboutData about( "kvirtual",
+	KAboutData about( "kvirtual",
 					  0,
-					  ki18n("KVirtual"),
+					  ki18n( "KVirtual" ),
 					  version,
-					  ki18n(description),
+					  ki18n( description ),
 					  KAboutData::License_GPL,
-					  ki18n("(C) 2012 Didier Fabert"),
+					  ki18n( "(C) 2012 Didier Fabert" ),
 					  KLocalizedString(),
 					  0,
 					  "didier.fabert@gmail.com"
 					);
-    about.addAuthor( ki18n( "Didier Fabert" ),
+	about.addAuthor( ki18n( "Didier Fabert" ),
 					 ki18n( "Project manager and main developer" ),
 					 "didier.fabert@gmail.com" );
-    KCmdLineArgs::init(argc, argv, &about);
+	KCmdLineArgs::init( argc, argv, &about );
 
-    KCmdLineOptions options;
-    options.add("+[URL]", ki18n( "Document to open" ));
-    KCmdLineArgs::addCmdLineOptions(options);
-    KApplication app;
+	KCmdLineOptions options;
+	options.add( "+[URL]", ki18n( "Document to open" ) );
+	KCmdLineArgs::addCmdLineOptions( options );
+	KApplication app;
 
-    KVirtual *widget = new KVirtual;
+	KVirtual *widget = new KVirtual;
 
-    // see if we are starting with session management
-    if (app.isSessionRestored())
-    {
-        RESTORE(KVirtual);
-    }
-    else
-    {
-        // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        if (args->count() == 0)
-        {
-            //kvirtual *widget = new kvirtual;
-            widget->show();
-        }
-        else
-        {
-            //int i = 0;
-            //for (; i < args->count(); i++)
-            if ( args->count() == 1 )
-            {
-				widget->load( args->arg(0) );
-                widget->show();
-            }
-        }
-        args->clear();
-    }
+	// see if we are starting with session management
 
-    return app.exec();
+	if ( app.isSessionRestored() )
+	{
+		RESTORE( KVirtual );
+	}
+	else
+	{
+		// no session.. just start up normally
+		KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+		if ( args->count() == 0 )
+		{
+			//kvirtual *widget = new kvirtual;
+			widget->show();
+		}
+		else
+		{
+			//int i = 0;
+			//for (; i < args->count(); i++)
+			if ( args->count() == 1 )
+			{
+				widget->load( args->arg( 0 ) );
+				widget->show();
+			}
+		}
+
+		args->clear();
+	}
+
+	return app.exec();
 }
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4; 

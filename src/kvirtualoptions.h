@@ -40,98 +40,102 @@
 #include <QObject>
 
 class KVirtualStorage;
+
 class KVirtualIface;
 
 class KVirtualOptions : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
+
 public:
-    /**
-     * Default Constructor
-     */
-    KVirtualOptions();
+	/**
+	 * Default Constructor
+	 */
+	KVirtualOptions();
 
-    /**
-     * Default Destructor
-     */
-    virtual ~KVirtualOptions();
+	/**
+	 * Default Destructor
+	 */
+	virtual ~KVirtualOptions();
 
-    typedef enum {
-        DISPLAY_NONE   = 0,
-        DISPLAY_DIRECT = 1,
-        DISPLAY_VNC    = 2,
-    }Display;
+	typedef enum
+	{
+		DISPLAY_NONE   = 0,
+		DISPLAY_DIRECT = 1,
+		DISPLAY_VNC    = 2,
+	}Display;
 
-    typedef enum {
-        BOOT_ON_DISK    = 0,
-        BOOT_ON_CDROM   = 1,
-        BOOT_ON_FLOPPY  = 2,
-        BOOT_ON_NETWORK = 3,
-    }BootOrder;
+	typedef enum
+	{
+		BOOT_ON_DISK    = 0,
+		BOOT_ON_CDROM   = 1,
+		BOOT_ON_FLOPPY  = 2,
+		BOOT_ON_NETWORK = 3,
+	}BootOrder;
 
-    QStringList getNeededVirtualSwitch();
+	QStringList getNeededVirtualSwitch();
 
-    const QStringList & getArgs();
+	const QStringList & getArgs();
 
-    const QString & getName() const;
-    const QString & getDistrib() const;
-    const QString & getDescription() const;
-    const QString & getKeyboard() const;
-    uint getMemory() const;
-    uint getVncPort() const;
-    uint getNbCPU() const;
-    Display getDisplay() const;
-    BootOrder getBootDevice() const;
-    KVirtualStorage* getStorage( uint ) const;
-    KVirtualIface* getIface( uint ) const;
-    const QString & getVideoCard() const;
-    bool isUsbSupported() const;
-    bool isSnapshotEnabled() const;
-    bool isModified( const QString & ) const;
+	const QString & getName() const;
+	const QString & getDistrib() const;
+	const QString & getDescription() const;
+	const QString & getKeyboard() const;
+	uint getMemory() const;
+	uint getVncPort() const;
+	uint getNbCPU() const;
+	Display getDisplay() const;
+	BootOrder getBootDevice() const;
+	KVirtualStorage* getStorage( uint ) const;
+	KVirtualIface* getIface( uint ) const;
+	const QString & getVideoCard() const;
+	bool isUsbSupported() const;
+	bool isSnapshotEnabled() const;
+	bool isModified( const QString & ) const;
 
 public slots:
-    void setName( const QString & );
-    void setDistrib( const QString & );
-    void setDescription( const QString & );
-    void setUsbSupported( int );
-    void setSnapshotEnabled( int );
-    void setVideoCard( const QString & );
-    void setMemory( int );
-    void setNbCPU( int );
-    void setBootDevice( int );
-    void setKeyboard( const QString & );
-    void setVncPort( int port );
-    void setDisplay( Display );
-    void setDisplay( int );
-    void load( const QString & );
-    void save( const QString & );
-    void setUsedSwitch( const QString & );
-    void clear();
+	void setName( const QString & );
+	void setDistrib( const QString & );
+	void setDescription( const QString & );
+	void setUsbSupported( int );
+	void setSnapshotEnabled( int );
+	void setVideoCard( const QString & );
+	void setMemory( int );
+	void setNbCPU( int );
+	void setBootDevice( int );
+	void setKeyboard( const QString & );
+	void setVncPort( int port );
+	void setDisplay( Display );
+	void setDisplay( int );
+	void load( const QString & );
+	void save( const QString & );
+	void setUsedSwitch( const QString & );
+	void clear();
 
 protected:
-    QStringList m_opts;
-    QStringList m_usedSwitches;
-    QMap<uint, KVirtualStorage*> m_storages;
-    QMap<uint, KVirtualIface*> m_ifaces;
-    QString m_file;
-    QString m_name;
-    QString m_distrib;
-    QString m_description;
-    QString m_videoCard;
-    BootOrder m_bootDevice;
-    QString m_keyboard;
-    Display m_display;
-    uint m_vncport;
-    uint m_memory;
-    uint m_cpus;
-    bool m_usb;
-    bool m_snapshot;
+	QStringList m_opts;
+	QStringList m_usedSwitches;
+	QMap<uint, KVirtualStorage*> m_storages;
+	QMap<uint, KVirtualIface*> m_ifaces;
+	QString m_file;
+	QString m_name;
+	QString m_distrib;
+	QString m_description;
+	QString m_videoCard;
+	BootOrder m_bootDevice;
+	QString m_keyboard;
+	Display m_display;
+	uint m_vncport;
+	uint m_memory;
+	uint m_cpus;
+	bool m_usb;
+	bool m_snapshot;
 
-    KVirtualIface* addIface( uint );
-    KVirtualStorage* addStorage( uint );
+	KVirtualIface* addIface( uint );
+	KVirtualStorage* addStorage( uint );
 
 signals:
-    void errorEncoured( const QString & );
+	void errorEncoured( const QString & );
 };
 
 inline QString DisplayToString( KVirtualOptions::Display );
@@ -140,4 +144,4 @@ inline KVirtualOptions::Display DisplayFromString( const QString & );
 inline KVirtualOptions::BootOrder BootOrderFromString( const QString & );
 
 #endif // _KVIRTUALOPTIONS_H_
-// kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;   replace-tabs off;

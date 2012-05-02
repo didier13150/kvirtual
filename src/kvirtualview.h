@@ -42,6 +42,7 @@
 #include "kvirtualoptions.h"
 
 class QPainter;
+
 class QButtonGroup;
 
 class KUrl;
@@ -60,97 +61,97 @@ class KVirtualOptions;
 
 class KVirtualView : public QWidget, public Ui::kvirtualview_base
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    /**
-     * Default constructor
-     */
-    KVirtualView( QWidget *parent );
+	/**
+	 * Default constructor
+	 */
+	KVirtualView( QWidget *parent );
 
-    /**
-     * Destructor
-     */
-    virtual ~KVirtualView();
+	/**
+	 * Destructor
+	 */
+	virtual ~KVirtualView();
 
-    /**
-     * Initialize options
-     */
-    void initOptions( KVirtualOptions* );
+	/**
+	 * Initialize options
+	 */
+	void initOptions( KVirtualOptions* );
 
-    /**
-     * Load options from config
-     */
-    void loadOptions();
+	/**
+	 * Load options from config
+	 */
+	void loadOptions();
 
 private:
-    Ui::kvirtualview_base _ui_kvirtualview_base;
+	Ui::kvirtualview_base _ui_kvirtualview_base;
 
-    KVirtualOptions* m_options;
-    QButtonGroup* m_displayGroup;
+	KVirtualOptions* m_options;
+	QButtonGroup* m_displayGroup;
 
 signals:
-    /**
-     * Use this signal to change the content of the statusbar
-     */
-    void signalChangeStatusbar( const QString& text );
+	/**
+	 * Use this signal to change the content of the statusbar
+	 */
+	void signalChangeStatusbar( const QString& text );
 
-    /**
-     * Use this signal to change the content of the caption
-     */
-    void signalChangeCaption( const QString& text );
+	/**
+	 * Use this signal to change the content of the caption
+	 */
+	void signalChangeCaption( const QString& text );
 
-    void signalChangeDistribution( const QString& distrib );
+	void signalChangeDistribution( const QString& distrib );
 
 public slots:
-    void addOutput( const QString & );
-    void addError( const QString & );
-    void toggleOutput();
-    void setState( uint, bool );
+	void addOutput( const QString & );
+	void addError( const QString & );
+	void toggleOutput();
+	void setState( uint, bool );
 
 private slots:
-    void settingsChanged();
-    void setIcon( const QString & );
-    void setType1Enable( int );
-    void setType2Enable( int );
-    void setType3Enable( int );
-    void setIface1Enabled( int );
-    void setIface2Enabled( int );
-    void setIface3Enabled( int );
-    void syncDescription();
-    void syncVideoCard();
-    void syncStorageType1( int );
-    void syncStorageType2( int );
-    void syncStorageType3( int );
-    void syncStorageFile1( const QString & );
-    void syncStorageFile2( const QString & );
-    void syncStorageFile3( const QString & );
-    void syncIfaceType1( const QString & );
-    void syncIfaceType2( const QString & );
-    void syncIfaceType3( const QString & );
-    void syncIfaceFile1( const QString & );
-    void syncIfaceFile2( const QString & );
-    void syncIfaceFile3( const QString & );
-    void syncIfaceModel1( const QString & );
-    void syncIfaceModel2( const QString & );
-    void syncIfaceModel3( const QString & );
-    void syncIfaceHwAddr1( const QString & );
-    void syncIfaceHwAddr2( const QString & );
-    void syncIfaceHwAddr3( const QString & );
-    void syncIfaceScriptUp1( const QString & );
-    void syncIfaceScriptUp2( const QString & );
-    void syncIfaceScriptUp3( const QString & );
-    void syncIfaceScriptDown1( const QString & );
-    void syncIfaceScriptDown2( const QString & );
-    void syncIfaceScriptDown3( const QString & );
-    void syncIfaceScriptUpState1( int );
-    void syncIfaceScriptUpState2( int );
-    void syncIfaceScriptUpState3( int );
-    void syncIfaceScriptDownState1( int );
-    void syncIfaceScriptDownState2( int );
-    void syncIfaceScriptDownState3( int );
+	void settingsChanged();
+	void setIcon( const QString & );
+	void setType1Enable( int );
+	void setType2Enable( int );
+	void setType3Enable( int );
+	void setIface1Enabled( int );
+	void setIface2Enabled( int );
+	void setIface3Enabled( int );
+	void syncDescription();
+	void syncVideoCard();
+	void syncStorageType1( int );
+	void syncStorageType2( int );
+	void syncStorageType3( int );
+	void syncStorageFile1( const QString & );
+	void syncStorageFile2( const QString & );
+	void syncStorageFile3( const QString & );
+	void syncIfaceType1( const QString & );
+	void syncIfaceType2( const QString & );
+	void syncIfaceType3( const QString & );
+	void syncIfaceFile1( const QString & );
+	void syncIfaceFile2( const QString & );
+	void syncIfaceFile3( const QString & );
+	void syncIfaceModel1( const QString & );
+	void syncIfaceModel2( const QString & );
+	void syncIfaceModel3( const QString & );
+	void syncIfaceHwAddr1( const QString & );
+	void syncIfaceHwAddr2( const QString & );
+	void syncIfaceHwAddr3( const QString & );
+	void syncIfaceScriptUp1( const QString & );
+	void syncIfaceScriptUp2( const QString & );
+	void syncIfaceScriptUp3( const QString & );
+	void syncIfaceScriptDown1( const QString & );
+	void syncIfaceScriptDown2( const QString & );
+	void syncIfaceScriptDown3( const QString & );
+	void syncIfaceScriptUpState1( int );
+	void syncIfaceScriptUpState2( int );
+	void syncIfaceScriptUpState3( int );
+	void syncIfaceScriptDownState1( int );
+	void syncIfaceScriptDownState2( int );
+	void syncIfaceScriptDownState3( int );
 
 };
 
 #endif // _KVIRTUALVIEW_H_
-// kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;   replace-tabs off;

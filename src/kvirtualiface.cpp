@@ -37,22 +37,22 @@
 
 KVirtualIface::KVirtualIface()
 {
-    m_isScriptUp = false;
-    m_isScriptDown = false;
+	m_isScriptUp = false;
+	m_isScriptDown = false;
 }
 
 KVirtualIface::KVirtualIface( const QString & type,
-                              const QString & file,
-                              const QString & model,
-                              const QString & hwaddr
-                            )
+							  const QString & file,
+							  const QString & model,
+							  const QString & hwaddr
+							)
 {
-    m_type = type;
-    m_file = file;
-    m_model = model;
-    m_hwaddr = hwaddr;
-    m_isScriptUp = false;
-    m_isScriptDown = false;
+	m_type = type;
+	m_file = file;
+	m_model = model;
+	m_hwaddr = hwaddr;
+	m_isScriptUp = false;
+	m_isScriptDown = false;
 }
 
 KVirtualIface::~KVirtualIface()
@@ -61,62 +61,63 @@ KVirtualIface::~KVirtualIface()
 
 void KVirtualIface::setHardwareAddress( const QString & hwaddr )
 {
-    m_hwaddr = hwaddr;
+	m_hwaddr = hwaddr;
 }
 
 void KVirtualIface::setModel( const QString & model )
 {
-    m_model = model;
+	m_model = model;
 }
 
 void KVirtualIface::setScriptUp( const QString & script )
 {
-    m_scriptUp = script;
+	m_scriptUp = script;
 }
 
 void KVirtualIface::setScriptDown( const QString & script )
 {
-    m_scriptDown = script;
+	m_scriptDown = script;
 }
 
 void KVirtualIface::setScriptUpEnabled( bool state )
 {
-    m_isScriptUp = state;
+	m_isScriptUp = state;
 }
 
 void KVirtualIface::setScriptDownEnabled( bool state )
 {
-    m_isScriptDown = state;
+	m_isScriptDown = state;
 }
 
 const QString & KVirtualIface::getModel() const
 {
-    return m_model;
+	return m_model;
 }
 
 const QString & KVirtualIface::getHardwareAddress() const
 {
-    return m_hwaddr;
+	return m_hwaddr;
 }
 
 const QString & KVirtualIface::getScriptUp() const
 {
-    return m_scriptUp;
+	return m_scriptUp;
 }
 
 const QString & KVirtualIface::getScriptDown() const
 {
-    return m_scriptDown;
+	return m_scriptDown;
 }
 
 bool KVirtualIface::isScriptUpEnabled() const
 {
-    return m_isScriptUp;
+	return m_isScriptUp;
 }
 
 bool KVirtualIface::isScriptDownEnabled() const
 {
-    return m_isScriptDown;
+	return m_isScriptDown;
 }
+
 #include "kvirtualiface.moc"
-// kate: indent-mode cstyle; space-indent on; indent-width 0;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;

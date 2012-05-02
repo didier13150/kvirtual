@@ -36,14 +36,14 @@
 
 KVirtualStorage::KVirtualStorage()
 {
-    m_typeID = KVirtualStorage::NONE;
+	m_typeID = KVirtualStorage::NONE;
 }
 
 KVirtualStorage::KVirtualStorage( const KVirtualStorage::Type & type, const QString & file )
 {
-    m_typeID = type;
-    setTypeByTypeID( type );
-    m_file = file;
+	m_typeID = type;
+	setTypeByTypeID( type );
+	m_file = file;
 }
 
 KVirtualStorage::~KVirtualStorage()
@@ -52,46 +52,51 @@ KVirtualStorage::~KVirtualStorage()
 
 void KVirtualStorage::setTypeByTypeID( const Type & type )
 {
-    switch ( type )
-    {
-    case KVirtualStorage::DISK:
-    {
-        m_type = "disk";
-        break;
-    }
-    case KVirtualStorage::CDROM:
-    {
-        m_type = "cdrom";
-        break;
-    }
-    case KVirtualStorage::FLOPPY:
-    {
-        m_type = "floppy";
-        break;
-    }
-    case KVirtualStorage::NONE:
-    {
-        m_type = "none";
-        break;
-    }
-    }
+	switch ( type )
+	{
+
+		case KVirtualStorage::DISK:
+		{
+			m_type = "disk";
+			break;
+		}
+
+		case KVirtualStorage::CDROM:
+		{
+			m_type = "cdrom";
+			break;
+		}
+
+		case KVirtualStorage::FLOPPY:
+		{
+			m_type = "floppy";
+			break;
+		}
+
+		case KVirtualStorage::NONE:
+		{
+			m_type = "none";
+			break;
+		}
+	}
 }
 
 int KVirtualStorage::getTypeID() const
 {
-    return (int) m_typeID;
+	return ( int ) m_typeID;
 }
 
 void KVirtualStorage::setTypeID( const Type id )
 {
-    m_typeID = id;
-    setTypeByTypeID( m_typeID );
+	m_typeID = id;
+	setTypeByTypeID( m_typeID );
 }
 
 void KVirtualStorage::setTypeID( int id )
 {
-    m_typeID = ( KVirtualStorage::Type ) id;
-    setTypeByTypeID( m_typeID );
+	m_typeID = ( KVirtualStorage::Type ) id;
+	setTypeByTypeID( m_typeID );
 }
+
 #include "kvirtualstorage.moc"
-// kate: indent-mode cstyle; space-indent on; indent-width 0;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;
