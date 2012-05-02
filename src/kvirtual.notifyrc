@@ -1,0 +1,24 @@
+[Global]
+IconName=Filename
+Comment=Friendly Name of app
+Name=Name of app
+
+[Context/group]
+Name=Group name
+Comment=The name of the group for contacts
+
+[Context/folder]
+Name=Group name
+
+[Event/newmail]
+Name=New email
+Comment=You have got a new email
+Contexts=folder,group
+Action=Sound|Popup
+
+[Event/contactOnline]
+Name=Contact goes online
+Comment=One of your contact has been connected
+Contexts=group
+Sound=filetoplay.ogg
+Action=None
