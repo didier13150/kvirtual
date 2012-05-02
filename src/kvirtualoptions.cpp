@@ -137,25 +137,26 @@ const QStringList & KVirtualOptions::getArgs()
 				buffer += ",ifname=" + m_ifaces[*it]->getFile();
 
 				if ( ! m_ifaces[*it]->getScriptUp().isEmpty() &&
-						! m_ifaces[*it]->getScriptDown().isEmpty() &&
-						m_ifaces[*it]->isScriptUpEnabled() &&
-						m_ifaces[*it]->isScriptDownEnabled()
+				        ! m_ifaces[*it]->getScriptDown().isEmpty() &&
+				        m_ifaces[*it]->isScriptUpEnabled() &&
+				        m_ifaces[*it]->isScriptDownEnabled()
 				   )
 				{
 					//TODO improve this part
 					buffer += ",script=" + m_ifaces[*it]->getScriptUp();
 					buffer += ",downscript=" + m_ifaces[*it]->getScriptDown();
 				}
+
 				else
 				{
 					buffer += ",script=no";
 				}
 			}
-			else
-				if ( buffer == "vde" )
-				{
-					buffer += ",sock=" + m_ifaces[*it]->getFile();
-				}
+
+			else if ( buffer == "vde" )
+			{
+				buffer += ",sock=" + m_ifaces[*it]->getFile();
+			}
 
 			buffer += ",vlan=" + id;
 
@@ -202,6 +203,7 @@ const QStringList & KVirtualOptions::getArgs()
 	{
 		buffer = "none";
 	}
+
 	else
 	{
 		buffer = m_videoCard;
@@ -1171,4 +1173,6 @@ inline KVirtualOptions::BootOrder BootOrderFromString( const QString & order )
 
 #include "kvirtualoptions.moc"
 
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;   replace-tabs off;        replace-tabs off;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;  replace-tabs off;  replace-tabs off;   replace-tabs off;        replace-tabs off;
+
+
