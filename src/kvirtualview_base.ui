@@ -1650,7 +1650,7 @@
   <connection>
    <sender>checkBox_scriptdown_2</sender>
    <signal>toggled(bool)</signal>
-   <receiver>checkBox_scriptdown_2</receiver>
+   <receiver>kurlrequester_scriptdown_2</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1658,15 +1658,15 @@
      <y>632</y>
     </hint>
     <hint type="destinationlabel">
-     <x>405</x>
-     <y>632</y>
+     <x>103</x>
+     <y>607</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>checkBox_scriptup_3</sender>
    <signal>toggled(bool)</signal>
-   <receiver>checkBox_scriptup_3</receiver>
+   <receiver>kurlrequester_scriptup_3</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1674,15 +1674,15 @@
      <y>632</y>
     </hint>
     <hint type="destinationlabel">
-     <x>64</x>
-     <y>632</y>
+     <x>44</x>
+     <y>607</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>checkBox_scriptdown_3</sender>
    <signal>toggled(bool)</signal>
-   <receiver>checkBox_scriptdown_3</receiver>
+   <receiver>kurlrequester_scriptdown_3</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1690,8 +1690,8 @@
      <y>632</y>
     </hint>
     <hint type="destinationlabel">
-     <x>405</x>
-     <y>632</y>
+     <x>103</x>
+     <y>607</y>
     </hint>
    </hints>
   </connection>
