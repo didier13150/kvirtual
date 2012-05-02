@@ -333,154 +333,184 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
            );
 }
 
-void KVirtualView::syncIfaceScriptUp1( const QString & script )
-{
-    m_options->setScriptUp( 0, script );
-}
-
-void KVirtualView::syncIfaceScriptUp2( const QString & script )
-{
-    m_options->setScriptUp( 1, script );
-}
-
-void KVirtualView::syncIfaceScriptUp3( const QString & script )
-{
-    m_options->setScriptUp( 2, script );
-}
-
-void KVirtualView::syncIfaceScriptDown1( const QString & script )
-{
-    m_options->setScriptDown( 0, script );
-}
-
-void KVirtualView::syncIfaceScriptDown2( const QString & script )
-{
-    m_options->setScriptDown( 1, script );
-}
-
-void KVirtualView::syncIfaceScriptDown3( const QString & script )
-{
-    m_options->setScriptDown( 2, script );
-}
-
-void KVirtualView::syncIfaceScriptUpState1( int state )
-{
-    m_options->setScriptUpEnabled( 0, (bool) state );
-}
-
-void KVirtualView::syncIfaceScriptUpState2( int state )
-{
-    m_options->setScriptUpEnabled( 1, (bool) state );
-}
-
-void KVirtualView::syncIfaceScriptUpState3( int state )
-{
-    m_options->setScriptUpEnabled( 2, (bool) state );
-}
-
-void KVirtualView::syncIfaceScriptDownState1( int state )
-{
-    m_options->setScriptDownEnabled( 0, (bool) state );
-}
-
-void KVirtualView::syncIfaceScriptDownState2( int state )
-{
-    m_options->setScriptDownEnabled( 1, (bool) state );
-}
-
-void KVirtualView::syncIfaceScriptDownState3( int state )
-{
-    m_options->setScriptDownEnabled( 2, (bool) state );
-}
-
 void KVirtualView::syncStorageType1( int type )
 {
-    m_options->setStorageType( 0, type );
+	KVirtualStorage* storage = m_options->getStorage( 0 );
+    storage->setTypeID( type );
 }
 
 void KVirtualView::syncStorageType2( int type )
 {
-    m_options->setStorageType( 1, type );
+	KVirtualStorage* storage = m_options->getStorage( 1 );
+    storage->setTypeID( type );
 }
 
 void KVirtualView::syncStorageType3( int type )
 {
-    m_options->setStorageType( 2, type );
+	KVirtualStorage* storage = m_options->getStorage( 2 );
+    storage->setTypeID( type );
 }
 
 void KVirtualView::syncStorageFile1( const QString & file )
 {
-    m_options->setStorageFile( 0, file );
+	KVirtualStorage* storage = m_options->getStorage( 0 );
+    storage->setFile( file );
 }
 
 void KVirtualView::syncStorageFile2( const QString & file )
 {
-    m_options->setStorageFile( 1, file );
+	KVirtualStorage* storage = m_options->getStorage( 1 );
+    storage->setFile( file );
 }
 
 void KVirtualView::syncStorageFile3( const QString & file )
 {
-    m_options->setStorageFile( 2, file );
+	KVirtualStorage* storage = m_options->getStorage( 2 );
+    storage->setFile( file );
+}
+
+void KVirtualView::syncIfaceScriptUp1( const QString & script )
+{
+	KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setScriptUp( script );
+}
+
+void KVirtualView::syncIfaceScriptUp2( const QString & script )
+{
+	KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setScriptUp( script );
+}
+
+void KVirtualView::syncIfaceScriptUp3( const QString & script )
+{
+	KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setScriptUp( script );
+}
+
+void KVirtualView::syncIfaceScriptDown1( const QString & script )
+{
+    KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setScriptDown( script );
+}
+
+void KVirtualView::syncIfaceScriptDown2( const QString & script )
+{
+    KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setScriptDown( script );
+}
+
+void KVirtualView::syncIfaceScriptDown3( const QString & script )
+{
+    KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setScriptDown( script );
+}
+
+void KVirtualView::syncIfaceScriptUpState1( int state )
+{
+	KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setScriptUpEnabled( (bool) state );
+}
+
+void KVirtualView::syncIfaceScriptUpState2( int state )
+{
+	KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setScriptUpEnabled( (bool) state );
+}
+
+void KVirtualView::syncIfaceScriptUpState3( int state )
+{
+	KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setScriptUpEnabled( (bool) state );
+}
+
+void KVirtualView::syncIfaceScriptDownState1( int state )
+{
+	KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setScriptDownEnabled( (bool) state );
+}
+
+void KVirtualView::syncIfaceScriptDownState2( int state )
+{
+	KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setScriptDownEnabled( (bool) state );
+}
+
+void KVirtualView::syncIfaceScriptDownState3( int state )
+{
+	KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setScriptDownEnabled( (bool) state );
 }
 
 void KVirtualView::syncIfaceType1( const QString & type )
 {
-    m_options->setIfaceType( 0, type );
+	KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setType( type );
 }
 
 void KVirtualView::syncIfaceType2( const QString & type )
 {
-    m_options->setIfaceType( 1, type );
+	KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setType( type );
 }
 
 void KVirtualView::syncIfaceType3( const QString & type )
 {
-    m_options->setIfaceType( 2, type );
+	KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setType( type );
 }
 
 void KVirtualView::syncIfaceFile1( const QString & file )
 {
-    m_options->setIfaceFile( 0, file );
+	KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setFile( file );
 }
 
 void KVirtualView::syncIfaceFile2( const QString & file )
 {
-    m_options->setIfaceFile( 1, file );
+	KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setFile( file );
 }
 
 void KVirtualView::syncIfaceFile3( const QString & file )
 {
-    m_options->setIfaceFile( 2, file );
+	KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setFile( file );
 }
 
 void KVirtualView::syncIfaceModel1( const QString & model )
 {
-    m_options->setIfaceModel( 0, model );
+	KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setModel( model );
 }
 
 void KVirtualView::syncIfaceModel2( const QString & model )
 {
-    m_options->setIfaceModel( 1, model );
+	KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setModel( model );
 }
 
 void KVirtualView::syncIfaceModel3( const QString & model )
 {
-    m_options->setIfaceModel( 2, model );
+	KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setModel( model );
 }
 
 void KVirtualView::syncIfaceHwAddr1( const QString & hwaddr )
 {
-    m_options->setIfaceHwAddr( 0, hwaddr );
+	KVirtualIface* iface = m_options->getIface( 0 );
+    iface->setHardwareAddress( hwaddr );
 }
 
 void KVirtualView::syncIfaceHwAddr2( const QString & hwaddr )
 {
-    m_options->setIfaceHwAddr( 1, hwaddr );
+	KVirtualIface* iface = m_options->getIface( 1 );
+    iface->setHardwareAddress( hwaddr );
 }
 
 void KVirtualView::syncIfaceHwAddr3( const QString & hwaddr )
 {
-    m_options->setIfaceHwAddr( 2, hwaddr );
+	KVirtualIface* iface = m_options->getIface( 2 );
+    iface->setHardwareAddress( hwaddr );
 }
 
 void KVirtualView::syncVideoCard()

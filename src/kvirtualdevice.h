@@ -45,11 +45,11 @@ public:
     KVirtualDevice();
     virtual ~KVirtualDevice();
 
-    const QString & getFile() const;
-    const QString & getType() const;
+    virtual const QString & getFile() const;
+    virtual const QString & getType() const;
 
-    void setFile( const QString & );
-    void setType( const QString & );
+    virtual void setFile( const QString & );
+    virtual void setType( const QString & );
 
 protected:
     QString m_file;

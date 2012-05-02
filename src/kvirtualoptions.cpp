@@ -266,7 +266,7 @@ void KVirtualOptions::setNbCPU( int nb )
 {
     m_cpus = (uint) nb;
 }
-
+/*
 void KVirtualOptions::setStorageType( uint id, const int type )
 {
     if ( ! m_storages.contains( id ) )
@@ -284,7 +284,6 @@ void KVirtualOptions::setStorageFile( uint id, const QString & file )
     }
     m_storages[id]->setFile( file );
 }
-
 void KVirtualOptions::setStorage( uint id, const int type, const QString & file )
 {
     if ( m_storages.contains( id ) )
@@ -296,7 +295,21 @@ void KVirtualOptions::setStorage( uint id, const int type, const QString & file 
 
     m_storages[id] = storage;
 }
+*/
 
+KVirtualStorage* KVirtualOptions::addStorage( uint id )
+{
+    if ( m_storages.contains( id ) )
+    {
+        delete m_storages[id];
+    }
+
+    KVirtualStorage* storage = new KVirtualStorage();
+
+    m_storages[id] = storage;
+    return m_storages[id];
+}
+/*
 void KVirtualOptions::setIfaceType( uint id, const QString & type )
 {
     if ( ! m_ifaces.contains( id ) )
@@ -348,8 +361,20 @@ void KVirtualOptions::setIface( uint id,
     KVirtualIface* iface = new KVirtualIface( type, file, model, mac );
 
     m_ifaces[id] = iface;
-}
+}*/
 
+KVirtualIface* KVirtualOptions::addIface( uint id )
+{
+    if ( m_ifaces.contains( id ) )
+    {
+        delete m_ifaces[id];
+    }
+
+    KVirtualIface* iface = new KVirtualIface();
+    m_ifaces[id] = iface;
+    return m_ifaces[ id ];
+}
+/*
 void KVirtualOptions::setScriptUp( uint id, const QString & script )
 {
     if ( m_ifaces.contains( id ) )
@@ -381,7 +406,7 @@ void KVirtualOptions::setScriptDownEnabled( uint id, bool state )
         m_ifaces[id]->setScriptDownEnabled( state );
     }
 }
-
+*/
 void KVirtualOptions::setUsbSupported( int state )
 {
     m_usb = (bool) state;
@@ -442,7 +467,6 @@ bool KVirtualOptions::isModified( const QString & filename ) const
     QDomNode node, child, littlechild;
     QString buffer;
     uint id;
-    bool scriptup, scriptdown;
 
     QFile file( filename );
 
@@ -664,38 +688,12 @@ bool KVirtualOptions::isModified( const QString & filename ) const
                                     return true;
                                 }
 
-                                switch ( element3.attribute( "flag" ).toInt() )
-                                {
-                                case 1:
-                                {
-                                    scriptup = true;
-                                    scriptdown = false;
-                                    break;
-                                }
-                                case 2:
-                                {
-                                    scriptup = false;
-                                    scriptdown = true;
-                                    break;
-                                }
-                                case 3:
-                                {
-                                    scriptup = true;
-                                    scriptdown = true;
-                                    break;
-                                }
-                                default:
-                                {
-                                    scriptup = false;
-                                    scriptdown = false;
-                                    break;
-                                }
-                                }
-                                if ( getIface( id )->isScriptUpEnabled() != scriptup )
+                                int flag = element3.attribute( "flag" ).toInt();
+                                if ( getIface( id )->isScriptUpEnabled() != ( flag | 0x01 ) )
                                 {
                                     return true;
                                 }
-                                if ( getIface( id )->isScriptDownEnabled() != scriptdown )
+                                if ( getIface( id )->isScriptDownEnabled() != ( flag | 0x02 ) )
                                 {
                                     return true;
                                 }
@@ -728,7 +726,9 @@ void KVirtualOptions::load( const QString & filename )
     QDomElement root, element, element2, element3;
     QDomNode node, child, littlechild;
     QString buffer;
-    bool scriptup, scriptdown;
+    uint id;
+    KVirtualIface * iface;
+    KVirtualStorage * storage;
 
     QFile file( filename );
 
@@ -851,10 +851,10 @@ void KVirtualOptions::load( const QString & filename )
 
                     if ( element2.tagName() == "storage" )
                     {
-                        setStorage( element2.attribute( "id" ).toUInt(),
-                                    (KVirtualStorage::Type) element2.attribute( "type" ).toInt(),
-                                    element2.attribute( "file" )
-                                  );
+                        id = element2.attribute( "id" ).toUInt();
+                        storage = addStorage( id );
+                        storage->setTypeID( (KVirtualStorage::Type) element2.attribute( "type" ).toInt() );
+                        storage->setFile( element2.attribute( "file" ) );
                     }
 
                     child = child.nextSibling();
@@ -871,63 +871,29 @@ void KVirtualOptions::load( const QString & filename )
 
                     if ( element2.tagName() == "iface" )
                     {
-                        setIface( element2.attribute( "id" ).toUInt(),
-                                  element2.attribute( "type" ),
-                                  element2.attribute( "file" ),
-                                  element2.attribute( "model" ),
-                                  element2.attribute( "addr" )
-                                );
-                    }
+                        id = element2.attribute( "id" ).toUInt();
+                        iface = addIface( id );
+                        iface->setType( element2.attribute( "type" ) );
+                        iface->setFile( element2.attribute( "file" ) );
+                        iface->setModel( element2.attribute( "model" ) );
+                        iface->setHardwareAddress( element2.attribute( "addr" ) );
 
-                    littlechild = element2.firstChild();
-                    while ( ! littlechild.isNull() )
-                    {
-                        element3 = littlechild.toElement();
-                        if ( element3.tagName() == "scripts" )
+                        littlechild = element2.firstChild();
+                        while ( ! littlechild.isNull() )
                         {
-                            setScriptUp( element2.attribute( "id" ).toUInt(),
-                                         element3.attribute( "up" )
-                                       );
-                            setScriptDown( element2.attribute( "id" ).toUInt(),
-                                           element3.attribute( "down" )
-                                         );
+                            element3 = littlechild.toElement();
+                            if ( element3.tagName() == "scripts" )
+                            {
+                                iface->setScriptUp( element3.attribute( "up" ) );
+                                iface->setScriptDown( element3.attribute( "down" ) );
 
-                            switch ( element3.attribute( "flag" ).toInt() )
-                            {
-                            case 1:
-                            {
-                                scriptup = true;
-                                scriptdown = false;
-                                break;
+                                int flag = element3.attribute( "flag" ).toInt();
+                                iface->setScriptUpEnabled( flag | 0x01 );
+                                iface->setScriptDownEnabled( flag | 0x02 );
                             }
-                            case 2:
-                            {
-                                scriptup = false;
-                                scriptdown = true;
-                                break;
-                            }
-                            case 3:
-                            {
-                                scriptup = true;
-                                scriptdown = true;
-                                break;
-                            }
-                            default:
-                            {
-                                scriptup = false;
-                                scriptdown = false;
-                                break;
-                            }
-                            }
-                            setScriptUpEnabled( element2.attribute( "id" ).toUInt(),
-                                                scriptup
-                                              );
-                            setScriptDownEnabled( element2.attribute( "id" ).toUInt(),
-                                                  scriptdown
-                                                );
+
+                            littlechild = littlechild.nextSibling();
                         }
-
-                        littlechild = littlechild.nextSibling();
                     }
 
                     child = child.nextSibling();

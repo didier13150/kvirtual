@@ -93,12 +93,6 @@ public slots:
     void setName( const QString & );
     void setDistrib( const QString & );
     void setDescription( const QString & );
-    void setIfaceType( uint, const QString & );
-    void setIfaceFile( uint, const QString & );
-    void setIfaceModel( uint, const QString & );
-    void setIfaceHwAddr( uint, const QString & );
-    void setStorageType( uint, const int );
-    void setStorageFile( uint, const QString & );
     void setUsbSupported( int );
     void setSnapshotEnabled( int );
     void setVideoCard( const QString & );
@@ -113,10 +107,6 @@ public slots:
     void save( const QString & );
     void setUsedSwitch( const QString & );
     void clear();
-    void setScriptUp( uint, const QString & );
-    void setScriptDown( uint, const QString & );
-    void setScriptUpEnabled( uint, bool );
-    void setScriptDownEnabled( uint, bool );
 
 protected:
     QStringList m_opts;
@@ -137,8 +127,8 @@ protected:
     bool m_usb;
     bool m_snapshot;
 
-    void setStorage( uint, const int , const QString & );
-    void setIface( uint, const QString &, const QString &, const QString &, const QString & );
+	KVirtualIface* addIface( uint );
+	KVirtualStorage* addStorage( uint );
 
 signals:
     void errorEncoured( const QString & );
