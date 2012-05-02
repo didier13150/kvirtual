@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualoptions.cpp                 ||--|| *         *
  *                                                                           *
@@ -124,7 +124,7 @@ const QStringList & KVirtualOptions::getArgs()
 
     for ( it = keys.begin() ; it != keys.end() ; ++it )
     {
-        if ( ! m_ifaces[*it]->getModel().isNull() )
+        if ( ! m_ifaces[*it]->getModel().isEmpty() )
         {
             id.setNum( *it );
             buffer = "nic,macaddr=" + m_ifaces[*it]->getHardwareAddress() + ",model=" + m_ifaces[*it]->getModel() + ",vlan=" + id;
@@ -135,12 +135,13 @@ const QStringList & KVirtualOptions::getArgs()
             if ( buffer == "tap" )
             {
                 buffer += ",ifname=" + m_ifaces[*it]->getFile();
-                if ( ! m_ifaces[*it]->getScriptUp().isNull() &&
-                        ! m_ifaces[*it]->getScriptDown().isNull() &&
+                if ( ! m_ifaces[*it]->getScriptUp().isEmpty() &&
+                        ! m_ifaces[*it]->getScriptDown().isEmpty() &&
                         m_ifaces[*it]->isScriptUpEnabled() &&
                         m_ifaces[*it]->isScriptDownEnabled()
                    )
                 {
+                    //TODO improve this part
                     buffer += ",script=" + m_ifaces[*it]->getScriptUp();
                     buffer += ",downscript=" + m_ifaces[*it]->getScriptDown();
                 }
@@ -192,10 +193,10 @@ const QStringList & KVirtualOptions::getArgs()
     if ( m_snapshot )
         m_opts << "-snapshot";
 
-    if ( ! m_keyboard.isNull() )
+    if ( ! m_keyboard.isEmpty() )
         m_opts << "-k" << m_keyboard;
 
-    if ( m_videoCard.isNull() )
+    if ( m_videoCard.isEmpty() )
     {
         buffer = "none";
     }
@@ -266,36 +267,6 @@ void KVirtualOptions::setNbCPU( int nb )
 {
     m_cpus = (uint) nb;
 }
-/*
-void KVirtualOptions::setStorageType( uint id, const int type )
-{
-    if ( ! m_storages.contains( id ) )
-    {
-        m_storages[id] = new KVirtualStorage();
-    }
-    m_storages[id]->setTypeID( type );
-}
-
-void KVirtualOptions::setStorageFile( uint id, const QString & file )
-{
-    if ( ! m_storages.contains( id ) )
-    {
-        m_storages[id] = new KVirtualStorage();
-    }
-    m_storages[id]->setFile( file );
-}
-void KVirtualOptions::setStorage( uint id, const int type, const QString & file )
-{
-    if ( m_storages.contains( id ) )
-    {
-        delete m_storages[id];
-    }
-
-    KVirtualStorage* storage = new KVirtualStorage( (KVirtualStorage::Type) type, file );
-
-    m_storages[id] = storage;
-}
-*/
 
 KVirtualStorage* KVirtualOptions::addStorage( uint id )
 {
@@ -309,59 +280,6 @@ KVirtualStorage* KVirtualOptions::addStorage( uint id )
     m_storages[id] = storage;
     return m_storages[id];
 }
-/*
-void KVirtualOptions::setIfaceType( uint id, const QString & type )
-{
-    if ( ! m_ifaces.contains( id ) )
-    {
-        m_ifaces[id] = new KVirtualIface();
-    }
-    m_ifaces[id]->setType( type );
-}
-
-void KVirtualOptions::setIfaceFile( uint id, const QString & file )
-{
-    if ( ! m_ifaces.contains( id ) )
-    {
-        m_ifaces[id] = new KVirtualIface();
-    }
-    m_ifaces[id]->setFile( file );
-}
-
-void KVirtualOptions::setIfaceModel( uint id, const QString & model )
-{
-    if ( ! m_ifaces.contains( id ) )
-    {
-        m_ifaces[id] = new KVirtualIface();
-    }
-    m_ifaces[id]->setModel( model );
-}
-
-void KVirtualOptions::setIfaceHwAddr( uint id, const QString & hwaddr )
-{
-    if ( ! m_ifaces.contains( id ) )
-    {
-        m_ifaces[id] = new KVirtualIface();
-    }
-    m_ifaces[id]->setHardwareAddress( hwaddr );
-}
-
-void KVirtualOptions::setIface( uint id,
-                                const QString & type,
-                                const QString & file,
-                                const QString & model,
-                                const QString & mac
-                              )
-{
-    if ( m_ifaces.contains( id ) )
-    {
-        delete m_ifaces[id];
-    }
-
-    KVirtualIface* iface = new KVirtualIface( type, file, model, mac );
-
-    m_ifaces[id] = iface;
-}*/
 
 KVirtualIface* KVirtualOptions::addIface( uint id )
 {
@@ -374,39 +292,7 @@ KVirtualIface* KVirtualOptions::addIface( uint id )
     m_ifaces[id] = iface;
     return m_ifaces[ id ];
 }
-/*
-void KVirtualOptions::setScriptUp( uint id, const QString & script )
-{
-    if ( m_ifaces.contains( id ) )
-    {
-        m_ifaces[id]->setScriptUp( script );
-    }
-}
 
-void KVirtualOptions::setScriptDown( uint id, const QString & script )
-{
-    if ( m_ifaces.contains( id ) )
-    {
-        m_ifaces[id]->setScriptDown( script );
-    }
-}
-
-void KVirtualOptions::setScriptUpEnabled( uint id, bool state )
-{
-    if ( m_ifaces.contains( id ) )
-    {
-        m_ifaces[id]->setScriptUpEnabled( state );
-    }
-}
-
-void KVirtualOptions::setScriptDownEnabled( uint id, bool state )
-{
-    if ( m_ifaces.contains( id ) )
-    {
-        m_ifaces[id]->setScriptDownEnabled( state );
-    }
-}
-*/
 void KVirtualOptions::setUsbSupported( int state )
 {
     m_usb = (bool) state;
@@ -689,11 +575,11 @@ bool KVirtualOptions::isModified( const QString & filename ) const
                                 }
 
                                 int flag = element3.attribute( "flag" ).toInt();
-                                if ( getIface( id )->isScriptUpEnabled() != ( flag | 0x01 ) )
+                                if ( getIface( id )->isScriptUpEnabled() != ( flag & KVirtualIface::SCRIPT_UP ) )
                                 {
                                     return true;
                                 }
-                                if ( getIface( id )->isScriptDownEnabled() != ( flag | 0x02 ) )
+                                if ( getIface( id )->isScriptDownEnabled() != ( flag & KVirtualIface::SCRIPT_DOWN ) )
                                 {
                                     return true;
                                 }
@@ -888,8 +774,8 @@ void KVirtualOptions::load( const QString & filename )
                                 iface->setScriptDown( element3.attribute( "down" ) );
 
                                 int flag = element3.attribute( "flag" ).toInt();
-                                iface->setScriptUpEnabled( flag | 0x01 );
-                                iface->setScriptDownEnabled( flag | 0x02 );
+                                iface->setScriptUpEnabled( flag & KVirtualIface::SCRIPT_UP );
+                                iface->setScriptDownEnabled( flag & KVirtualIface::SCRIPT_DOWN );
                             }
 
                             littlechild = littlechild.nextSibling();
@@ -1054,11 +940,11 @@ void KVirtualOptions::save( const QString & filename )
         if ( m_ifaces[*it]->isScriptUpEnabled() )
 
         {
-            flag |= 0x01;
+            flag |= KVirtualIface::SCRIPT_UP;
         }
         if ( m_ifaces[*it]->isScriptDownEnabled() )
         {
-            flag |= 0x2;
+            flag |= KVirtualIface::SCRIPT_DOWN;
         }
         element3.setAttribute( "flag", buffer.setNum( flag ) );
         element2.appendChild( element3 );
@@ -1241,5 +1127,6 @@ inline KVirtualOptions::BootOrder BootOrderFromString( const QString & order )
     return boot;
 }
 
+#include "kvirtualoptions.moc"
 
 // kate: indent-mode cstyle; space-indent on; indent-width 0;  replace-tabs off;        replace-tabs off;

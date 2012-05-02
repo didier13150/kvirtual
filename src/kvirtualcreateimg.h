@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualcreateimg.h                 ||--|| *         *
  *                                                                           *
@@ -41,12 +41,7 @@
 #include "ui_kvirtual_create_img.h"
 
 /**
- * This class serves as the main window for KVirtual.  It handles the
- * menus, toolbars and status bars.
  *
- * @short Main window class
- * @author %{AUTHOR} <%{EMAIL}>
- * @version %{VERSION}
  */
 
 class KVirtualCreateImg : public QDialog
@@ -78,4 +73,4 @@ signals:
 };
 
 #endif // _KVIRTUALCREATEIMG_H_
-// kate: indent-mode cstyle; space-indent on; indent-width 0; 
+// kate: indent-mode cstyle; space-indent on; indent-width 0;

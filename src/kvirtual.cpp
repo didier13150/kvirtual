@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtual.cpp                        ||--|| *         *
  *                                                                           *
@@ -95,8 +95,8 @@ KVirtual::KVirtual()
     m_systray = new KStatusNotifierItem( this );
     m_systray->setStandardActionsEnabled( true );
     m_systray->activate();
-	m_systray->setStatus( KStatusNotifierItem::Passive );
-	changeIcon( m_options->getDistrib() );
+    m_systray->setStatus( KStatusNotifierItem::Passive );
+    changeIcon( m_options->getDistrib() );
 
     m_create = new KVirtualCreateImg( this );
 }
@@ -208,7 +208,7 @@ void KVirtual::changeIcon( const QString & distrib )
 bool KVirtual::queryClose() //exitCalled()
 {
     hide();
-	return false;
+    return false;
 }
 
 bool KVirtual::queryExit() //exitCalled()
@@ -216,23 +216,23 @@ bool KVirtual::queryExit() //exitCalled()
     if ( m_options->isModified( m_confFilename ) )
     {
         switch ( KMessageBox::warningYesNoCancel( this,
-                i18n("Save changes to virtual host definition document ?") ) )
-		{
-			case KMessageBox::Yes:
-			{
-				// save document here. If saving fails, return false;
-				m_options->save( m_confFilename );
-				break;
-			}
-			case KMessageBox::No:
-			{
-				break;
-			}
-			default: // cancel
-			{
-				return false;
-			}
-		}
+                 i18n("Save changes to virtual host definition document ?") ) )
+        {
+        case KMessageBox::Yes:
+        {
+            // save document here. If saving fails, return false;
+            m_options->save( m_confFilename );
+            break;
+        }
+        case KMessageBox::No:
+        {
+            break;
+        }
+        default: // cancel
+        {
+            return false;
+        }
+        }
     }
     return true;
 }
@@ -527,7 +527,7 @@ void KVirtual::readStarted( uint id )
     if ( process->getVirtualType() == KVirtualProcess::HOST )
     {
         emit( vmStateChanged( id, true ) );
-		m_systray->setStatus( KStatusNotifierItem::Active );
+        m_systray->setStatus( KStatusNotifierItem::Active );
     }
     buffer.setNum( id );
     buffer.prepend( "Process" );
@@ -615,10 +615,10 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
                SIGNAL( finished( uint, int, QProcess::ExitStatus ) ) );
 
     if ( process->getVirtualType() == KVirtualProcess::HOST )
-	{
+    {
         emit( vmStateChanged( id, false ) );
-		m_systray->setStatus( KStatusNotifierItem::Passive );
-	}
+        m_systray->setStatus( KStatusNotifierItem::Passive );
+    }
     delete process;
 }
 

@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualstorage.cpp                 ||--|| *         *
  *                                                                           *
@@ -51,7 +51,7 @@ public:
     }Type;
 
     KVirtualStorage();
-    KVirtualStorage( const Type type , const QString & );
+    KVirtualStorage( const Type & type , const QString & );
     virtual ~KVirtualStorage();
 
     void setTypeID( const Type );
@@ -59,8 +59,11 @@ public:
     int getTypeID() const;
 
 protected:
+    void setTypeByTypeID( const Type & type );
+
+protected:
     Type m_typeID;
 };
 
 #endif // KVIRTUALSTORAGE_H
-// kate: indent-mode cstyle; space-indent on; indent-width 0; 
+// kate: indent-mode cstyle; space-indent on; indent-width 0;

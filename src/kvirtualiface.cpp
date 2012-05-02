@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualiface.cpp                   ||--|| *         *
  *                                                                           *
@@ -118,4 +118,5 @@ bool KVirtualIface::isScriptDownEnabled() const
 {
     return m_isScriptDown;
 }
-// kate: indent-mode cstyle; space-indent on; indent-width 0; 
+#include "kvirtualiface.moc"
+// kate: indent-mode cstyle; space-indent on; indent-width 0;

@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualstorage.h                   ||--|| *         *
  *                                                                           *
@@ -39,9 +39,19 @@ KVirtualStorage::KVirtualStorage()
     m_typeID = KVirtualStorage::NONE;
 }
 
-KVirtualStorage::KVirtualStorage( const KVirtualStorage::Type type, const QString & file )
+KVirtualStorage::KVirtualStorage( const KVirtualStorage::Type & type, const QString & file )
 {
     m_typeID = type;
+    setTypeByTypeID( type );
+    m_file = file;
+}
+
+KVirtualStorage::~KVirtualStorage()
+{
+}
+
+void KVirtualStorage::setTypeByTypeID( const Type & type )
+{
     switch ( type )
     {
     case KVirtualStorage::DISK:
@@ -65,11 +75,6 @@ KVirtualStorage::KVirtualStorage( const KVirtualStorage::Type type, const QStrin
         break;
     }
     }
-    m_file = file;
-}
-
-KVirtualStorage::~KVirtualStorage()
-{
 }
 
 int KVirtualStorage::getTypeID() const
@@ -80,10 +85,13 @@ int KVirtualStorage::getTypeID() const
 void KVirtualStorage::setTypeID( const Type id )
 {
     m_typeID = id;
+    setTypeByTypeID( m_typeID );
 }
 
 void KVirtualStorage::setTypeID( int id )
 {
     m_typeID = ( KVirtualStorage::Type ) id;
+    setTypeByTypeID( m_typeID );
 }
-// kate: indent-mode cstyle; space-indent on; indent-width 0; 
+#include "kvirtualstorage.moc"
+// kate: indent-mode cstyle; space-indent on; indent-width 0;

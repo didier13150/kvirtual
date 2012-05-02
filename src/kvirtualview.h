@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualview.h                      ||--|| *         *
  *                                                                           *
@@ -54,8 +54,8 @@ class KVirtualOptions;
  * here.
  *
  * @short Main view
- * @author %{AUTHOR} <%{EMAIL}>
- * @version %{VERSION}
+ * @author Didier Fabert <didier.fabert@gmail.com>
+ * @version 1.0.0
  */
 
 class KVirtualView : public QWidget, public Ui::kvirtualview_base
@@ -110,7 +110,7 @@ public slots:
 
 private slots:
     void settingsChanged();
-    void setPixmap( const QString & );
+    void setIcon( const QString & );
     void setType1Enable( int );
     void setType2Enable( int );
     void setType3Enable( int );

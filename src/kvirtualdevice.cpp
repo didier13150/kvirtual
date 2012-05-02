@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualdevice.cpp                  ||--|| *         *
  *                                                                           *
@@ -61,4 +61,5 @@ const QString & KVirtualDevice::getType() const
 {
     return m_type;
 }
-// kate: indent-mode cstyle; space-indent on; indent-width 0; 
+#include "kvirtualdevice.moc"
+// kate: indent-mode cstyle; space-indent on; indent-width 0;

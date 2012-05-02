@@ -11,7 +11,7 @@
  *   ||  |       Developper : Didier FABERT <didier.fabert@gmail.com>        *
  *   ||_  \      Date : 2012, April                                          *
  *   \_|  o|                                             ,__,                *
- *    \___/      Copyright (C) 2009 by didier fabert     (oo)____            *
+ *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
  *     (___)_)   File : kvirtualiface.h                     ||--|| *         *
  *                                                                           *
@@ -62,6 +62,14 @@ public:
     bool isScriptUpEnabled() const;
     bool isScriptDownEnabled() const;
 
+    enum
+    {
+        SCRIPT_NONE = 0x00,
+        SCRIPT_UP   = 0x01,
+        SCRIPT_DOWN = 0x02,
+        SCRIPT_ALL  = SCRIPT_UP & SCRIPT_DOWN,
+    };
+
 protected:
     QString m_model;
     QString m_hwaddr;
@@ -72,4 +80,4 @@ protected:
 };
 
 #endif // KVIRTUALIFACE_H
-// kate: indent-mode cstyle; space-indent on; indent-width 0; 
+// kate: indent-mode cstyle; space-indent on; indent-width 0;
