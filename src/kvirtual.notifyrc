@@ -1,24 +1,28 @@
 [Global]
-IconName=Filename
-Comment=Friendly Name of app
-Name=Name of app
+IconName=kvirtual
+Comment=KVirtual - KDE4 GUI for KVM
+Comment[fr]=KVirtual - Interface KDE4 pour KVM
 
-[Context/group]
-Name=Group name
-Comment=The name of the group for contacts
-
-[Context/folder]
-Name=Group name
-
-[Event/newmail]
-Name=New email
-Comment=You have got a new email
-Contexts=folder,group
+[Event/started]
+Name=The virtual host is started
+Name[fr]=L'hôte virtuel est démarré
+Comment=The virtual host is started
+Comment[fr]=L'hôte virtuel est démarré
+Sound=KDE-Sys-App-Message.ogg
 Action=Sound|Popup
 
-[Event/contactOnline]
-Name=Contact goes online
-Comment=One of your contact has been connected
-Contexts=group
-Sound=filetoplay.ogg
-Action=None
+[Event/stopped]
+Name=The virtual host is stopped
+Name[fr]=L'hôte virtuel est arrêté
+Comment=The virtual host is stopped
+Comment[fr]=L'hôte virtuel est arrêté
+Sound=KDE-Sys-App-Message.ogg
+Action=Sound|Popup
+
+[Event/startFailed]
+Name=The virtual host has failed to start
+Name[fr]=L'hôte virtuel n'a pas pu démarrer
+Comment=The virtual host has failed to start
+Comment[fr]=L'hôte virtuel n'a pas pu démarrer
+Sound=KDE-Sys-App-Error.ogg
+Action=Sound|Popup

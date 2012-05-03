@@ -55,6 +55,7 @@
 #include <KLineEdit>
 #include <KMessageBox>
 #include <KStandardDirs>
+#include <KNotification>
 
 #include <KLocale>
 
@@ -531,6 +532,15 @@ void KVirtual::startVirtual()
 		buffer.prepend( "Process" );
 		buffer.append( " failed to start" );
 		m_view->addError( buffer );
+		
+		QString img = KStandardDirs::locate( "appdata", m_options->getDistrib() + ".png" );
+		QPixmap pixmap;
+		pixmap.load( img );
+		
+		KNotification *notification= new KNotification ( "startFailed", this );
+		notification->setText( i18n( "The virtual host <i>%1</i> is not started", m_options->getName() ) );
+		notification->setPixmap( pixmap );
+		notification->sendEvent();
 	}
 }
 
@@ -550,6 +560,19 @@ void KVirtual::readStarted( uint id )
 	{
 		emit( vmStateChanged( id, true ) );
 		m_systray->setStatus( KStatusNotifierItem::Active );
+		/* Events are:
+		 * started
+		 * stopped
+		 * startFailed
+		 */
+		QString img = KStandardDirs::locate( "appdata", m_options->getDistrib() + ".png" );
+		QPixmap pixmap;
+		pixmap.load( img );
+		
+		KNotification *notification= new KNotification ( "started", this );
+		notification->setText( i18n( "The virtual host <i>%1</i> is started", m_options->getName() ) );
+		notification->setPixmap( pixmap );
+		notification->sendEvent();
 	}
 
 	buffer.setNum( id );
@@ -645,6 +668,15 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 	{
 		emit( vmStateChanged( id, false ) );
 		m_systray->setStatus( KStatusNotifierItem::Passive );
+		
+		QString img = KStandardDirs::locate( "appdata", m_options->getDistrib() + ".png" );
+		QPixmap pixmap;
+		pixmap.load( img );
+		
+		KNotification *notification= new KNotification ( "stopped", this );
+		notification->setText( i18n( "The virtual host <i>%1</i> is stopped", m_options->getName() ) );
+		notification->setPixmap( pixmap );
+		notification->sendEvent();
 	}
 
 	delete process;

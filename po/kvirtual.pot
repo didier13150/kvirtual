@@ -119,6 +119,18 @@ msgstr ""
 msgid " terminated with retval "
 msgstr ""
 
+#: kvirtual.cpp:541
+msgid "The virtual host <i>%1</i> is not started"
+msgstr ""
+
+#: kvirtual.cpp:573
+msgid "The virtual host <i>%1</i> is started"
+msgstr ""
+
+#: kvirtual.cpp:677
+msgid "The virtual host <i>%1</i> is stopped"
+msgstr ""
+
 #: rc.cpp:3
 msgid "&File"
 msgstr ""

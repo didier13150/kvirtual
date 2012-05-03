@@ -1,6 +1,6 @@
 set(kvirtual_SRCS
    kvirtualiface.cpp
-   kvirtualstorage.cpp 
+   kvirtualstorage.cpp
    kvirtualdevice.cpp
    kvirtualcreateimg.cpp
    kvirtualoptions.cpp
@@ -30,3 +30,4 @@ install(TARGETS kvirtual ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( PROGRAMS kvirtual.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES kvirtual.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install( FILES kvirtualui.rc  DESTINATION  ${DATA_INSTALL_DIR}/kvirtual )
+install( FILES kvirtual.notifyrc  DESTINATION  ${DATA_INSTALL_DIR}/kvirtual )

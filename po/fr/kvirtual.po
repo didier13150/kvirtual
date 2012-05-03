@@ -2,13 +2,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Didier Fabert <didier.fabert@gmail.com>, 2012.
+# Noreply B2PWeb <noreply@b2pweb.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-22 17:09+0200\n"
-"PO-Revision-Date: 2012-04-26 20:00+0200\n"
-"Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
+"PO-Revision-Date: 2012-05-03 11:14+0200\n"
+"Last-Translator: Noreply B2PWeb <noreply@b2pweb.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -118,6 +119,18 @@ msgstr "a planté"
 #: kvirtual.cpp:518
 msgid " terminated with retval "
 msgstr " a terminé avec le valeur de retour "
+
+#: kvirtual.cpp:541
+msgid "The virtual host <i>%1</i> is not started"
+msgstr "L'hôte virtuel <i>%1</i> n'a pas pu démarrer"
+
+#: kvirtual.cpp:573
+msgid "The virtual host <i>%1</i> is started"
+msgstr "L'hôte virtuel <i>%1</i> est démarré"
+
+#: kvirtual.cpp:677
+msgid "The virtual host <i>%1</i> is stopped"
+msgstr "L'hôte virtuel <i>%1</i> est arrêté"
 
 #: rc.cpp:3
 msgid "&File"
