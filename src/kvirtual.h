@@ -114,8 +114,6 @@ protected:
 private:
 	void setupActions();
 	uint getID();
-	void terminateAll();
-	void killAll();
 
 private:
 	Ui::prefs_base ui_prefs_base ;

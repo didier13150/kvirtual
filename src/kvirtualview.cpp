@@ -56,9 +56,9 @@ KVirtualView::KVirtualView( QWidget * )
 	setAutoFillBackground( true );
 	setIcon( "linux" );
 	connect( _ui_kvirtualview_base.comboBox_distrib,
-			 SIGNAL( currentIndexChanged( const QString & ) ),
-			 SLOT( setIcon( const QString & ) )
-		   );
+	         SIGNAL( currentIndexChanged( const QString & ) ),
+	         SLOT( setIcon( const QString & ) )
+	       );
 	m_displayGroup = new QButtonGroup( this );
 	m_displayGroup->addButton( _ui_kvirtualview_base.radioButton_none, ( int ) KVirtualOptions::DISPLAY_NONE );
 	m_displayGroup->addButton( _ui_kvirtualview_base.radioButton_direct, ( int ) KVirtualOptions::DISPLAY_DIRECT );
@@ -116,226 +116,226 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	_ui_kvirtualview_base.kintspinbox_nb_of_cpu->setRange( 1, ( int ) cpus );
 	_ui_kvirtualview_base.horizontalSlider_nb_of_cpu->setRange( 1, ( int ) cpus );
 	connect( _ui_kvirtualview_base.horizontalSlider_memory,
-			 SIGNAL( valueChanged( int ) ),
-			 _ui_kvirtualview_base.kintspinbox_memory,
-			 SLOT( setValue( int ) )
-		   );
+	         SIGNAL( valueChanged( int ) ),
+	         _ui_kvirtualview_base.kintspinbox_memory,
+	         SLOT( setValue( int ) )
+	       );
 	connect( _ui_kvirtualview_base.kintspinbox_memory,
-			 SIGNAL( valueChanged( int ) ),
-			 _ui_kvirtualview_base.horizontalSlider_memory,
-			 SLOT( setValue( int ) )
-		   );
+	         SIGNAL( valueChanged( int ) ),
+	         _ui_kvirtualview_base.horizontalSlider_memory,
+	         SLOT( setValue( int ) )
+	       );
 	connect( _ui_kvirtualview_base.horizontalSlider_nb_of_cpu,
-			 SIGNAL( valueChanged( int ) ),
-			 _ui_kvirtualview_base.kintspinbox_nb_of_cpu,
-			 SLOT( setValue( int ) )
-		   );
+	         SIGNAL( valueChanged( int ) ),
+	         _ui_kvirtualview_base.kintspinbox_nb_of_cpu,
+	         SLOT( setValue( int ) )
+	       );
 	connect( _ui_kvirtualview_base.kintspinbox_nb_of_cpu,
-			 SIGNAL( valueChanged( int ) ),
-			 _ui_kvirtualview_base.horizontalSlider_nb_of_cpu,
-			 SLOT( setValue( int ) )
-		   );
+	         SIGNAL( valueChanged( int ) ),
+	         _ui_kvirtualview_base.horizontalSlider_nb_of_cpu,
+	         SLOT( setValue( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_type_1,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( setType1Enable( int ) )
-		   );
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( setType1Enable( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_type_2,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( setType2Enable( int ) )
-		   );
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( setType2Enable( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_type_3,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( setType3Enable( int ) )
-		   );
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( setType3Enable( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_model_1,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( setIface1Enabled( int ) )
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( setIface1Enabled( int ) )
 
-		   );
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_model_2,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( setIface2Enabled( int ) )
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( setIface2Enabled( int ) )
 
-		   );
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_model_3,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( setIface3Enabled( int ) )
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( setIface3Enabled( int ) )
 
-		   );
+	       );
 	connect( _ui_kvirtualview_base.lineEdit_name,
-			 SIGNAL( textEdited( QString ) ),
-			 m_options,
-			 SLOT( setName( QString ) )
-		   );
+	         SIGNAL( textEdited( QString ) ),
+	         m_options,
+	         SLOT( setName( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_distrib,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 m_options,
-			 SLOT( setDistrib( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         m_options,
+	         SLOT( setDistrib( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.textEdit_description,
-			 SIGNAL( textChanged() ),
-			 SLOT( syncDescription() )
-		   );
+	         SIGNAL( textChanged() ),
+	         SLOT( syncDescription() )
+	       );
 	connect( _ui_kvirtualview_base.kintspinbox_memory,
-			 SIGNAL( valueChanged( int ) ),
-			 m_options,
-			 SLOT( setMemory( int ) )
-		   );
+	         SIGNAL( valueChanged( int ) ),
+	         m_options,
+	         SLOT( setMemory( int ) )
+	       );
 	connect( _ui_kvirtualview_base.kintspinbox_nb_of_cpu,
-			 SIGNAL( valueChanged( int ) ),
-			 m_options,
-			 SLOT( setNbCPU( int ) )
-		   );
+	         SIGNAL( valueChanged( int ) ),
+	         m_options,
+	         SLOT( setNbCPU( int ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_usb,
-			 SIGNAL( stateChanged( int ) ),
-			 m_options,
-			 SLOT( setUsbSupported( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         m_options,
+	         SLOT( setUsbSupported( int ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_snapshot,
-			 SIGNAL( stateChanged( int ) ),
-			 m_options,
-			 SLOT( setSnapshotEnabled( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         m_options,
+	         SLOT( setSnapshotEnabled( int ) )
+	       );
 	connect( _ui_kvirtualview_base.spinBox_vncport,
-			 SIGNAL( valueChanged( int ) ),
-			 m_options,
-			 SLOT( setVncPort( int ) )
-		   );
+	         SIGNAL( valueChanged( int ) ),
+	         m_options,
+	         SLOT( setVncPort( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_display_keyboard,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 m_options,
-			 SLOT( setKeyboard( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         m_options,
+	         SLOT( setKeyboard( QString ) )
+	       );
 	connect( m_displayGroup,
-			 SIGNAL( buttonClicked( int ) ),
-			 m_options,
-			 SLOT( setDisplay( int ) )
-		   );
+	         SIGNAL( buttonClicked( int ) ),
+	         m_options,
+	         SLOT( setDisplay( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_boot,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 m_options,
-			 SLOT( setBootDevice( int ) )
-		   );
+	         SIGNAL( currentIndexChanged( int ) ),
+	         m_options,
+	         SLOT( setBootDevice( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_storage_1,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( syncStorageType1( int ) )
-		   );
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( syncStorageType1( int ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_storage_1,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncStorageFile1( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncStorageFile1( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_storage_2,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncStorageFile2( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncStorageFile2( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_storage_3,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncStorageFile3( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncStorageFile3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_storage_2,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( syncStorageType2( int ) )
-		   );
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( syncStorageType2( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_storage_3,
-			 SIGNAL( currentIndexChanged( int ) ),
-			 SLOT( syncStorageType3( int ) )
-		   );
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( syncStorageType3( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_type_1,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 SLOT( syncIfaceType1( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncIfaceType1( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_type_2,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 SLOT( syncIfaceType3( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncIfaceType3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_type_2,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 SLOT( syncIfaceType3( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncIfaceType3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.lineEdit_iface_detail_1,
-			 SIGNAL( textEdited( QString ) ),
-			 SLOT( syncIfaceFile1( QString ) )
-		   );
+	         SIGNAL( textEdited( QString ) ),
+	         SLOT( syncIfaceFile1( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.lineEdit_iface_detail_2,
-			 SIGNAL( textEdited( QString ) ),
-			 SLOT( syncIfaceFile2( QString ) )
-		   );
+	         SIGNAL( textEdited( QString ) ),
+	         SLOT( syncIfaceFile2( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.lineEdit_iface_detail_3,
-			 SIGNAL( textEdited( QString ) ),
-			 SLOT( syncIfaceFile3( QString ) )
-		   );
+	         SIGNAL( textEdited( QString ) ),
+	         SLOT( syncIfaceFile3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_model_1,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 SLOT( syncIfaceModel1( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncIfaceModel1( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_model_2,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 SLOT( syncIfaceModel2( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncIfaceModel2( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_model_3,
-			 SIGNAL( currentIndexChanged( QString ) ),
-			 SLOT( syncIfaceModel3( QString ) )
-		   );
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncIfaceModel3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.lineEdit_iface_mac_1,
-			 SIGNAL( textEdited( QString ) ),
-			 SLOT( syncIfaceHwAddr1( QString ) )
-		   );
+	         SIGNAL( textEdited( QString ) ),
+	         SLOT( syncIfaceHwAddr1( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.lineEdit_iface_mac_2,
-			 SIGNAL( textEdited( QString ) ),
-			 SLOT( syncIfaceHwAddr2( QString ) )
-		   );
+	         SIGNAL( textEdited( QString ) ),
+	         SLOT( syncIfaceHwAddr2( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.lineEdit_iface_mac_3,
-			 SIGNAL( textEdited( QString ) ),
-			 SLOT( syncIfaceHwAddr3( QString ) )
-		   );
+	         SIGNAL( textEdited( QString ) ),
+	         SLOT( syncIfaceHwAddr3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_scriptup_1,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncIfaceScriptUp1( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncIfaceScriptUp1( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_scriptup_2,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncIfaceScriptUp2( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncIfaceScriptUp2( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_scriptup_3,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncIfaceScriptUp3( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncIfaceScriptUp3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_scriptdown_1,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncIfaceScriptDown1( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncIfaceScriptDown1( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_scriptdown_2,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncIfaceScriptDown2( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncIfaceScriptDown2( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.kurlrequester_scriptdown_3,
-			 SIGNAL( textChanged( QString ) ),
-			 SLOT( syncIfaceScriptDown3( QString ) )
-		   );
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( syncIfaceScriptDown3( QString ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_scriptup_1,
-			 SIGNAL( stateChanged( int ) ),
-			 SLOT( syncIfaceScriptUpState1( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         SLOT( syncIfaceScriptUpState1( int ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_scriptup_2,
-			 SIGNAL( stateChanged( int ) ),
-			 SLOT( syncIfaceScriptUpState2( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         SLOT( syncIfaceScriptUpState2( int ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_scriptup_3,
-			 SIGNAL( stateChanged( int ) ),
-			 SLOT( syncIfaceScriptUpState3( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         SLOT( syncIfaceScriptUpState3( int ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_scriptdown_1,
-			 SIGNAL( stateChanged( int ) ),
-			 SLOT( syncIfaceScriptDownState1( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         SLOT( syncIfaceScriptDownState1( int ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_scriptdown_2,
-			 SIGNAL( stateChanged( int ) ),
-			 SLOT( syncIfaceScriptDownState2( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         SLOT( syncIfaceScriptDownState2( int ) )
+	       );
 	connect( _ui_kvirtualview_base.checkBox_scriptdown_3,
-			 SIGNAL( stateChanged( int ) ),
-			 SLOT( syncIfaceScriptDownState3( int ) )
-		   );
+	         SIGNAL( stateChanged( int ) ),
+	         SLOT( syncIfaceScriptDownState3( int ) )
+	       );
 }
 
 void KVirtualView::syncStorageType1( int type )
@@ -449,18 +449,33 @@ void KVirtualView::syncIfaceScriptDownState3( int state )
 void KVirtualView::syncIfaceType1( const QString & type )
 {
 	KVirtualIface* iface = m_options->getIface( 0 );
+	if ( ! _ui_kvirtualview_base.comboBox_iface_type_1->currentIndex() )
+	{
+		iface->setType( QString() );
+		return;
+	}
 	iface->setType( type );
 }
 
 void KVirtualView::syncIfaceType2( const QString & type )
 {
 	KVirtualIface* iface = m_options->getIface( 1 );
+	if ( ! _ui_kvirtualview_base.comboBox_iface_type_2->currentIndex() )
+	{
+		iface->setType( QString() );
+		return;
+	}
 	iface->setType( type );
 }
 
 void KVirtualView::syncIfaceType3( const QString & type )
 {
 	KVirtualIface* iface = m_options->getIface( 2 );
+	if ( ! _ui_kvirtualview_base.comboBox_iface_type_3->currentIndex() )
+	{
+		iface->setType( QString() );
+		return;
+	}
 	iface->setType( type );
 }
 
@@ -485,18 +500,33 @@ void KVirtualView::syncIfaceFile3( const QString & file )
 void KVirtualView::syncIfaceModel1( const QString & model )
 {
 	KVirtualIface* iface = m_options->getIface( 0 );
+	if ( ! _ui_kvirtualview_base.comboBox_iface_model_1->currentIndex() )
+	{
+		iface->setModel( QString() );
+		return;
+	}
 	iface->setModel( model );
 }
 
 void KVirtualView::syncIfaceModel2( const QString & model )
 {
 	KVirtualIface* iface = m_options->getIface( 1 );
+	if ( ! _ui_kvirtualview_base.comboBox_iface_model_2->currentIndex() )
+	{
+		iface->setModel( QString() );
+		return;
+	}
 	iface->setModel( model );
 }
 
 void KVirtualView::syncIfaceModel3( const QString & model )
 {
 	KVirtualIface* iface = m_options->getIface( 2 );
+	if ( ! _ui_kvirtualview_base.comboBox_iface_model_3->currentIndex() )
+	{
+		iface->setModel( QString() );
+		return;
+	}
 	iface->setModel( model );
 }
 
@@ -594,59 +624,89 @@ void KVirtualView::setIface3Enabled( int id )
 
 void KVirtualView::setType1Enable( int id )
 {
-	bool state = true;
-
-	if ( ! id )
+	switch ( id )
 	{
-		state = false;
-		_ui_kvirtualview_base.kurlrequester_scriptup_1->setEnabled( false );
-		_ui_kvirtualview_base.kurlrequester_scriptdown_1->setEnabled( false );
-		_ui_kvirtualview_base.checkBox_scriptup_1->setChecked( false );
-		_ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( false );
+		case 0:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( false );
+			break;
+		}
+		case 1:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( true );
+			break;
+		}
+		default:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( false );
+		}
 	}
-
-	_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( state );
-
-	_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( state );
-	_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_1->setChecked( false );
+	_ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( false );
 }
 
 void KVirtualView::setType2Enable( int id )
 {
-	bool state = true;
-
-	if ( ! id )
+	switch ( id )
 	{
-		state = false;
-		_ui_kvirtualview_base.kurlrequester_scriptup_2->setEnabled( state );
-		_ui_kvirtualview_base.kurlrequester_scriptdown_2->setEnabled( state );
-		_ui_kvirtualview_base.checkBox_scriptup_2->setChecked( false );
-		_ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( false );
+		case 0:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( false );
+			break;
+		}
+		case 1:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( true );
+			break;
+		}
+		default:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( false );
+		}
 	}
-
-	_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( state );
-
-	_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( state );
-	_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_2->setChecked( false );
+	_ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( false );
 }
 
 void KVirtualView::setType3Enable( int id )
 {
-	bool state = true;
-
-	if ( ! id )
+	switch ( id )
 	{
-		state = false;
-		_ui_kvirtualview_base.kurlrequester_scriptup_3->setEnabled( state );
-		_ui_kvirtualview_base.kurlrequester_scriptdown_3->setEnabled( state );
-		_ui_kvirtualview_base.checkBox_scriptup_3->setChecked( false );
-		_ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( false );
+		case 0:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( false );
+			break;
+		}
+		case 1:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( true );
+			break;
+		}
+		default:
+		{
+			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
+			_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( false );
+			_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( false );
+		}
 	}
-
-	_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( state );
-
-	_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( state );
-	_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_3->setChecked( false );
+	_ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( false );
 }
 
 void KVirtualView::loadOptions()
@@ -728,6 +788,8 @@ void KVirtualView::loadOptions()
 
 		if ( index >= 0 )
 			_ui_kvirtualview_base.comboBox_iface_model_1->setCurrentIndex( index );
+		else
+			_ui_kvirtualview_base.comboBox_iface_model_1->setCurrentIndex( 0 );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_1->findText( iface->getType() );
 
@@ -755,6 +817,8 @@ void KVirtualView::loadOptions()
 
 		if ( index >= 0 )
 			_ui_kvirtualview_base.comboBox_iface_model_2->setCurrentIndex( index );
+		else
+			_ui_kvirtualview_base.comboBox_iface_model_2->setCurrentIndex( 0 );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_2->findText( iface->getType() );
 
@@ -782,6 +846,8 @@ void KVirtualView::loadOptions()
 
 		if ( index >= 0 )
 			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( index );
+		else
+			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( 0 );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_3->findText( iface->getType() );
 
@@ -825,4 +891,4 @@ void KVirtualView::toggleOutput()
 }
 
 #include "kvirtualview.moc"
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;      replace-tabs off;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;   replace-tabs off;  replace-tabs off;      replace-tabs off;

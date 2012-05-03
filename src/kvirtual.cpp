@@ -105,11 +105,6 @@ KVirtual::KVirtual()
 KVirtual::~KVirtual()
 {
 	QMapIterator<uint, KVirtualProcess*> it( m_processes );
-
-	terminateAll();
-	sleep( 1 );
-	killAll();
-
 	while ( it.hasNext() )
 	{
 		it.next();
@@ -123,42 +118,6 @@ KVirtual::~KVirtual()
 	delete m_systray;
 
 	delete m_create;
-}
-
-void KVirtual::terminateAll()
-{
-	QMapIterator<uint, KVirtualProcess*> it( m_processes );
-
-	while ( it.hasNext() )
-	{
-		it.next();
-
-		if ( it.value() )
-		{
-			if ( it.value()->state() != QProcess::NotRunning )
-			{
-				it.value()->terminate();
-			}
-		}
-	}
-}
-
-void KVirtual::killAll()
-{
-	QMapIterator<uint, KVirtualProcess*> it( m_processes );
-
-	while ( it.hasNext() )
-	{
-		it.next();
-
-		if ( it.value() )
-		{
-			if ( it.value()->state() != QProcess::NotRunning )
-			{
-				it.value()->kill();
-			}
-		}
-	}
 }
 
 void KVirtual::setupActions()
@@ -216,13 +175,13 @@ void KVirtual::changeIcon( const QString & distrib )
 	m_systray->setIconByName( img );
 }
 
-bool KVirtual::queryClose() //exitCalled()
+bool KVirtual::queryClose() //exitCalled() by window button
 {
 	hide();
 	return false;
 }
 
-bool KVirtual::queryExit() //exitCalled()
+bool KVirtual::queryExit() //exitCalled() by file menu or by system tray
 {
 	if ( m_options->isModified( m_confFilename ) )
 	{
@@ -248,7 +207,7 @@ bool KVirtual::queryExit() //exitCalled()
 			}
 		}
 	}
-
+	terminateVirtual();
 	return true;
 }
 
@@ -482,7 +441,7 @@ void KVirtual::killVirtual()
 		//if( m_processes[*it]->getVirtualType() != KVirtualProcess::HOST ) continue;
 		if ( m_processes[*it] &&  m_processes[*it]->state() != QProcess::NotRunning )
 		{
-			m_processes[*it]->terminate();
+			m_processes[*it]->kill();
 		}
 	}
 }

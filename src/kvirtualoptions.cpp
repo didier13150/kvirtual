@@ -157,10 +157,17 @@ const QStringList & KVirtualOptions::getArgs()
 			{
 				buffer += ",sock=" + m_ifaces[*it]->getFile();
 			}
+			
+			else
+			{
+				buffer.clear();
+			}
 
-			buffer += ",vlan=" + id;
-
-			m_opts << "-net" << buffer;
+			if ( ! buffer.isEmpty() )
+			{
+				buffer += ",vlan=" + id;
+				m_opts << "-net" << buffer;
+			}
 		}
 	}
 
