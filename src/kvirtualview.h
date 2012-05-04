@@ -116,12 +116,6 @@ public slots:
 private slots:
 	void settingsChanged();
 	void setIcon( const QString & );
-	void setType1Enable( int );
-	void setType2Enable( int );
-	void setType3Enable( int );
-	void setIface1Enabled( int );
-	void setIface2Enabled( int );
-	void setIface3Enabled( int );
 	void syncDescription();
 	void syncVideoCard();
 	void syncStorageType1( int );

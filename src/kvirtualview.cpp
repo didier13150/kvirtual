@@ -135,7 +135,7 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	         _ui_kvirtualview_base.horizontalSlider_nb_of_cpu,
 	         SLOT( setValue( int ) )
 	       );
-	connect( _ui_kvirtualview_base.comboBox_iface_type_1,
+/*	connect( _ui_kvirtualview_base.comboBox_iface_type_1,
 	         SIGNAL( currentIndexChanged( int ) ),
 	         SLOT( setType1Enable( int ) )
 	       );
@@ -161,7 +161,7 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	         SIGNAL( currentIndexChanged( int ) ),
 	         SLOT( setIface3Enabled( int ) )
 
-	       );
+	       );*/
 	connect( _ui_kvirtualview_base.lineEdit_name,
 	         SIGNAL( textEdited( QString ) ),
 	         m_options,
@@ -248,7 +248,7 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	         SIGNAL( currentIndexChanged( QString ) ),
 	         SLOT( syncIfaceType3( QString ) )
 	       );
-	connect( _ui_kvirtualview_base.comboBox_iface_type_2,
+	connect( _ui_kvirtualview_base.comboBox_iface_type_3,
 	         SIGNAL( currentIndexChanged( QString ) ),
 	         SLOT( syncIfaceType3( QString ) )
 	       );
@@ -449,34 +449,79 @@ void KVirtualView::syncIfaceScriptDownState3( int state )
 void KVirtualView::syncIfaceType1( const QString & type )
 {
 	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
-	if ( ! _ui_kvirtualview_base.comboBox_iface_type_1->currentIndex() )
+	int typeID = _ui_kvirtualview_base.comboBox_iface_type_1->currentIndex();
+	switch ( typeID )
 	{
-		iface->setType( QString() );
-		return;
+		case 0:
+		{
+			iface->setType( QString() );
+			enableScripts1( false );
+			break;
+		}
+		case 1:
+		{
+			iface->setType( type );
+			enableScripts1( true );
+			break;
+		}
+		default:
+		{
+			iface->setType( type );
+			enableScripts1( false );
+		}
 	}
-	iface->setType( type );
 }
 
 void KVirtualView::syncIfaceType2( const QString & type )
 {
 	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
-	if ( ! _ui_kvirtualview_base.comboBox_iface_type_2->currentIndex() )
+	int typeID = _ui_kvirtualview_base.comboBox_iface_type_2->currentIndex();
+	switch ( typeID )
 	{
-		iface->setType( QString() );
-		return;
+		case 0:
+		{
+			iface->setType( QString() );
+			enableScripts2( false );
+			break;
+		}
+		case 1:
+		{
+			iface->setType( type );
+			enableScripts2( true );
+			break;
+		}
+		default:
+		{
+			iface->setType( type );
+			enableScripts2( false );
+		}
 	}
-	iface->setType( type );
 }
 
 void KVirtualView::syncIfaceType3( const QString & type )
 {
 	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
-	if ( ! _ui_kvirtualview_base.comboBox_iface_type_3->currentIndex() )
+	int typeID = _ui_kvirtualview_base.comboBox_iface_type_3->currentIndex();
+	switch ( typeID )
 	{
-		iface->setType( QString() );
-		return;
+		case 0:
+		{
+			iface->setType( QString() );
+			enableScripts3( false );
+			break;
+		}
+		case 1:
+		{
+			iface->setType( type );
+			enableScripts3( true );
+			break;
+		}
+		default:
+		{
+			iface->setType( type );
+			enableScripts3( false );
+		}
 	}
-	iface->setType( type );
 }
 
 void KVirtualView::syncIfaceFile1( const QString & file )
@@ -500,6 +545,31 @@ void KVirtualView::syncIfaceFile3( const QString & file )
 void KVirtualView::syncIfaceModel1( const QString & model )
 {
 	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
+	int modelID = _ui_kvirtualview_base.comboBox_iface_model_1->currentIndex();
+	int typeID = _ui_kvirtualview_base.comboBox_iface_type_1->currentIndex();
+	if ( modelID )
+	{
+		_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
+		_ui_kvirtualview_base.lineEdit_iface_mac_1->setEnabled( true );
+		_ui_kvirtualview_base.comboBox_iface_type_1->setEnabled( true );
+		if( typeID == 1 )
+		{
+			enableScripts1( true );
+		}
+		else
+		{
+			enableScripts1( false );
+		}
+		iface->setModel( model );
+	}
+	else
+	{
+		_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( false );
+		_ui_kvirtualview_base.lineEdit_iface_mac_1->setEnabled( false );
+		_ui_kvirtualview_base.comboBox_iface_type_1->setEnabled( false );
+		enableScripts3( false );
+		iface->setModel( QString() );
+	}
 	if ( ! _ui_kvirtualview_base.comboBox_iface_model_1->currentIndex() )
 	{
 		iface->setModel( QString() );
@@ -511,23 +581,61 @@ void KVirtualView::syncIfaceModel1( const QString & model )
 void KVirtualView::syncIfaceModel2( const QString & model )
 {
 	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
-	if ( ! _ui_kvirtualview_base.comboBox_iface_model_2->currentIndex() )
+	int modelID = _ui_kvirtualview_base.comboBox_iface_model_2->currentIndex();
+	int typeID = _ui_kvirtualview_base.comboBox_iface_type_2->currentIndex();
+	if ( modelID )
 	{
-		iface->setModel( QString() );
-		return;
+		_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
+		_ui_kvirtualview_base.lineEdit_iface_mac_2->setEnabled( true );
+		_ui_kvirtualview_base.comboBox_iface_type_2->setEnabled( true );
+		if( typeID == 1 )
+		{
+			enableScripts2( true );
+		}
+		else
+		{
+			enableScripts2( false );
+		}
+		iface->setModel( model );
 	}
-	iface->setModel( model );
+	else
+	{
+		_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( false );
+		_ui_kvirtualview_base.lineEdit_iface_mac_2->setEnabled( false );
+		_ui_kvirtualview_base.comboBox_iface_type_2->setEnabled( false );
+		enableScripts3( false );
+		iface->setModel( QString() );
+	}
 }
 
 void KVirtualView::syncIfaceModel3( const QString & model )
 {
 	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
-	if ( ! _ui_kvirtualview_base.comboBox_iface_model_3->currentIndex() )
+	int modelID = _ui_kvirtualview_base.comboBox_iface_model_3->currentIndex();
+	int typeID = _ui_kvirtualview_base.comboBox_iface_type_3->currentIndex();
+	if ( modelID )
 	{
-		iface->setModel( QString() );
-		return;
+		_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
+		_ui_kvirtualview_base.lineEdit_iface_mac_3->setEnabled( true );
+		_ui_kvirtualview_base.comboBox_iface_type_3->setEnabled( true );
+		if( typeID == 1 )
+		{
+			enableScripts3( true );
+		}
+		else
+		{
+			enableScripts3( false );
+		}
+		iface->setModel( model );
 	}
-	iface->setModel( model );
+	else
+	{
+		_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( false );
+		_ui_kvirtualview_base.lineEdit_iface_mac_3->setEnabled( false );
+		_ui_kvirtualview_base.comboBox_iface_type_3->setEnabled( false );
+		enableScripts3( false );
+		iface->setModel( QString() );
+	}
 }
 
 void KVirtualView::syncIfaceHwAddr1( const QString & hwaddr )
@@ -563,99 +671,6 @@ void KVirtualView::syncVideoCard()
 void KVirtualView::syncDescription()
 {
 	m_options->setDescription( _ui_kvirtualview_base.textEdit_description->toHtml() );
-}
-
-void KVirtualView::setIface1Enabled( int id )
-{
-	setType1Enable( id );
-	_ui_kvirtualview_base.comboBox_iface_type_1->setEnabled( (bool) id );
-	_ui_kvirtualview_base.lineEdit_iface_mac_1->setEnabled( (bool) id );
-}
-
-void KVirtualView::setIface2Enabled( int id )
-{
-	setType2Enable( id );
-	_ui_kvirtualview_base.comboBox_iface_type_2->setEnabled( (bool) id );
-	_ui_kvirtualview_base.lineEdit_iface_mac_2->setEnabled( (bool) id );
-}
-
-void KVirtualView::setIface3Enabled( int id )
-{
-	setType3Enable( id );
-	_ui_kvirtualview_base.comboBox_iface_type_3->setEnabled( (bool) id );
-	_ui_kvirtualview_base.lineEdit_iface_mac_3->setEnabled( (bool) id );
-}
-
-void KVirtualView::setType1Enable( int id )
-{
-	switch ( id )
-	{
-		case 0:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( false );
-			enableScripts1( false );
-			break;
-		}
-		case 1:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
-			enableScripts1( true );
-			break;
-		}
-		default:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
-			enableScripts1( false );
-		}
-	}
-}
-
-void KVirtualView::setType2Enable( int id )
-{
-	switch ( id )
-	{
-		case 0:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( false );
-			enableScripts2( false );
-			break;
-		}
-		case 1:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
-			enableScripts2( true );
-			break;
-		}
-		default:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
-			enableScripts2( false );
-		}
-	}
-}
-
-void KVirtualView::setType3Enable( int id )
-{
-	switch ( id )
-	{
-		case 0:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( false );
-			enableScripts3( false );
-			break;
-		}
-		case 1:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
-			enableScripts3( true );
-			break;
-		}
-		default:
-		{
-			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
-			enableScripts3( false );
-		}
-	}
 }
 
 void KVirtualView::enableScripts1( bool state )
@@ -736,7 +751,7 @@ void KVirtualView::loadOptions()
 
 	_ui_kvirtualview_base.comboBox_boot->setCurrentIndex(( int ) m_options->getBootDevice() );
 
-	storage = m_options->getAutoCreateStorage( 0 );
+	storage = m_options->getStorage( 0 );
 
 	if ( storage )
 	{
@@ -745,7 +760,7 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.comboBox_storage_1->setCurrentIndex( storage->getTypeID() );
 	}
 
-	storage = m_options->getAutoCreateStorage( 1 );
+	storage = m_options->getStorage( 1 );
 
 	if ( storage )
 	{
@@ -754,7 +769,7 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( storage->getTypeID() );
 	}
 
-	storage = m_options->getAutoCreateStorage( 2 );
+	storage = m_options->getStorage( 2 );
 
 	if ( storage )
 	{
@@ -763,7 +778,7 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.comboBox_storage_3->setCurrentIndex( storage->getTypeID() );
 	}
 
-	iface = m_options->getAutoCreateIface( 0 );
+	iface = m_options->getIface( 0 );
 
 	if ( iface )
 	{
@@ -794,7 +809,7 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( iface->isScriptDownEnabled() );
 	}
 
-	iface = m_options->getAutoCreateIface( 1 );
+	iface = m_options->getIface( 1 );
 
 	if ( iface )
 	{
@@ -825,7 +840,7 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( iface->isScriptDownEnabled() );
 	}
 
-	iface = m_options->getAutoCreateIface( 2 );
+	iface = m_options->getIface( 2 );
 
 	if ( iface )
 	{
@@ -835,7 +850,6 @@ void KVirtualView::loadOptions()
 			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( index );
 		else
 			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( 0 );
-		setType3Enable( index );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_3->findText( iface->getType() );
 
@@ -844,7 +858,6 @@ void KVirtualView::loadOptions()
 		else
 		{
 			_ui_kvirtualview_base.comboBox_iface_type_3->setCurrentIndex( 0 );
-			enableScripts3( false );
 		}
 
 		_ui_kvirtualview_base.lineEdit_iface_detail_3->setText( iface->getFile() );
