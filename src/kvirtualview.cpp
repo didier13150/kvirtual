@@ -567,59 +567,23 @@ void KVirtualView::syncDescription()
 
 void KVirtualView::setIface1Enabled( int id )
 {
-	bool state = true;
-
-	if ( id <= 0 )
-	{
-		state = false;
-		setType1Enable( 0 );
-	}
-	else
-	{
-		setType1Enable( 1 );
-	}
-
-	_ui_kvirtualview_base.comboBox_iface_type_1->setEnabled( state );
-
-	_ui_kvirtualview_base.lineEdit_iface_mac_1->setEnabled( state );
+	setType1Enable( id );
+	_ui_kvirtualview_base.comboBox_iface_type_1->setEnabled( (bool) id );
+	_ui_kvirtualview_base.lineEdit_iface_mac_1->setEnabled( (bool) id );
 }
 
 void KVirtualView::setIface2Enabled( int id )
 {
-	bool state = true;
-
-	if ( id <= 0 )
-	{
-		state = false;
-		setType2Enable( 0 );
-	}
-	else
-	{
-		setType2Enable( 1 );
-	}
-
-	_ui_kvirtualview_base.comboBox_iface_type_2->setEnabled( state );
-
-	_ui_kvirtualview_base.lineEdit_iface_mac_2->setEnabled( state );
+	setType2Enable( id );
+	_ui_kvirtualview_base.comboBox_iface_type_2->setEnabled( (bool) id );
+	_ui_kvirtualview_base.lineEdit_iface_mac_2->setEnabled( (bool) id );
 }
 
 void KVirtualView::setIface3Enabled( int id )
 {
-	bool state = true;
-
-	if ( id <= 0 )
-	{
-		state = false;
-		setType3Enable( 0 );
-	}
-	else
-	{
-		setType3Enable( 1 );
-	}
-
-	_ui_kvirtualview_base.comboBox_iface_type_3->setEnabled( state );
-
-	_ui_kvirtualview_base.lineEdit_iface_mac_3->setEnabled( state );
+	setType3Enable( id );
+	_ui_kvirtualview_base.comboBox_iface_type_3->setEnabled( (bool) id );
+	_ui_kvirtualview_base.lineEdit_iface_mac_3->setEnabled( (bool) id );
 }
 
 void KVirtualView::setType1Enable( int id )
@@ -629,26 +593,21 @@ void KVirtualView::setType1Enable( int id )
 		case 0:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( false );
+			enableScripts1( false );
 			break;
 		}
 		case 1:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( true );
+			enableScripts1( true );
 			break;
 		}
 		default:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( false );
+			enableScripts1( false );
 		}
 	}
-	_ui_kvirtualview_base.checkBox_scriptup_1->setChecked( false );
-	_ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( false );
 }
 
 void KVirtualView::setType2Enable( int id )
@@ -658,26 +617,21 @@ void KVirtualView::setType2Enable( int id )
 		case 0:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( false );
+			enableScripts2( false );
 			break;
 		}
 		case 1:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( true );
+			enableScripts2( true );
 			break;
 		}
 		default:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( false );
+			enableScripts2( false );
 		}
 	}
-	_ui_kvirtualview_base.checkBox_scriptup_2->setChecked( false );
-	_ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( false );
 }
 
 void KVirtualView::setType3Enable( int id )
@@ -687,27 +641,56 @@ void KVirtualView::setType3Enable( int id )
 		case 0:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( false );
+			enableScripts3( false );
 			break;
 		}
 		case 1:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( true );
+			enableScripts3( true );
 			break;
 		}
 		default:
 		{
 			_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
-			_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( false );
-			_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( false );
+			enableScripts3( false );
 		}
 	}
-	_ui_kvirtualview_base.checkBox_scriptup_3->setChecked( false );
-	_ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( false );
 }
+
+void KVirtualView::enableScripts1( bool state )
+{
+	if ( ! state )
+	{
+		_ui_kvirtualview_base.checkBox_scriptup_1->setChecked( state );
+		_ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( state );
+	}
+	_ui_kvirtualview_base.checkBox_scriptdown_1->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_1->setEnabled( state );
+}
+
+void KVirtualView::enableScripts2( bool state )
+{
+	if ( ! state )
+	{
+		_ui_kvirtualview_base.checkBox_scriptup_2->setChecked( state );
+		_ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( state );
+	}
+	_ui_kvirtualview_base.checkBox_scriptdown_2->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_2->setEnabled( state );
+}
+
+void KVirtualView::enableScripts3( bool state )
+{
+	if ( ! state )
+	{
+		_ui_kvirtualview_base.checkBox_scriptup_3->setChecked( state );
+		_ui_kvirtualview_base.checkBox_scriptdown_3->setChecked( state );
+	}
+	_ui_kvirtualview_base.checkBox_scriptdown_3->setEnabled( state );
+	_ui_kvirtualview_base.checkBox_scriptup_3->setEnabled( state );
+}
+
 
 void KVirtualView::loadOptions()
 {
@@ -795,6 +778,8 @@ void KVirtualView::loadOptions()
 
 		if ( index >= 0 )
 			_ui_kvirtualview_base.comboBox_iface_type_1->setCurrentIndex( index );
+		else
+			_ui_kvirtualview_base.comboBox_iface_type_1->setCurrentIndex( 0 );
 
 		_ui_kvirtualview_base.lineEdit_iface_detail_1->setText( iface->getFile() );
 
@@ -824,6 +809,8 @@ void KVirtualView::loadOptions()
 
 		if ( index >= 0 )
 			_ui_kvirtualview_base.comboBox_iface_type_2->setCurrentIndex( index );
+		else
+			_ui_kvirtualview_base.comboBox_iface_type_2->setCurrentIndex( 0 );
 
 		_ui_kvirtualview_base.lineEdit_iface_detail_2->setText( iface->getFile() );
 
@@ -848,11 +835,17 @@ void KVirtualView::loadOptions()
 			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( index );
 		else
 			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( 0 );
+		setType3Enable( index );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_3->findText( iface->getType() );
 
-		if ( index >= 0 )
+		if ( index > 0 )
 			_ui_kvirtualview_base.comboBox_iface_type_3->setCurrentIndex( index );
+		else
+		{
+			_ui_kvirtualview_base.comboBox_iface_type_3->setCurrentIndex( 0 );
+			enableScripts3( false );
+		}
 
 		_ui_kvirtualview_base.lineEdit_iface_detail_3->setText( iface->getFile() );
 

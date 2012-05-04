@@ -90,6 +90,10 @@ private:
 	KVirtualOptions* m_options;
 	QButtonGroup* m_displayGroup;
 
+	void enableScripts1( bool );
+	void enableScripts2( bool );
+	void enableScripts3( bool );
+
 signals:
 	/**
 	 * Use this signal to change the content of the statusbar
