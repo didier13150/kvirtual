@@ -340,115 +340,115 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 
 void KVirtualView::syncStorageType1( int type )
 {
-	KVirtualStorage* storage = m_options->getStorage( 0 );
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 0 );
 	storage->setTypeID( type );
 }
 
 void KVirtualView::syncStorageType2( int type )
 {
-	KVirtualStorage* storage = m_options->getStorage( 1 );
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 1 );
 	storage->setTypeID( type );
 }
 
 void KVirtualView::syncStorageType3( int type )
 {
-	KVirtualStorage* storage = m_options->getStorage( 2 );
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 2 );
 	storage->setTypeID( type );
 }
 
 void KVirtualView::syncStorageFile1( const QString & file )
 {
-	KVirtualStorage* storage = m_options->getStorage( 0 );
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 0 );
 	storage->setFile( file );
 }
 
 void KVirtualView::syncStorageFile2( const QString & file )
 {
-	KVirtualStorage* storage = m_options->getStorage( 1 );
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 1 );
 	storage->setFile( file );
 }
 
 void KVirtualView::syncStorageFile3( const QString & file )
 {
-	KVirtualStorage* storage = m_options->getStorage( 2 );
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 2 );
 	storage->setFile( file );
 }
 
 void KVirtualView::syncIfaceScriptUp1( const QString & script )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	iface->setScriptUp( script );
 }
 
 void KVirtualView::syncIfaceScriptUp2( const QString & script )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	iface->setScriptUp( script );
 }
 
 void KVirtualView::syncIfaceScriptUp3( const QString & script )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	iface->setScriptUp( script );
 }
 
 void KVirtualView::syncIfaceScriptDown1( const QString & script )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	iface->setScriptDown( script );
 }
 
 void KVirtualView::syncIfaceScriptDown2( const QString & script )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	iface->setScriptDown( script );
 }
 
 void KVirtualView::syncIfaceScriptDown3( const QString & script )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	iface->setScriptDown( script );
 }
 
 void KVirtualView::syncIfaceScriptUpState1( int state )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	iface->setScriptUpEnabled(( bool ) state );
 }
 
 void KVirtualView::syncIfaceScriptUpState2( int state )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	iface->setScriptUpEnabled(( bool ) state );
 }
 
 void KVirtualView::syncIfaceScriptUpState3( int state )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	iface->setScriptUpEnabled(( bool ) state );
 }
 
 void KVirtualView::syncIfaceScriptDownState1( int state )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	iface->setScriptDownEnabled(( bool ) state );
 }
 
 void KVirtualView::syncIfaceScriptDownState2( int state )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	iface->setScriptDownEnabled(( bool ) state );
 }
 
 void KVirtualView::syncIfaceScriptDownState3( int state )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	iface->setScriptDownEnabled(( bool ) state );
 }
 
 void KVirtualView::syncIfaceType1( const QString & type )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	if ( ! _ui_kvirtualview_base.comboBox_iface_type_1->currentIndex() )
 	{
 		iface->setType( QString() );
@@ -459,7 +459,7 @@ void KVirtualView::syncIfaceType1( const QString & type )
 
 void KVirtualView::syncIfaceType2( const QString & type )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	if ( ! _ui_kvirtualview_base.comboBox_iface_type_2->currentIndex() )
 	{
 		iface->setType( QString() );
@@ -470,7 +470,7 @@ void KVirtualView::syncIfaceType2( const QString & type )
 
 void KVirtualView::syncIfaceType3( const QString & type )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	if ( ! _ui_kvirtualview_base.comboBox_iface_type_3->currentIndex() )
 	{
 		iface->setType( QString() );
@@ -481,25 +481,25 @@ void KVirtualView::syncIfaceType3( const QString & type )
 
 void KVirtualView::syncIfaceFile1( const QString & file )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	iface->setFile( file );
 }
 
 void KVirtualView::syncIfaceFile2( const QString & file )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	iface->setFile( file );
 }
 
 void KVirtualView::syncIfaceFile3( const QString & file )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	iface->setFile( file );
 }
 
 void KVirtualView::syncIfaceModel1( const QString & model )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	if ( ! _ui_kvirtualview_base.comboBox_iface_model_1->currentIndex() )
 	{
 		iface->setModel( QString() );
@@ -510,7 +510,7 @@ void KVirtualView::syncIfaceModel1( const QString & model )
 
 void KVirtualView::syncIfaceModel2( const QString & model )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	if ( ! _ui_kvirtualview_base.comboBox_iface_model_2->currentIndex() )
 	{
 		iface->setModel( QString() );
@@ -521,7 +521,7 @@ void KVirtualView::syncIfaceModel2( const QString & model )
 
 void KVirtualView::syncIfaceModel3( const QString & model )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	if ( ! _ui_kvirtualview_base.comboBox_iface_model_3->currentIndex() )
 	{
 		iface->setModel( QString() );
@@ -532,19 +532,19 @@ void KVirtualView::syncIfaceModel3( const QString & model )
 
 void KVirtualView::syncIfaceHwAddr1( const QString & hwaddr )
 {
-	KVirtualIface* iface = m_options->getIface( 0 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 0 );
 	iface->setHardwareAddress( hwaddr );
 }
 
 void KVirtualView::syncIfaceHwAddr2( const QString & hwaddr )
 {
-	KVirtualIface* iface = m_options->getIface( 1 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 1 );
 	iface->setHardwareAddress( hwaddr );
 }
 
 void KVirtualView::syncIfaceHwAddr3( const QString & hwaddr )
 {
-	KVirtualIface* iface = m_options->getIface( 2 );
+	KVirtualIface* iface = m_options->getAutoCreateIface( 2 );
 	iface->setHardwareAddress( hwaddr );
 }
 
@@ -753,7 +753,7 @@ void KVirtualView::loadOptions()
 
 	_ui_kvirtualview_base.comboBox_boot->setCurrentIndex(( int ) m_options->getBootDevice() );
 
-	storage = m_options->getStorage( 0 );
+	storage = m_options->getAutoCreateStorage( 0 );
 
 	if ( storage )
 	{
@@ -762,7 +762,7 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.comboBox_storage_1->setCurrentIndex( storage->getTypeID() );
 	}
 
-	storage = m_options->getStorage( 1 );
+	storage = m_options->getAutoCreateStorage( 1 );
 
 	if ( storage )
 	{
@@ -771,7 +771,7 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.comboBox_storage_2->setCurrentIndex( storage->getTypeID() );
 	}
 
-	storage = m_options->getStorage( 2 );
+	storage = m_options->getAutoCreateStorage( 2 );
 
 	if ( storage )
 	{
@@ -780,20 +780,20 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.comboBox_storage_3->setCurrentIndex( storage->getTypeID() );
 	}
 
-	iface = m_options->getIface( 0 );
+	iface = m_options->getAutoCreateIface( 0 );
 
 	if ( iface )
 	{
 		index = _ui_kvirtualview_base.comboBox_iface_model_1->findText( iface->getModel() );
 
-		if ( index >= 0 )
+		if ( index > 0 )
 			_ui_kvirtualview_base.comboBox_iface_model_1->setCurrentIndex( index );
 		else
 			_ui_kvirtualview_base.comboBox_iface_model_1->setCurrentIndex( 0 );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_1->findText( iface->getType() );
 
-		if ( index >= 0 )
+		if ( index > 0 )
 			_ui_kvirtualview_base.comboBox_iface_type_1->setCurrentIndex( index );
 
 		_ui_kvirtualview_base.lineEdit_iface_detail_1->setText( iface->getFile() );
@@ -809,20 +809,20 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.checkBox_scriptdown_1->setChecked( iface->isScriptDownEnabled() );
 	}
 
-	iface = m_options->getIface( 1 );
+	iface = m_options->getAutoCreateIface( 1 );
 
 	if ( iface )
 	{
 		index = _ui_kvirtualview_base.comboBox_iface_model_2->findText( iface->getModel() );
 
-		if ( index >= 0 )
+		if ( index > 0 )
 			_ui_kvirtualview_base.comboBox_iface_model_2->setCurrentIndex( index );
 		else
 			_ui_kvirtualview_base.comboBox_iface_model_2->setCurrentIndex( 0 );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_2->findText( iface->getType() );
 
-		if ( index >= 0 )
+		if ( index > 0 )
 			_ui_kvirtualview_base.comboBox_iface_type_2->setCurrentIndex( index );
 
 		_ui_kvirtualview_base.lineEdit_iface_detail_2->setText( iface->getFile() );
@@ -838,20 +838,20 @@ void KVirtualView::loadOptions()
 		_ui_kvirtualview_base.checkBox_scriptdown_2->setChecked( iface->isScriptDownEnabled() );
 	}
 
-	iface = m_options->getIface( 2 );
+	iface = m_options->getAutoCreateIface( 2 );
 
 	if ( iface )
 	{
 		index = _ui_kvirtualview_base.comboBox_iface_model_3->findText( iface->getModel() );
 
-		if ( index >= 0 )
+		if ( index > 0 )
 			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( index );
 		else
 			_ui_kvirtualview_base.comboBox_iface_model_3->setCurrentIndex( 0 );
 
 		index = _ui_kvirtualview_base.comboBox_iface_type_3->findText( iface->getType() );
 
-		if ( index >= 0 )
+		if ( index > 0 )
 			_ui_kvirtualview_base.comboBox_iface_type_3->setCurrentIndex( index );
 
 		_ui_kvirtualview_base.lineEdit_iface_detail_3->setText( iface->getFile() );

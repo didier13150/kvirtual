@@ -357,6 +357,109 @@ void KVirtualOptions::setUsedSwitch( const QString & vswitch )
 		m_usedSwitches << vswitch;
 }
 
+
+const QString & KVirtualOptions::getName() const
+{
+	return m_name;
+}
+
+const QString & KVirtualOptions::getDistrib() const
+{
+	return m_distrib;
+}
+
+const QString & KVirtualOptions::getDescription() const
+{
+	return m_description;
+}
+
+uint KVirtualOptions::getMemory() const
+{
+	return m_memory;
+}
+
+uint KVirtualOptions::getNbCPU() const
+{
+	return m_cpus;
+}
+
+KVirtualStorage* KVirtualOptions::getStorage( uint id ) const
+{
+	if ( ! m_storages.contains( id ) )
+	{
+		return 0;
+	}
+
+	return m_storages[ id ];
+}
+
+KVirtualStorage* KVirtualOptions::getAutoCreateStorage( uint id )
+{
+	if ( ! m_storages.contains( id ) )
+	{
+		KVirtualStorage* storage = new KVirtualStorage();
+		m_storages[ id ] = storage;
+	}
+
+	return m_storages[ id ];
+}
+
+KVirtualIface* KVirtualOptions::getIface( uint id ) const
+{
+	if ( ! m_ifaces.contains( id ) )
+	{
+		return 0;
+	}
+
+	return m_ifaces[ id ];
+}
+
+KVirtualIface* KVirtualOptions::getAutoCreateIface( uint id )
+{
+	if ( ! m_ifaces.contains( id ) )
+	{
+		KVirtualIface* iface = new KVirtualIface();
+		m_ifaces[ id ] = iface;
+	}
+
+	return m_ifaces[ id ];
+}
+
+const QString & KVirtualOptions::getVideoCard() const
+{
+	return m_videoCard;
+}
+
+bool KVirtualOptions::isUsbSupported() const
+{
+	return m_usb;
+}
+
+bool KVirtualOptions::isSnapshotEnabled() const
+{
+	return m_snapshot;
+}
+
+uint KVirtualOptions::getVncPort() const
+{
+	return m_vncport;
+}
+
+KVirtualOptions::Display KVirtualOptions::getDisplay() const
+{
+	return m_display;
+}
+
+KVirtualOptions::BootOrder KVirtualOptions::getBootDevice() const
+{
+	return m_bootDevice;
+}
+
+const QString & KVirtualOptions::getKeyboard() const
+{
+	return m_keyboard;
+}
+
 bool KVirtualOptions::isModified( const QString & filename ) const
 {
 	if ( filename.isNull() )
@@ -460,6 +563,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 					{
 						if ( isUsbSupported() != element2.attribute( "enabled" ).toInt() )
 						{
+							qDebug() << "usb support is not sync" << isUsbSupported() << element2.attribute( "enabled" );
 							return true;
 						}
 					}
@@ -468,6 +572,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 					{
 						if ( isSnapshotEnabled() != element2.attribute( "enabled" ).toInt() )
 						{
+							qDebug() << "snapshot mode not sync" << isSnapshotEnabled() << element2.attribute( "enabled" );
 							return true;
 						}
 					}
@@ -476,6 +581,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 					{
 						if ( getNbCPU() != element2.attribute( "value" ).toUInt() )
 						{
+							qDebug() << "number of core not sync" << getNbCPU() << element2.attribute( "value" );
 							return true;
 						}
 					}
@@ -490,6 +596,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 				if ( getDisplay() != DisplayFromString( buffer ) )
 				{
+							qDebug() << "display not sync" << DisplayToString( getDisplay() ) << buffer;
 					return true;
 				}
 
@@ -503,6 +610,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 					{
 						if ( getVideoCard() != element2.attribute( "model" ) )
 						{
+							qDebug() << "video card not sync" << getVideoCard() << element2.attribute( "model" );
 							return true;
 						}
 					}
@@ -511,6 +619,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 					{
 						if ( getVncPort() != element2.attribute( "port" ).toUInt() )
 						{
+							qDebug() << "vnc port not sync" << getVncPort() << element2.attribute( "port" );
 							return true;
 						}
 					}
@@ -519,6 +628,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 					{
 						if ( getKeyboard() != element2.attribute( "model" ) )
 						{
+							qDebug() << "keyboard not sync" << getKeyboard() << element2.attribute( "model" );
 							return true;
 						}
 					}
@@ -541,11 +651,13 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 						if ( element2.attribute( "type" ).toInt() != getStorage( id )->getTypeID() )
 						{
+							qDebug() << "storage type not sync, id" << id << getStorage( id )->getTypeID() << element2.attribute( "type" );
 							return true;
 						}
 
 						if ( element2.attribute( "file" ) != getStorage( id )->getFile() )
 						{
+							qDebug() << "storage file not sync, id" << id << getStorage( id )->getFile() << element2.attribute( "file" );
 							return true;
 						}
 					}
@@ -568,21 +680,25 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 						if ( element2.attribute( "type" ) != getIface( id )->getType() )
 						{
+							qDebug() << "iface type not sync, id" << id << getIface( id )->getType() << element2.attribute( "type" );
 							return true;
 						}
 
 						if ( element2.attribute( "file" ) != getIface( id )->getFile() )
 						{
+							qDebug() << "iface file not sync, id" << id << getIface( id )->getFile() << element2.attribute( "file" );
 							return true;
 						}
 
 						if ( element2.attribute( "model" ) != getIface( id )->getModel() )
 						{
+							qDebug() << "iface model not sync, id" << id << getIface( id )->getModel() << element2.attribute( "model" );
 							return true;
 						}
 
 						if ( element2.attribute( "addr" ) != getIface( id )->getHardwareAddress() )
 						{
+							qDebug() << "iface hwaddr not sync, id" << id << getIface( id )->getHardwareAddress() << element2.attribute( "addr" );
 							return true;
 						}
 
@@ -596,11 +712,13 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 							{
 								if ( getIface( id )->getScriptUp() != element3.attribute( "up" ) )
 								{
+									qDebug() << "iface scriptup not sync, id" << id << getIface( id )->getScriptUp() << element3.attribute( "up" );
 									return true;
 								}
 
 								if ( getIface( id )->getScriptDown() != element3.attribute( "down" ) )
 								{
+									qDebug() << "iface scriptdown not sync, id" << id << getIface( id )->getScriptDown() << element3.attribute( "down" );
 									return true;
 								}
 
@@ -608,11 +726,13 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 								if ( getIface( id )->isScriptUpEnabled() != ( flag & KVirtualIface::SCRIPT_UP ) )
 								{
+									qDebug() << "iface scriptup enable not sync, id" << id << getIface( id )->isScriptUpEnabled() << ( flag & KVirtualIface::SCRIPT_UP );
 									return true;
 								}
 
 								if ( getIface( id )->isScriptDownEnabled() != ( flag & KVirtualIface::SCRIPT_DOWN ) )
 								{
+									qDebug() << "iface scriptdown enable not sync" << getIface( id )->isScriptDownEnabled() << ( flag & KVirtualIface::SCRIPT_DOWN );
 									return true;
 								}
 							}
@@ -999,86 +1119,6 @@ void KVirtualOptions::save( const QString & filename )
 	stream << doc.toString();
 
 	file.close();
-}
-
-const QString & KVirtualOptions::getName() const
-{
-	return m_name;
-}
-
-const QString & KVirtualOptions::getDistrib() const
-{
-	return m_distrib;
-}
-
-const QString & KVirtualOptions::getDescription() const
-{
-	return m_description;
-}
-
-uint KVirtualOptions::getMemory() const
-{
-	return m_memory;
-}
-
-uint KVirtualOptions::getNbCPU() const
-{
-	return m_cpus;
-}
-
-KVirtualStorage* KVirtualOptions::getStorage( uint id ) const
-{
-	if ( ! m_storages.contains( id ) )
-	{
-		return 0;
-	}
-
-	return m_storages[ id ];
-}
-
-KVirtualIface* KVirtualOptions::getIface( uint id ) const
-{
-	if ( ! m_ifaces.contains( id ) )
-	{
-		return 0;
-	}
-
-	return m_ifaces[ id ];
-}
-
-const QString & KVirtualOptions::getVideoCard() const
-{
-	return m_videoCard;
-}
-
-bool KVirtualOptions::isUsbSupported() const
-{
-	return m_usb;
-}
-
-bool KVirtualOptions::isSnapshotEnabled() const
-{
-	return m_snapshot;
-}
-
-uint KVirtualOptions::getVncPort() const
-{
-	return m_vncport;
-}
-
-KVirtualOptions::Display KVirtualOptions::getDisplay() const
-{
-	return m_display;
-}
-
-KVirtualOptions::BootOrder KVirtualOptions::getBootDevice() const
-{
-	return m_bootDevice;
-}
-
-const QString & KVirtualOptions::getKeyboard() const
-{
-	return m_keyboard;
 }
 
 inline QString DisplayToString( KVirtualOptions::Display display )
