@@ -92,6 +92,8 @@ public:
 	bool isUsbSupported() const;
 	bool isSnapshotEnabled() const;
 	bool isModified( const QString & ) const;
+	KVirtualStorage* getAutoCreateStorage( uint );
+	KVirtualIface* getAutoCreateIface( uint );
 
 public slots:
 	void setName( const QString & );
