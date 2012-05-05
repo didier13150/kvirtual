@@ -46,6 +46,7 @@
 #include <QButtonGroup>
 
 #include <sys/sysinfo.h>
+#include <unistd.h>
 
 KVirtualView::KVirtualView( QWidget * )
 {
