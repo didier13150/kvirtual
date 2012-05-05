@@ -1,4 +1,5 @@
 set(kvirtual_SRCS
+   kvirtualsettingsview.cpp
    kvirtualiface.cpp
    kvirtualstorage.cpp
    kvirtualdevice.cpp

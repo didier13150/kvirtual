@@ -143,6 +143,10 @@ msgstr ""
 msgid "Main Toolbar"
 msgstr ""
 
+#: rc.cpp
+msgid "Minimise to system tray on close"
+msgstr ""
+
 #: rc.cpp:12
 msgid "qemu-img is the QEMU disk image utility"
 msgstr ""

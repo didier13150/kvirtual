@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-22 17:09+0200\n"
-"PO-Revision-Date: 2012-05-03 11:14+0200\n"
-"Last-Translator: Noreply B2PWeb <noreply@b2pweb.com>\n"
+"PO-Revision-Date: 2012-05-05 12:07+0200\n"
+"Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -143,6 +143,10 @@ msgstr "&Virtuel"
 #: rc.cpp:9
 msgid "Main Toolbar"
 msgstr "Barre d'outil principale"
+
+#: rc.cpp
+msgid "Minimise to system tray on close"
+msgstr "Minimiser dans la boite à miniature à la fermeture"
 
 #: rc.cpp:12
 msgid "qemu-img is the QEMU disk image utility"

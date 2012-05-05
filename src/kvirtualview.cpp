@@ -135,33 +135,6 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	         _ui_kvirtualview_base.horizontalSlider_nb_of_cpu,
 	         SLOT( setValue( int ) )
 	       );
-/*	connect( _ui_kvirtualview_base.comboBox_iface_type_1,
-	         SIGNAL( currentIndexChanged( int ) ),
-	         SLOT( setType1Enable( int ) )
-	       );
-	connect( _ui_kvirtualview_base.comboBox_iface_type_2,
-	         SIGNAL( currentIndexChanged( int ) ),
-	         SLOT( setType2Enable( int ) )
-	       );
-	connect( _ui_kvirtualview_base.comboBox_iface_type_3,
-	         SIGNAL( currentIndexChanged( int ) ),
-	         SLOT( setType3Enable( int ) )
-	       );
-	connect( _ui_kvirtualview_base.comboBox_iface_model_1,
-	         SIGNAL( currentIndexChanged( int ) ),
-	         SLOT( setIface1Enabled( int ) )
-
-	       );
-	connect( _ui_kvirtualview_base.comboBox_iface_model_2,
-	         SIGNAL( currentIndexChanged( int ) ),
-	         SLOT( setIface2Enabled( int ) )
-
-	       );
-	connect( _ui_kvirtualview_base.comboBox_iface_model_3,
-	         SIGNAL( currentIndexChanged( int ) ),
-	         SLOT( setIface3Enabled( int ) )
-
-	       );*/
 	connect( _ui_kvirtualview_base.lineEdit_name,
 	         SIGNAL( textEdited( QString ) ),
 	         m_options,

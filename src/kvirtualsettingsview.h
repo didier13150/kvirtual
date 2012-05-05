@@ -13,7 +13,7 @@
  *   \_|  o|                                             ,__,                *
  *    \___/      Copyright (C) 2012 by didier fabert     (oo)____            *
  *     ||||__                                            (__)    )\          *
- *     (___)_)   File : kvirtual.h                          ||--|| *         *
+ *     (___)_)   File : kvirtualsettings.cpp                ||--|| *         *
  *                                                                           *
  *                                                                           *
  *   This program is free software; you can redistribute it and/or modify    *
@@ -32,39 +32,14 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
  *****************************************************************************/
 
-#ifndef KVIRTUAL_H
-#define KVIRTUAL_H
+#ifndef KVIRTUALSETTINGSVIEW_H
+#define KVIRTUALSETTINGSVIEW_H
 
-#include <QProcess>
+#include <QWidget>
+#include "ui_prefs_base.h"
 
-#include <KXmlGuiWindow>
 
-class QPrinter;
-
-class KToggleAction;
-
-class KUrl;
-
-class KVirtualView;
-
-class KVirtualOptions;
-
-class KVirtualProcess;
-
-class KStatusNotifierItem;
-
-class KVirtualCreateImg;
-
-/**
- * This class serves as the main window for KVirtual.  It handles the
- * menus, toolbars and status bars.
- *
- * @short Main window class
- * @author %{AUTHOR} <%{EMAIL}>
- * @version %{VERSION}
- */
-
-class KVirtual : public KXmlGuiWindow
+class KVirtualSettingsView : public QWidget
 {
 	Q_OBJECT
 
@@ -72,61 +47,22 @@ public:
 	/**
 	 * Default Constructor
 	 */
-	KVirtual();
+	KVirtualSettingsView();
 
 	/**
 	 * Default Destructor
 	 */
-	virtual ~KVirtual();
+	virtual ~KVirtualSettingsView();
 
-	/**
-	 * Load vitual host file
-	 */
-	void load( const QString & filename );
+private:
+	Ui::prefs_base ui_prefs_base ;
+
+	QString search();
 
 private slots:
-	void fileNew();
-	void fileOpen();
-	void fileSave();
-	void fileSaveAs();
-	void optionsPreferences();
-	void startVirtual();
-	void terminateVirtual();
-	void killVirtual();
-	void readStarted( uint );
-	void readData( uint );
-	void readError( uint );
-	void closeProcess( uint, int, QProcess::ExitStatus );
-	void startVde( const QString & );
-	void showCreateVDiskDlg();
-	void createVDisk( const QString &, const QString &, const QString & );
-	void changeIcon( const QString & );
-	bool checkConfigSync();
-
-protected:
-	bool queryClose();
-	bool queryExit();
-
-private:
-	void setupActions();
-	uint getID();
-
-private:
-	KVirtualView *m_view;
-	KVirtualCreateImg *m_create;
-	KStatusNotifierItem *m_systray;
-	QMap<uint, KVirtualProcess*> m_processes;
-	uint m_id;
-	KVirtualOptions* m_options;
-
-	QPrinter   *m_printer;
-	KToggleAction *m_toolbarAction;
-	KToggleAction *m_statusbarAction;
-	QString m_confFilename;
-
-signals:
-	void vmStateChanged( uint, bool );
+	void searchKvm();
+	void searchVde();
+	void searchQemuImg();
 };
 
-#endif // _KVIRTUAL_H_
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4;    replace-tabs off;
+#endif // KVIRTUALSETTINGSVIEW_H

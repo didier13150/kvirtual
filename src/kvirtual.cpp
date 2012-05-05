@@ -36,6 +36,7 @@
 #include "kvirtualview.h"
 #include "kvirtualprocess.h"
 #include "kvirtualcreateimg.h"
+#include "kvirtualsettingsview.h"
 
 #include "settings.h"
 
@@ -93,10 +94,17 @@ KVirtual::KVirtual()
 	// toolbar position, icon size, etc.
 	setupGUI();
 
-	m_systray = new KStatusNotifierItem( this );
-	m_systray->setStandardActionsEnabled( true );
-	m_systray->activate();
-	m_systray->setStatus( KStatusNotifierItem::Passive );
+	if( Settings::systray_enable() )
+	{
+		m_systray = new KStatusNotifierItem( this );
+		m_systray->setStandardActionsEnabled( true );
+		m_systray->activate();
+		m_systray->setStatus( KStatusNotifierItem::Passive );
+	}
+	else
+	{
+		m_systray = 0;
+	}
 	changeIcon( m_options->getDistrib() );
 
 	m_create = new KVirtualCreateImg( this );
@@ -115,7 +123,7 @@ KVirtual::~KVirtual()
 		}
 	}
 
-	delete m_systray;
+	if ( m_systray ) delete m_systray;
 
 	delete m_create;
 }
@@ -172,16 +180,30 @@ void KVirtual::changeIcon( const QString & distrib )
 		img = KStandardDirs::locate( "appdata", "linux.png" );
 	}
 
-	m_systray->setIconByName( img );
+	if ( m_systray ) m_systray->setIconByName( img );
 }
 
 bool KVirtual::queryClose() //exitCalled() by window button
 {
-	hide();
-	return false;
+	if( Settings::systray_enable() )
+	{
+		hide();
+		return false;
+	}
+	return checkConfigSync();
 }
 
-bool KVirtual::queryExit() //exitCalled() by file menu or by system tray
+bool KVirtual::queryExit() //exitCalled() by file or system tray menu
+{
+	if( ! checkConfigSync() )
+	{
+		return false;
+	}
+	terminateVirtual();
+	return true;
+}
+
+bool KVirtual::checkConfigSync()
 {
 	if ( m_options->isModified( m_confFilename ) )
 	{
@@ -207,7 +229,6 @@ bool KVirtual::queryExit() //exitCalled() by file menu or by system tray
 			}
 		}
 	}
-	terminateVirtual();
 	return true;
 }
 
@@ -232,7 +253,7 @@ void KVirtual::createVDisk( const QString & file, const QString & type, const QS
 	opts << file;
 	opts << size;
 
-	process->setProgram( Settings::exeQemuImgCreator(), opts );
+	process->setProgram( Settings::qemu_img_creator_exe(), opts );
 	process->setOutputChannelMode( KProcess::SeparateChannels );
 	connect( process,
 			 SIGNAL( readyReadStandardOutput( uint ) ),
@@ -321,42 +342,11 @@ void KVirtual::optionsPreferences()
 
 	KConfigDialog *dialog = new KConfigDialog( this, "settings", Settings::self() );
 
-	QWidget *generalSettingsDlg = new QWidget;
-	ui_prefs_base.setupUi( generalSettingsDlg );
-	ui_prefs_base.kurlrequester_exeKvm->lineEdit()->setText( Settings::exeKvm() );
-	ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit()->setText( Settings::exeVdeSwitch() );
-	ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit()->setText( Settings::exeQemuImgCreator() );
+	QWidget *generalSettingsDlg = new KVirtualSettingsView();
 	dialog->addPage( generalSettingsDlg, i18n( "Executable" ), "run-build" );
 	connect( dialog, SIGNAL( settingsChanged( QString ) ), m_view, SLOT( settingsChanged() ) );
-	connect( ui_prefs_base.kurlrequester_exeKvm->lineEdit(),
-			 SIGNAL( textEdited( const QString & ) ),
-			 SLOT( setKvmExe( const QString & ) )
-		   );
-	connect( ui_prefs_base.kurlrequester_exeVdeSwitch->lineEdit(),
-			 SIGNAL( textEdited( const QString & ) ),
-			 SLOT( setVdeSwitchExe( const QString & ) )
-		   );
-	connect( ui_prefs_base.kurlrequester_exeQemuImgCreator->lineEdit(),
-			 SIGNAL( textEdited( const QString & ) ),
-			 SLOT( setQemuImgCreator( const QString & ) )
-		   );
 	dialog->setAttribute( Qt::WA_DeleteOnClose );
 	dialog->show();
-}
-
-void KVirtual::setKvmExe( const QString & exe )
-{
-	Settings::setExeKvm( exe );
-}
-
-void KVirtual::setVdeSwitchExe( const QString & exe )
-{
-	Settings::setExeVdeSwitch( exe );
-}
-
-void KVirtual::setQemuImgCreator( const QString & exe )
-{
-	Settings::setExeQemuImgCreator( exe );
 }
 
 uint KVirtual::getID()
@@ -380,7 +370,7 @@ void KVirtual::startVde( const QString & vswitch )
 
 	args << "-F" << "-sock" << vswitch;
 
-	process->setProgram( Settings::exeVdeSwitch(), args );
+	process->setProgram( Settings::vde_switch_exe(), args );
 	process->setOutputChannelMode( KProcess::SeparateChannels );
 	connect( process,
 			 SIGNAL( readyReadStandardOutput( uint ) ),
@@ -453,7 +443,7 @@ void KVirtual::startVirtual()
 	QStringList vswitch;
 	QString buffer;
 
-	process->setProgram( Settings::exeKvm(), m_options->getArgs() );
+	process->setProgram( Settings::kvm_exe(), m_options->getArgs() );
 	process->setOutputChannelMode( KProcess::SeparateChannels );
 	connect( process,
 			 SIGNAL( readyReadStandardOutput( uint ) ),
@@ -518,12 +508,7 @@ void KVirtual::readStarted( uint id )
 	if ( process->getVirtualType() == KVirtualProcess::HOST )
 	{
 		emit( vmStateChanged( id, true ) );
-		m_systray->setStatus( KStatusNotifierItem::Active );
-		/* Events are:
-		 * started
-		 * stopped
-		 * startFailed
-		 */
+		if ( m_systray ) m_systray->setStatus( KStatusNotifierItem::Active );
 		QString img = KStandardDirs::locate( "appdata", m_options->getDistrib() + ".png" );
 		QPixmap pixmap;
 		pixmap.load( img );
@@ -626,7 +611,7 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 	if ( process->getVirtualType() == KVirtualProcess::HOST )
 	{
 		emit( vmStateChanged( id, false ) );
-		m_systray->setStatus( KStatusNotifierItem::Passive );
+		if ( m_systray ) m_systray->setStatus( KStatusNotifierItem::Passive );
 		
 		QString img = KStandardDirs::locate( "appdata", m_options->getDistrib() + ".png" );
 		QPixmap pixmap;
