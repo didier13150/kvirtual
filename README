@@ -2,6 +2,19 @@ kvirtual
 ========
 
 KVirtual is a KDE4 GUI-frontend for kvm/qemu
+The fast and easiest way to configure a virtual host. Not all kvm options are supported for now, but app is still in progress.
+
+Supported kvm options:
+* Memory size
+* Number of CPU
+* USB Support
+* Snapshot
+* Boot device
+* Display: none, direct (sdl), vnc (just port can be configured, host is localhost)
+* video card
+* keyboard
+* storage: file (new qcow2 image can be created) and type (disk,cdrom,floppy)
+* iface: model, connection(none, tap or vde), hardware address, up and down script for tap
 
 How to build kvirtual
 
