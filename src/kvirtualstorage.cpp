@@ -37,6 +37,7 @@
 KVirtualStorage::KVirtualStorage()
 {
 	m_typeID = KVirtualStorage::NONE;
+	m_interface.clear();
 }
 
 KVirtualStorage::KVirtualStorage( const KVirtualStorage::Type & type, const QString & file )
@@ -44,6 +45,7 @@ KVirtualStorage::KVirtualStorage( const KVirtualStorage::Type & type, const QStr
 	m_typeID = type;
 	setTypeByTypeID( type );
 	m_file = file;
+	m_interface.clear();
 }
 
 KVirtualStorage::~KVirtualStorage()
@@ -80,19 +82,28 @@ void KVirtualStorage::setTypeByTypeID( const Type & type )
 		}
 	}
 }
+void KVirtualStorage::setInterface( const QString & interface )
+{
+	m_interface = interface;
+}
+
+const QString & KVirtualStorage::getInterface()
+{
+	return m_interface;
+}
 
 int KVirtualStorage::getTypeID() const
 {
 	return ( int ) m_typeID;
 }
 
-void KVirtualStorage::setTypeID( const Type id )
+void KVirtualStorage::setTypeID( const Type & id )
 {
 	m_typeID = id;
 	setTypeByTypeID( m_typeID );
 }
 
-void KVirtualStorage::setTypeID( int id )
+void KVirtualStorage::setTypeID( const int & id )
 {
 	m_typeID = ( KVirtualStorage::Type ) id;
 	setTypeByTypeID( m_typeID );

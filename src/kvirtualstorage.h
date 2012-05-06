@@ -55,15 +55,19 @@ public:
     KVirtualStorage( const Type & type , const QString & );
     virtual ~KVirtualStorage();
 
-    void setTypeID( const Type );
-    void setTypeID( int );
+    void setTypeID( const Type & );
+    void setTypeID( const int & );
     int getTypeID() const;
+
+	void setInterface( const QString & );
+	const QString & getInterface();
 
 protected:
     void setTypeByTypeID( const Type & type );
 
 protected:
     Type m_typeID;
+	QString m_interface;
 };
 
 #endif // KVIRTUALSTORAGE_H

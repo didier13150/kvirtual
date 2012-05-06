@@ -118,6 +118,10 @@ const QStringList & KVirtualOptions::getArgs()
 		if ( m_storages[*it]->getTypeID() )
 		{
 			buffer = "file=" + m_storages[*it]->getFile() + ",media=" + m_storages[*it]->getType();
+			if ( ! m_storages[*it]->getInterface().isEmpty() )
+			{
+				buffer.append( ",if=" + m_storages[*it]->getInterface() );
+			}
 			m_opts << "-drive" << buffer;
 		}
 	}
@@ -707,6 +711,11 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 							qDebug() << "storage file not sync, id" << id << getStorage( id )->getFile() << element2.attribute( "file" );
 							return true;
 						}
+						if ( element2.attribute( "interface" ) != getStorage( id )->getInterface() )
+						{
+							qDebug() << "storage interface not sync, id" << id << getStorage( id )->getInterface() << element2.attribute( "interface" );
+							return true;
+						}
 					}
 
 					child = child.nextSibling();
@@ -942,6 +951,7 @@ void KVirtualOptions::load( const QString & filename )
 						storage = addStorage( id );
 						storage->setTypeID(( KVirtualStorage::Type ) element2.attribute( "type" ).toInt() );
 						storage->setFile( element2.attribute( "file" ) );
+						storage->setInterface( element2.attribute( "interface" ) );
 					}
 
 					child = child.nextSibling();
@@ -1116,6 +1126,7 @@ void KVirtualOptions::save( const QString & filename )
 		element2.setAttribute( "id", buffer.setNum( *it ) );
 		element2.setAttribute( "type", buffer.setNum(( int ) m_storages[*it]->getTypeID() ) );
 		element2.setAttribute( "file", m_storages[*it]->getFile() );
+		element2.setAttribute( "interface", m_storages[*it]->getInterface() );
 
 		element.appendChild( element2 );
 	}

@@ -200,10 +200,6 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	         m_options,
 	         SLOT( setBootDevice( int ) )
 	       );
-	connect( _ui_kvirtualview_base.comboBox_storage_1,
-	         SIGNAL( currentIndexChanged( int ) ),
-	         SLOT( syncStorageType1( int ) )
-	       );
 	connect( _ui_kvirtualview_base.kurlrequester_storage_1,
 	         SIGNAL( textChanged( QString ) ),
 	         SLOT( syncStorageFile1( QString ) )
@@ -216,6 +212,10 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	         SIGNAL( textChanged( QString ) ),
 	         SLOT( syncStorageFile3( QString ) )
 	       );
+	connect( _ui_kvirtualview_base.comboBox_storage_1,
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( syncStorageType1( int ) )
+	       );
 	connect( _ui_kvirtualview_base.comboBox_storage_2,
 	         SIGNAL( currentIndexChanged( int ) ),
 	         SLOT( syncStorageType2( int ) )
@@ -223,6 +223,18 @@ void KVirtualView::initOptions( KVirtualOptions* opts )
 	connect( _ui_kvirtualview_base.comboBox_storage_3,
 	         SIGNAL( currentIndexChanged( int ) ),
 	         SLOT( syncStorageType3( int ) )
+	       );
+	connect( _ui_kvirtualview_base.comboBox_interface_1,
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncStorageInterface1( QString ) )
+	       );
+	connect( _ui_kvirtualview_base.comboBox_interface_2,
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncStorageInterface2( QString ) )
+	       );
+	connect( _ui_kvirtualview_base.comboBox_interface_3,
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( syncStorageInterface3( QString ) )
 	       );
 	connect( _ui_kvirtualview_base.comboBox_iface_type_1,
 	         SIGNAL( currentIndexChanged( QString ) ),
@@ -390,6 +402,48 @@ void KVirtualView::syncStorageFile3( const QString & file )
 {
 	KVirtualStorage* storage = m_options->getAutoCreateStorage( 2 );
 	storage->setFile( file );
+}
+
+void KVirtualView::syncStorageInterface1( const QString & interface )
+{
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 0 );
+	if ( _ui_kvirtualview_base.comboBox_interface_1->currentIndex() )
+	{
+		storage->setInterface( interface );
+	}
+
+	else
+	{
+		storage->setInterface( QString() );
+	}
+}
+
+void KVirtualView::syncStorageInterface2( const QString & interface )
+{
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 1 );
+	if ( _ui_kvirtualview_base.comboBox_interface_1->currentIndex() )
+	{
+		storage->setInterface( interface );
+	}
+
+	else
+	{
+		storage->setInterface( QString() );
+	}
+}
+
+void KVirtualView::syncStorageInterface3( const QString & interface )
+{
+	KVirtualStorage* storage = m_options->getAutoCreateStorage( 2 );
+	if ( _ui_kvirtualview_base.comboBox_interface_1->currentIndex() )
+	{
+		storage->setInterface( interface );
+	}
+
+	else
+	{
+		storage->setInterface( QString() );
+	}
 }
 
 void KVirtualView::syncIfaceScriptUp1( const QString & script )

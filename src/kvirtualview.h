@@ -126,6 +126,9 @@ private slots:
 	void syncStorageFile1( const QString & );
 	void syncStorageFile2( const QString & );
 	void syncStorageFile3( const QString & );
+	void syncStorageInterface1( const QString & );
+	void syncStorageInterface2( const QString & );
+	void syncStorageInterface3( const QString & );
 	void syncIfaceType1( const QString & );
 	void syncIfaceType2( const QString & );
 	void syncIfaceType3( const QString & );
