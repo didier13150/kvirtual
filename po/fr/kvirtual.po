@@ -2,13 +2,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Didier Fabert <didier.fabert@gmail.com>, 2012.
-# Noreply B2PWeb <noreply@b2pweb.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-22 17:09+0200\n"
-"PO-Revision-Date: 2012-05-05 12:07+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/didier13150/kvirtual/issues\n"
+"POT-Creation-Date: 2012-05-06 14:11+0200\n"
+"PO-Revision-Date: 2012-05-06 14:34+0200\n"
 "Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -18,42 +17,65 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: kvirtualview.cpp:68
+#: kvirtual.cpp:143
+msgid "Start VM"
+msgstr "Démarrer la VM"
+
+#: kvirtual.cpp:147
+msgid "Terminate VM"
+msgstr "Arrêter la VM"
+
+#: kvirtual.cpp:151
+msgid "Kill VM"
+msgstr "Tuer la VM "
+
+#: kvirtual.cpp:156
+msgid "Show/Hide Output"
+msgstr "Montrer/Cacher la sortie "
+
+#: kvirtual.cpp:161
+msgid "Create a new virtual disk image"
+msgstr "Créer une nouvelle image de disque virtuel"
+
+#: kvirtual.cpp:214
+msgid "Save changes to virtual host definition document ?"
+msgstr "Sauvegarder les changements dans la définition de l'hôte virtuel ?"
+
+#: kvirtual.cpp:349
+msgid "Executable"
+msgstr "Executable"
+
+#: kvirtual.cpp:493
+msgid "The virtual host <i>%1</i> is not started"
+msgstr "L'hôte virtuel <i>%1</i> n'a pas démarré"
+
+#: kvirtual.cpp:520
+msgid "The virtual host <i>%1</i> is started"
+msgstr "L'hôte virtuel <i>%1</i> est démarré"
+
+#: kvirtual.cpp:624
+msgid "The virtual host <i>%1</i> is stopped"
+msgstr "L'hôte virtuel <i>%1</i> est arrêté"
+
+#: kvirtualview.cpp:81
 msgid "Settings changed"
 msgstr "La configuration a changé"
-
-#: kvirtualview.cpp:188 kvirtualview.cpp:278 rc.cpp:72 rc.cpp:120 rc.cpp:132
-#: kvirtualoptions.cpp:764
-msgid "Disk"
-msgstr "Disque"
-
-#: kvirtualview.cpp:193 kvirtualview.cpp:280 rc.cpp:81 rc.cpp:141
-#: kvirtualoptions.cpp:465 kvirtualoptions.cpp:619 kvirtualoptions.cpp:770
-#: kvirtualoptions.cpp:806
-msgid "Network"
-msgstr "Réseau"
-
-#: kvirtualview.cpp:198 kvirtualview.cpp:282 rc.cpp:75 rc.cpp:123 rc.cpp:135
-#: kvirtualoptions.cpp:776 kvirtualoptions.cpp:807
-msgid "CD-Rom"
-msgstr "CD-Rom"
-
-#: kvirtualview.cpp:203 rc.cpp:78 rc.cpp:126 rc.cpp:138
-#: kvirtualoptions.cpp:782 kvirtualoptions.cpp:805
-msgid "Floppy"
-msgstr "Disquette"
 
 #: main.cpp:42
 msgid "A KDE 4 GUI Frontend for KVM"
 msgstr "Une interface utilisateur KDE 4 pour KVM"
 
-#: main.cpp:48 kvirtual.cpp:90
-msgid "kvirtual"
-msgstr "kvirtual"
-
 #: main.cpp:50
 msgid "KVirtual"
 msgstr "KVirtual"
+
+#: main.cpp:54
+msgid "(C) 2012 Didier Fabert"
+msgstr "(C) 2012 Didier Fabert"
+
+#: main.cpp:59
+msgid "Didier Fabert"
+msgstr "Didier Fabert"
 
 #: main.cpp:60
 msgid "Project manager and main developer"
@@ -63,273 +85,482 @@ msgstr "Chef de projet et principal développeur"
 msgid "Document to open"
 msgstr "Document à ouvrir"
 
-#: kvirtual.cpp:127
-msgid "Start VM"
-msgstr "Démarrer la VM"
-
-#: kvirtual.cpp:131
-msgid "Terminate VM"
-msgstr "Arrêter la VM"
-
-#: kvirtual.cpp:135
-msgid "Kill VM"
-msgstr "Tuer la VM"
-
-#: kvirtual.cpp:140
-msgid "Show/Hide Output"
-msgstr "Montrer/Cacher la sortie"
-
-#: kvirtual.cpp:145
-msgid "Create a new virtual disk image"
-msgstr "Créer une nouvelle image de disque virtuel"
-
-#: kvirtual.cpp:198 kvirtual.cpp:346 kvirtual.cpp:425 kvirtual.cpp:446
-#: kvirtual.cpp:466 kvirtual.cpp:483 kvirtual.cpp:500
-msgid "Process"
-msgstr "Processus"
-
-#: kvirtual.cpp:199 kvirtual.cpp:347 kvirtual.cpp:426
-msgid " failed to start"
-msgstr " a échoué au démarrage"
-
-#: kvirtual.cpp:267
-msgid "Executable"
-msgstr "Executable"
-
-#: kvirtual.cpp:315
-msgid "Virtual switch is already exists but is not handled by me"
-msgstr "Le switch virtuel existe déjà mais n'est pas géré par moi"
-
-#: kvirtual.cpp:414
-msgid "Need a virtual switch: "
-msgstr "Besoin d'un switch virtuel"
-
-#: kvirtual.cpp:449
-msgid " process started, PID is "
-msgstr " processus démarré, le PID est "
-
-#: kvirtual.cpp:507
-msgid "Exit normally"
-msgstr "A terminé normalement"
-
-#: kvirtual.cpp:513
-msgid "Crash"
-msgstr "a planté"
-
-#: kvirtual.cpp:518
-msgid " terminated with retval "
-msgstr " a terminé avec le valeur de retour "
-
-#: kvirtual.cpp:541
-msgid "The virtual host <i>%1</i> is not started"
-msgstr "L'hôte virtuel <i>%1</i> n'a pas pu démarrer"
-
-#: kvirtual.cpp:573
-msgid "The virtual host <i>%1</i> is started"
-msgstr "L'hôte virtuel <i>%1</i> est démarré"
-
-#: kvirtual.cpp:677
-msgid "The virtual host <i>%1</i> is stopped"
-msgstr "L'hôte virtuel <i>%1</i> est arrêté"
-
-#: rc.cpp:3
-msgid "&File"
-msgstr "&Fichier"
-
-#: rc.cpp:6
-msgid "&Virtual"
-msgstr "&Virtuel"
-
-#: rc.cpp:9
-msgid "Main Toolbar"
-msgstr "Barre d'outil principale"
-
-#: rc.cpp
-msgid "Minimise to system tray on close"
-msgstr "Minimiser dans la boite à miniature à la fermeture"
-
-#: rc.cpp:12
-msgid "qemu-img is the QEMU disk image utility"
-msgstr "qemu-img est l'utilitaire QEMU de création d'image de disque"
-
-#: rc.cpp:15
-msgid "KVM / QEMU Emulator"
-msgstr "Emulateur KVM / QEMU"
-
-#: rc.cpp:18
-msgid "Virtual Distributed Ethernet switch"
-msgstr "Switch Ethernet Distribué virtuel"
-
-#: rc.cpp:21
-msgid "QEMU disk image utility"
-msgstr "Utilitaire d'image disque QEMU"
-
-#: rc.cpp:24
-msgid "Executable file for kvm"
-msgstr "Fichier exécutable kvm"
-
-#: rc.cpp:27
-msgid "Executable file for vde_switch"
-msgstr "Fichier exécutable vde_switch"
-
-#: rc.cpp:30
-msgid "Executable file for qemu-img"
-msgstr "Fichier exécutable qemu-img"
-
-#: rc.cpp:33
+#. i18n: file: kvirtual_create_img.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, Dialog_create)
+#: rc.cpp:3 rc.cpp:3
 msgid "Create a new disk image"
 msgstr "Créer une nouvelle image disque"
 
-#: rc.cpp:36
+#. i18n: file: kvirtual_create_img.ui:20
+#. i18n: ectx: property (text), widget (QLabel, label_create_img_file)
+#: rc.cpp:6 rc.cpp:6
 msgid "File"
 msgstr "Fichier"
 
-#: rc.cpp:39
+#. i18n: file: kvirtual_create_img.ui:97
+#. i18n: ectx: property (text), widget (QLabel, label_create_img_size)
+#: rc.cpp:9 rc.cpp:9
 msgid "Size"
 msgstr "Taille"
 
-#: rc.cpp:42
+#. i18n: file: kvirtual_create_img.ui:152
+#. i18n: ectx: property (text), widget (QLabel, label_type)
+#: rc.cpp:12 rc.cpp:12
 msgid "Type"
 msgstr "Type"
 
-#: rc.cpp:45
+#. i18n: file: kvirtual.kcfg:18
+#. i18n: ectx: label, entry (systray_enable), group (Preferences)
+#: rc.cpp:15 rc.cpp:15
+msgid "Minimise to KDE system tray on close"
+msgstr "Minimiser dans la boite à miniature à la fermeture"
+
+#. i18n: file: kvirtualui.rc:5
+#. i18n: ectx: Menu (file)
+#: rc.cpp:18 rc.cpp:18
+msgid "&File"
+msgstr "&Fichier"
+
+#. i18n: file: kvirtualui.rc:17
+#. i18n: ectx: Menu (virtual)
+#: rc.cpp:21 rc.cpp:21
+msgid "&Virtual"
+msgstr "&Virtuel"
+
+#. i18n: file: kvirtualui.rc:28
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:24 rc.cpp:24
+msgid "Main Toolbar"
+msgstr "Barre d'outil principale"
+
+#. i18n: file: kvirtualview_base.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, kvirtualview_base)
+#: rc.cpp:27 rc.cpp:27
 msgid "Form"
 msgstr "Formulaire"
 
-#: rc.cpp:48
+#. i18n: file: kvirtualview_base.ui:26
+#. i18n: ectx: property (title), widget (QGroupBox, gbCommon)
+#: rc.cpp:30 rc.cpp:30
 msgid "Common"
 msgstr "Général"
 
-#: rc.cpp:51
+#. i18n: file: kvirtualview_base.ui:32
+#. i18n: ectx: property (text), widget (QLabel, label_name)
+#: rc.cpp:33 rc.cpp:33
 msgid "Name"
 msgstr "Nom"
 
-#: rc.cpp:54
+#. i18n: file: kvirtualview_base.ui:42
+#. i18n: ectx: property (text), widget (QLabel, label_description)
+#: rc.cpp:36 rc.cpp:36
 msgid "Description"
 msgstr "Description"
 
-#: rc.cpp:57
-msgid "System"
-msgstr "Système"
-
-#: rc.cpp:60
-msgid "Base Memory"
-msgstr "Mémoire"
-
-#: rc.cpp:63
-msgid "Number of CPU"
-msgstr "Nombre de CPU"
-
-#: rc.cpp:66
-msgid "USB Support"
-msgstr "Support de l'USB"
-
-#: rc.cpp:69
-msgid "Snapshot"
-msgstr "Instantané"
-
-#: rc.cpp:84
-msgid "Boot on"
-msgstr "Démarrer sur"
-
-#: rc.cpp:87 rc.cpp:90
-msgid "Display"
-msgstr "Affichage"
-
-#: rc.cpp:93 rc.cpp:108 rc.cpp:150 rc.cpp:162
-msgid "None"
-msgstr "Aucun"
-
-#: rc.cpp:96
-msgid "Direct"
-msgstr "Direct"
-
-#: rc.cpp:99
-msgid "VNC"
-msgstr "VNC"
-
-#: rc.cpp:102
-msgid "VNC Port"
-msgstr "Port VNC"
-
-#: rc.cpp:105
-msgid "Video Card Type"
-msgstr "Type de carte vidéo"
-
-#: rc.cpp:111
-msgid "Keyboard type"
-msgstr "Type de clavier"
-
-#: rc.cpp:114
-msgid "Storage Media"
-msgstr "Média de Stockage"
-
-#: rc.cpp:117
-msgid "Storage Media 1"
-msgstr "Média de Stockage 1"
-
-#: rc.cpp:129
-msgid "Storage Media 2"
-msgstr "Média de Stockage 2"
-
-#: rc.cpp:129
-msgid "Storage Media 3"
-msgstr "Média de Stockage 3"
-
-#: rc.cpp:144
-msgid "Iface 1"
-msgstr "Interface réseau 1"
-
-#: rc.cpp:147 rc.cpp:159
-msgid "Model"
-msgstr "Modèle"
-
-#: rc.cpp:153 rc.cpp:165
-msgid "MAC Adress"
-msgstr "Adresse MAC"
-
-#: rc.cpp:156
-msgid "Iface 2"
-msgstr "Interface réseau 2"
-
-#: rc.cpp:156
-msgid "Iface 3"
-msgstr "Interface réseau 3"
-
-#: rc.cpp
-msgid "Script (up)"
-msgstr "Script (montage)"
-
-#: rc.cpp
-msgid "Script (down)"
-msgstr "Script (démontage)"
-
-#: rc.cpp
+#. i18n: file: kvirtualview_base.ui:59
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:39 rc.cpp:39
 msgid "Distribution"
 msgstr "Distribution"
 
-#: rc.cpp
-msgid "Connected to"
-msgstr "Connecté à"
+#. i18n: file: kvirtualview_base.ui:210
+#. i18n: ectx: property (title), widget (QGroupBox, gbSystem)
+#: rc.cpp:42 rc.cpp:42
+msgid "System"
+msgstr "Système"
 
-#: rc.cpp
+#. i18n: file: kvirtualview_base.ui:218
+#. i18n: ectx: property (text), widget (QLabel, label_memory)
+#: rc.cpp:45 rc.cpp:45
+msgid "Base Memory"
+msgstr "Mémoire"
+
+#. i18n: file: kvirtualview_base.ui:264
+#. i18n: ectx: property (text), widget (QLabel, label_nb_of_cpu)
+#: rc.cpp:48 rc.cpp:48
+msgid "Number of CPU"
+msgstr "Nombre de CPU"
+
+#. i18n: file: kvirtualview_base.ui:308
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_usb)
+#: rc.cpp:51 rc.cpp:51
+msgid "USB Support"
+msgstr "Support de l'USB"
+
+#. i18n: file: kvirtualview_base.ui:341
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_snapshot)
+#: rc.cpp:54 rc.cpp:54
+msgid "Snapshot"
+msgstr "Instantané"
+
+#. i18n: file: kvirtualview_base.ui:349
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:797
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:844
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:891
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#. i18n: file: kvirtualview_base.ui:349
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:797
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:844
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:891
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#: rc.cpp:57 rc.cpp:108 rc.cpp:123 rc.cpp:138 rc.cpp:57 rc.cpp:108 rc.cpp:123
+#: rc.cpp:138
+msgid "Disk"
+msgstr "Disque"
+
+#. i18n: file: kvirtualview_base.ui:354
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:802
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:849
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:896
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#. i18n: file: kvirtualview_base.ui:354
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:802
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:849
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:896
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#: rc.cpp:60 rc.cpp:111 rc.cpp:126 rc.cpp:141 rc.cpp:60 rc.cpp:111 rc.cpp:126
+#: rc.cpp:141
+msgid "CD-Rom"
+msgstr "CD-Rom"
+
+#. i18n: file: kvirtualview_base.ui:359
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:807
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:854
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:901
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#. i18n: file: kvirtualview_base.ui:359
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:807
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:854
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:901
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#: rc.cpp:63 rc.cpp:114 rc.cpp:129 rc.cpp:144 rc.cpp:63 rc.cpp:114 rc.cpp:129
+#: rc.cpp:144
+msgid "Floppy"
+msgstr "Disquette"
+
+#. i18n: file: kvirtualview_base.ui:364
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:922
+#. i18n: ectx: property (title), widget (QGroupBox, gbNetwork)
+#. i18n: file: kvirtualview_base.ui:364
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_boot)
+#. i18n: file: kvirtualview_base.ui:922
+#. i18n: ectx: property (title), widget (QGroupBox, gbNetwork)
+#: rc.cpp:66 rc.cpp:147 rc.cpp:66 rc.cpp:147
+msgid "Network"
+msgstr "Réseau"
+
+#. i18n: file: kvirtualview_base.ui:372
+#. i18n: ectx: property (text), widget (QLabel, label_bootorder)
+#: rc.cpp:69 rc.cpp:69
+msgid "Boot on"
+msgstr "Démarrer sur"
+
+#. i18n: file: kvirtualview_base.ui:401
+#. i18n: ectx: property (title), widget (QGroupBox, gbDisplay)
+#. i18n: file: kvirtualview_base.ui:409
+#. i18n: ectx: property (text), widget (QLabel, label_display_type)
+#. i18n: file: kvirtualview_base.ui:401
+#. i18n: ectx: property (title), widget (QGroupBox, gbDisplay)
+#. i18n: file: kvirtualview_base.ui:409
+#. i18n: ectx: property (text), widget (QLabel, label_display_type)
+#: rc.cpp:72 rc.cpp:75 rc.cpp:72 rc.cpp:75
+msgid "Display"
+msgstr "Affichage"
+
+#. i18n: file: kvirtualview_base.ui:429
+#. i18n: ectx: property (text), widget (QRadioButton, radioButton_none)
+#. i18n: file: kvirtualview_base.ui:522
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_video_card)
+#. i18n: file: kvirtualview_base.ui:792
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:839
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:886
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#. i18n: file: kvirtualview_base.ui:1018
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_model_1)
+#. i18n: file: kvirtualview_base.ui:1178
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_model_2)
+#. i18n: file: kvirtualview_base.ui:1401
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_model_3)
+#. i18n: file: kvirtualview_base.ui:429
+#. i18n: ectx: property (text), widget (QRadioButton, radioButton_none)
+#. i18n: file: kvirtualview_base.ui:522
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_video_card)
+#. i18n: file: kvirtualview_base.ui:792
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_1)
+#. i18n: file: kvirtualview_base.ui:839
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_2)
+#. i18n: file: kvirtualview_base.ui:886
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_storage_3)
+#. i18n: file: kvirtualview_base.ui:1018
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_model_1)
+#. i18n: file: kvirtualview_base.ui:1178
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_model_2)
+#. i18n: file: kvirtualview_base.ui:1401
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_model_3)
+#: rc.cpp:78 rc.cpp:93 rc.cpp:105 rc.cpp:120 rc.cpp:135 rc.cpp:159 rc.cpp:183
+#: rc.cpp:210 rc.cpp:78 rc.cpp:93 rc.cpp:105 rc.cpp:120 rc.cpp:135 rc.cpp:159
+#: rc.cpp:183 rc.cpp:210
+msgid "None"
+msgstr "Aucun"
+
+#. i18n: file: kvirtualview_base.ui:449
+#. i18n: ectx: property (text), widget (QRadioButton, radioButton_direct)
+#: rc.cpp:81 rc.cpp:81
+msgid "Direct"
+msgstr "Direct"
+
+#. i18n: file: kvirtualview_base.ui:472
+#. i18n: ectx: property (text), widget (QRadioButton, radioButton_vnc)
+#: rc.cpp:84 rc.cpp:84
+msgid "VNC"
+msgstr "VNC"
+
+#. i18n: file: kvirtualview_base.ui:492
+#. i18n: ectx: property (text), widget (QLabel, label_vncport)
+#: rc.cpp:87 rc.cpp:87
+msgid "VNC Port"
+msgstr "Port VNC"
+
+#. i18n: file: kvirtualview_base.ui:511
+#. i18n: ectx: property (text), widget (QLabel, label_vga_type)
+#: rc.cpp:90 rc.cpp:90
+msgid "Video Card Type"
+msgstr "Type de carte vidéo"
+
+#. i18n: file: kvirtualview_base.ui:568
+#. i18n: ectx: property (text), widget (QLabel, label_display_keyboard)
+#: rc.cpp:96 rc.cpp:96
+msgid "Keyboard type"
+msgstr "Type de clavier"
+
+#. i18n: file: kvirtualview_base.ui:759
+#. i18n: ectx: property (title), widget (QGroupBox, gbStorage)
+#: rc.cpp:99 rc.cpp:99
+msgid "Storage Media"
+msgstr "Média de Stockage"
+
+#. i18n: file: kvirtualview_base.ui:769
+#. i18n: ectx: attribute (title), widget (QWidget, tab_1)
+#: rc.cpp:102 rc.cpp:102
+msgid "Storage Media 1"
+msgstr "Média de Stockage  1"
+
+#. i18n: file: kvirtualview_base.ui:816
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: rc.cpp:117 rc.cpp:117
+msgid "Storage Media 2"
+msgstr "Média de Stockage 2"
+
+#. i18n: file: kvirtualview_base.ui:863
+#. i18n: ectx: attribute (title), widget (QWidget, tab_8)
+#: rc.cpp:132 rc.cpp:132
+msgid "Storage Media 3"
+msgstr "Média de Stockage  3"
+
+#. i18n: file: kvirtualview_base.ui:932
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: rc.cpp:150 rc.cpp:150
+msgid "Iface 1"
+msgstr "Interface réseau 1"
+
+#. i18n: file: kvirtualview_base.ui:1000
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptdown_1)
+#. i18n: file: kvirtualview_base.ui:1293
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptdown_2)
+#. i18n: file: kvirtualview_base.ui:1516
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptdown_3)
+#. i18n: file: kvirtualview_base.ui:1000
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptdown_1)
+#. i18n: file: kvirtualview_base.ui:1293
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptdown_2)
+#. i18n: file: kvirtualview_base.ui:1516
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptdown_3)
+#: rc.cpp:153 rc.cpp:192 rc.cpp:219 rc.cpp:153 rc.cpp:192 rc.cpp:219
+msgid "Script (down)"
+msgstr "Script (démontage)"
+
+#. i18n: file: kvirtualview_base.ui:1007
+#. i18n: ectx: property (text), widget (QLabel, label_iface_model_1)
+#. i18n: file: kvirtualview_base.ui:1167
+#. i18n: ectx: property (text), widget (QLabel, label_iface_model_2)
+#. i18n: file: kvirtualview_base.ui:1390
+#. i18n: ectx: property (text), widget (QLabel, label_iface_model_3)
+#. i18n: file: kvirtualview_base.ui:1007
+#. i18n: ectx: property (text), widget (QLabel, label_iface_model_1)
+#. i18n: file: kvirtualview_base.ui:1167
+#. i18n: ectx: property (text), widget (QLabel, label_iface_model_2)
+#. i18n: file: kvirtualview_base.ui:1390
+#. i18n: ectx: property (text), widget (QLabel, label_iface_model_3)
+#: rc.cpp:156 rc.cpp:180 rc.cpp:207 rc.cpp:156 rc.cpp:180 rc.cpp:207
+msgid "Model"
+msgstr "Modèle"
+
+#. i18n: file: kvirtualview_base.ui:1073
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_type_1)
+#. i18n: file: kvirtualview_base.ui:1233
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_type_2)
+#. i18n: file: kvirtualview_base.ui:1453
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_type_3)
+#. i18n: file: kvirtualview_base.ui:1073
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_type_1)
+#. i18n: file: kvirtualview_base.ui:1233
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_type_2)
+#. i18n: file: kvirtualview_base.ui:1453
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBox_iface_type_3)
+#: rc.cpp:162 rc.cpp:186 rc.cpp:213 rc.cpp:162 rc.cpp:186 rc.cpp:213
 msgid "Nothing"
 msgstr "Rien"
 
-#: kvirtualoptions.cpp:324
-msgid "filename is null"
-msgstr "Le nom de fichier est nul"
+#. i18n: file: kvirtualview_base.ui:1119
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptup_1)
+#. i18n: file: kvirtualview_base.ui:1273
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptup_2)
+#. i18n: file: kvirtualview_base.ui:1496
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptup_3)
+#. i18n: file: kvirtualview_base.ui:1119
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptup_1)
+#. i18n: file: kvirtualview_base.ui:1273
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptup_2)
+#. i18n: file: kvirtualview_base.ui:1496
+#. i18n: ectx: property (text), widget (QCheckBox, checkBox_scriptup_3)
+#: rc.cpp:165 rc.cpp:189 rc.cpp:216 rc.cpp:165 rc.cpp:189 rc.cpp:216
+msgid "Script (up)"
+msgstr "Script (montage)"
 
-#: kvirtualoptions.cpp:338
-msgid "Can't open filename in read mode"
-msgstr "Ne peut ouvrir le fichier en lecture seule"
+#. i18n: file: kvirtualview_base.ui:1126
+#. i18n: ectx: property (text), widget (QLabel, label_iface_mac_1)
+#. i18n: file: kvirtualview_base.ui:1300
+#. i18n: ectx: property (text), widget (QLabel, label_iface_mac_2)
+#. i18n: file: kvirtualview_base.ui:1533
+#. i18n: ectx: property (text), widget (QLabel, label_iface_mac_3)
+#. i18n: file: kvirtualview_base.ui:1126
+#. i18n: ectx: property (text), widget (QLabel, label_iface_mac_1)
+#. i18n: file: kvirtualview_base.ui:1300
+#. i18n: ectx: property (text), widget (QLabel, label_iface_mac_2)
+#. i18n: file: kvirtualview_base.ui:1533
+#. i18n: ectx: property (text), widget (QLabel, label_iface_mac_3)
+#: rc.cpp:168 rc.cpp:195 rc.cpp:222 rc.cpp:168 rc.cpp:195 rc.cpp:222
+msgid "MAC Adress"
+msgstr "Adresse MAC"
 
-#: kvirtualoptions.cpp:345
-msgid "Can't parse XML file"
-msgstr "Ne peut décoder le fichier XML"
+#. i18n: file: kvirtualview_base.ui:1133
+#. i18n: ectx: property (text), widget (QLabel, label_connect_1)
+#. i18n: file: kvirtualview_base.ui:1356
+#. i18n: ectx: property (text), widget (QLabel, label_connecte_2)
+#. i18n: file: kvirtualview_base.ui:1579
+#. i18n: ectx: property (text), widget (QLabel, label_connect_3)
+#. i18n: file: kvirtualview_base.ui:1133
+#. i18n: ectx: property (text), widget (QLabel, label_connect_1)
+#. i18n: file: kvirtualview_base.ui:1356
+#. i18n: ectx: property (text), widget (QLabel, label_connecte_2)
+#. i18n: file: kvirtualview_base.ui:1579
+#. i18n: ectx: property (text), widget (QLabel, label_connect_3)
+#: rc.cpp:171 rc.cpp:198 rc.cpp:225 rc.cpp:171 rc.cpp:198 rc.cpp:225
+msgid "Connected to"
+msgstr "Connecté à"
 
-#: kvirtualoptions.cpp:355
-msgid "Wrong root node"
-msgstr "Mauvais nœud principal"
+#. i18n: file: kvirtualview_base.ui:1153
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_hwaddr_1)
+#. i18n: file: kvirtualview_base.ui:1376
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_hwaddr_2)
+#. i18n: file: kvirtualview_base.ui:1599
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_hwaddr_3)
+#. i18n: file: kvirtualview_base.ui:1153
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_hwaddr_1)
+#. i18n: file: kvirtualview_base.ui:1376
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_hwaddr_2)
+#. i18n: file: kvirtualview_base.ui:1599
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_hwaddr_3)
+#: rc.cpp:174 rc.cpp:201 rc.cpp:228 rc.cpp:174 rc.cpp:201 rc.cpp:228
+msgid "..."
+msgstr "..."
 
+#. i18n: file: kvirtualview_base.ui:1161
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: rc.cpp:177 rc.cpp:177
+msgid "Iface 2"
+msgstr "Interface réseau 2"
+
+#. i18n: file: kvirtualview_base.ui:1384
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: rc.cpp:204 rc.cpp:204
+msgid "Iface 3"
+msgstr "Interface réseau 3"
+
+#. i18n: file: prefs_base.ui:14
+#. i18n: ectx: property (toolTip), widget (QWidget, prefs_base)
+#: rc.cpp:231 rc.cpp:231
+msgid "qemu-img is the QEMU disk image utility"
+msgstr "qemu-img est l'utilitaire QEMU de création d'image de disque"
+
+#. i18n: file: prefs_base.ui:26
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_systray_enable)
+#: rc.cpp:234 rc.cpp:234
+msgid "Minimise to system tray on close"
+msgstr "Minimiser dans la boite à miniature à la fermeture"
+
+#. i18n: file: prefs_base.ui:36
+#. i18n: ectx: property (statusTip), widget (QLabel, textLabel_kvm)
+#: rc.cpp:237 rc.cpp:237
+msgid "KVM / QEMU Emulator"
+msgstr "Emulateur KVM / QEMU"
+
+#. i18n: file: prefs_base.ui:62
+#. i18n: ectx: property (toolTip), widget (QLabel, textLabel_vde_switch)
+#: rc.cpp:240 rc.cpp:240
+msgid "Virtual Distributed Ethernet switch"
+msgstr "Switch Ethernet Distribué virtuel"
+
+#. i18n: file: prefs_base.ui:91
+#. i18n: ectx: property (toolTip), widget (QLabel, textLabel_qemu_img)
+#: rc.cpp:243 rc.cpp:243
+msgid "QEMU disk image utility"
+msgstr "Utilitaire d'image disque QEMU"
+
+#. i18n: file: prefs_base.ui:136
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_kvm)
+#. i18n: file: prefs_base.ui:143
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_vde)
+#. i18n: file: prefs_base.ui:150
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_qemuimg)
+#. i18n: file: prefs_base.ui:136
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_kvm)
+#. i18n: file: prefs_base.ui:143
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_vde)
+#. i18n: file: prefs_base.ui:150
+#. i18n: ectx: property (text), widget (QPushButton, pushButton_qemuimg)
+#: rc.cpp:246 rc.cpp:249 rc.cpp:252 rc.cpp:246 rc.cpp:249 rc.cpp:252
+msgid "Search"
+msgstr "Rechercher"
+
+#: rc.cpp:253 rc.cpp:253
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Didier Fabert"
+
+#: rc.cpp:254 rc.cpp:254
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "didier.fabert@gmail.com"
 
