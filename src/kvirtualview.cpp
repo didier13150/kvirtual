@@ -335,19 +335,22 @@ void KVirtualView::setNewHwAddr( int id )
 
 		case 0:
 		{
-			_ui_kvirtualview_base.lineEdit_iface_mac_1->setText( hwaddr );
+			if( _ui_kvirtualview_base.lineEdit_iface_mac_1->isEnabled() )
+				_ui_kvirtualview_base.lineEdit_iface_mac_1->setText( hwaddr );
 			break;
 		}
 
 		case 1:
 		{
-			_ui_kvirtualview_base.lineEdit_iface_mac_2->setText( hwaddr );
+			if( _ui_kvirtualview_base.lineEdit_iface_mac_2->isEnabled() )
+				_ui_kvirtualview_base.lineEdit_iface_mac_2->setText( hwaddr );
 			break;
 		}
 
 		default:
 		{
-			_ui_kvirtualview_base.lineEdit_iface_mac_3->setText( hwaddr );
+			if( _ui_kvirtualview_base.lineEdit_iface_mac_3->isEnabled() )
+				_ui_kvirtualview_base.lineEdit_iface_mac_3->setText( hwaddr );
 			break;
 		}
 	}
@@ -580,6 +583,7 @@ void KVirtualView::syncIfaceModel1( const QString & model )
 		_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( true );
 		_ui_kvirtualview_base.lineEdit_iface_mac_1->setEnabled( true );
 		_ui_kvirtualview_base.comboBox_iface_type_1->setEnabled( true );
+		_ui_kvirtualview_base.pushButton_hwaddr_1->setEnabled( true );
 
 		if ( typeID == 1 )
 		{
@@ -599,6 +603,7 @@ void KVirtualView::syncIfaceModel1( const QString & model )
 		_ui_kvirtualview_base.lineEdit_iface_detail_1->setEnabled( false );
 		_ui_kvirtualview_base.lineEdit_iface_mac_1->setEnabled( false );
 		_ui_kvirtualview_base.comboBox_iface_type_1->setEnabled( false );
+		_ui_kvirtualview_base.pushButton_hwaddr_1->setEnabled( false );
 		enableScripts3( false );
 		iface->setModel( QString() );
 	}
@@ -623,6 +628,7 @@ void KVirtualView::syncIfaceModel2( const QString & model )
 		_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( true );
 		_ui_kvirtualview_base.lineEdit_iface_mac_2->setEnabled( true );
 		_ui_kvirtualview_base.comboBox_iface_type_2->setEnabled( true );
+		_ui_kvirtualview_base.pushButton_hwaddr_2->setEnabled( true );
 
 		if ( typeID == 1 )
 		{
@@ -642,6 +648,7 @@ void KVirtualView::syncIfaceModel2( const QString & model )
 		_ui_kvirtualview_base.lineEdit_iface_detail_2->setEnabled( false );
 		_ui_kvirtualview_base.lineEdit_iface_mac_2->setEnabled( false );
 		_ui_kvirtualview_base.comboBox_iface_type_2->setEnabled( false );
+		_ui_kvirtualview_base.pushButton_hwaddr_2->setEnabled( false );
 		enableScripts3( false );
 		iface->setModel( QString() );
 	}
@@ -658,6 +665,7 @@ void KVirtualView::syncIfaceModel3( const QString & model )
 		_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( true );
 		_ui_kvirtualview_base.lineEdit_iface_mac_3->setEnabled( true );
 		_ui_kvirtualview_base.comboBox_iface_type_3->setEnabled( true );
+		_ui_kvirtualview_base.pushButton_hwaddr_3->setEnabled( true );
 
 		if ( typeID == 1 )
 		{
@@ -677,6 +685,7 @@ void KVirtualView::syncIfaceModel3( const QString & model )
 		_ui_kvirtualview_base.lineEdit_iface_detail_3->setEnabled( false );
 		_ui_kvirtualview_base.lineEdit_iface_mac_3->setEnabled( false );
 		_ui_kvirtualview_base.comboBox_iface_type_3->setEnabled( false );
+		_ui_kvirtualview_base.pushButton_hwaddr_3->setEnabled( false );
 		enableScripts3( false );
 		iface->setModel( QString() );
 	}
