@@ -42,6 +42,8 @@
 #include <QFile>
 #include <KStandardDirs>
 
+#include <stdlib.h>
+
 KVirtualOptions::KVirtualOptions()
 {
 	clear();
@@ -61,7 +63,7 @@ void KVirtualOptions::clear()
 	m_bootDevice = KVirtualOptions::BOOT_ON_DISK;
 	m_vncport = 1;
 	m_keyboard = "fr";
-	m_videoCard.clear();
+	m_videoCard = "std";
 	m_description.clear();
 	m_name.clear();
 	m_distrib = "linux";
@@ -357,6 +359,51 @@ void KVirtualOptions::setUsedSwitch( const QString & vswitch )
 		m_usedSwitches << vswitch;
 }
 
+const QString & KVirtualOptions::getRandomHwAddr( uint id )
+{
+	QMapIterator<uint, KVirtualIface*> it( m_ifaces );
+	QString hwaddr = "52:54:00:12:", lastdigit;
+	uint digit = (uint) random() % 255;
+	bool used = false;
+
+	switch( id )
+	{
+		case 0:
+		{
+			hwaddr.append( "34:" );
+			break;
+		}
+		case 1:
+		{
+			hwaddr.append( "36:" );
+			break;
+		}
+		default:
+		{
+			hwaddr.append( "38:" );
+			break;
+		}
+	}
+	do
+	{
+		used = false;
+		lastdigit.setNum( digit, 16 );
+		hwaddr.append( lastdigit.rightJustified( 2, '0' ).toUpper() );
+		// Check if addr is already in use
+		while ( it.hasNext() )
+		{
+			it.next();
+
+			if ( hwaddr == it.value()->getHardwareAddress() )
+			{
+				used = true;
+				digit += 2;
+			}
+		}
+	} while( used );
+	m_ifaces[id]->setHardwareAddress( hwaddr );
+	return m_ifaces[id]->getHardwareAddress();
+}
 
 const QString & KVirtualOptions::getName() const
 {

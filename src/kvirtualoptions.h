@@ -113,6 +113,7 @@ public slots:
 	void save( const QString & );
 	void setUsedSwitch( const QString & );
 	void clear();
+	const QString & getRandomHwAddr( uint );
 
 protected:
 	QStringList m_opts;

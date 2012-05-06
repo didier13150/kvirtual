@@ -89,6 +89,7 @@ private:
 
 	KVirtualOptions* m_options;
 	QButtonGroup* m_displayGroup;
+	QButtonGroup* m_randomAddr;
 
 	void enableScripts1( bool );
 	void enableScripts2( bool );
@@ -116,6 +117,7 @@ public slots:
 private slots:
 	void settingsChanged();
 	void setIcon( const QString & );
+	void setNewHwAddr( int );
 	void syncDescription();
 	void syncVideoCard();
 	void syncStorageType1( int );

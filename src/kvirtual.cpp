@@ -195,9 +195,12 @@ bool KVirtual::queryClose() //exitCalled() by window button
 
 bool KVirtual::queryExit() //exitCalled() by file or system tray menu
 {
-	if( ! checkConfigSync() )
+	if( Settings::systray_enable() )
 	{
-		return false;
+		if( ! checkConfigSync() )
+		{
+			return false;
+		}
 	}
 	terminateVirtual();
 	return true;

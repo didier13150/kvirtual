@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
-    <height>774</height>
+    <width>695</width>
+    <height>775</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -229,6 +229,9 @@
           </property>
           <property name="pageStep">
            <number>512</number>
+          </property>
+          <property name="value">
+           <number>128</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -929,6 +932,75 @@
           <string>Iface 1</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit_iface_mac_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
+            </property>
+            <property name="text">
+             <string notr="true">52:54:00:12:34:56</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="KUrlRequester" name="kurlrequester_scriptdown_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string notr="true">/etc/kvm/kvm-ifdown</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2" colspan="2">
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="1">
+           <widget class="KUrlRequester" name="kurlrequester_scriptup_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string notr="true">/etc/kvm/kvm-ifup</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="checkBox_scriptdown_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Script (down)</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_iface_model_1">
             <property name="text">
@@ -939,7 +1011,7 @@
           <item row="0" column="1">
            <widget class="QComboBox" name="comboBox_iface_model_1">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <item>
              <property name="text">
@@ -990,8 +1062,11 @@
           </item>
           <item row="0" column="4">
            <widget class="QComboBox" name="comboBox_iface_type_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <item>
              <property name="text">
@@ -1012,6 +1087,9 @@
           </item>
           <item row="0" column="5">
            <widget class="QLineEdit" name="lineEdit_iface_detail_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -1034,35 +1112,11 @@
           </item>
           <item row="1" column="0">
            <widget class="QCheckBox" name="checkBox_scriptup_1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Script (up)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="KUrlRequester" name="kurlrequester_scriptup_1">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string notr="true">/etc/kvm/kvm-ifup</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QCheckBox" name="checkBox_scriptdown_1">
-            <property name="text">
-             <string>Script (down)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="5">
-           <widget class="KUrlRequester" name="kurlrequester_scriptdown_1">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string notr="true">/etc/kvm/kvm-ifdown</string>
             </property>
            </widget>
           </item>
@@ -1073,30 +1127,14 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_iface_mac_1">
-            <property name="inputMask">
-             <string notr="true">HH:HH:HH:HH:HH:HH; </string>
-            </property>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_connect_1">
             <property name="text">
-             <string notr="true">52:54:00:12:34:56</string>
+             <string>Connected to</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <spacer name="horizontalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="2" column="2" colspan="4">
+          <item row="2" column="3" colspan="3">
            <spacer name="horizontalSpacer_8">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1109,25 +1147,12 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="label_connect_1">
+          <item row="2" column="2">
+           <widget class="QPushButton" name="pushButton_hwaddr_1">
             <property name="text">
-             <string>Connected to</string>
+             <string>...</string>
             </property>
            </widget>
-          </item>
-          <item row="1" column="2" colspan="2">
-           <spacer name="horizontalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>
@@ -1325,7 +1350,14 @@
             </property>
            </spacer>
           </item>
-          <item row="2" column="2" colspan="4">
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_connecte_2">
+            <property name="text">
+             <string>Connected to</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3" colspan="3">
            <spacer name="horizontalSpacer_10">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1338,10 +1370,10 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="label_connecte_2">
+          <item row="2" column="2">
+           <widget class="QPushButton" name="pushButton_hwaddr_2">
             <property name="text">
-             <string>Connected to</string>
+             <string>...</string>
             </property>
            </widget>
           </item>
@@ -1541,7 +1573,14 @@
             </property>
            </spacer>
           </item>
-          <item row="2" column="2" colspan="4">
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_connect_3">
+            <property name="text">
+             <string>Connected to</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3" colspan="3">
            <spacer name="horizontalSpacer_14">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1554,10 +1593,10 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="label_connect_3">
+          <item row="2" column="2">
+           <widget class="QPushButton" name="pushButton_hwaddr_3">
             <property name="text">
-             <string>Connected to</string>
+             <string>...</string>
             </property>
            </widget>
           </item>
