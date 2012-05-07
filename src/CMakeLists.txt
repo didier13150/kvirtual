@@ -9,9 +9,12 @@ set(kvirtual_SRCS
    kvirtual.cpp
    main.cpp
    kvirtualview.cpp
+   kvirtualstoragewidget.cpp
 )
 
 kde4_add_ui_files(kvirtual_SRCS
+   kvirtualiface_widget.ui
+   kvirtualstorage_widget.ui
    kvirtualview_base.ui
    prefs_base.ui
    kvirtual_create_img.ui
