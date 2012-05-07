@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KVirtualIfaceWidget</class>
- <widget class="QWidget" name="KVirtualIfaceWidget">
+ <class>KVirtualIfaceView</class>
+ <widget class="QWidget" name="KVirtualIfaceView">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>613</width>
+    <width>597</width>
     <height>87</height>
    </rect>
   </property>
@@ -102,14 +102,17 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="4" colspan="2">
+   <item row="0" column="4">
     <widget class="QLabel" name="label_connect">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Connected to</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="6">
+   <item row="0" column="5">
     <widget class="QComboBox" name="comboBox_type">
      <property name="enabled">
       <bool>false</bool>
@@ -134,7 +137,7 @@
      </item>
     </widget>
    </item>
-   <item row="0" column="7">
+   <item row="0" column="6">
     <widget class="QLineEdit" name="lineEdit_file">
      <property name="enabled">
       <bool>false</bool>
@@ -159,14 +162,17 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" rowspan="2">
+   <item row="1" column="0">
     <widget class="QLabel" name="label_mac">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>MAC Adress</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" rowspan="2">
+   <item row="1" column="1">
     <widget class="QLineEdit" name="lineEdit_mac">
      <property name="enabled">
       <bool>false</bool>
@@ -197,8 +203,11 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="2" rowspan="2">
+   <item row="1" column="2">
     <widget class="QPushButton" name="pushButton_hwaddr">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -210,7 +219,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="3" rowspan="2">
+   <item row="1" column="3">
     <spacer name="horizontalSpacer_6">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -226,27 +235,27 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="5" rowspan="2" colspan="3">
-    <widget class="KUrlRequester" name="kurlrequester_scriptdown">
+   <item row="1" column="4">
+    <widget class="QCheckBox" name="checkBox_scriptup">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="text">
-      <string notr="true">/etc/kvm/kvm-ifdown</string>
+      <string>Script (up)</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="4">
-    <widget class="QCheckBox" name="checkBox_scriptdown">
+   <item row="1" column="5" colspan="2">
+    <widget class="KUrlRequester" name="kurlrequester_scriptup">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Script (down)</string>
+      <string notr="true">/etc/kvm/kvm-ifup</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="4">
+   <item row="2" column="0" colspan="4">
     <spacer name="horizontalSpacer_8">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -259,23 +268,23 @@
      </property>
     </spacer>
    </item>
-   <item row="3" column="4">
-    <widget class="QCheckBox" name="checkBox_scriptup">
+   <item row="2" column="4">
+    <widget class="QCheckBox" name="checkBox_scriptdown">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Script (up)</string>
+      <string>Script (down)</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="5" colspan="3">
-    <widget class="KUrlRequester" name="kurlrequester_scriptup">
+   <item row="2" column="5" colspan="2">
+    <widget class="KUrlRequester" name="kurlrequester_scriptdown">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="text">
-      <string notr="true">/etc/kvm/kvm-ifup</string>
+      <string notr="true">/etc/kvm/kvm-ifdown</string>
      </property>
     </widget>
    </item>

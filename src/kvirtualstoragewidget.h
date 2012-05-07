@@ -47,15 +47,25 @@ public:
 
     KVirtualStorageWidget( QWidget *parent = 0 );
     virtual ~KVirtualStorageWidget();
+	
+	void setID( uint );
+	uint getID();
 
 protected:
     Ui::KVirtualStorageView ui_widget;
+	uint m_id;
+	
+	void enableWidgets( bool );
+	
+protected slots:
+	void emitFileChanged( const QString & );
+	void emitTypeChanged( const QString & );
+	void emitInterfaceChanged( const QString & );
 	
 signals:
-	void fileChanged( const QString & );
-	void typeChanged( const QString & );
-	void InterfaceChanged( const QString & );
-
+	void fileChanged( uint, const QString & );
+	void typeChanged( uint, const QString & );
+	void interfaceChanged( uint, const QString & );
 };
 
 #endif // KVIRTUALSTORAGEWIDGET_H

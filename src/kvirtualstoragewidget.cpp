@@ -34,17 +34,73 @@
 
 #include "kvirtualstoragewidget.h"
 
-
 KVirtualStorageWidget::KVirtualStorageWidget( QWidget *parent )
 		: QWidget( parent )
 {
 	ui_widget.setupUi( this );
+	connect( ui_widget.kurlrequester_file,
+	         SIGNAL( textChanged( QString ) ),
+	         SLOT( emitFileChanged( QString ) )
+	       );
+	connect( ui_widget.comboBox_type,
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( emitTypeChanged( QString ) )
+	       );
+	connect( ui_widget.comboBox_interface,
+	         SIGNAL( currentIndexChanged( QString ) ),
+	         SLOT( emitInterfaceChanged( QString ) )
+	       );
 }
-
 
 KVirtualStorageWidget::~KVirtualStorageWidget()
 {
 }
 
+void KVirtualStorageWidget::setID( uint id )
+{
+	m_id = id;
+}
+
+uint KVirtualStorageWidget::getID()
+{
+	return m_id;
+}
+
+
+void KVirtualStorageWidget::enableWidgets( bool state )
+{
+	ui_widget.kurlrequester_file->setEnabled( state );
+	ui_widget.comboBox_interface->setEnabled( state );
+	ui_widget.label_interface->setEnabled( state );
+	ui_widget.label_file->setEnabled( state );
+}
+
+void KVirtualStorageWidget::emitFileChanged( const QString &  file )
+{
+	emit( fileChanged( m_id, file ) );
+}
+
+void KVirtualStorageWidget::emitTypeChanged( const QString & type )
+{
+	if ( ui_widget.comboBox_type->currentIndex() )
+	{
+		enableWidgets( true );
+		emit( typeChanged( m_id, type ) );
+	}
+	else
+	{
+		enableWidgets( false );
+		emit( typeChanged( m_id, QString() ) );
+	}
+}
+
+void KVirtualStorageWidget::emitInterfaceChanged( const QString & interface )
+{
+	if ( ui_widget.comboBox_interface->currentIndex() )
+		emit( interfaceChanged( m_id, interface ) );
+	else
+		emit( interfaceChanged( m_id, QString() ) );
+}
+
 #include "kvirtualstoragewidget.moc"
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4; 
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;
