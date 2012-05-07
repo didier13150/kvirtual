@@ -47,13 +47,14 @@ public:
 
     KVirtualStorageWidget( QWidget *parent = 0 );
     virtual ~KVirtualStorageWidget();
-	
-	void setID( uint );
-	uint getID();
+
+public slots:
+	void setStorageID( uint );
+	uint getStorageID();
 
 protected:
     Ui::KVirtualStorageView ui_widget;
-	uint m_id;
+	uint m_storageID;
 	
 	void enableWidgets( bool );
 	

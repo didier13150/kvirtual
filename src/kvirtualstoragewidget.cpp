@@ -56,14 +56,14 @@ KVirtualStorageWidget::~KVirtualStorageWidget()
 {
 }
 
-void KVirtualStorageWidget::setID( uint id )
+void KVirtualStorageWidget::setStorageID( uint id )
 {
-	m_id = id;
+	m_storageID = id;
 }
 
-uint KVirtualStorageWidget::getID()
+uint KVirtualStorageWidget::getStorageID()
 {
-	return m_id;
+	return m_storageID;
 }
 
 
@@ -77,7 +77,7 @@ void KVirtualStorageWidget::enableWidgets( bool state )
 
 void KVirtualStorageWidget::emitFileChanged( const QString &  file )
 {
-	emit( fileChanged( m_id, file ) );
+	emit( fileChanged( m_storageID, file ) );
 }
 
 void KVirtualStorageWidget::emitTypeChanged( const QString & type )
@@ -85,21 +85,21 @@ void KVirtualStorageWidget::emitTypeChanged( const QString & type )
 	if ( ui_widget.comboBox_type->currentIndex() )
 	{
 		enableWidgets( true );
-		emit( typeChanged( m_id, type ) );
+		emit( typeChanged( m_storageID, type ) );
 	}
 	else
 	{
 		enableWidgets( false );
-		emit( typeChanged( m_id, QString() ) );
+		emit( typeChanged( m_storageID, QString() ) );
 	}
 }
 
 void KVirtualStorageWidget::emitInterfaceChanged( const QString & interface )
 {
 	if ( ui_widget.comboBox_interface->currentIndex() )
-		emit( interfaceChanged( m_id, interface ) );
+		emit( interfaceChanged( m_storageID, interface ) );
 	else
-		emit( interfaceChanged( m_id, QString() ) );
+		emit( interfaceChanged( m_storageID, QString() ) );
 }
 
 #include "kvirtualstoragewidget.moc"
