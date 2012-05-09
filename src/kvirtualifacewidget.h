@@ -46,8 +46,45 @@ public:
     KVirtualIfaceWidget( QWidget *parent = 0 );
     virtual ~KVirtualIfaceWidget();
 
+public slots:
+	void setIfaceID( uint );
+	uint getIfaceID();
+	void setFile( const QString & );
+	void setType( const QString & );
+	void setModel( const QString & );
+	void setHwAddr( const QString & );
+	void setScriptUp( const QString & );
+	void setScriptDown( const QString & );
+	void setScriptUpEnabled( bool );
+	void setScriptDownEnabled( bool );
+	
 protected:
     Ui::KVirtualIfaceView ui_widget;
+	uint m_ifaceID;
+
+protected slots:
+	void emitFileChanged( const QString & );
+	void emitTypeChanged( const QString & );
+	void emitModelChanged( const QString & );
+	void emitHwAddrChanged( const QString & );
+	void emitScriptUpChanged( const QString & );
+	void emitScriptDownChanged( const QString & );
+	void emitScriptUpEnabled( int );
+	void emitScriptDownEnabled( int );
+	void enableWidgets( int );
+	void enableScriptUp( int );
+	void enableScriptDown( int );
+	void enableScripts( int );
+	
+signals:
+	void fileChanged( uint, const QString & );
+	void typeChanged( uint, const QString & );
+	void modelChanged( uint, const QString & );
+	void hwAddrChanged( uint, const QString & );
+	void scriptUpChanged( uint, const QString & );
+	void scriptDownChanged( uint, const QString & );
+	void scriptUpEnabled( uint, bool );
+	void scriptDownEnabled( uint, bool );
 };
 
 #endif // KVIRTUALIFACEWIDGET_H

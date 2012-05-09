@@ -51,21 +51,25 @@ public:
 public slots:
 	void setStorageID( uint );
 	uint getStorageID();
+	void setType( const QString & );
+	void setType( int );
+	void setFile( const QString & );
+	void setInterface( const QString & );
 
 protected:
     Ui::KVirtualStorageView ui_widget;
 	uint m_storageID;
 	
-	void enableWidgets( bool );
 	
 protected slots:
 	void emitFileChanged( const QString & );
-	void emitTypeChanged( const QString & );
+	void emitTypeChanged( int );
 	void emitInterfaceChanged( const QString & );
+	void enableWidgets( int );
 	
 signals:
 	void fileChanged( uint, const QString & );
-	void typeChanged( uint, const QString & );
+	void typeChanged( uint, int );
 	void interfaceChanged( uint, const QString & );
 };
 

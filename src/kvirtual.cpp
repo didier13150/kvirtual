@@ -163,9 +163,9 @@ void KVirtual::setupActions()
 	connect( vdisk, SIGNAL( triggered( bool ) ), SLOT( showCreateVDiskDlg() ) );
 
 	// test
-	/*KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Test config" ), this );
+	KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Print config on stdout" ), this );
 	actionCollection()->addAction( QLatin1String( "test_config" ), test );
-	connect( test, SIGNAL( triggered( bool ) ), SLOT( exitCalled() ) );*/
+	connect( test, SIGNAL( triggered( bool ) ), m_options, SLOT( printConfig() ) );
 
 
 	connect( this, SIGNAL( vmStateChanged( uint, bool ) ), m_view, SLOT( setState( uint, bool ) ) );

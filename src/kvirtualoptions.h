@@ -92,8 +92,6 @@ public:
 	bool isUsbSupported() const;
 	bool isSnapshotEnabled() const;
 	bool isModified( const QString & ) const;
-	KVirtualStorage* getAutoCreateStorage( uint );
-	KVirtualIface* getAutoCreateIface( uint );
 
 public slots:
 	void setName( const QString & );
@@ -106,14 +104,26 @@ public slots:
 	void setNbCPU( int );
 	void setBootDevice( int );
 	void setKeyboard( const QString & );
-	void setVncPort( int port );
+	void setVncPort( int );
 	void setDisplay( Display );
 	void setDisplay( int );
+	void setStorageFile( uint, const QString & );
+	void setStorageType( uint, int );
+	void setStorageInterface( uint, const QString & );
+	void setIfaceModel( uint, const QString & );
+	void setIfaceType( uint, const QString & );
+	void setIfaceFile( uint, const QString & );
+	void setIfaceHwAddr( uint, const QString & );
+	void setIfaceScriptUp( uint, const QString & );
+	void setIfaceScriptDown( uint, const QString & );
+	void setIfaceScriptUpEnabled( uint, bool );
+	void setIfaceScriptDownEnabled( uint, bool );
 	void load( const QString & );
 	void save( const QString & );
 	void setUsedSwitch( const QString & );
 	void clear();
 	const QString & getRandomHwAddr( uint );
+	void printConfig();
 
 protected:
 	QStringList m_opts;
@@ -136,6 +146,8 @@ protected:
 
 	KVirtualIface* addIface( uint );
 	KVirtualStorage* addStorage( uint );
+	KVirtualStorage* getAutoCreateStorage( uint );
+	KVirtualIface* getAutoCreateIface( uint );
 
 signals:
 	void errorEncoured( const QString & );

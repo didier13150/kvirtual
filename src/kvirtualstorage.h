@@ -54,7 +54,7 @@ public:
     KVirtualStorage();
     KVirtualStorage( const Type & type , const QString & );
     virtual ~KVirtualStorage();
-
+	
     void setTypeID( const Type & );
     void setTypeID( const int & );
     int getTypeID() const;

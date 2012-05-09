@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Iface Widget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -158,7 +158,7 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string notr="true">tap10</string>
+      <string notr="true"/>
      </property>
     </widget>
    </item>
@@ -197,9 +197,6 @@
      </property>
      <property name="inputMask">
       <string notr="true">HH:HH:HH:HH:HH:HH; </string>
-     </property>
-     <property name="text">
-      <string notr="true">52:54:00:12:34:56</string>
      </property>
     </widget>
    </item>
@@ -250,9 +247,6 @@
      <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="text">
-      <string notr="true">/etc/kvm/kvm-ifup</string>
-     </property>
     </widget>
    </item>
    <item row="2" column="0" colspan="4">
@@ -282,9 +276,6 @@
     <widget class="KUrlRequester" name="kurlrequester_scriptdown">
      <property name="enabled">
       <bool>false</bool>
-     </property>
-     <property name="text">
-      <string notr="true">/etc/kvm/kvm-ifdown</string>
      </property>
     </widget>
    </item>

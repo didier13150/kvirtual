@@ -62,6 +62,7 @@ void KVirtualOptions::clear()
 	m_display = KVirtualOptions::DISPLAY_DIRECT;
 	m_bootDevice = KVirtualOptions::BOOT_ON_DISK;
 	m_vncport = 1;
+	m_cpus = 1;
 	m_keyboard = "fr";
 	m_videoCard = "std";
 	m_description.clear();
@@ -357,6 +358,72 @@ void KVirtualOptions::setDisplay( int type )
 	m_display = ( KVirtualOptions::Display ) type;
 }
 
+void KVirtualOptions::setStorageFile( uint id, const QString & file )
+{
+	KVirtualStorage* storage = getAutoCreateStorage( id );
+	storage->setFile( file );
+}
+
+void KVirtualOptions::setStorageType( uint id, int type )
+{
+	KVirtualStorage* storage = getAutoCreateStorage( id );
+	storage->setTypeID( type );
+}
+
+void KVirtualOptions::setStorageInterface( uint id, const QString & interface )
+{
+	KVirtualStorage* storage = getAutoCreateStorage( id );
+	storage->setInterface( interface );
+}
+
+void KVirtualOptions::setIfaceModel( uint id, const QString & model )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setModel( model );
+}
+
+void KVirtualOptions::setIfaceType( uint id, const QString & type )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setType( type );
+}
+
+void KVirtualOptions::setIfaceFile( uint id, const QString & file )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setFile( file );
+}
+
+void KVirtualOptions::setIfaceHwAddr( uint id, const QString & addr )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setHardwareAddress( addr );
+}
+
+void KVirtualOptions::setIfaceScriptUp( uint id, const QString & script )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setScriptUp( script );
+}
+
+void KVirtualOptions::setIfaceScriptDown( uint id, const QString & script )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setScriptDown( script );
+}
+
+void KVirtualOptions::setIfaceScriptUpEnabled( uint id, bool state )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setScriptUpEnabled( state );
+}
+
+void KVirtualOptions::setIfaceScriptDownEnabled( uint id, bool state )
+{
+	KVirtualIface* iface = getAutoCreateIface( id );
+	iface->setScriptDownEnabled( state );
+}
+
 void KVirtualOptions::setUsedSwitch( const QString & vswitch )
 {
 	if ( not m_usedSwitches.contains( vswitch ) )
@@ -509,6 +576,50 @@ KVirtualOptions::BootOrder KVirtualOptions::getBootDevice() const
 const QString & KVirtualOptions::getKeyboard() const
 {
 	return m_keyboard;
+}
+
+void KVirtualOptions::printConfig()
+{
+	QList<uint> keys;
+	QList<uint>::ConstIterator id;
+	
+	qDebug() << "name" << getName();
+	qDebug() << "description" << getDescription();
+	qDebug() << "memory" << getMemory();
+	qDebug() << "boot device" << getBootDevice();
+	qDebug() << "usb support" << isUsbSupported();
+	qDebug() << "snapshot mode" << isSnapshotEnabled();
+	qDebug() << "number of core" << getNbCPU();
+	qDebug() << "display" << DisplayToString( getDisplay() );
+	qDebug() << "video card" << getVideoCard();
+	qDebug() << "vnc port" << getVncPort();
+	qDebug() << "keyboard" << getKeyboard();
+
+	keys = m_storages.keys();
+
+	for ( id = keys.begin() ; id != keys.end() ; ++id )
+	{
+		qDebug() << "*******************************************************";
+		qDebug() << "storage type, id" << *id << getStorage( *id )->getTypeID();
+		qDebug() << "storage file, id" << *id << getStorage( *id )->getFile();
+		qDebug() << "storage interface, id" << *id << getStorage( *id )->getInterface();
+	}
+
+	keys = m_ifaces.keys();
+
+	for ( id = keys.begin() ; id != keys.end() ; ++id )
+	{
+		qDebug() << "*******************************************************";
+		qDebug() << "iface type, id" << *id << getIface( *id )->getType();
+		qDebug() << "iface file, id" << *id << getIface( *id )->getFile();
+		qDebug() << "iface model, id" << *id << getIface( *id )->getModel();
+		qDebug() << "iface hwaddr, id" << *id << getIface( *id )->getHardwareAddress();
+		qDebug() << "iface scriptup, id" << *id << getIface( *id )->getScriptUp();
+		qDebug() << "iface scriptdown, id" << *id << getIface( *id )->getScriptDown();
+		qDebug() << "iface scriptup enable, id" << *id << getIface( *id )->isScriptUpEnabled();
+		qDebug() << "iface scriptdown enable, id" << *id << getIface( *id )->isScriptDownEnabled();
+	}
+	qDebug() << "*******************************************************";
 }
 
 bool KVirtualOptions::isModified( const QString & filename ) const
@@ -788,7 +899,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 								if ( getIface( id )->isScriptDownEnabled() != ( flag & KVirtualIface::SCRIPT_DOWN ) )
 								{
-									qDebug() << "iface scriptdown enable not sync" << getIface( id )->isScriptDownEnabled() << ( flag & KVirtualIface::SCRIPT_DOWN );
+									qDebug() << "iface scriptdown enable not sync, id" << id << getIface( id )->isScriptDownEnabled() << ( flag & KVirtualIface::SCRIPT_DOWN );
 									return true;
 								}
 							}

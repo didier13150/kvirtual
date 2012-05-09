@@ -41,7 +41,7 @@
 static const char description[] =
 	I18N_NOOP( "A KDE 4 GUI Frontend for KVM" );
 
-static const char version[] = "1.0.1";
+static const char version[] = "1.1.0";
 
 int main( int argc, char **argv )
 {

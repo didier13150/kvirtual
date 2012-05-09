@@ -33,18 +33,20 @@
  *****************************************************************************/
 
 #include "kvirtualstoragewidget.h"
+#include <KLineEdit>
 
 KVirtualStorageWidget::KVirtualStorageWidget( QWidget *parent )
 		: QWidget( parent )
 {
 	ui_widget.setupUi( this );
+	ui_widget.kurlrequester_file->lineEdit()->setSqueezedTextEnabled( true );
 	connect( ui_widget.kurlrequester_file,
 	         SIGNAL( textChanged( QString ) ),
 	         SLOT( emitFileChanged( QString ) )
 	       );
 	connect( ui_widget.comboBox_type,
-	         SIGNAL( currentIndexChanged( QString ) ),
-	         SLOT( emitTypeChanged( QString ) )
+	         SIGNAL( currentIndexChanged( int ) ),
+	         SLOT( emitTypeChanged( int ) )
 	       );
 	connect( ui_widget.comboBox_interface,
 	         SIGNAL( currentIndexChanged( QString ) ),
@@ -61,18 +63,47 @@ void KVirtualStorageWidget::setStorageID( uint id )
 	m_storageID = id;
 }
 
+
+void KVirtualStorageWidget::setType( const QString & type )
+{
+	int index = ui_widget.comboBox_type->findText( type );
+
+	if ( index < 0 ) index = 0;
+
+	ui_widget.comboBox_type->setCurrentIndex( index );
+}
+
+void KVirtualStorageWidget::setType( int type )
+{
+	ui_widget.comboBox_type->setCurrentIndex( type );
+}
+
+void KVirtualStorageWidget::setFile( const QString & file )
+{
+	ui_widget.kurlrequester_file->setText( file );
+}
+
+void KVirtualStorageWidget::setInterface( const QString & interface )
+{
+	int index = ui_widget.comboBox_interface->findText( interface );
+
+	if ( index < 0 ) index = 0;
+
+	ui_widget.comboBox_interface->setCurrentIndex( index );
+}
+
 uint KVirtualStorageWidget::getStorageID()
 {
 	return m_storageID;
 }
 
-
-void KVirtualStorageWidget::enableWidgets( bool state )
+void KVirtualStorageWidget::enableWidgets( int state )
 {
-	ui_widget.kurlrequester_file->setEnabled( state );
-	ui_widget.comboBox_interface->setEnabled( state );
-	ui_widget.label_interface->setEnabled( state );
-	ui_widget.label_file->setEnabled( state );
+	bool enabled = ( bool ) state;
+	ui_widget.kurlrequester_file->setEnabled( enabled );
+	ui_widget.comboBox_interface->setEnabled( enabled );
+	ui_widget.label_interface->setEnabled( enabled );
+	ui_widget.label_file->setEnabled( enabled );
 }
 
 void KVirtualStorageWidget::emitFileChanged( const QString &  file )
@@ -80,18 +111,10 @@ void KVirtualStorageWidget::emitFileChanged( const QString &  file )
 	emit( fileChanged( m_storageID, file ) );
 }
 
-void KVirtualStorageWidget::emitTypeChanged( const QString & type )
+void KVirtualStorageWidget::emitTypeChanged( int type )
 {
-	if ( ui_widget.comboBox_type->currentIndex() )
-	{
-		enableWidgets( true );
-		emit( typeChanged( m_storageID, type ) );
-	}
-	else
-	{
-		enableWidgets( false );
-		emit( typeChanged( m_storageID, QString() ) );
-	}
+	emit( typeChanged( m_storageID, type ) );
+	enableWidgets( type );
 }
 
 void KVirtualStorageWidget::emitInterfaceChanged( const QString & interface )
@@ -103,4 +126,4 @@ void KVirtualStorageWidget::emitInterfaceChanged( const QString & interface )
 }
 
 #include "kvirtualstoragewidget.moc"
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;  replace-tabs off;
