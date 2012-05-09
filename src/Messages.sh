@@ -4,6 +4,7 @@ BASEDIR="../"	# root of translatable sources
 PROJECT="kvirtual"	# project name
 BUGADDR="https://github.com/didier13150/kvirtual/issues"	# MSGID-Bugs
 WDIR=`pwd`		# working dir
+PODIR="${BASEDIR}/po/"
 
 
 echo "Preparing rc files"
@@ -29,10 +30,10 @@ echo "Done extracting messages"
 
 
 echo "Merging translations"
-catalogs=`find ../po/ -name '*.po'`
+catalogs=`find ${PODIR} -name '*.po'`
 for cat in $catalogs; do
   echo $cat
-  msgmerge -o $cat.new $cat ../po/${PROJECT}.pot
+  msgmerge -o $cat.new $cat ${PODIR}/${PROJECT}.pot
   mv $cat.new $cat
 done
 echo "Done merging translations"
