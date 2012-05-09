@@ -57,6 +57,7 @@ public slots:
 	void setScriptDown( const QString & );
 	void setScriptUpEnabled( bool );
 	void setScriptDownEnabled( bool );
+	void setRandomHwAddr();
 	
 protected:
     Ui::KVirtualIfaceView ui_widget;

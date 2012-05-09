@@ -93,6 +93,10 @@ KVirtualIfaceWidget::KVirtualIfaceWidget( QWidget *parent )
 	         SLOT( enableScriptDown( int ) )
 
 	       );
+	connect( ui_widget.pushButton_hwaddr,
+	         SIGNAL( clicked( bool ) ),
+	         SLOT( setRandomHwAddr() )
+	       );
 }
 
 KVirtualIfaceWidget::~KVirtualIfaceWidget()
@@ -269,5 +273,40 @@ void KVirtualIfaceWidget::enableScriptDown( int state )
 	ui_widget.kurlrequester_scriptdown->setEnabled(( bool ) state );
 }
 
+void KVirtualIfaceWidget::setRandomHwAddr()
+{
+	QString hwaddr = "52:54:00:12:", lastdigit;
+	uint digit = ( uint ) random() % 255;
+
+	switch ( m_ifaceID )
+	{
+
+		case 0:
+		{
+			hwaddr.append( "34:" );
+			break;
+		}
+
+		case 1:
+		{
+			hwaddr.append( "36:" );
+			break;
+		}
+
+		default:
+		{
+			hwaddr.append( "38:" );
+			break;
+		}
+	}
+
+	lastdigit.setNum( digit, 16 );
+
+	hwaddr.append( lastdigit.rightJustified( 2, '0' ).toUpper() );
+
+	setHwAddr( hwaddr );
+	emit( hwAddrChanged( m_ifaceID, hwaddr ) );
+}
+
 #include "kvirtualifacewidget.moc"
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;  replace-tabs off;  replace-tabs off;  replace-tabs off;  replace-tabs off;
+// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;
