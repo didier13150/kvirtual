@@ -8,8 +8,8 @@ Supported kvm options:
 * Memory size
 * Number of CPU
 * USB Support
-* Snapshot
-* Boot device
+* Snapshot Mode
+* First Boot device
 * Display: none, direct (sdl), vnc (just port can be configured, host is localhost)
 * video card
 * keyboard

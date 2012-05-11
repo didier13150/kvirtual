@@ -3,72 +3,18 @@
   <!-- Define an entity for your application if it is not part of KDE
        CVS -->
   <!ENTITY kmyapplication "<application>KVirtual</application>">
-  <!ENTITY kappname "&kmyapplication;"><!-- replace kmyapplication here
-                                            do *not* replace kappname-->
-  <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc.  Leave
-                                     this unchanged if your
-                                     application is not maintained in KDE source archiv -->
+  <!ENTITY kappname "&kmyapplication;">
+  <!ENTITY package "kde-module">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"> <!-- ONLY If you are writing non-English
                                      original documentation, change
                                      the language here -->
-
-  <!-- Do not define any other entities; instead, use the entities
-       from entities/general.entities and en/user.entities. -->
 ]>
-<!-- kdoctemplate v0.9.1 2010-10-27 lueck
-     changed releaseinfo format
-     removed screenshot format="EPS
-     added comment when to write a command reference
-     added tip using id's in varlistentries
-     removed refentry stuff
-
-     kdoctemplate v0.9 January 10 2003
-     Changes to comments to clarify entity usage January 10 2003
-     Minor update to "Credits and Licenses" section on August 24, 2000
-     Removed "Revision history" section on 22 January 2001
-     Changed to Installation/Help menu entities 18 October 2001
-     Other minor cleanup and changes 18 October 2001
-     FPI change and minor changes November 2002 -->
-
-<!--
-This template was designed by: David Rugge davidrugge@mindspring.com
-with lots of help from: Eric Bischoff ebisch@cybercable.tm.fr
-and Frederik Fouvry fouvry@sfs.nphil.uni-tuebingen.de
-of the KDE DocBook team.
-
-You may freely use this template for writing any sort of KDE documentation.
-If you have any changes or improvements, please let us know.
-
-Remember:
-- in XML, the case of the <tags> and attributes is relevant ;
-- also, quote all attributes.
-
-Please don't forget to remove all these comments in your final documentation,
-thanks ;-).
--->
-
-<!-- ................................................................ -->
-
-<!-- The language must NOT be changed here. -->
-<!-- If you are writing original documentation in a language other -->
-<!-- than English, change the language above ONLY, not here -->
 <book lang="&language;">
-
-<!-- This header contains all of the meta-information for the document such
-as Authors, publish date, the abstract, and Keywords -->
-
 <bookinfo>
 <title>The &kmyapplication; Handbook</title>
-
 <authorgroup>
 <author>
-<!-- This is just put in as an example.  For real documentation, please
-     define a general entity in entities/contributor.entities, e.g.
-<!ENTITY George.N.Ugnacious "<personname><firstname>George</firstname><othername>N.</othername><surname>Ugnacious</surname></personname>">
-<!ENTITY George.N.Ugnacious.mail "<email>gnu@kde.org</email>">
-and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
- -->
 <personname>
 <firstname>Didier</firstname>
 <othername></othername>
@@ -85,59 +31,89 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 </copyright>
 <legalnotice>&FDLNotice;</legalnotice>
 
-<!-- Date of the documentation
-Don't forget to include this last date.
-Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
--->
-<date>2012-04-24</date>
+<date>2012-05-11</date>
 
 <!--version information of the application and kde this documentation is valid for.
 either 'xx.yy.zz (&kde; x.y)' or '&kde; x.y'
 -->
-<releaseinfo>1.00.00 (&kde; 4,5)</releaseinfo>
-
-<!-- Abstract about this handbook -->
-
+<releaseinfo>1.1.1 (&kde; 4.5)</releaseinfo>
 <abstract>
 <para>
 &kmyapplication; is a KDE 4 GUI Frontend for KVM.
 </para>
 </abstract>
-
-<!-- This is a set of Keywords for indexing by search engines.
-Please at least include KDE, the KDE package it is in, the name
- of your application, and a few relevant keywords. -->
-
 <keywordset>
 <keyword>KDE</keyword>
 <keyword>kdeutils</keyword>
 <keyword>KVirtual</keyword>
 <keyword>kvm</keyword>
+<keyword>qemu</keyword>
 <keyword>virtual</keyword>
+<keyword>vm</keyword>
 </keywordset>
-
 </bookinfo>
-
-<!-- The contents of the documentation begin here.  Label
-each chapter so with the id attribute. This is necessary for two reasons: it
-allows you to easily reference the chapter from other chapters of your
-document, and if there is no ID, the name of the generated HTML files will vary
-from time to time making it hard to manage for maintainers and for the CVS
-system. Any chapter labelled (OPTIONAL) may be left out at the author's
-discretion. Other chapters should not be left out in order to maintain a
-consistent documentation style across all KDE apps. -->
 
 <chapter id="introduction">
 <title>Introduction</title>
-
-<!-- The introduction chapter contains a brief introduction for the
-application that explains what it does and where to report
-problems. Basically a long version of the abstract.  Don't include a
-revision history. (see installation appendix comment) -->
-
 <para>
-&kmyapplication; is a program that lets you do absolutely nothing. Please report
-any problems or feature requests to the &kde; mailing lists.
+&kmyapplication; is a program that set the most KVM/Qemu emulator common
+options for you, without reminding a lot of configuration parameters:
+<itemizedlist>
+<listitem><para></para></listitem>
+<listitem><para>Memory size</para></listitem>
+<listitem><para>Number of CPU</para></listitem>
+<listitem><para>USB Support</para></listitem>
+<listitem><para>Snapshot mode</para></listitem>
+<listitem><para>First Boot device</para></listitem>
+<listitem><para>Display:
+  <itemizedlist>
+    <listitem><para>None: no display at all</para></listitem>
+    <listitem><para>Direct: Display directly on a SDL window</para></listitem>
+    <listitem><para>VNC: Export display on a VNC server. Just port can be
+configured, host is localhost</para></listitem>
+  </itemizedlist>
+</para></listitem>
+<listitem><para>video card</para></listitem>
+<listitem><para>keyboard: Very usefull with VNC display</para></listitem>
+<listitem><para>storage:
+  <itemizedlist>
+    <listitem><para>File: can be a real disk image file or a real partition on
+/dev directory</para></listitem>
+    <listitem><para>Type:
+      <itemizedlist>
+        <listitem><para>Disk</para></listitem>
+        <listitem><para>CD-Rom</para></listitem>
+        <listitem><para>Floppy</para></listitem>
+      </itemizedlist>
+     </para></listitem>
+    <listitem><para>Interface: IDE, SCSI, etc...</para></listitem>
+  </itemizedlist>
+</para></listitem>
+<listitem><para>iface:
+  <itemizedlist>
+    <listitem><para>Network card model</para></listitem>
+    <listitem><para>MAC Address</para></listitem>
+    <listitem><para>Type of connection:
+      <itemizedlist>
+        <listitem><para>none: Network card exists on guest but is not connected
+to anything</para></listitem>
+        <listitem><para>tap: Network card is connected to a tap device on host
+</para></listitem>
+        <listitem><para>vde: Network card is connected to a virtual switch
+</para></listitem>
+      </itemizedlist></para></listitem>
+    <listitem><para>Connection point: Set the tap name or path to vde switch
+</para></listitem>
+    <listitem><para>Script (up): define script to launch when the virtual host
+start.</para></listitem>
+    <listitem><para>Script (down): define script to launch when the virtual host
+stop.</para></listitem>
+  </itemizedlist></para></listitem>
+</itemizedlist>
+</para>
+<para>Please report any bug or feature request to the
+<ulink url="https://github.com/didier13150/kvirtual/issues">github issues page
+</ulink>.
 </para>
 </chapter>
 
@@ -340,39 +316,16 @@ which will be expanded to:
           <para><action>Create a new virtual disk image</action></para>
         </listitem>
       </varlistentry>
-
     </variablelist>
   </para>
 </sect2>
 
 <sect2>
 <title>The Help Menu</title>
-
-<!-- Assuming you have a standard help menu (help, what's this, about -->
-<!-- &kmyapplication;, about KDE) then the documentation is already written. -->
-<!-- The following entity is valid anywhere that a variablelist is -->
-<!-- valid.  -->
-
 &help.menu.documentation;
-
 </sect2>
-
 </sect1>
 </chapter>
-<!--
-<chapter id="developers">
-<title>Developer's Guide to &kmyapplication;</title> -->
-
-<!-- (OPTIONAL) A Programming/Scripting reference chapter should be
-used for apps that use plugins or that provide their own scripting hooks
-and/or development libraries. -->
-
-<!-- <para>
-Programming &kmyapplication; plugins is a joy to behold.
-</para>
-
-
-</chapter> -->
 
 <chapter id="faq">
 <title>Questions and Answers</title>
