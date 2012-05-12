@@ -40,6 +40,7 @@
 #include <QDebug>
 #include <QDomDocument>
 #include <QFile>
+#include <QUuid>
 #include <KStandardDirs>
 
 #include <stdlib.h>
@@ -103,6 +104,11 @@ const QStringList & KVirtualOptions::getArgs()
 	QList<uint> keys;
 
 	m_opts.clear();
+
+	buffer = QUuid::createUuid().toString();
+	buffer.remove( "{" ).remove( "}" );
+	m_opts << "--uuid" << buffer;
+	
 	buffer.setNum( m_memory );
 	m_opts << "-m" << buffer;
 
