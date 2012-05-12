@@ -6,9 +6,7 @@
   <!ENTITY kappname "&kmyapplication;">
   <!ENTITY package "kde-module">
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % English "INCLUDE"> <!-- ONLY If you are writing non-English
-                                     original documentation, change
-                                     the language here -->
+  <!ENTITY % English "INCLUDE">
 ]>
 <book lang="&language;">
 <bookinfo>
@@ -32,10 +30,6 @@
 <legalnotice>&FDLNotice;</legalnotice>
 
 <date>2012-05-11</date>
-
-<!--version information of the application and kde this documentation is valid for.
-either 'xx.yy.zz (&kde; x.y)' or '&kde; x.y'
--->
 <releaseinfo>1.1.1 (&kde; 4.5)</releaseinfo>
 <abstract>
 <para>
@@ -59,56 +53,10 @@ either 'xx.yy.zz (&kde; x.y)' or '&kde; x.y'
 &kmyapplication; is a program that set the most KVM/Qemu emulator common
 options for you, without reminding a lot of configuration parameters:
 <itemizedlist>
-<listitem><para></para></listitem>
-<listitem><para>Memory size</para></listitem>
-<listitem><para>Number of CPU</para></listitem>
-<listitem><para>USB Support</para></listitem>
-<listitem><para>Snapshot mode</para></listitem>
-<listitem><para>First Boot device</para></listitem>
-<listitem><para>Display:
-  <itemizedlist>
-    <listitem><para>None: no display at all</para></listitem>
-    <listitem><para>Direct: Display directly on a SDL window</para></listitem>
-    <listitem><para>VNC: Export display on a VNC server. Just port can be
-configured, host is localhost</para></listitem>
-  </itemizedlist>
-</para></listitem>
-<listitem><para>video card</para></listitem>
-<listitem><para>keyboard: Very usefull with VNC display</para></listitem>
-<listitem><para>storage:
-  <itemizedlist>
-    <listitem><para>File: can be a real disk image file or a real partition on
-/dev directory</para></listitem>
-    <listitem><para>Type:
-      <itemizedlist>
-        <listitem><para>Disk</para></listitem>
-        <listitem><para>CD-Rom</para></listitem>
-        <listitem><para>Floppy</para></listitem>
-      </itemizedlist>
-     </para></listitem>
-    <listitem><para>Interface: IDE, SCSI, etc...</para></listitem>
-  </itemizedlist>
-</para></listitem>
-<listitem><para>iface:
-  <itemizedlist>
-    <listitem><para>Network card model</para></listitem>
-    <listitem><para>MAC Address</para></listitem>
-    <listitem><para>Type of connection:
-      <itemizedlist>
-        <listitem><para>none: Network card exists on guest but is not connected
-to anything</para></listitem>
-        <listitem><para>tap: Network card is connected to a tap device on host
-</para></listitem>
-        <listitem><para>vde: Network card is connected to a virtual switch
-</para></listitem>
-      </itemizedlist></para></listitem>
-    <listitem><para>Connection point: Set the tap name or path to vde switch
-</para></listitem>
-    <listitem><para>Script (up): define script to launch when the virtual host
-start.</para></listitem>
-    <listitem><para>Script (down): define script to launch when the virtual host
-stop.</para></listitem>
-  </itemizedlist></para></listitem>
+<listitem><para>Common options</para></listitem>
+<listitem><para>Display options</para></listitem>
+<listitem><para>Storage options</para></listitem>
+<listitem><para>Network options</para></listitem>
 </itemizedlist>
 </para>
 <para>Please report any bug or feature request to the
@@ -130,7 +78,7 @@ your application. -->
 patent issues. -->
 
 <screenshot>
-<screeninfo>Here's a screenshot of &kmyapplication;</screeninfo>
+  <screeninfo>Here's a screenshot of &kmyapplication;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="screenshot.png" format="PNG"/>
@@ -146,18 +94,110 @@ patent issues. -->
 <sect1 id="kapp-features">
 <title>More &kmyapplication; features</title>
 
-<para>It slices! It dices! and it comes with a free toaster!</para>
-<para>
-The Squiggle Tool <guiicon><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="squiggle.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Squiggle</phrase>
-	  </textobject>
-</inlinemediaobject></guiicon> is used to draw squiggly lines all over
-the &kmyapplication; main window. It's not a bug, it's a feature!
+<para>Emulator options are divized in five parts</para>
+<sect2 id="kapp-features-common">
+<title>Common Options</title>
+<para>Here is the place to set:
+<itemizedlist>
+<listitem><para>Name</para></listitem>
+<listitem><para>Description</para></listitem>
+<listitem><para>Operating system</para></listitem>
+</itemizedlist>
+All common options are not sent to emulator, but they are very usefull when a
+lot of virtual hosts are managed by an administrator.
+Operating system logo is automatically synchronized with the operating system
+selector.
 </para>
+</sect2>
+<sect2 id="kapp-features-system">
+<title>System Options</title>
+<para>
+It's the place to set system options :
+<itemizedlist>
+<listitem><para>Memory size</para></listitem>
+<listitem><para>Number of CPU</para></listitem>
+<listitem><para>USB Support</para><para>Enable the USB driver</para></listitem>
+<listitem><para>Snapshot mode</para><para>Write to temporary files instead of
+disk image files. In this case, the raw disk image you use is not written
+ back.</para></listitem>
+</itemizedlist>
+</para>
+<para>
+&kmyapplication; get automatically memory size and number of core. You can't
+set more than you have.
+</para>
+</sect2>
+<sect2 id="kapp-features-display">
+<title>Display Options</title>
+<para>
+<itemizedlist>
+<listitem><para>Display</para>
+<itemizedlist>
+<listitem><para>None</para></listitem>
+<listitem><para>Direct</para></listitem>
+<listitem><para>VNC</para></listitem>
+</itemizedlist>
+</listitem>
+<listitem><para>VNC port</para><para>By convention the TCP port is 5900 + port.
+	</para><para>Host is omitted to accept connections from any host.</para>
+	<para> So virtual host address is vnc://YOUR_IP:port</para></listitem>
+<listitem><para>Video card Type</para><para>KVM can emulate a lot of graphic
+card. std is more powerfull than cirrus (kvm default), because resolution can
+be XGA compatible (1024x768).</para></listitem>
+<listitem><para>Keyboard</para><para>Set keyboard type</para></listitem>
+</itemizedlist>
+</para>
+<para>VNC port can be set only when VNC is selected.
+</para>
+</sect2>
+<sect2 id="kapp-features-storage">
+<title>Storage Options</title>
+<para>
+	<itemizedlist>
+		<listitem><para>File: can be a real disk image file or a real partition 
+			on /dev directory</para></listitem>
+		<listitem><para>Type:
+		<itemizedlist>
+			<listitem><para>Disk</para></listitem>
+			<listitem><para>CD-Rom</para></listitem>
+			<listitem><para>Floppy</para></listitem>
+		</itemizedlist>
+		</para></listitem>
+		<listitem><para>Interface: Emulate a specific one: IDE, SCSI, etc... or
+			let kvm emulate the default one.</para></listitem>
+	</itemizedlist>
+</para>
+</sect2>
+<sect2 id="kapp-features-iface">
+<title>Network Options</title>
+<para>
+<itemizedlist>
+	<listitem><para>Network card model</para><para>virtio is good choice, but
+		if you need to emulate a specific card, select it on the list.
+		</para></listitem>
+	<listitem><para>MAC Address</para><para>Set an unique hardware address
+		</para></listitem>
+	<listitem><para>Type of connection:
+		<itemizedlist>
+			<listitem><para>none: Network card exists on guest but is not connected
+				to anything</para></listitem>
+			<listitem><para>tap</para><para>Network card is connected to a tap device
+				on host</para></listitem>
+			<listitem><para>vde</para><para>Network card is connected to a Virtual
+				Distributed Ethernet</para></listitem>
+		</itemizedlist>
+	</para></listitem>
+	<listitem><para>Connection point</para><para>Set the tap name or
+		path to vde switch</para></listitem>
+	<listitem><para>Script (up)</para><para>Define script to launch when the
+		virtual host start.</para><para>Usefull to create a tap device on the fly
+		and connect it to a bridge.</para></listitem>
+	<listitem><para>Script (down)</para><para>Define script to launch when the
+		virtual host stop.</para><para>Usefull to disconnect tap device from a
+		bridge and delete it.</para></listitem>
+</itemizedlist>
+</para>
+</sect2>
 
 </sect1>
 </chapter>
@@ -198,11 +238,6 @@ Use variablelist markup for this
 <para>
 <variablelist>
 <varlistentry  id="file-new">
-<!-- Tip: With id's here, then you can use them like
-"select <xref linkend="file-new"/> to open the file dialog"
-which will be expanded to:
-"select File->New (Ctrl+N) to open the file dialog"
--->
 <term><menuchoice>
 <shortcut>
 <keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
@@ -314,8 +349,21 @@ which will be expanded to:
         </term>
         <listitem>
           <para><action>Create a new virtual disk image</action></para>
+          <para>Select file name, set a size and a type and click on OK to add
+			a new virtual disk image</para>
+          <para>Type is always qcow2 for now. File name extension is not 
+			automatically added</para>
+				<mediaobject>
+				<imageobject>
+					<imagedata fileref="create-img.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Create a new disk image file window</phrase>
+				</textobject>
+				</mediaobject>
         </listitem>
       </varlistentry>
+
     </variablelist>
   </para>
 </sect2>
@@ -327,18 +375,17 @@ which will be expanded to:
 </sect1>
 </chapter>
 
-<chapter id="faq">
-<title>Questions and Answers</title>
+<chapter id="developers">
+<title>Developer's Guide to &kmyapplication;</title>
+<para>
+You can easily fork &kmyapplication; on github and submit your changes by
+sending a pull request.
+</para>
+</chapter>
 
-<!-- (OPTIONAL but recommended) This chapter should include all of the silly
-(and not-so-silly) newbie questions that fill up your mailbox. This chapter
-should be reserved for BRIEF questions and answers! If one question uses more
-than a page or so then it should probably be part of the
-"Using this Application" chapter instead. You should use links to
-cross-reference questions to the parts of your documentation that answer them.
-This is also a great place to provide pointers to other FAQ's if your users
-must do some complicated configuration on other programs in order for your
-application work. -->
+
+<!-- <chapter id="faq">
+<title>Questions and Answers</title>
 
 &reporting.bugs;
 &updating.documentation;
@@ -363,15 +410,9 @@ installed.</para>
 </answer>
 </qandaentry>
 </qandaset>
-</chapter>
+</chapter> -->
 
 <chapter id="credits">
-
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the KDE
-distribution. -->
-
 <title>Credits and License</title>
 
 <para>
@@ -393,10 +434,8 @@ Contributors:
 <para>
 Documentation Copyright &copy; 2012 Didier Fabert <email>didier.fabert@gmail.com</email>
 </para>
-
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
-&underFDL;               <!-- FDL: do not remove -->
+&underFDL;
 &underGPL;
 
 </chapter>
@@ -406,10 +445,6 @@ Documentation Copyright &copy; 2012 Didier Fabert <email>didier.fabert@gmail.com
 
 <sect1 id="getting-kapp">
 <title>How to obtain &kmyapplication;</title>
-
-<!-- This first entity contains boiler plate for applications that are
-part of KDE archiv.  You should remove it if you are releasing your
-application -->
 <para>
 &kmyapplication; can be found on
 <ulink url="https://github.com/didier13150/kvirtual">
@@ -420,17 +455,6 @@ The &kmyapplication; home page on github</ulink>.
 
 <sect1 id="requirements">
 <title>Requirements</title>
-
-<!--
-List any special requirements for your application here. This should include:
-.Libraries or other software that is not included in kdesupport,
-kdelibs, or kdebase.
-.Hardware requirements like amount of RAM, disk space, graphics card
-capabilities, screen resolution, special expansion cards, etc.
-.Operating systems the app will run on. If your app is designed only for a
-specific OS, (you wrote a graphical LILO configurator for example) put this
-information here.
--->
 
 <para>
 In order to successfully use &kmyapplication;, you need kvm or qemu and vde if
@@ -443,8 +467,6 @@ on <ulink url="https://github.com/didier13150/kvirtual">
 The &kmyapplication; home page on github</ulink>.
 </para>
 
-<!-- For a list of updates, you may refer to the application web site
-or the ChangeLog file, or ... -->
 <para>
 You can find a list of changes at <ulink
 url="https://github.com/didier13150/kvirtual/commits/master">
@@ -455,10 +477,6 @@ url="https://github.com/didier13150/kvirtual/commits/master">
 <sect1 id="compilation">
 <title>Compilation and Installation</title>
 
-<!-- This entity contains the boilerplate text for standard -->
-<!-- compilation instructions.  If your application requires any -->
-<!-- special handling, remove it, and replace with your own text. -->
-
 &install.compile.documentation;
 
 </sect1>
@@ -466,9 +484,34 @@ url="https://github.com/didier13150/kvirtual/commits/master">
 <sect1 id="configuration">
 <title>Configuration</title>
 
-<para>Don't forget to tell your system to start the <filename>dtd</filename>
-dicer-toaster daemon first, or &kmyapplication; won't work !</para>
+<para>Set the executable files for :</para>
+<itemizedlist>
+  <listitem>
+    <para>kvm or qemu emulator ( typically kvm or qemu, but can be kvm-qemu on rpm based distros )</para>
+  </listitem>
+  <listitem>
+    <para>vde switch ( vde_switch is the common executable file name )</para>
+  </listitem>
+  <listitem>
+    <para>image file creator ( qemu-img or kvm-img on most distribution )</para>
+  </listitem>
+</itemizedlist>
+<para>All entries can be set with path if it's not included in your $PATH.
+</para>
+<para>You can choose to integrate &kmyapplication; in the KDE sytem tray too.
 
+<screenshot>
+  <screeninfo>Here's a screenshot of &kmyapplication;'s settings</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="settings.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase>Screenshot about settings</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
 </sect1>
 
 </appendix>
@@ -486,5 +529,5 @@ sgml-indent-data:nil
 End:
 
 vim:tabstop=2:shiftwidth=2:expandtab
-kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+kate: space-indent on; indent-mode cstyle; replace-tabs off; tab-width 4;
 -->
