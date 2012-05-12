@@ -624,6 +624,8 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 		notification->setText( i18n( "The virtual host <i>%1</i> is stopped", m_options->getName() ) );
 		notification->setPixmap( pixmap );
 		notification->sendEvent();
+
+		terminateVirtual();
 	}
 
 	delete process;
