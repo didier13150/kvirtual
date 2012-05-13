@@ -49,7 +49,14 @@
 
 <chapter id="introduction">
 <title>Introduction</title>
-<para>
+<para><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="logo.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Logo</phrase>
+	  </textobject>
+</inlinemediaobject>
 &kmyapplication; is a program that set the most KVM/Qemu emulator common
 options for you, without reminding a lot of configuration parameters:
 <itemizedlist>
