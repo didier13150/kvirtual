@@ -52,7 +52,28 @@ KVirtualOptions::KVirtualOptions()
 
 KVirtualOptions::~KVirtualOptions()
 {
+	QMapIterator<uint, KVirtualStorage*> it1 ( m_storages );
+	
+	while ( it1.hasNext() )
+	{
+		it1.next();
 
+		if ( it1.value() )
+		{
+			delete it1.value();
+		}
+	}
+	QMapIterator<uint, KVirtualIface*> it2 ( m_ifaces );
+	
+	while ( it2.hasNext() )
+	{
+		it2.next();
+
+		if ( it2.value() )
+		{
+			delete it2.value();
+		}
+	}
 }
 
 void KVirtualOptions::clear()
