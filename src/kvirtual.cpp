@@ -63,8 +63,8 @@
 
 KVirtual::KVirtual()
 		: KXmlGuiWindow(),
-		m_view( new KVirtualView( this ) ),
-		m_printer( 0 )
+		m_view( new KVirtualView( this ) )
+		//m_printer( 0 )
 {
 	m_id = 0;
 
@@ -162,7 +162,7 @@ void KVirtual::setupActions()
 	actionCollection()->addAction( QLatin1String( "new_vdisk" ), vdisk );
 	connect( vdisk, SIGNAL( triggered( bool ) ), SLOT( showCreateVDiskDlg() ) );
 
-	// test
+	// test: print current config to stdout
 	KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Print config on stdout" ), this );
 	actionCollection()->addAction( QLatin1String( "test_config" ), test );
 	connect( test, SIGNAL( triggered( bool ) ), m_options, SLOT( printConfig() ) );
@@ -173,6 +173,7 @@ void KVirtual::setupActions()
 
 void KVirtual::changeIcon( const QString & distrib )
 {
+	if ( ! m_systray ) return;
 	QString img = KStandardDirs::locate( "appdata", distrib + ".png" );
 
 	if ( img.isNull() )
@@ -180,7 +181,7 @@ void KVirtual::changeIcon( const QString & distrib )
 		img = KStandardDirs::locate( "appdata", "linux.png" );
 	}
 
-	if ( m_systray ) m_systray->setIconByName( img );
+	m_systray->setIconByName( img );
 }
 
 bool KVirtual::queryClose() //exitCalled() by window button

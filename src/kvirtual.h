@@ -80,7 +80,8 @@ public:
 	virtual ~KVirtual();
 
 	/**
-	 * Load vitual host file
+	 * Load virtual host config
+	 * @param filename file name where stored host config ( XML file )
 	 */
 	void load( const QString & filename );
 
@@ -119,7 +120,7 @@ private:
 	uint m_id;
 	KVirtualOptions* m_options;
 
-	QPrinter   *m_printer;
+	//QPrinter   *m_printer;
 	KToggleAction *m_toolbarAction;
 	KToggleAction *m_statusbarAction;
 	QString m_confFilename;
