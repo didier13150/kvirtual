@@ -74,6 +74,11 @@
         </item>
         <item>
          <property name="text">
+          <string>aptosid</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string notr="true">centos</string>
          </property>
         </item>
@@ -89,12 +94,22 @@
         </item>
         <item>
          <property name="text">
+          <string>fluxbuntu</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string notr="true">freebsd</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string notr="true">knoppix</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>kubuntu</string>
          </property>
         </item>
         <item>

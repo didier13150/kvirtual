@@ -17,6 +17,9 @@ set(KVIRTUAL_DATA_FILES
     opensuse.svg
     slackware.svg
     ubuntu.svg
+    kubuntu.svg
+    fluxbuntu.svg
+    aptosid.svg
     linux.png
     centos.png
     debian.png
@@ -35,6 +38,9 @@ set(KVIRTUAL_DATA_FILES
     opensuse.png
     slackware.png
     ubuntu.png
+    kubuntu.png
+    fluxbuntu.png
+    aptosid.png
 )
 
 message(STATUS ${KDE4_DATA_DIR})
