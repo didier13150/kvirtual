@@ -1,0 +1,4 @@
+valgrind --leak-check=full --show-reachable=yes --error-limit=no --gen-suppressions=all --log-file=minimalraw.log  release/src/kvirtual
+cat minimalraw.log | extra/valgrind/valgrind_parse_suppression.awk > minimal.supp
+
+re-run with option --suppressions=minimal.supp

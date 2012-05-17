@@ -17,3 +17,5 @@ src/.kdev_include_paths
 *.kate-swp
 po/fr/kvirtual.lokalize
 po/fr/lokalize-scripts/
+*.supp
+*.log
