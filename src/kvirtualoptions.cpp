@@ -627,9 +627,9 @@ void KVirtualOptions::printConfig()
 	for ( id = keys.begin() ; id != keys.end() ; ++id )
 	{
 		qDebug() << "*******************************************************";
-		qDebug() << "storage type, id" << *id << getStorage( *id )->getTypeID();
-		qDebug() << "storage file, id" << *id << getStorage( *id )->getFile();
-		qDebug() << "storage interface, id" << *id << getStorage( *id )->getInterface();
+		qDebug() << "storage( id" << *id << ") type" << getStorage( *id )->getTypeID();
+		qDebug() << "storage( id" << *id << ") file" << getStorage( *id )->getFile();
+		qDebug() << "storage( id" << *id << ") interface" << getStorage( *id )->getInterface();
 	}
 
 	keys = m_ifaces.keys();
@@ -637,14 +637,14 @@ void KVirtualOptions::printConfig()
 	for ( id = keys.begin() ; id != keys.end() ; ++id )
 	{
 		qDebug() << "*******************************************************";
-		qDebug() << "iface type, id" << *id << getIface( *id )->getType();
-		qDebug() << "iface file, id" << *id << getIface( *id )->getFile();
-		qDebug() << "iface model, id" << *id << getIface( *id )->getModel();
-		qDebug() << "iface hwaddr, id" << *id << getIface( *id )->getHardwareAddress();
-		qDebug() << "iface scriptup, id" << *id << getIface( *id )->getScriptUp();
-		qDebug() << "iface scriptdown, id" << *id << getIface( *id )->getScriptDown();
-		qDebug() << "iface scriptup enable, id" << *id << getIface( *id )->isScriptUpEnabled();
-		qDebug() << "iface scriptdown enable, id" << *id << getIface( *id )->isScriptDownEnabled();
+		qDebug() << "iface( id" << *id << ") type" << getIface( *id )->getType();
+		qDebug() << "iface( id" << *id << ") file" << getIface( *id )->getFile();
+		qDebug() << "iface( id" << *id << ") model" << getIface( *id )->getModel();
+		qDebug() << "iface( id" << *id << ") hwaddr" << getIface( *id )->getHardwareAddress();
+		qDebug() << "iface( id" << *id << ") scriptup" << getIface( *id )->getScriptUp();
+		qDebug() << "iface( id" << *id << ") scriptdown" << getIface( *id )->getScriptDown();
+		qDebug() << "iface( id" << *id << ") scriptup enable" << getIface( *id )->isScriptUpEnabled();
+		qDebug() << "iface( id" << *id << ") scriptdown enable" << getIface( *id )->isScriptDownEnabled();
 	}
 	qDebug() << "*******************************************************";
 }
