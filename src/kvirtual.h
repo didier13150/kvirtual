@@ -39,9 +39,9 @@
 
 #include <KXmlGuiWindow>
 
-class QPrinter;
+//class QPrinter;
 
-class KToggleAction;
+//class KToggleAction;
 
 class KUrl;
 
@@ -99,7 +99,6 @@ private slots:
 	void readError( uint );
 	void closeProcess( uint, int, QProcess::ExitStatus );
 	void startVde( const QString & );
-	void showCreateVDiskDlg();
 	void createVDisk( const QString &, const QString &, const QString & );
 	void changeIcon( const QString & );
 	bool checkConfigSync();
@@ -121,8 +120,8 @@ private:
 	KVirtualOptions* m_options;
 
 	//QPrinter   *m_printer;
-	KToggleAction *m_toolbarAction;
-	KToggleAction *m_statusbarAction;
+	//KToggleAction *m_toolbarAction;
+	//KToggleAction *m_statusbarAction;
 	QString m_confFilename;
 
 signals:

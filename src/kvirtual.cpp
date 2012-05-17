@@ -75,6 +75,12 @@ KVirtual::KVirtual()
 			 SLOT( changeIcon( QString ) )
 		   );
 
+	m_create = new KVirtualCreateImg( this );
+	connect( m_create,
+			 SIGNAL( accepted( const QString &, const QString &, const QString & ) ),
+			 SLOT( createVDisk( const QString &, const QString &, const QString & ) )
+		   );
+
 	// accept dnd
 	setAcceptDrops( true );
 
@@ -106,12 +112,11 @@ KVirtual::KVirtual()
 		m_systray = 0;
 	}
 	changeIcon( m_options->getDistrib() );
-
-	m_create = new KVirtualCreateImg( this );
 }
 
 KVirtual::~KVirtual()
 {
+	killVirtual();
 	QMapIterator<uint, KVirtualProcess*> it( m_processes );
 	while ( it.hasNext() )
 	{
@@ -125,7 +130,9 @@ KVirtual::~KVirtual()
 
 	if ( m_systray ) delete m_systray;
 
+	delete m_options;
 	delete m_create;
+	delete m_view;
 }
 
 void KVirtual::setupActions()
@@ -160,7 +167,7 @@ void KVirtual::setupActions()
 	// custom menu and menu item - the slot is in the class KVirtualView
 	KAction *vdisk = new KAction( KIcon( "document-export-table" ), i18n( "Create a new virtual disk image" ), this );
 	actionCollection()->addAction( QLatin1String( "new_vdisk" ), vdisk );
-	connect( vdisk, SIGNAL( triggered( bool ) ), SLOT( showCreateVDiskDlg() ) );
+	connect( vdisk, SIGNAL( triggered( bool ) ), m_create, SLOT( show() ) );
 
 	// test: print current config to stdout
 	KAction *test = new KAction( KIcon( "edit-find" ), i18n( "Print config on stdout" ), this );
@@ -234,15 +241,6 @@ bool KVirtual::checkConfigSync()
 		}
 	}
 	return true;
-}
-
-void KVirtual::showCreateVDiskDlg()
-{
-	connect( m_create,
-			 SIGNAL( accepted( const QString &, const QString &, const QString & ) ),
-			 SLOT( createVDisk( const QString &, const QString &, const QString & ) )
-		   );
-	m_create->show();
 }
 
 void KVirtual::createVDisk( const QString & file, const QString & type, const QString & size )
@@ -348,7 +346,7 @@ void KVirtual::optionsPreferences()
 
 	QWidget *generalSettingsDlg = new KVirtualSettingsView();
 	dialog->addPage( generalSettingsDlg, i18n( "Executable" ), "run-build" );
-	connect( dialog, SIGNAL( settingsChanged( QString ) ), m_view, SLOT( settingsChanged() ) );
+	//connect( dialog, SIGNAL( settingsChanged( QString ) ), m_view, SLOT( settingsChanged() ) );
 	dialog->setAttribute( Qt::WA_DeleteOnClose );
 	dialog->show();
 }
@@ -611,6 +609,9 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 				SIGNAL( readyReadStandardError( uint ) ) );
 	disconnect( process,
 				SIGNAL( finished( uint, int, QProcess::ExitStatus ) ) );
+	disconnect( process,
+				SIGNAL( started( uint ) )
+	);
 
 	if ( process->getVirtualType() == KVirtualProcess::HOST )
 	{
