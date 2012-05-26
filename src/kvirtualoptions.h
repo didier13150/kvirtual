@@ -81,6 +81,7 @@ public:
 	const QString & getDistrib() const;
 	const QString & getDescription() const;
 	const QString & getKeyboard() const;
+	const QString & getUUID() const;
 	uint getMemory() const;
 	uint getVncPort() const;
 	uint getNbCPU() const;
@@ -107,6 +108,7 @@ public slots:
 	void setVncPort( int );
 	void setDisplay( Display );
 	void setDisplay( int );
+	void setUUID( const QString & );
 	void setStorageFile( uint, const QString & );
 	void setStorageType( uint, int );
 	void setStorageInterface( uint, const QString & );
@@ -137,6 +139,7 @@ protected:
 	QString m_videoCard;
 	BootOrder m_bootDevice;
 	QString m_keyboard;
+	QString m_uuid;
 	Display m_display;
 	uint m_vncport;
 	uint m_memory;

@@ -52,24 +52,25 @@ KVirtualOptions::KVirtualOptions()
 
 KVirtualOptions::~KVirtualOptions()
 {
-	QMapIterator<uint, KVirtualStorage*> it1 ( m_storages );
-	
-	while ( it1.hasNext() )
+	QMapIterator<uint, KVirtualStorage*> it1( m_storages );
+
+	while( it1.hasNext() )
 	{
 		it1.next();
 
-		if ( it1.value() )
+		if( it1.value() )
 		{
 			delete it1.value();
 		}
 	}
-	QMapIterator<uint, KVirtualIface*> it2 ( m_ifaces );
-	
-	while ( it2.hasNext() )
+
+	QMapIterator<uint, KVirtualIface*> it2( m_ifaces );
+
+	while( it2.hasNext() )
 	{
 		it2.next();
 
-		if ( it2.value() )
+		if( it2.value() )
 		{
 			delete it2.value();
 		}
@@ -93,6 +94,8 @@ void KVirtualOptions::clear()
 	m_storages.clear();
 	m_ifaces.clear();
 	m_opts.clear();
+	m_uuid = QUuid::createUuid().toString();
+	m_uuid.remove( "{" ).remove( "}" );
 
 }
 
@@ -104,13 +107,13 @@ QStringList KVirtualOptions::getNeededVirtualSwitch()
 	QList<uint>::ConstIterator it;
 	QList<uint> keys = m_ifaces.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
+	for( it = keys.begin() ; it != keys.end() ; ++it )
 	{
-		if ( m_ifaces[*it]->getType() == "vde" )
+		if( m_ifaces[*it]->getType() == "vde" )
 		{
 			buffer = m_ifaces[*it]->getFile();
 
-			if ( not m_usedSwitches.contains( buffer ) )
+			if( not m_usedSwitches.contains( buffer ) )
 				needed << buffer;
 		}
 	}
@@ -126,16 +129,14 @@ const QStringList & KVirtualOptions::getArgs()
 
 	m_opts.clear();
 
-	buffer = QUuid::createUuid().toString();
-	buffer.remove( "{" ).remove( "}" );
-	m_opts << "-uuid" << buffer;
+	m_opts << "-uuid" << getUUID();
 
 	m_opts << "-name" << getName();
-	
+
 	buffer.setNum( m_memory );
 	m_opts << "-m" << buffer;
 
-	if ( m_cpus > 1 )
+	if( m_cpus > 1 )
 	{
 		buffer.setNum( m_cpus );
 		m_opts << "-smp" << buffer;
@@ -143,24 +144,26 @@ const QStringList & KVirtualOptions::getArgs()
 
 	keys = m_storages.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
+	for( it = keys.begin() ; it != keys.end() ; ++it )
 	{
-		if ( m_storages[*it]->getTypeID() )
+		if( m_storages[*it]->getTypeID() )
 		{
 			buffer = "file=" + m_storages[*it]->getFile() + ",media=" + m_storages[*it]->getType();
-			if ( ! m_storages[*it]->getInterface().isEmpty() )
+
+			if( ! m_storages[*it]->getInterface().isEmpty() )
 			{
 				buffer.append( ",if=" + m_storages[*it]->getInterface() );
 			}
+
 			m_opts << "-drive" << buffer;
 		}
 	}
 
 	keys = m_ifaces.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
+	for( it = keys.begin() ; it != keys.end() ; ++it )
 	{
-		if ( ! m_ifaces[*it]->getModel().isEmpty() )
+		if( ! m_ifaces[*it]->getModel().isEmpty() )
 		{
 			id.setNum( *it );
 			buffer = "nic,macaddr=" + m_ifaces[*it]->getHardwareAddress() + ",model=" + m_ifaces[*it]->getModel() + ",vlan=" + id;
@@ -168,15 +171,15 @@ const QStringList & KVirtualOptions::getArgs()
 
 			buffer = m_ifaces[*it]->getType();
 
-			if ( buffer == "tap" )
+			if( buffer == "tap" )
 			{
 				buffer += ",ifname=" + m_ifaces[*it]->getFile();
 
-				if ( ! m_ifaces[*it]->getScriptUp().isEmpty() &&
+				if( ! m_ifaces[*it]->getScriptUp().isEmpty() &&
 				        ! m_ifaces[*it]->getScriptDown().isEmpty() &&
 				        m_ifaces[*it]->isScriptUpEnabled() &&
 				        m_ifaces[*it]->isScriptDownEnabled()
-				   )
+				  )
 				{
 					//TODO improve this part
 					buffer += ",script=" + m_ifaces[*it]->getScriptUp();
@@ -189,17 +192,17 @@ const QStringList & KVirtualOptions::getArgs()
 				}
 			}
 
-			else if ( buffer == "vde" )
+			else if( buffer == "vde" )
 			{
 				buffer += ",sock=" + m_ifaces[*it]->getFile();
 			}
-			
+
 			else
 			{
 				buffer.clear();
 			}
 
-			if ( ! buffer.isEmpty() )
+			if( ! buffer.isEmpty() )
 			{
 				buffer += ",vlan=" + id;
 				m_opts << "-net" << buffer;
@@ -207,7 +210,7 @@ const QStringList & KVirtualOptions::getArgs()
 		}
 	}
 
-	switch ( m_display )
+	switch( m_display )
 	{
 
 		case KVirtualOptions::DISPLAY_DIRECT:
@@ -233,16 +236,16 @@ const QStringList & KVirtualOptions::getArgs()
 
 	m_opts << "-display" << buffer;
 
-	if ( m_usb )
+	if( m_usb )
 		m_opts << "-usb";
 
-	if ( m_snapshot )
+	if( m_snapshot )
 		m_opts << "-snapshot";
 
-	if ( ! m_keyboard.isEmpty() )
+	if( ! m_keyboard.isEmpty() )
 		m_opts << "-k" << m_keyboard;
 
-	if ( m_videoCard.isEmpty() )
+	if( m_videoCard.isEmpty() )
 	{
 		buffer = "none";
 	}
@@ -254,7 +257,7 @@ const QStringList & KVirtualOptions::getArgs()
 
 	m_opts << "-vga" << buffer;
 
-	switch ( m_bootDevice )
+	switch( m_bootDevice )
 	{
 
 		case KVirtualOptions::BOOT_ON_DISK:
@@ -323,7 +326,7 @@ void KVirtualOptions::setNbCPU( int nb )
 
 KVirtualStorage* KVirtualOptions::addStorage( uint id )
 {
-	if ( m_storages.contains( id ) )
+	if( m_storages.contains( id ) )
 	{
 		delete m_storages[id];
 	}
@@ -336,7 +339,7 @@ KVirtualStorage* KVirtualOptions::addStorage( uint id )
 
 KVirtualIface* KVirtualOptions::addIface( uint id )
 {
-	if ( m_ifaces.contains( id ) )
+	if( m_ifaces.contains( id ) )
 	{
 		delete m_ifaces[id];
 	}
@@ -385,6 +388,11 @@ void KVirtualOptions::setDisplay( KVirtualOptions::Display type )
 void KVirtualOptions::setDisplay( int type )
 {
 	m_display = ( KVirtualOptions::Display ) type;
+}
+
+void KVirtualOptions::setUUID( const QString & uuid )
+{
+	m_uuid = uuid;
 }
 
 void KVirtualOptions::setStorageFile( uint id, const QString & file )
@@ -455,7 +463,7 @@ void KVirtualOptions::setIfaceScriptDownEnabled( uint id, bool state )
 
 void KVirtualOptions::setUsedSwitch( const QString & vswitch )
 {
-	if ( not m_usedSwitches.contains( vswitch ) )
+	if( not m_usedSwitches.contains( vswitch ) )
 		m_usedSwitches << vswitch;
 }
 
@@ -463,7 +471,7 @@ const QString & KVirtualOptions::getRandomHwAddr( uint id )
 {
 	QMapIterator<uint, KVirtualIface*> it( m_ifaces );
 	QString hwaddr = "52:54:00:12:", lastdigit;
-	uint digit = (uint) random() % 255;
+	uint digit = ( uint ) random() % 255;
 	bool used = false;
 
 	switch( id )
@@ -484,23 +492,27 @@ const QString & KVirtualOptions::getRandomHwAddr( uint id )
 			break;
 		}
 	}
+
 	do
 	{
 		used = false;
 		lastdigit.setNum( digit, 16 );
 		hwaddr.append( lastdigit.rightJustified( 2, '0' ).toUpper() );
+
 		// Check if addr is already in use
-		while ( it.hasNext() )
+		while( it.hasNext() )
 		{
 			it.next();
 
-			if ( hwaddr == it.value()->getHardwareAddress() )
+			if( hwaddr == it.value()->getHardwareAddress() )
 			{
 				used = true;
 				digit += 2;
 			}
 		}
-	} while( used );
+	}
+	while( used );
+
 	m_ifaces[id]->setHardwareAddress( hwaddr );
 	return m_ifaces[id]->getHardwareAddress();
 }
@@ -532,7 +544,7 @@ uint KVirtualOptions::getNbCPU() const
 
 KVirtualStorage* KVirtualOptions::getStorage( uint id ) const
 {
-	if ( ! m_storages.contains( id ) )
+	if( ! m_storages.contains( id ) )
 	{
 		return 0;
 	}
@@ -542,7 +554,7 @@ KVirtualStorage* KVirtualOptions::getStorage( uint id ) const
 
 KVirtualStorage* KVirtualOptions::getAutoCreateStorage( uint id )
 {
-	if ( ! m_storages.contains( id ) )
+	if( ! m_storages.contains( id ) )
 	{
 		KVirtualStorage* storage = new KVirtualStorage();
 		m_storages[ id ] = storage;
@@ -553,7 +565,7 @@ KVirtualStorage* KVirtualOptions::getAutoCreateStorage( uint id )
 
 KVirtualIface* KVirtualOptions::getIface( uint id ) const
 {
-	if ( ! m_ifaces.contains( id ) )
+	if( ! m_ifaces.contains( id ) )
 	{
 		return 0;
 	}
@@ -563,7 +575,7 @@ KVirtualIface* KVirtualOptions::getIface( uint id ) const
 
 KVirtualIface* KVirtualOptions::getAutoCreateIface( uint id )
 {
-	if ( ! m_ifaces.contains( id ) )
+	if( ! m_ifaces.contains( id ) )
 	{
 		KVirtualIface* iface = new KVirtualIface();
 		m_ifaces[ id ] = iface;
@@ -607,12 +619,18 @@ const QString & KVirtualOptions::getKeyboard() const
 	return m_keyboard;
 }
 
+const QString & KVirtualOptions::getUUID() const
+{
+	return m_uuid;
+}
+
 void KVirtualOptions::printConfig()
 {
 	QList<uint> keys;
 	QList<uint>::ConstIterator id;
-	
+
 	qDebug() << "name" << getName();
+	qDebug() << "uuid" << getUUID();
 	qDebug() << "description" << getDescription();
 	qDebug() << "memory" << getMemory();
 	qDebug() << "boot device" << getBootDevice();
@@ -626,7 +644,7 @@ void KVirtualOptions::printConfig()
 
 	keys = m_storages.keys();
 
-	for ( id = keys.begin() ; id != keys.end() ; ++id )
+	for( id = keys.begin() ; id != keys.end() ; ++id )
 	{
 		qDebug() << "*******************************************************";
 		qDebug() << "storage( id" << *id << ") type" << getStorage( *id )->getTypeID();
@@ -636,7 +654,7 @@ void KVirtualOptions::printConfig()
 
 	keys = m_ifaces.keys();
 
-	for ( id = keys.begin() ; id != keys.end() ; ++id )
+	for( id = keys.begin() ; id != keys.end() ; ++id )
 	{
 		qDebug() << "*******************************************************";
 		qDebug() << "iface( id" << *id << ") type" << getIface( *id )->getType();
@@ -648,12 +666,13 @@ void KVirtualOptions::printConfig()
 		qDebug() << "iface( id" << *id << ") scriptup enable" << getIface( *id )->isScriptUpEnabled();
 		qDebug() << "iface( id" << *id << ") scriptdown enable" << getIface( *id )->isScriptDownEnabled();
 	}
+
 	qDebug() << "*******************************************************";
 }
 
 bool KVirtualOptions::isModified( const QString & filename ) const
 {
-	if ( filename.isNull() )
+	if( filename.isNull() )
 	{
 		qDebug() << "filename is null";
 		return true;
@@ -668,13 +687,13 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 	QFile file( filename );
 
-	if ( !file.open( QIODevice::ReadOnly ) )
+	if( !file.open( QIODevice::ReadOnly ) )
 	{
 		qDebug() << "Can't open filename in read mode";
 		return true;
 	}
 
-	if ( !doc.setContent( &file ) )
+	if( !doc.setContent( &file ) )
 	{
 		file.close();
 		qDebug() << "Can't parse XML file";
@@ -685,92 +704,97 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 	root = doc.documentElement();
 
-	if ( root.tagName() != "host" )
+	if( root.tagName() != "host" )
 	{
 		qDebug() << "Wrong root node" << root.tagName();
 		return true;
 	}
 
-	if ( root.attribute( "distribution" ) != getDistrib() )
+	if( root.attribute( "distribution" ) != getDistrib() )
+	{
+		return true;
+	}
+
+	if( root.attribute( "uuid" ) != getUUID() )
 	{
 		return true;
 	}
 
 	node = root.firstChild();
 
-	while ( ! node.isNull() )
+	while( ! node.isNull() )
 	{
 		element = node.toElement();
 
-		if ( ! element.isNull() )
+		if( ! element.isNull() )
 		{
-			if ( element.tagName() == "name" )
+			if( element.tagName() == "name" )
 			{
-				if ( getName() != element.text() )
+				if( getName() != element.text() )
 				{
 					qDebug() << "name is not sync" << getName() << element.text();
 					return true;
 				}
 			}
 
-			if ( element.tagName() == "description" )
+			if( element.tagName() == "description" )
 			{
-				if ( getDescription() != element.text() )
+				if( getDescription() != element.text() )
 				{
 					qDebug() << "description is not sync" << getDescription() << element.text();
 					return true;
 				}
 			}
 
-			if ( element.tagName() == "system" )
+			if( element.tagName() == "system" )
 			{
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "memory" )
+					if( element2.tagName() == "memory" )
 					{
-						if ( getMemory() !=  element2.attribute( "value" ).toUInt() )
+						if( getMemory() !=  element2.attribute( "value" ).toUInt() )
 						{
 							qDebug() << "memory is not sync" << getMemory() << element2.attribute( "value" );
 							return true;
 						}
 					}
 
-					if ( element2.tagName() == "boot" )
+					if( element2.tagName() == "boot" )
 					{
 						buffer = element2.attribute( "device" );
 
-						if ( getBootDevice() != BootOrderFromString( buffer ) )
+						if( getBootDevice() != BootOrderFromString( buffer ) )
 						{
 							qDebug() << "boot device is not sync" << getBootDevice() << BootOrderFromString( buffer );
 							return true;
 						}
 					}
 
-					if ( element2.tagName() == "usb" )
+					if( element2.tagName() == "usb" )
 					{
-						if ( isUsbSupported() != element2.attribute( "enabled" ).toInt() )
+						if( isUsbSupported() != element2.attribute( "enabled" ).toInt() )
 						{
 							qDebug() << "usb support is not sync" << isUsbSupported() << element2.attribute( "enabled" );
 							return true;
 						}
 					}
 
-					if ( element2.tagName() == "snapshot" )
+					if( element2.tagName() == "snapshot" )
 					{
-						if ( isSnapshotEnabled() != element2.attribute( "enabled" ).toInt() )
+						if( isSnapshotEnabled() != element2.attribute( "enabled" ).toInt() )
 						{
 							qDebug() << "snapshot mode not sync" << isSnapshotEnabled() << element2.attribute( "enabled" );
 							return true;
 						}
 					}
 
-					if ( element2.tagName() == "core" )
+					if( element2.tagName() == "core" )
 					{
-						if ( getNbCPU() != element2.attribute( "value" ).toUInt() )
+						if( getNbCPU() != element2.attribute( "value" ).toUInt() )
 						{
 							qDebug() << "number of core not sync" << getNbCPU() << element2.attribute( "value" );
 							return true;
@@ -781,43 +805,43 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 				}
 			}
 
-			if ( element.tagName() == "display" )
+			if( element.tagName() == "display" )
 			{
 				buffer = element.attribute( "method" );
 
-				if ( getDisplay() != DisplayFromString( buffer ) )
+				if( getDisplay() != DisplayFromString( buffer ) )
 				{
-							qDebug() << "display not sync" << DisplayToString( getDisplay() ) << buffer;
+					qDebug() << "display not sync" << DisplayToString( getDisplay() ) << buffer;
 					return true;
 				}
 
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "card" )
+					if( element2.tagName() == "card" )
 					{
-						if ( getVideoCard() != element2.attribute( "model" ) )
+						if( getVideoCard() != element2.attribute( "model" ) )
 						{
 							qDebug() << "video card not sync" << getVideoCard() << element2.attribute( "model" );
 							return true;
 						}
 					}
 
-					if ( element2.tagName() == "vnc" )
+					if( element2.tagName() == "vnc" )
 					{
-						if ( getVncPort() != element2.attribute( "port" ).toUInt() )
+						if( getVncPort() != element2.attribute( "port" ).toUInt() )
 						{
 							qDebug() << "vnc port not sync" << getVncPort() << element2.attribute( "port" );
 							return true;
 						}
 					}
 
-					if ( element2.tagName() == "keyboard" )
+					if( element2.tagName() == "keyboard" )
 					{
-						if ( getKeyboard() != element2.attribute( "model" ) )
+						if( getKeyboard() != element2.attribute( "model" ) )
 						{
 							qDebug() << "keyboard not sync" << getKeyboard() << element2.attribute( "model" );
 							return true;
@@ -828,30 +852,31 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 				}
 			}
 
-			if ( element.tagName() == "storages" )
+			if( element.tagName() == "storages" )
 			{
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "storage" )
+					if( element2.tagName() == "storage" )
 					{
 						id = element2.attribute( "id" ).toUInt();
 
-						if ( element2.attribute( "type" ).toInt() != getStorage( id )->getTypeID() )
+						if( element2.attribute( "type" ).toInt() != getStorage( id )->getTypeID() )
 						{
 							qDebug() << "storage type not sync, id" << id << getStorage( id )->getTypeID() << element2.attribute( "type" );
 							return true;
 						}
 
-						if ( element2.attribute( "file" ) != getStorage( id )->getFile() )
+						if( element2.attribute( "file" ) != getStorage( id )->getFile() )
 						{
 							qDebug() << "storage file not sync, id" << id << getStorage( id )->getFile() << element2.attribute( "file" );
 							return true;
 						}
-						if ( element2.attribute( "interface" ) != getStorage( id )->getInterface() )
+
+						if( element2.attribute( "interface" ) != getStorage( id )->getInterface() )
 						{
 							qDebug() << "storage interface not sync, id" << id << getStorage( id )->getInterface() << element2.attribute( "interface" );
 							return true;
@@ -862,37 +887,37 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 				}
 			}
 
-			if ( element.tagName() == "network" )
+			if( element.tagName() == "network" )
 			{
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "iface" )
+					if( element2.tagName() == "iface" )
 					{
 						id = element2.attribute( "id" ).toUInt();
 
-						if ( element2.attribute( "type" ) != getIface( id )->getType() )
+						if( element2.attribute( "type" ) != getIface( id )->getType() )
 						{
 							qDebug() << "iface type not sync, id" << id << getIface( id )->getType() << element2.attribute( "type" );
 							return true;
 						}
 
-						if ( element2.attribute( "file" ) != getIface( id )->getFile() )
+						if( element2.attribute( "file" ) != getIface( id )->getFile() )
 						{
 							qDebug() << "iface file not sync, id" << id << getIface( id )->getFile() << element2.attribute( "file" );
 							return true;
 						}
 
-						if ( element2.attribute( "model" ) != getIface( id )->getModel() )
+						if( element2.attribute( "model" ) != getIface( id )->getModel() )
 						{
 							qDebug() << "iface model not sync, id" << id << getIface( id )->getModel() << element2.attribute( "model" );
 							return true;
 						}
 
-						if ( element2.attribute( "addr" ) != getIface( id )->getHardwareAddress() )
+						if( element2.attribute( "addr" ) != getIface( id )->getHardwareAddress() )
 						{
 							qDebug() << "iface hwaddr not sync, id" << id << getIface( id )->getHardwareAddress() << element2.attribute( "addr" );
 							return true;
@@ -900,19 +925,19 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 						littlechild = element2.firstChild();
 
-						while ( ! littlechild.isNull() )
+						while( ! littlechild.isNull() )
 						{
 							element3 = littlechild.toElement();
 
-							if ( element3.tagName() == "scripts" )
+							if( element3.tagName() == "scripts" )
 							{
-								if ( getIface( id )->getScriptUp() != element3.attribute( "up" ) )
+								if( getIface( id )->getScriptUp() != element3.attribute( "up" ) )
 								{
 									qDebug() << "iface scriptup not sync, id" << id << getIface( id )->getScriptUp() << element3.attribute( "up" );
 									return true;
 								}
 
-								if ( getIface( id )->getScriptDown() != element3.attribute( "down" ) )
+								if( getIface( id )->getScriptDown() != element3.attribute( "down" ) )
 								{
 									qDebug() << "iface scriptdown not sync, id" << id << getIface( id )->getScriptDown() << element3.attribute( "down" );
 									return true;
@@ -920,13 +945,13 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 								int flag = element3.attribute( "flag" ).toInt();
 
-								if ( getIface( id )->isScriptUpEnabled() != ( flag & KVirtualIface::SCRIPT_UP ) )
+								if( getIface( id )->isScriptUpEnabled() != ( flag & KVirtualIface::SCRIPT_UP ) )
 								{
 									qDebug() << "iface scriptup enable not sync, id" << id << getIface( id )->isScriptUpEnabled() << ( flag & KVirtualIface::SCRIPT_UP );
 									return true;
 								}
 
-								if ( getIface( id )->isScriptDownEnabled() != ( flag & KVirtualIface::SCRIPT_DOWN ) )
+								if( getIface( id )->isScriptDownEnabled() != ( flag & KVirtualIface::SCRIPT_DOWN ) )
 								{
 									qDebug() << "iface scriptdown enable not sync, id" << id << getIface( id )->isScriptDownEnabled() << ( flag & KVirtualIface::SCRIPT_DOWN );
 									return true;
@@ -950,7 +975,7 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 
 void KVirtualOptions::load( const QString & filename )
 {
-	if ( filename.isNull() )
+	if( filename.isNull() )
 	{
 		qDebug() << "filename is null";
 		return;
@@ -967,13 +992,13 @@ void KVirtualOptions::load( const QString & filename )
 
 	QFile file( filename );
 
-	if ( !file.open( QIODevice::ReadOnly ) )
+	if( !file.open( QIODevice::ReadOnly ) )
 	{
 		qDebug() << "Can't open filename in read mode";
 		return;
 	}
 
-	if ( !doc.setContent( &file ) )
+	if( !doc.setContent( &file ) )
 	{
 		file.close();
 		qDebug() << "Can't parse XML file";
@@ -984,62 +1009,66 @@ void KVirtualOptions::load( const QString & filename )
 
 	root = doc.documentElement();
 
-	if ( root.tagName() != "host" )
+	if( root.tagName() != "host" )
 	{
 		qDebug() << "Wrong root node" << root.tagName();
 		return;
 	}
 
-	setDistrib( root.attribute( "distribution" ) );
+	if( ! root.attribute( "distribution" ).isEmpty() )
+		setDistrib( root.attribute( "distribution" ) );
+
+	if( ! root.attribute( "uuid" ).isEmpty() )
+		setUUID( root.attribute( "uuid" ) );
 
 	node = root.firstChild();
 
-	while ( ! node.isNull() )
+	while( ! node.isNull() )
 	{
 		element = node.toElement();
 
-		if ( ! element.isNull() )
+		if( ! element.isNull() )
 		{
-			if ( element.tagName() == "name" )
+			if( element.tagName() == "name" )
 			{
 				setName( element.text() );
 			}
 
-			if ( element.tagName() == "description" )
+			if( element.tagName() == "description" )
 			{
 				setDescription( element.text() );
 			}
 
-			if ( element.tagName() == "system" )
+			if( element.tagName() == "system" )
 			{
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "memory" )
+					if( element2.tagName() == "memory" )
 					{
 						setMemory( element2.attribute( "value" ).toUInt() );
 					}
 
-					if ( element2.tagName() == "boot" )
+					if( element2.tagName() == "boot" )
 					{
 						buffer = element2.attribute( "device" );
 						setBootDevice( BootOrderFromString( buffer ) );
 					}
 
-					if ( element2.tagName() == "usb" )
+					if( element2.tagName() == "usb" )
 					{
 						setUsbSupported( element2.attribute( "enabled" ).toInt() );
 					}
 
-					if ( element2.tagName() == "snapshot" )
+					if( element2.tagName() == "snapshot" )
 					{
 						setSnapshotEnabled( element2.attribute( "enabled" ).toInt() );
 					}
 
-					if ( element2.tagName() == "core" )
+					if( element2.tagName() == "core" )
 					{
 						setNbCPU( element2.attribute( "value" ).toUInt() );
 					}
@@ -1048,27 +1077,27 @@ void KVirtualOptions::load( const QString & filename )
 				}
 			}
 
-			if ( element.tagName() == "display" )
+			if( element.tagName() == "display" )
 			{
 				buffer = element.attribute( "method" );
 				setDisplay( DisplayFromString( buffer ) );
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "card" )
+					if( element2.tagName() == "card" )
 					{
 						setVideoCard( element2.attribute( "model" ) );
 					}
 
-					if ( element2.tagName() == "vnc" )
+					if( element2.tagName() == "vnc" )
 					{
 						setVncPort( element2.attribute( "port" ).toUInt() );
 					}
 
-					if ( element2.tagName() == "keyboard" )
+					if( element2.tagName() == "keyboard" )
 					{
 						setKeyboard( element2.attribute( "model" ) );
 					}
@@ -1077,19 +1106,19 @@ void KVirtualOptions::load( const QString & filename )
 				}
 			}
 
-			if ( element.tagName() == "storages" )
+			if( element.tagName() == "storages" )
 			{
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "storage" )
+					if( element2.tagName() == "storage" )
 					{
 						id = element2.attribute( "id" ).toUInt();
 						storage = addStorage( id );
-						storage->setTypeID(( KVirtualStorage::Type ) element2.attribute( "type" ).toInt() );
+						storage->setTypeID( ( KVirtualStorage::Type ) element2.attribute( "type" ).toInt() );
 						storage->setFile( element2.attribute( "file" ) );
 						storage->setInterface( element2.attribute( "interface" ) );
 					}
@@ -1098,15 +1127,15 @@ void KVirtualOptions::load( const QString & filename )
 				}
 			}
 
-			if ( element.tagName() == "network" )
+			if( element.tagName() == "network" )
 			{
 				child = element.firstChild();
 
-				while ( ! child.isNull() )
+				while( ! child.isNull() )
 				{
 					element2 = child.toElement();
 
-					if ( element2.tagName() == "iface" )
+					if( element2.tagName() == "iface" )
 					{
 						id = element2.attribute( "id" ).toUInt();
 						iface = addIface( id );
@@ -1117,11 +1146,11 @@ void KVirtualOptions::load( const QString & filename )
 
 						littlechild = element2.firstChild();
 
-						while ( ! littlechild.isNull() )
+						while( ! littlechild.isNull() )
 						{
 							element3 = littlechild.toElement();
 
-							if ( element3.tagName() == "scripts" )
+							if( element3.tagName() == "scripts" )
 							{
 								iface->setScriptUp( element3.attribute( "up" ) );
 								iface->setScriptDown( element3.attribute( "down" ) );
@@ -1146,7 +1175,7 @@ void KVirtualOptions::load( const QString & filename )
 
 void KVirtualOptions::save( const QString & filename )
 {
-	if ( filename.isNull() )
+	if( filename.isNull() )
 	{
 		return;
 	}
@@ -1163,12 +1192,13 @@ void KVirtualOptions::save( const QString & filename )
 
 	QFile file( filename );
 
-	if ( !file.open( QIODevice::WriteOnly ) )
+	if( !file.open( QIODevice::WriteOnly ) )
 		return;
 
 	root = doc.createElement( "host" );
 
 	root.setAttribute( "distribution", getDistrib() );
+	root.setAttribute( "uuid", getUUID() );
 
 	doc.appendChild( root );
 
@@ -1260,11 +1290,11 @@ void KVirtualOptions::save( const QString & filename )
 
 	keys = m_storages.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
+	for( it = keys.begin() ; it != keys.end() ; ++it )
 	{
 		element2 = doc.createElement( "storage" );
 		element2.setAttribute( "id", buffer.setNum( *it ) );
-		element2.setAttribute( "type", buffer.setNum(( int ) m_storages[*it]->getTypeID() ) );
+		element2.setAttribute( "type", buffer.setNum( ( int ) m_storages[*it]->getTypeID() ) );
 		element2.setAttribute( "file", m_storages[*it]->getFile() );
 		element2.setAttribute( "interface", m_storages[*it]->getInterface() );
 
@@ -1277,7 +1307,7 @@ void KVirtualOptions::save( const QString & filename )
 
 	keys = m_ifaces.keys();
 
-	for ( it = keys.begin() ; it != keys.end() ; ++it )
+	for( it = keys.begin() ; it != keys.end() ; ++it )
 	{
 		element2 = doc.createElement( "iface" );
 		element2.setAttribute( "id", buffer.setNum( *it ) );
@@ -1293,13 +1323,13 @@ void KVirtualOptions::save( const QString & filename )
 
 		flag = 0;
 
-		if ( m_ifaces[*it]->isScriptUpEnabled() )
+		if( m_ifaces[*it]->isScriptUpEnabled() )
 
 		{
 			flag |= KVirtualIface::SCRIPT_UP;
 		}
 
-		if ( m_ifaces[*it]->isScriptDownEnabled() )
+		if( m_ifaces[*it]->isScriptDownEnabled() )
 		{
 			flag |= KVirtualIface::SCRIPT_DOWN;
 		}
@@ -1323,7 +1353,7 @@ inline QString DisplayToString( KVirtualOptions::Display display )
 {
 	QString buffer;
 
-	switch ( display )
+	switch( display )
 	{
 
 		case KVirtualOptions::DISPLAY_DIRECT:
@@ -1352,7 +1382,7 @@ inline QString BootOrderToString( KVirtualOptions::BootOrder order )
 {
 	QString buffer;
 
-	switch ( order )
+	switch( order )
 	{
 
 		case KVirtualOptions::BOOT_ON_DISK:
@@ -1387,13 +1417,14 @@ inline KVirtualOptions::Display DisplayFromString( const QString & display )
 {
 	KVirtualOptions::Display type;
 
-	if ( display == "direct" )
+	if( display == "direct" )
 		type = KVirtualOptions::DISPLAY_DIRECT;
+
+	else if( display == "vnc" )
+		type = KVirtualOptions::DISPLAY_VNC;
+
 	else
-		if ( display == "vnc" )
-			type = KVirtualOptions::DISPLAY_VNC;
-		else
-			type = KVirtualOptions::DISPLAY_NONE;
+		type = KVirtualOptions::DISPLAY_NONE;
 
 	return type;
 }
@@ -1402,22 +1433,23 @@ inline KVirtualOptions::BootOrder BootOrderFromString( const QString & order )
 {
 	KVirtualOptions::BootOrder boot;
 
-	if ( order == "floppy" )
+	if( order == "floppy" )
 		boot = KVirtualOptions::BOOT_ON_FLOPPY;
+
+	else if( order == "network" )
+		boot = KVirtualOptions::BOOT_ON_NETWORK;
+
+	else if( order == "cdrom" )
+		boot = KVirtualOptions::BOOT_ON_CDROM;
+
 	else
-		if ( order == "network" )
-			boot = KVirtualOptions::BOOT_ON_NETWORK;
-		else
-			if ( order == "cdrom" )
-				boot = KVirtualOptions::BOOT_ON_CDROM;
-			else
-				boot = KVirtualOptions::BOOT_ON_DISK;
+		boot = KVirtualOptions::BOOT_ON_DISK;
 
 	return boot;
 }
 
 #include "kvirtualoptions.moc"
 
-// kate: indent-mode cstyle; replace-tabs off; tab-width 4;  replace-tabs off;  replace-tabs off;  replace-tabs off;   replace-tabs off;        replace-tabs off;
+// kate: indent-mode cstyle; indent-width 4; replace-tabs off; tab-width 4; 
 
 
