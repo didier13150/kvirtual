@@ -62,10 +62,14 @@ public:
 
 	ProcessType getVirtualType();
 
+	void setDataDir( const QString & );
+	const QString & getDataDir() const;
+
 
 protected:
 	uint m_id;
 	ProcessType m_type;
+	QString m_datadir;
 
 protected slots:
 	void sendReadyReadStandardOutput();

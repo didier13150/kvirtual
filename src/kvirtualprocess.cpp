@@ -48,6 +48,17 @@ KVirtualProcess::~KVirtualProcess()
 {
 }
 
+void KVirtualProcess::setDataDir( const QString & datadir )
+{
+	m_datadir = datadir;
+}
+
+const QString & KVirtualProcess::getDataDir() const
+{
+	return m_datadir;
+}
+
+
 KVirtualProcess::ProcessType KVirtualProcess::getVirtualType()
 {
 	return m_type;

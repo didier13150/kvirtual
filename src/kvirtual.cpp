@@ -60,6 +60,7 @@
 
 #include <KLocale>
 
+#include <unistd.h>
 
 KVirtual::KVirtual()
 		: KXmlGuiWindow(),
@@ -374,6 +375,7 @@ void KVirtual::startVde( const QString & vswitch )
 
 	process->setProgram( Settings::vde_switch_exe(), args );
 	process->setOutputChannelMode( KProcess::SeparateChannels );
+	process->setDataDir( vswitch );
 	connect( process,
 			 SIGNAL( readyReadStandardOutput( uint ) ),
 			 SLOT( readData( uint ) )
@@ -502,6 +504,7 @@ void KVirtual::readStarted( uint id )
 
 	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
 	{
+		qDebug() << "No process found (" << id << ")";
 		return;
 	}
 
@@ -538,6 +541,7 @@ void KVirtual::readData( uint id )
 
 	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
 	{
+		qDebug() << "No process found (" << id << ")";
 		return;
 	}
 
@@ -556,6 +560,7 @@ void KVirtual::readError( uint id )
 
 	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
 	{
+		qDebug() << "No process found (" << id << ")";
 		return;
 	}
 
@@ -574,9 +579,12 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 
 	if ( ! m_processes.contains( id ) || m_processes[id] == 0 )
 	{
+		qDebug() << "No process found (" << id << ")";
 		return;
 	}
 
+	qDebug() << "close process id" << id;
+	
 	process = m_processes.take( id );
 
 	buffer.setNum( id );
@@ -602,6 +610,7 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 
 	buffer.setNum( retval );
 	message += buffer + " ( " + description + " )";
+	qDebug() << message;
 	m_view->addOutput( message );
 	disconnect( process,
 				SIGNAL( readyReadStandardOutput( uint ) ) );
@@ -627,7 +636,29 @@ void KVirtual::closeProcess( uint id, int retval, QProcess::ExitStatus status )
 		notification->setPixmap( pixmap );
 		notification->sendEvent();
 
+		sleep( 1 );
 		terminateVirtual();
+	}
+	else
+	{
+		QString vswitch = process->getDataDir();
+		QDir dir( vswitch );
+		if ( dir.exists() )
+		{
+			qDebug() << "Deleting" << vswitch;
+			QStringList files = dir.entryList();
+			QStringList::Iterator it;
+			for ( it = files.begin() ; it != files.end() ; ++it )
+			{
+				qDebug() << *it;
+				dir.remove( *it );
+			}
+			dir.cdUp();
+			if ( ! dir.remove( vswitch ) )
+			{
+				qDebug() << "Can't remove dir" << vswitch;
+			}
+		}
 	}
 
 	delete process;

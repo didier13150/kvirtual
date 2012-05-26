@@ -128,7 +128,9 @@ const QStringList & KVirtualOptions::getArgs()
 
 	buffer = QUuid::createUuid().toString();
 	buffer.remove( "{" ).remove( "}" );
-	m_opts << "--uuid" << buffer;
+	m_opts << "-uuid" << buffer;
+
+	m_opts << "-name" << getName();
 	
 	buffer.setNum( m_memory );
 	m_opts << "-m" << buffer;
