@@ -93,6 +93,7 @@ public:
 	bool isUsbSupported() const;
 	bool isSnapshotEnabled() const;
 	bool isModified( const QString & ) const;
+	bool isEmpty() const;
 
 public slots:
 	void setName( const QString & );

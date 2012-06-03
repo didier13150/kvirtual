@@ -328,6 +328,10 @@ void KVirtual::fileSaveAs()
 	KUrl url = KUrl::fromPath( QDir::homePath() );
 
 	m_confFilename = KFileDialog::getSaveFileName( url, "*.xml", this );
+	if ( m_confFilename.isNull() )
+	{
+		return;
+	}
 	m_options->save( m_confFilename );
 }
 

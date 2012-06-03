@@ -96,7 +96,6 @@ void KVirtualOptions::clear()
 	m_opts.clear();
 	m_uuid = QUuid::createUuid().toString();
 	m_uuid.remove( "{" ).remove( "}" );
-
 }
 
 QStringList KVirtualOptions::getNeededVirtualSwitch()
@@ -624,6 +623,95 @@ const QString & KVirtualOptions::getUUID() const
 	return m_uuid;
 }
 
+bool KVirtualOptions::isEmpty() const
+{
+	if( m_usb )
+	{
+		qDebug() << "usb is set";
+		return false;
+	}
+
+	if( m_snapshot )
+	{
+		qDebug() << "snapshot is set";
+		return false;
+	}
+
+	if( m_memory != 128 )
+	{
+		qDebug() << "memory is set";
+		return false;
+	}
+
+	if( m_display != KVirtualOptions::DISPLAY_DIRECT )
+	{
+		qDebug() << "display is set";
+		return false;
+	}
+
+	if( m_bootDevice != KVirtualOptions::BOOT_ON_DISK )
+	{
+		qDebug() << "boot device is set";
+		return false;
+	}
+
+	if( m_vncport != 1 )
+	{
+		qDebug() << "vnc port is set";
+		return false;
+	}
+
+	if( m_cpus != 1 )
+	{
+		qDebug() << "cpu is set";
+		return false;
+	}
+
+	if( m_keyboard != "fr" )
+	{
+		qDebug() << "keyboard is set";
+		return false;
+	}
+
+	if( m_videoCard != "std" )
+	{
+		qDebug() << "video card is set";
+		return false;
+	}
+
+	if( ! m_description.isEmpty() )
+	{
+		qDebug() << "description is set" << m_description;
+		return false;
+	}
+
+	if( ! m_name.isEmpty() )
+	{
+		qDebug() << "name is set" << m_name;
+		return false;
+	}
+
+	if( m_distrib != "linux" )
+	{
+		qDebug() << "distrib is set" << m_distrib;
+		return false;
+	}
+
+	if( m_storages.count() )
+	{
+		qDebug() << "storages are set";
+		return false;
+	}
+
+	if( m_ifaces.count() )
+	{
+		qDebug() << "ifaces are set";
+		return false;
+	}
+
+	return true;
+}
+
 void KVirtualOptions::printConfig()
 {
 	QList<uint> keys;
@@ -674,6 +762,12 @@ bool KVirtualOptions::isModified( const QString & filename ) const
 {
 	if( filename.isNull() )
 	{
+		if( isEmpty() )
+		{
+			qDebug() << "unmodified";
+			return false;
+		}
+
 		qDebug() << "filename is null";
 		return true;
 	}
