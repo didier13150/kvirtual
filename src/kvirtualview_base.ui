@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>695</width>
-    <height>775</height>
+    <width>765</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>KVirtual</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_7">
-   <item row="0" column="0">
+   <item row="0" column="0" colspan="2">
     <widget class="QGroupBox" name="gbCommon">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -213,7 +213,7 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="1" column="0" rowspan="2">
     <widget class="QGroupBox" name="gbSystem">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -416,7 +416,7 @@
      </layout>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="1" column="1">
     <widget class="QGroupBox" name="gbDisplay">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -428,121 +428,7 @@
       <string>Display</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
-      <item row="0" column="0" colspan="5">
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_display_type">
-          <property name="text">
-           <string>Display</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_16">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_none">
-          <property name="text">
-           <string>None</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_17">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_direct">
-          <property name="text">
-           <string>Direct</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_18">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_vnc">
-          <property name="text">
-           <string>VNC</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_vncport">
-          <property name="text">
-           <string>VNC Port</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="spinBox_vncport">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>12</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_vga_type">
-        <property name="text">
-         <string>Video Card Type</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
+      <item row="0" column="4">
        <widget class="QComboBox" name="comboBox_video_card">
         <property name="currentIndex">
          <number>1</number>
@@ -579,18 +465,66 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="2">
-       <spacer name="horizontalSpacer_15">
+      <item row="3" column="3" colspan="2">
+       <spacer name="verticalSpacer_2">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
-          <height>20</height>
+          <width>20</width>
+          <height>40</height>
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_vga_type">
+        <property name="text">
+         <string>Video Card Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" rowspan="4">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QRadioButton" name="radioButton_none">
+          <property name="text">
+           <string>None</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButton_direct">
+          <property name="text">
+           <string>Direct</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButton_vnc">
+          <property name="text">
+           <string>VNC</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item row="1" column="3">
        <widget class="QLabel" name="label_display_keyboard">
@@ -774,6 +708,78 @@
         </item>
        </widget>
       </item>
+      <item row="2" column="3">
+       <widget class="QLabel" name="label_vncport">
+        <property name="text">
+         <string>VNC Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QSpinBox" name="spinBox_vncport">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>12</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1" rowspan="2">
+    <widget class="QGroupBox" name="gbNetwork">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Network</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QTabWidget" name="tabWidget_ifaces">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab_3">
+         <attribute name="title">
+          <string>Iface 1</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="0">
+           <widget class="KVirtualIfaceWidget" name="widget_iface0" native="true"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_4">
+         <attribute name="title">
+          <string>Iface 2</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="KVirtualIfaceWidget" name="widget_iface1" native="true"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Iface 3</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="KVirtualIfaceWidget" name="widget_iface2" native="true"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -829,59 +835,7 @@
      </layout>
     </widget>
    </item>
-   <item row="4" column="0">
-    <widget class="QGroupBox" name="gbNetwork">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Network</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
-       <widget class="QTabWidget" name="tabWidget_ifaces">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="tab_3">
-         <attribute name="title">
-          <string>Iface 1</string>
-         </attribute>
-         <layout class="QGridLayout" name="gridLayout_11">
-          <item row="0" column="0">
-           <widget class="KVirtualIfaceWidget" name="widget_iface0" native="true"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tab_4">
-         <attribute name="title">
-          <string>Iface 2</string>
-         </attribute>
-         <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="KVirtualIfaceWidget" name="widget_iface1" native="true"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tab">
-         <attribute name="title">
-          <string>Iface 3</string>
-         </attribute>
-         <layout class="QGridLayout" name="gridLayout_8">
-          <item row="0" column="0">
-           <widget class="KVirtualIfaceWidget" name="widget_iface2" native="true"/>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="5" column="0">
+   <item row="4" column="0" colspan="2">
     <widget class="QTextBrowser" name="textBrowser_output">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
